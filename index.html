@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" data-reveal="off">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Set synchronously so JS-gated hidden states apply from the first paint,
+       and so the page degrades to fully-visible content if JS never runs. -->
+  <script>document.documentElement.classList.add("js");</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0b" />
+
+  <title>Anirudh Thata — Product Designer</title>
+  <meta
+    name="description"
+    content="Anirudh Thata — Lead Product Designer. I build products people use, then build the systems that make designing them better. Experience product design, don't just read about it."
+  />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Anirudh Thata — Product Designer" />
+  <meta
+    property="og:description"
+    content="A portfolio that teaches Product Design through interaction. Experience it."
+  />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Fonts: Inter Tight (editorial) with a system fallback stack (SF Pro et al). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap"
+    media="print"
+    onload="this.media='all'"
+  />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap"
+    />
+  </noscript>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+</head>
+
+<body>
+  <a class="skip-link" href="#work">Skip to work</a>
+
+  <!-- ===================================================================
+       NAV  —  revealed by the hero light
+       =================================================================== -->
+  <header class="site-nav" data-reveal-item="nav" aria-label="Primary">
+    <nav class="site-nav__inner">
+      <a class="site-nav__mark" href="#hero" aria-label="Anirudh Thata, home">
+        <span class="site-nav__mark-dot" aria-hidden="true"></span>
+        <span class="site-nav__mark-name">Anirudh&nbsp;Thata</span>
+      </a>
+      <ul class="site-nav__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#principles">Principles</a></li>
+        <li><a href="#experience">Experience</a></li>
+      </ul>
+      <a class="site-nav__cta" href="#contact">Let's Connect</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ===============================================================
+         01 · HERO  —  Principle: Accessibility
+         =============================================================== -->
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <!-- The single warm architectural light. Only this is visible before "Switch ON". -->
+      <div class="hero__stage" aria-hidden="true">
+        <div class="hero__light"></div>
+        <div class="hero__monolith">
+          <div class="hero__monolith-slab hero__monolith-slab--a"></div>
+          <div class="hero__monolith-slab hero__monolith-slab--b"></div>
+          <div class="hero__monolith-slab hero__monolith-slab--c"></div>
+          <div class="hero__monolith-floor"></div>
+        </div>
+        <div class="hero__grain"></div>
+      </div>
+
+      <!-- The accessibility control. Present and reachable from the very first frame. -->
+      <div class="hero__switch-wrap" data-reveal-persist>
+        <button
+          type="button"
+          class="switch"
+          id="hero-switch"
+          role="switch"
+          aria-checked="false"
+          aria-describedby="hero-switch-hint"
+        >
+          <span class="switch__track" aria-hidden="true">
+            <span class="switch__thumb"></span>
+          </span>
+          <span class="switch__label">
+            <span class="switch__label-off">Switch ON</span>
+            <span class="switch__label-on">Light on</span>
+          </span>
+        </button>
+        <p class="hero__switch-hint" id="hero-switch-hint">
+          This portfolio begins almost inaccessible. Turn on the light to make it available.
+        </p>
+      </div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow" data-reveal-item="eyebrow">
+          <span>Product Principle</span>
+          <span class="hero__eyebrow-mark">Accessibility</span>
+        </p>
+
+        <p class="hero__kicker" data-reveal-item="kicker">
+          Anirudh&nbsp;Thata <span aria-hidden="true">·</span> 11+&nbsp;Years
+        </p>
+
+        <h1 class="hero__title" id="hero-title" data-reveal-item="title">
+          I build products people use.
+          <span class="hero__title-line">
+            Then I build the systems that make designing them better.
+          </span>
+        </h1>
+
+        <p class="hero__lede" data-reveal-item="lede">
+          Experience product design, don't just read about it.
+        </p>
+
+        <div class="hero__actions" data-reveal-item="actions">
+          <a class="btn btn--primary" href="#work">View Selected Work</a>
+          <a class="btn btn--ghost" href="#contact">Let's Connect</a>
+        </div>
+
+        <p class="hero__principle-note" data-reveal-item="note">
+          Everyone should be able to experience the product. You just did.
+        </p>
+      </div>
+
+      <div class="hero__scroll" data-reveal-item="scroll" aria-hidden="true">
+        <span>Scroll</span>
+        <span class="hero__scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ===============================================================
+         02 · WHAT I BELIEVE  —  editorial, no interaction
+         =============================================================== -->
+    <section id="believe" class="believe section" aria-labelledby="believe-title">
+      <div class="section__index" aria-hidden="true">02</div>
+      <div class="believe__inner">
+        <h2 class="section__eyebrow" id="believe-title">What I Believe</h2>
+        <p class="believe__statement" data-anim="rise">
+          Design isn't the act of making interfaces. It's the discipline of
+          <em>reducing uncertainty.</em>
+        </p>
+        <div class="believe__body">
+          <p data-anim="rise">The screen is only one output.</p>
+          <p data-anim="rise">
+            The real work is understanding people, aligning teams, making difficult
+            decisions, and shipping products that create measurable value.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===============================================================
+         03 · SELECTED WORK  —  Principle: Information Architecture
+         =============================================================== -->
+    <section id="work" class="work section" aria-labelledby="work-title" data-state="scattered">
+      <div class="section__index" aria-hidden="true">03</div>
+
+      <div class="section__head work__head">
+        <div>
+          <h2 class="section__eyebrow" id="work-title">Selected Work</h2>
+          <p class="section__principle">
+            <span class="section__principle-name">Information Architecture.</span>
+            Information should be organized before it can be understood.
+          </p>
+        </div>
+        <button type="button" class="action-btn" id="work-organize" aria-pressed="false">
+          <span class="action-btn__icon" aria-hidden="true"></span>
+          <span class="action-btn__label">
+            <span class="action-btn__label-idle">Organize</span>
+            <span class="action-btn__label-done">Organized</span>
+          </span>
+        </button>
+      </div>
+
+      <ol class="work__grid" id="work-grid">
+        <li class="work-card" style="--i: 0">
+          <a class="work-card__link" href="#contact">
+            <div class="work-card__visual" data-visual="tower" aria-hidden="true"></div>
+            <div class="work-card__meta">
+              <span class="work-card__tag">Fintech · 0→1</span>
+              <h3 class="work-card__title">A lending platform that approves in minutes, not weeks</h3>
+              <p class="work-card__desc">
+                Rebuilt the underwriting flow around a single question at a time.
+                Approval time down 74%.
+              </p>
+            </div>
+          </a>
+        </li>
+        <li class="work-card" style="--i: 1">
+          <a class="work-card__link" href="#contact">
+            <div class="work-card__visual" data-visual="arch" aria-hidden="true"></div>
+            <div class="work-card__meta">
+              <span class="work-card__tag">Design Systems</span>
+              <h3 class="work-card__title">One system, forty product teams</h3>
+              <p class="work-card__desc">
+                Designed and shipped the system that made every other product decision faster.
+              </p>
+            </div>
+          </a>
+        </li>
+        <li class="work-card" style="--i: 2">
+          <a class="work-card__link" href="#contact">
+            <div class="work-card__visual" data-visual="vault" aria-hidden="true"></div>
+            <div class="work-card__meta">
+              <span class="work-card__tag">AI Product</span>
+              <h3 class="work-card__title">Making an AI assistant feel trustworthy</h3>
+              <p class="work-card__desc">
+                Turned model uncertainty into an interface people could actually reason about.
+              </p>
+            </div>
+          </a>
+        </li>
+        <li class="work-card" style="--i: 3">
+          <a class="work-card__link" href="#contact">
+            <div class="work-card__visual" data-visual="span" aria-hidden="true"></div>
+            <div class="work-card__meta">
+              <span class="work-card__tag">Enterprise · Scale</span>
+              <h3 class="work-card__title">Untangling a decade of enterprise workflows</h3>
+              <p class="work-card__desc">
+                Reduced a 40-step operational tool to the six steps that mattered.
+              </p>
+            </div>
+          </a>
+        </li>
+      </ol>
+
+      <p class="work__note" data-state-note>
+        Every project appears scattered. Press <strong>Organize</strong> to experience
+        Information Architecture.
+      </p>
+    </section>
+
+    <!-- ===============================================================
+         04 · COMPANIES I'VE BUILT WITH  —  marquee
+         =============================================================== -->
+    <section id="companies" class="companies section" aria-labelledby="companies-title">
+      <div class="section__index" aria-hidden="true">04</div>
+      <h2 class="section__eyebrow companies__title" id="companies-title">Companies I've Built With</h2>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track" id="marquee-track"></div>
+      </div>
+      <p class="sr-only">
+        Anirudh has built with Northwind, Meridian, Atlas, Vantage, Foundry, Beacon,
+        Coreline, Praxis, Lattice, and Halcyon.
+      </p>
+    </section>
+
+    <!-- ===============================================================
+         05 · MY PROCESS  —  editorial flow, no interaction
+         =============================================================== -->
+    <section id="process" class="process section" aria-labelledby="process-title">
+      <div class="section__index" aria-hidden="true">05</div>
+      <div class="section__head">
+        <div>
+          <h2 class="section__eyebrow" id="process-title">My Process</h2>
+          <p class="section__principle">
+            The screen is the last step. Everything before it is where the product is decided.
+          </p>
+        </div>
+      </div>
+
+      <ol class="process__flow">
+        <li class="process__step" data-anim="rise"><span class="process__num">01</span><span class="process__word">Understand</span></li>
+        <li class="process__step" data-anim="rise"><span class="process__num">02</span><span class="process__word">Define</span></li>
+        <li class="process__step" data-anim="rise"><span class="process__num">03</span><span class="process__word">Explore</span></li>
+        <li class="process__step" data-anim="rise"><span class="process__num">04</span><span class="process__word">Validate</span></li>
+        <li class="process__step" data-anim="rise"><span class="process__num">05</span><span class="process__word">Build</span></li>
+        <li class="process__step" data-anim="rise"><span class="process__num">06</span><span class="process__word">Measure</span></li>
+        <li class="process__step" data-anim="rise"><span class="process__num">07</span><span class="process__word">Improve</span></li>
+      </ol>
+    </section>
+
+    <!-- ===============================================================
+         06 · THE PRINCIPLES BEHIND MY WORK  —  Principle: Clarity
+         =============================================================== -->
+    <section id="principles" class="principles section" aria-labelledby="principles-title" data-state="complex">
+      <div class="section__index" aria-hidden="true">06</div>
+
+      <div class="section__head">
+        <div>
+          <h2 class="section__eyebrow" id="principles-title">The Principles Behind My Work</h2>
+          <p class="section__principle">
+            <span class="section__principle-name">Clarity.</span>
+            Complex ideas should be easy to understand.
+          </p>
+        </div>
+        <button type="button" class="action-btn" id="principles-simplify" aria-pressed="false">
+          <span class="action-btn__icon" aria-hidden="true"></span>
+          <span class="action-btn__label">
+            <span class="action-btn__label-idle">Simplify</span>
+            <span class="action-btn__label-done">Clear</span>
+          </span>
+        </button>
+      </div>
+
+      <ol class="principles__list">
+        <li class="principle" data-anim="rise">
+          <span class="principle__num" aria-hidden="true">01</span>
+          <p class="principle__text">Don't open Figma until you know what you're solving.</p>
+        </li>
+        <li class="principle" data-anim="rise">
+          <span class="principle__num" aria-hidden="true">02</span>
+          <p class="principle__text">Good design makes hard decisions visible.</p>
+        </li>
+        <li class="principle" data-anim="rise">
+          <span class="principle__num" aria-hidden="true">03</span>
+          <p class="principle__text">If it doesn't help the user or the business, it doesn't ship.</p>
+        </li>
+        <li class="principle" data-anim="rise">
+          <span class="principle__num" aria-hidden="true">04</span>
+          <p class="principle__text">A product is never finished. Only the next decision is.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===============================================================
+         07 · TESTIMONIALS  —  Principle: Collaboration
+         =============================================================== -->
+    <section id="testimonials" class="testimonials section" aria-labelledby="testimonials-title" data-state="disconnected">
+      <div class="section__index" aria-hidden="true">07</div>
+
+      <div class="section__head">
+        <div>
+          <h2 class="section__eyebrow" id="testimonials-title">Testimonials</h2>
+          <p class="section__principle">
+            <span class="section__principle-name">Collaboration.</span>
+            Great products are built together.
+          </p>
+        </div>
+        <button type="button" class="action-btn" id="testimonials-connect" aria-pressed="false">
+          <span class="action-btn__icon" aria-hidden="true"></span>
+          <span class="action-btn__label">
+            <span class="action-btn__label-idle">Connect the team</span>
+            <span class="action-btn__label-done">Connected</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="team" id="team">
+        <svg class="team__wires" id="team-wires" aria-hidden="true" preserveAspectRatio="none"></svg>
+        <ul class="team__nodes" id="team-nodes">
+          <li class="team-node" data-role="Product"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Product</span></li>
+          <li class="team-node" data-role="Engineering"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Engineering</span></li>
+          <li class="team-node" data-role="Research"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Research</span></li>
+          <li class="team-node" data-role="Data"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Data</span></li>
+          <li class="team-node" data-role="Design"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Design</span></li>
+        </ul>
+      </div>
+
+      <ul class="quotes" id="quotes">
+        <li class="quote">
+          <blockquote class="quote__text">
+            Working with Anirudh changed the conversation our whole team was having — not just the screens.
+          </blockquote>
+          <p class="quote__by"><span class="quote__name">VP Product</span><span class="quote__co">Fintech scale-up</span></p>
+        </li>
+        <li class="quote">
+          <blockquote class="quote__text">
+            Anirudh made our hardest trade-offs visible, so we could finally decide together.
+          </blockquote>
+          <p class="quote__by"><span class="quote__name">Head of Engineering</span><span class="quote__co">Enterprise SaaS</span></p>
+        </li>
+        <li class="quote">
+          <blockquote class="quote__text">
+            The design system Anirudh built is still how we ship, three years later.
+          </blockquote>
+          <p class="quote__by"><span class="quote__name">Director of Design</span><span class="quote__co">Platform company</span></p>
+        </li>
+      </ul>
+
+      <p class="testimonials__note" data-state-note>
+        The team appears disconnected. Connect them to hear what they have to say.
+      </p>
+    </section>
+
+    <!-- ===============================================================
+         08 · EXPERIENCE  —  editorial timeline
+         =============================================================== -->
+    <section id="experience" class="experience section" aria-labelledby="experience-title">
+      <div class="section__index" aria-hidden="true">08</div>
+      <div class="section__head">
+        <h2 class="section__eyebrow" id="experience-title">Experience</h2>
+      </div>
+
+      <ol class="timeline">
+        <li class="timeline__row" data-anim="rise">
+          <div class="timeline__years">2021 — Now</div>
+          <div class="timeline__body">
+            <h3 class="timeline__role">Lead Product Designer</h3>
+            <p class="timeline__org">Platform &amp; AI Products</p>
+            <p class="timeline__note">Leading design for products and the systems the org designs them with.</p>
+          </div>
+        </li>
+        <li class="timeline__row" data-anim="rise">
+          <div class="timeline__years">2017 — 2021</div>
+          <div class="timeline__body">
+            <h3 class="timeline__role">Senior Product Designer</h3>
+            <p class="timeline__org">Fintech &amp; Enterprise</p>
+            <p class="timeline__note">0→1 products, complex workflows, and the first design system.</p>
+          </div>
+        </li>
+        <li class="timeline__row" data-anim="rise">
+          <div class="timeline__years">2014 — 2017</div>
+          <div class="timeline__body">
+            <h3 class="timeline__role">Product Designer</h3>
+            <p class="timeline__org">Consumer &amp; Mobile</p>
+            <p class="timeline__note">Learned that the interface is the easy part.</p>
+          </div>
+        </li>
+        <li class="timeline__row" data-anim="rise">
+          <div class="timeline__years">2013 — 2014</div>
+          <div class="timeline__body">
+            <h3 class="timeline__role">Where it started</h3>
+            <p class="timeline__org">Design &amp; the discipline of reducing uncertainty</p>
+            <p class="timeline__note">11+ years of asking what we're really solving.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===============================================================
+         09 · CONTACT  —  Principle: Connection
+         =============================================================== -->
+    <section id="contact" class="contact section" aria-labelledby="contact-title" data-state="idle">
+      <div class="section__index" aria-hidden="true">09</div>
+      <div class="contact__glow" aria-hidden="true"></div>
+
+      <div class="contact__inner">
+        <p class="section__principle contact__principle">
+          <span class="section__principle-name">Connection.</span>
+          Every opportunity starts with a conversation.
+        </p>
+
+        <h2 class="contact__title" id="contact-title">Let's build products together.</h2>
+
+        <div class="contact__available">
+          <span class="contact__available-label">Currently available for</span>
+          <ul class="contact__roles">
+            <li>Lead Product Designer</li>
+            <li>Principal Product Designer</li>
+            <li>AI Product Design</li>
+          </ul>
+        </div>
+
+        <div class="contact__actions">
+          <button type="button" class="btn btn--primary btn--lg" id="contact-cta">
+            Get in Touch
+          </button>
+          <a class="contact__email" href="mailto:anirudh.thata@gmail.com">anirudh.thata@gmail.com</a>
+        </div>
+        <p class="contact__ping" id="contact-ping" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__line">
+      Anirudh Thata <span aria-hidden="true">·</span> Lead Product Designer
+      <span aria-hidden="true">·</span> Pune, India
+    </p>
+    <p class="site-footer__meta">Built to be experienced, not just read.</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

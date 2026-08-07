@@ -1,0 +1,9 @@
+# Dependencies (this is a zero-dependency static site — nothing to install)
+node_modules/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

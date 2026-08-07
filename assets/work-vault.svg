@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="A heavy concrete vault lit by a single overhead shaft of warm light.">
+  <defs>
+    <linearGradient id="v-concrete" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#241f19"/>
+      <stop offset="1" stop-color="#0b0a09"/>
+    </linearGradient>
+    <linearGradient id="v-beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd3a3" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffb673" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="v-pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffb673" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ffb673" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="#070707"/>
+  <!-- side walls -->
+  <path d="M0 0 H210 L150 500 H0 Z" fill="url(#v-concrete)"/>
+  <path d="M800 0 H590 L650 500 H800 Z" fill="url(#v-concrete)"/>
+  <!-- back wall -->
+  <rect x="210" y="0" width="380" height="140" fill="url(#v-concrete)"/>
+  <!-- overhead aperture -->
+  <rect x="360" y="0" width="80" height="34" fill="#ffd3a3"/>
+  <!-- the beam -->
+  <path d="M360 34 H440 L520 500 H280 Z" fill="url(#v-beam)"/>
+  <!-- pool of light on the floor -->
+  <ellipse cx="400" cy="470" rx="180" ry="46" fill="url(#v-pool)"/>
+</svg>
