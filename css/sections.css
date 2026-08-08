@@ -821,3 +821,59 @@ html[data-reveal="on"] #progress { opacity: 0.85; }
 .ia-link { vector-effect: non-scaling-stroke; }
 .ia-link--scattered { stroke-width: 1.4; }
 .ia-link--organized { stroke-width: 1.6; }
+
+/* ===========================================================================
+   INTERACTION AFFORDANCE — every idea invites action
+   =========================================================================== */
+
+/* The "before → invitation" line; the verb echoes the control (accent underline). */
+.section__invite {
+  margin-top: var(--space-sm); max-width: 48ch;
+  font-size: 1.02rem; line-height: 1.5; color: var(--c-warm-400);
+}
+.section__invite span {
+  color: var(--c-warm-100); font-weight: 600;
+  border-bottom: 2px solid var(--c-light); padding-bottom: 0.02em;
+}
+.process__invite { max-width: none; }
+
+/* Controls read unmistakably as "try me": trailing arrow + hover fill. */
+.action-btn { cursor: pointer; }
+.action-btn::after {
+  content: "\2192"; font-family: var(--font-mono); font-size: 0.95em; line-height: 1;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.action-btn:hover { background: var(--c-light); color: #fff; border-color: var(--c-light); }
+.action-btn:hover::after { transform: translateX(4px); }
+.action-btn[aria-pressed="true"]::after { content: "\2713"; } /* ✓ once done */
+
+/* PROCESS — explorable stages (hover on desktop, tap/keyboard via .is-active) */
+.process__stage { cursor: pointer; }
+.process__stage:focus-visible { outline: 2px solid var(--c-light); outline-offset: 6px; border-radius: 6px; }
+.process__change {
+  margin-top: 0.5rem; color: var(--c-warm-200); font-weight: 500;
+  max-height: 0; opacity: 0; overflow: hidden; transform: translateY(-4px);
+  transition: max-height var(--dur-mid) var(--ease-out),
+    opacity var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
+}
+.process__change::before { content: "\2192  "; color: var(--c-light); font-family: var(--font-mono); }
+.process__stage:hover .process__change,
+.process__stage.is-active .process__change { max-height: 4em; opacity: 1; transform: none; }
+.process__stage:hover .process__word,
+.process__stage.is-active .process__word { color: var(--c-warm-100); }
+.process__stage:hover::before,
+.process__stage.is-active::before { background: var(--c-light); }
+
+/* CAREER — explorable stops reveal growing responsibility */
+.roadmap__stop { cursor: pointer; }
+.roadmap__stop:focus-visible { outline: 2px solid var(--c-light); outline-offset: 6px; border-radius: 6px; }
+.roadmap__resp {
+  margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.8rem;
+  letter-spacing: 0.03em; color: var(--c-warm-300);
+  max-height: 0; opacity: 0; overflow: hidden;
+  transition: max-height var(--dur-mid) var(--ease-out), opacity var(--dur-mid) var(--ease-out);
+}
+.roadmap__stop:hover .roadmap__resp,
+.roadmap__stop.is-active .roadmap__resp { max-height: 3em; opacity: 1; }
+.roadmap__stop:hover::before,
+.roadmap__stop.is-active::before { background: var(--c-light); border-color: var(--c-light); }
