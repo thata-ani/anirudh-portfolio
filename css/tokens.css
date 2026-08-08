@@ -75,10 +75,10 @@
 
   /* --- The continuous light field --------------------------------------- */
   /* Position/size/intensity are driven live by js/modules/lightfield.js.    */
-  --lx: 55%;
+  --lx: 50%;
   --ly: 12%;
-  --lsize: 70vmax;
-  --lint: 0.18;
+  --lsize: 66vmax;
+  --lint: 0.06;
 
   /* --- Motion ------------------------------------------------------------ */
   /* Calm, intentional. No bounce, no overshoot. */

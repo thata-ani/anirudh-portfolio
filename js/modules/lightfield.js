@@ -24,7 +24,7 @@ export function initLightField() {
   const applyIntensity = () => {
     field.style.setProperty(
       "--lint",
-      html.getAttribute("data-reveal") === "on" ? "0.95" : "0.18"
+      html.getAttribute("data-reveal") === "on" ? "0.95" : "0.06"
     );
   };
   new MutationObserver(applyIntensity).observe(html, {

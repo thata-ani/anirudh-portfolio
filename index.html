@@ -67,7 +67,7 @@
     <!-- ===============================================================
          01 · HERO — Principle: Accessibility
          =============================================================== -->
-    <section id="hero" class="hero" data-lx="58%" data-lsize="70vmax" aria-labelledby="hero-title">
+    <section id="hero" class="hero" data-lx="50%" data-lsize="66vmax" aria-labelledby="hero-title">
       <div class="hero__stage" aria-hidden="true">
         <div class="hero__planes">
           <span class="hero__plane hero__plane--a"></span>
@@ -77,23 +77,25 @@
         <div class="hero__floor"></div>
       </div>
 
-      <div class="hero__switch-wrap" data-reveal-persist>
-        <button type="button" class="switch" id="hero-switch" role="switch" aria-checked="false" aria-describedby="hero-switch-hint">
-          <span class="switch__track" aria-hidden="true"><span class="switch__thumb"></span></span>
-          <span class="switch__label">
-            <span class="switch__label-off">Switch ON</span>
-            <span class="switch__label-on">Light on</span>
+      <!-- A real hanging light. Off, in a dark room, with a pull-cord that asks
+           to be used. Switching it on is switching on the product. -->
+      <div class="lamp-rig" data-reveal-persist>
+        <button type="button" class="lamp" id="hero-switch" role="switch" aria-checked="false" aria-describedby="hero-switch-hint">
+          <span class="lamp__wire" aria-hidden="true"></span>
+          <span class="lamp__bulb" aria-hidden="true">
+            <span class="lamp__filament"></span>
+            <span class="lamp__halo"></span>
           </span>
+          <span class="lamp__cord" aria-hidden="true"><span class="lamp__knob"></span></span>
+          <span class="sr-only">Switch on the light</span>
         </button>
-        <p class="hero__switch-hint" id="hero-switch-hint">
-          This portfolio begins almost inaccessible. Turn on the light to make it available.
+        <p class="lamp__hint" id="hero-switch-hint">
+          Good products make what matters visible.
+          <strong>Pull the cord to switch it on.</strong>
         </p>
       </div>
 
       <div class="hero__content">
-        <p class="hero__eyebrow" data-reveal-item="eyebrow">
-          <span>Product Principle</span><span class="hero__eyebrow-mark">Accessibility</span>
-        </p>
         <p class="hero__kicker" data-reveal-item="kicker">
           Anirudh&nbsp;Thata <span aria-hidden="true">·</span> Senior Product Designer
           <span aria-hidden="true">·</span> Product Design · Strategy · AI

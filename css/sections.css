@@ -43,51 +43,96 @@ html[data-reveal="on"] .hero__plane { opacity: 1; }
 }
 html[data-reveal="on"] .hero__floor { opacity: 1; }
 
-/* The accessibility switch */
-html:not(.js) .hero__switch-wrap { display: none; }
-.hero__switch-wrap {
-  position: absolute; top: 50%; left: 50%; translate: -50% -50%;
+/* ---- The hanging light — the product you switch on ---------------------- */
+html:not(.js) .lamp-rig { display: none; }
+.lamp-rig {
+  position: absolute; top: 0; left: auto; right: clamp(6%, 16vw, 22%);
   z-index: 3; display: flex; flex-direction: column; align-items: center;
-  gap: var(--space-md); text-align: center; max-width: 32ch;
+  text-align: center; pointer-events: none;
+}
+.lamp {
+  position: relative; display: flex; flex-direction: column; align-items: center;
+  padding: 0 22px 14px; background: none; border: 0; cursor: pointer;
+  pointer-events: auto; transform-origin: 50% 0; will-change: transform;
+}
+html[data-reveal="on"] .lamp { animation: lamp-swing 2.8s var(--ease-out) 1; }
+
+.lamp__wire {
+  width: 2px; height: clamp(64px, 11vh, 120px);
+  background: linear-gradient(to bottom, rgba(255, 220, 180, 0.22), rgba(255, 200, 150, 0.5));
+}
+.lamp__bulb {
+  position: relative; width: 46px; height: 58px;
+  border-radius: 50% 50% 46% 46% / 56% 56% 44% 44%;
+  background: radial-gradient(circle at 50% 38%, rgba(64, 53, 42, 0.9), rgba(18, 15, 12, 0.96));
+  border: 1px solid rgba(255, 210, 160, 0.22);
+  box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.5);
+  transition: background var(--dur-mid) var(--ease-out),
+    border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out);
+}
+.lamp__bulb::before {
+  content: ""; position: absolute; top: -6px; left: 50%; translate: -50% 0;
+  width: 14px; height: 8px; border-radius: 2px; background: rgba(64, 55, 46, 0.9);
+}
+.lamp__filament {
+  position: absolute; left: 50%; top: 52%; translate: -50% -50%;
+  width: 15px; height: 15px; border: 1.6px solid rgba(255, 190, 120, 0.35);
+  border-radius: 50%; opacity: 0.5;
+  transition: opacity var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out);
+}
+.lamp__halo {
+  position: absolute; left: 50%; top: 46%; width: 340px; height: 340px; translate: -50% -50%;
+  border-radius: 50%; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle, var(--c-light-glow) 0%, rgba(255, 168, 92, 0.12) 32%, transparent 62%);
+}
+.lamp__cord {
+  position: relative; width: 1.5px; height: 42px; margin-top: 2px;
+  background: linear-gradient(to bottom, rgba(255, 210, 160, 0.4), rgba(255, 200, 150, 0.12));
+  transform-origin: 50% 0;
+}
+.lamp__knob {
+  position: absolute; bottom: -7px; left: 50%; translate: -50% 0;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--c-light-deep); border: 1px solid var(--c-light);
+  box-shadow: 0 0 8px rgba(255, 182, 115, 0.3);
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+.lamp:not([aria-checked="true"]) .lamp__cord { animation: cord-bob 2.8s var(--ease-in-out) infinite; }
+.lamp:hover .lamp__knob { box-shadow: 0 0 16px 3px var(--c-light-glow); }
+
+/* ON — the bulb ignites, floods the room, and swings on its wire */
+html[data-reveal="on"] .lamp__bulb {
+  background: radial-gradient(circle at 50% 40%, #fff3e2 0%, var(--c-light-soft) 42%, var(--c-light-deep) 100%);
+  border-color: var(--c-light-soft);
+  box-shadow: 0 0 60px 12px var(--c-light-glow), 0 0 150px 46px rgba(255, 168, 92, 0.22);
+  animation: bulb-ignite 0.62s var(--ease-out) 1;
+}
+html[data-reveal="on"] .lamp__filament { opacity: 1; border-color: #fff; }
+html[data-reveal="on"] .lamp__halo { opacity: 1; animation: bulb-ignite 0.62s var(--ease-out) 1; }
+html[data-reveal="on"] .lamp__cord { animation: none; }
+
+.lamp__hint {
+  margin-top: var(--space-md); max-width: 26ch; color: var(--c-warm-300);
+  font-size: 1rem; line-height: 1.55; pointer-events: none;
   transition: opacity var(--dur-mid) var(--ease-out);
 }
-html[data-reveal="on"] .hero__switch-wrap {
-  top: auto; bottom: var(--space-lg); left: auto; right: var(--gutter);
-  translate: 0 0; max-width: none; flex-direction: row-reverse; gap: var(--space-sm);
+.lamp__hint strong { display: block; color: var(--c-warm-100); font-weight: 600; margin-top: 0.4rem; }
+html[data-reveal="on"] .lamp__hint { opacity: 0; }
+
+@keyframes lamp-swing {
+  0% { transform: rotate(0deg); } 12% { transform: rotate(-3.4deg); }
+  34% { transform: rotate(2.2deg); } 56% { transform: rotate(-1.2deg); }
+  78% { transform: rotate(0.5deg); } 100% { transform: rotate(0deg); }
 }
-html[data-reveal="on"] .hero__switch-hint { display: none; }
-.switch {
-  display: inline-flex; align-items: center; gap: 0.85rem;
-  padding: 0.6rem 1.15rem 0.6rem 0.7rem;
-  border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
-  background: rgba(20, 17, 14, 0.6); backdrop-filter: blur(8px);
-  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out);
-  animation: switch-beacon 3.2s var(--ease-in-out) infinite;
+@keyframes cord-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+@keyframes bulb-ignite {
+  0% { opacity: 0.15; } 8% { opacity: 1; } 14% { opacity: 0.3; }
+  22% { opacity: 1; } 32% { opacity: 0.55; } 44% { opacity: 1; } 100% { opacity: 1; }
 }
-.switch:hover { border-color: var(--c-light); }
-html[data-reveal="on"] .switch { animation: none; }
-@keyframes switch-beacon {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 182, 115, 0); }
-  50% { box-shadow: 0 0 30px -4px var(--c-light-glow); }
+
+@media (max-width: 768px) {
+  .lamp-rig { right: auto; left: 50%; translate: -50% 0; }
 }
-.switch__track {
-  position: relative; width: 46px; height: 26px; border-radius: var(--radius-pill);
-  background: var(--c-ink-500); border: 1px solid var(--c-line-strong); flex: none;
-  transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out);
-}
-.switch__thumb {
-  position: absolute; top: 50%; left: 3px; width: 18px; height: 18px; translate: 0 -50%;
-  border-radius: 50%; background: var(--c-warm-300);
-  transition: transform var(--dur-mid) var(--ease-out), background var(--dur-mid) var(--ease-out);
-}
-.switch[aria-checked="true"] .switch__track { background: var(--c-light-deep); border-color: var(--c-light); }
-.switch[aria-checked="true"] .switch__thumb { transform: translateX(20px); background: var(--c-ink-900); }
-.switch__label { font-weight: 600; letter-spacing: 0.01em; display: inline-grid; }
-.switch__label-off, .switch__label-on { grid-area: 1 / 1; transition: opacity var(--dur-fast) var(--ease-out); }
-.switch__label-on { opacity: 0; }
-.switch[aria-checked="true"] .switch__label-off { opacity: 0; }
-.switch[aria-checked="true"] .switch__label-on { opacity: 1; }
-.hero__switch-hint { color: var(--c-warm-300); font-size: 0.98rem; line-height: 1.5; }
 
 .hero__content { position: relative; z-index: 2; }
 .hero__eyebrow {
