@@ -1,11 +1,12 @@
 /**
- * HERO GRAPHIC — visibility, shown (not named).
+ * HERO GRAPHIC — visibility / discoverability, shown (not named).
  *
- * A precise grid of "information" dots that stay nearly invisible until a soft
- * light of attention passes over them — then they resolve into view. It drifts
- * on its own and follows the pointer, so the visitor feels the principle: what
- * the light reaches becomes visible; the rest waits in the dark. Classic,
- * monochrome, restrained — a product graphic, not decoration.
+ * A full-bleed field of "information" points rests almost invisible. A soft
+ * light of attention travels across it — and only what the light reaches
+ * becomes visible: the points brighten, grow, and lightly resolve into
+ * structure. The rest waits in the dark. The visitor *feels* the principle:
+ * in a product, important information has to be made visible to exist.
+ * Classic, monochrome, restrained — a product graphic, not decoration.
  */
 import { prefersReducedMotion } from "./env.js";
 
@@ -16,11 +17,13 @@ export function initHeroGraphic() {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
-  const GAP = 30;
-  let w = 0, h = 0, dpr = 1, dots = [];
+  const GAP = 32;
+  const INK = "11, 11, 12";
+  let w = 0, h = 0, dpr = 1;
+  let cols = 0, rows = 0, ox = 0, oy = 0;
   const reduce = prefersReducedMotion();
 
-  // Focal point (where attention/light is). Target eases toward this.
+  // Focal point (where the light of attention is). fx/fy ease toward tx/ty.
   let fx = 0, fy = 0, tx = 0, ty = 0;
   let pointerActive = false;
 
@@ -31,47 +34,97 @@ export function initHeroGraphic() {
     canvas.width = Math.round(w * dpr);
     canvas.height = Math.round(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    dots = [];
-    const ox = (w % GAP) / 2, oy = (h % GAP) / 2;
-    for (let y = oy; y <= h; y += GAP) {
-      for (let x = ox; x <= w; x += GAP) dots.push({ x, y });
-    }
-    // default focal: right of the text column
-    tx = fx = w * 0.64;
-    ty = fy = h * 0.42;
+    cols = Math.floor(w / GAP);
+    rows = Math.floor(h / GAP);
+    ox = (w - cols * GAP) / 2 + GAP / 2;
+    oy = (h - rows * GAP) / 2 + GAP / 2;
+    // default focal: the open right/lower field, away from the copy
+    tx = fx = w * 0.68;
+    ty = fy = h * 0.52;
   };
 
-  const R = () => Math.hypot(w, h) * 0.4;
+  // Beam reach scales with the viewport diagonal.
+  const R = () => Math.hypot(w, h) * 0.32;
 
   const draw = () => {
     ctx.clearRect(0, 0, w, h);
     const radius = R();
-    for (const d of dots) {
-      const dist = Math.hypot(d.x - fx, d.y - fy);
-      let n = Math.max(0, 1 - dist / radius);
-      n = n * n * (3 - 2 * n); // smoothstep
-      if (n <= 0.001) continue;
-      // keep the left (text) column quiet so copy stays readable
-      const leftGuard = Math.min(1, Math.max(0.25, d.x / (w * 0.5)));
-      const a = (0.05 + n * 0.5) * leftGuard;
-      const rr = 0.9 + n * 1.7;
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, rr, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(11, 11, 12, ${a.toFixed(3)})`;
-      ctx.fill();
+    const inv = 1 / radius;
+
+    // Precompute reveal strength per grid node once, reuse for dots + links.
+    const n = new Float32Array(cols * rows);
+    for (let r = 0; r < rows; r++) {
+      const y = oy + r * GAP;
+      for (let c = 0; c < cols; c++) {
+        const x = ox + c * GAP;
+        let s = 1 - Math.hypot(x - fx, y - fy) * inv;
+        if (s < 0) s = 0;
+        s = s * s * (3 - 2 * s); // smoothstep
+        n[r * cols + c] = s;
+      }
+    }
+
+    // Structure — faint lattice that only forms where the light is strong,
+    // so information reads as "becoming discoverable", not random noise.
+    ctx.lineWidth = 1;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const s = n[r * cols + c];
+        if (s < 0.55) continue;
+        const x = ox + c * GAP, y = oy + r * GAP;
+        if (c + 1 < cols) {
+          const s2 = n[r * cols + c + 1];
+          if (s2 > 0.55) {
+            const a = (Math.min(s, s2) - 0.55) * 0.5;
+            ctx.strokeStyle = `rgba(${INK}, ${a.toFixed(3)})`;
+            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + GAP, y); ctx.stroke();
+          }
+        }
+        if (r + 1 < rows) {
+          const s2 = n[(r + 1) * cols + c];
+          if (s2 > 0.55) {
+            const a = (Math.min(s, s2) - 0.55) * 0.5;
+            ctx.strokeStyle = `rgba(${INK}, ${a.toFixed(3)})`;
+            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + GAP); ctx.stroke();
+          }
+        }
+      }
+    }
+
+    // The information points.
+    for (let r = 0; r < rows; r++) {
+      const y = oy + r * GAP;
+      for (let c = 0; c < cols; c++) {
+        const s = n[r * cols + c];
+        const x = ox + c * GAP;
+        const a = 0.05 + s * 0.72;
+        const rr = 1 + s * 2.4;
+        ctx.beginPath();
+        ctx.arc(x, y, rr, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${INK}, ${a.toFixed(3)})`;
+        ctx.fill();
+        // a soft halo on the points the light lands on most directly
+        if (s > 0.82) {
+          ctx.beginPath();
+          ctx.arc(x, y, rr + 4, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(${INK}, ${((s - 0.82) * 0.6).toFixed(3)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
     }
   };
 
   let t = 0, raf = 0;
   const tick = () => {
-    t += 0.008;
+    t += 0.006;
     if (!pointerActive) {
-      // gentle autonomous drift in the right half
-      tx = w * (0.6 + Math.cos(t) * 0.12);
-      ty = h * (0.45 + Math.sin(t * 0.8) * 0.16);
+      // a slow figure that roams the whole open field (incl. the lower area)
+      tx = w * (0.6 + Math.cos(t) * 0.22);
+      ty = h * (0.5 + Math.sin(t * 0.9) * 0.3);
     }
-    fx += (tx - fx) * 0.06;
-    fy += (ty - fy) * 0.06;
+    fx += (tx - fx) * 0.055;
+    fy += (ty - fy) * 0.055;
     draw();
     raf = requestAnimationFrame(tick);
   };
