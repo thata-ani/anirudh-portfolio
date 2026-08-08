@@ -17,22 +17,21 @@ Design principle before reading about it.
   as framed artifacts, given air.
 - **Motion is calm** — smooth, eased, no bounce or spectacle.
 
-## The eleven sections (locked)
+## The nine sections (Foundation v2.0, locked)
 
-01 Hero · 02 How I Create Product Impact · 03 Scale & Proven Impact ·
-04 Selected Product Work · 05 Leadership Beyond Design · 06 My Decision-Making
-Framework · 07 Driving Innovation · 08 How I Think · 09 Career Journey ·
-10 Recommendations · 11 Let's Build What's Next
+01 Hero · 02 What I Believe · 03 Selected Work · 04 Companies I've Built With ·
+05 My Process · 06 The Principles Behind My Work · 07 Testimonials ·
+08 Experience · 09 Let's Build Products Together
 
 ## The five principle-interactions
 
 | Section | Principle | Interaction |
 | --- | --- | --- |
-| Hero | **Accessibility** | The page begins almost inaccessible; *Switch ON* brings up the light and reveals the interface. |
-| Selected Product Work | **Information Architecture** | Cropwise's initiatives start scattered; *Organize* aligns them into the system. |
-| My Decision-Making Framework | **Clarity** | The four dimensions start visually complex; *Simplify* resolves them. |
-| Recommendations | **Collaboration** | A disconnected cross-functional team connects into a mesh — then the recommendations appear. |
-| Let's Build What's Next | **Connection** | *Get in Touch* plays a single subtle, premium notification tone. |
+| Hero | **Accessibility** | The page begins in the dark; pull the cord on the hanging light to switch it on and reveal the interface. |
+| Selected Work | **Information Architecture** | Projects start scattered; *Organize* aligns them into a clean editorial grid. |
+| The Principles Behind My Work | **Clarity** | The principles start visually complex; *Think Simple* resolves them into readable form. |
+| Testimonials | **Collaboration** | A disconnected cross-functional team connects into a mesh — then the testimonials appear. |
+| Let's Build Products Together | **Connection** | On arrival the button makes one subtle move, a single premium tone plays, and supported devices get a light haptic. |
 
 ## Tech
 

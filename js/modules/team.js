@@ -9,11 +9,11 @@
 import { prefersReducedMotion } from "./env.js";
 
 export function initTeam() {
-  const section = document.getElementById("recommendations");
+  const section = document.getElementById("testimonials");
   const team = document.getElementById("team");
   const nodesEl = document.getElementById("team-nodes");
   const wiresEl = document.getElementById("team-wires");
-  const button = document.getElementById("recommendations-connect");
+  const button = document.getElementById("testimonials-connect");
   if (!section || !team || !nodesEl || !wiresEl || !button) return;
 
   const nodes = [...nodesEl.querySelectorAll(".team-node")];
