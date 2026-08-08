@@ -244,10 +244,8 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
   position: relative; box-shadow: var(--shadow-card);
 }
 .case__visual::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, transparent 45%, rgba(5, 4, 3, 0.55)); }
-.case__visual[data-visual="tower"] { background-image: url("../assets/work-tower.svg"); }
-.case__visual[data-visual="arch"]  { background-image: url("../assets/work-arch.svg"); }
-.case__visual[data-visual="vault"] { background-image: url("../assets/work-vault.svg"); }
-.case__visual[data-visual="span"]  { background-image: url("../assets/work-span.svg"); }
+.case__visual[data-visual="cropwise"]    { background-image: url("../assets/case-cropwise.svg"); }
+.case__visual[data-visual="designbesti"] { background-image: url("../assets/case-designbesti.svg"); }
 .case__artifact figcaption { margin-top: var(--space-sm); font-size: 0.92rem; color: var(--c-warm-400); max-width: 60ch; }
 
 .case__body { display: grid; grid-template-columns: 1fr; gap: var(--space-2xl); }
@@ -428,3 +426,66 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
 .contact[data-state="pinged"] #contact-cta { animation: contact-ring var(--dur-slow) var(--ease-out); }
 @keyframes contact-ring { 0% { box-shadow: 0 0 0 0 var(--c-light-glow); } 100% { box-shadow: 0 0 0 26px rgba(255, 182, 115, 0); } }
 .contact__final { margin-top: var(--space-2xl); max-width: 54ch; color: var(--c-warm-400); font-size: 1.05rem; line-height: 1.6; }
+
+/* ===========================================================================
+   PREMIUM META LAYER — mono texture for labels, meta, and numerals
+   =========================================================================== */
+.hero__kicker,
+.case__role,
+.case__h,
+.concept__role,
+.evolution__label,
+.contact__interests-label,
+.hero__stat-l {
+  font-family: var(--font-mono);
+}
+.hero__stat-n,
+.scale__n,
+.proof__row dt,
+.innov__year,
+.timeline__years,
+.dimension__num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.hero__kicker { letter-spacing: 0.08em; }
+.case__role,
+.concept__role { letter-spacing: 0.1em; }
+.case__h { letter-spacing: 0.16em; }
+
+/* Numbered, ruled capability blocks (How I Create Impact / How I Lead) ------ */
+.pillars { counter-reset: pil; }
+.pillar {
+  counter-increment: pil;
+  border-top: 1px solid var(--c-line);
+  padding-top: var(--space-md);
+  max-width: 42ch;
+}
+.pillar__title::before {
+  content: counter(pil, decimal-leading-zero);
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--c-light);
+}
+
+/* How I Think — numbered tenets */
+.tenets { counter-reset: ten; }
+.tenet { counter-increment: ten; display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 3vw, 2.5rem); align-items: baseline; }
+.tenet::before {
+  content: counter(ten, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--c-warm-400);
+  padding-top: 0.4em;
+}
+
+/* Larger, more confident quotes */
+.quote__text { font-size: clamp(1.3rem, 1rem + 1.2vw, 1.7rem); line-height: 1.35; }
+.quote { border-left-width: 2px; border-left-color: var(--c-light); padding-left: var(--space-lg); }
+
+/* Case titles a touch grander */
+.case__title { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.4rem); }

@@ -28,8 +28,10 @@
   --c-light-haze: rgba(255, 168, 92, 0.12);
 
   /* --- Typography -------------------------------------------------------- */
-  --font-sans: "Inter Tight", "Söhne", -apple-system, BlinkMacSystemFont,
+  --font-sans: "Geist", "Inter Tight", -apple-system, BlinkMacSystemFont,
     "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    Consolas, monospace;
 
   --fs-eyebrow: clamp(0.72rem, 0.68rem + 0.2vw, 0.82rem);
   --fs-body:    clamp(1rem, 0.96rem + 0.25vw, 1.18rem);

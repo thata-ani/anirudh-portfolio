@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Abstract product interface representing the DesignBesti AI critique platform, lit warmly.">
+  <defs>
+    <linearGradient id="db-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14110e"/><stop offset="1" stop-color="#0a0908"/>
+    </linearGradient>
+    <radialGradient id="db-light" cx="76%" cy="8%" r="70%">
+      <stop offset="0" stop-color="#ffb673" stop-opacity="0.28"/>
+      <stop offset="45%" stop-color="#ffb673" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#ffb673" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#db-bg)"/>
+  <rect width="960" height="540" fill="url(#db-light)"/>
+
+  <line x1="0" y1="52" x2="960" y2="52" stroke="#ffffff" stroke-opacity="0.06"/>
+  <circle cx="34" cy="27" r="5" fill="#ffffff" fill-opacity="0.14"/>
+  <circle cx="54" cy="27" r="5" fill="#ffffff" fill-opacity="0.10"/>
+  <circle cx="74" cy="27" r="5" fill="#ffb673" fill-opacity="0.5"/>
+
+  <!-- the artboard under critique -->
+  <rect x="70" y="96" width="520" height="380" rx="14" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.09"/>
+  <rect x="104" y="132" width="220" height="24" rx="6" fill="#f6f2ec" fill-opacity="0.8"/>
+  <rect x="104" y="176" width="452" height="10" rx="5" fill="#ffffff" fill-opacity="0.10"/>
+  <rect x="104" y="196" width="410" height="10" rx="5" fill="#ffffff" fill-opacity="0.08"/>
+  <rect x="104" y="242" width="200" height="150" rx="10" fill="#ffffff" fill-opacity="0.05"/>
+  <rect x="330" y="242" width="226" height="150" rx="10" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.07"/>
+
+  <!-- annotation pins (the AI critique) -->
+  <g>
+    <circle cx="330" cy="156" r="13" fill="#ffb673" fill-opacity="0.16" stroke="#ffb673" stroke-opacity="0.8"/>
+    <circle cx="514" cy="300" r="13" fill="#ffb673" fill-opacity="0.16" stroke="#ffb673" stroke-opacity="0.8"/>
+    <circle cx="180" cy="360" r="13" fill="#ffb673" fill-opacity="0.16" stroke="#ffb673" stroke-opacity="0.8"/>
+    <line x1="330" y1="156" x2="640" y2="150" stroke="#ffb673" stroke-opacity="0.35" stroke-dasharray="3 4"/>
+    <line x1="514" y1="300" x2="640" y2="286" stroke="#ffb673" stroke-opacity="0.35" stroke-dasharray="3 4"/>
+    <line x1="180" y1="360" x2="640" y2="404" stroke="#ffb673" stroke-opacity="0.35" stroke-dasharray="3 4"/>
+  </g>
+
+  <!-- critique panel -->
+  <rect x="628" y="96" width="262" height="380" rx="14" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.09"/>
+  <rect x="656" y="128" width="120" height="16" rx="4" fill="#ffb673" fill-opacity="0.85"/>
+  <g fill="#ffffff" fill-opacity="0.10">
+    <rect x="656" y="166" width="206" height="9" rx="4"/>
+    <rect x="656" y="184" width="180" height="9" rx="4"/>
+    <rect x="656" y="220" width="206" height="9" rx="4"/>
+    <rect x="656" y="238" width="164" height="9" rx="4"/>
+    <rect x="656" y="304" width="206" height="9" rx="4"/>
+    <rect x="656" y="322" width="150" height="9" rx="4"/>
+  </g>
+</svg>
