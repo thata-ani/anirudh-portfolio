@@ -22,7 +22,8 @@
 @media (max-height: 900px) {
   .hero { justify-content: flex-start; }
 }
-.hero__stage { position: absolute; inset: 0; z-index: -1; }
+/* Architectural planes belong to the warm/dark direction — hidden in B&W. */
+.hero__stage { display: none; }
 .hero__planes { position: absolute; inset: 0; transform: translate3d(0, var(--pY, 0), 0); }
 .hero__plane {
   position: absolute;
@@ -44,11 +45,19 @@ html[data-reveal="on"] .hero__plane { opacity: 1; }
 html[data-reveal="on"] .hero__floor { opacity: 1; }
 
 /* ---- The hanging light — the product you switch on ---------------------- */
+/* It lives above the black "lights off" cover (z-index 40), on a dark room. */
 html:not(.js) .lamp-rig { display: none; }
 .lamp-rig {
-  position: absolute; top: 0; left: auto; right: clamp(6%, 16vw, 22%);
-  z-index: 3; display: flex; flex-direction: column; align-items: center;
+  position: fixed; top: 0; left: 50%; translate: -50% 0;
+  z-index: 50; display: flex; flex-direction: column; align-items: center;
   text-align: center; pointer-events: none;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+/* Once the lights are on, the room is simply lit — the lamp recedes. */
+html[data-reveal="on"] .lamp-rig {
+  opacity: 0;
+  transition-delay: 0.5s;
+  pointer-events: none;
 }
 .lamp {
   position: relative; display: flex; flex-direction: column; align-items: center;
@@ -59,52 +68,52 @@ html[data-reveal="on"] .lamp { animation: lamp-swing 2.8s var(--ease-out) 1; }
 
 .lamp__wire {
   width: 2px; height: clamp(64px, 11vh, 120px);
-  background: linear-gradient(to bottom, rgba(255, 220, 180, 0.22), rgba(255, 200, 150, 0.5));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.6));
 }
 .lamp__bulb {
   position: relative; width: 46px; height: 58px;
   border-radius: 50% 50% 46% 46% / 56% 56% 44% 44%;
-  background: radial-gradient(circle at 50% 38%, rgba(64, 53, 42, 0.9), rgba(18, 15, 12, 0.96));
-  border: 1px solid rgba(255, 210, 160, 0.22);
+  background: radial-gradient(circle at 50% 38%, rgba(46, 46, 48, 0.9), rgba(14, 14, 15, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.28);
   box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.5);
   transition: background var(--dur-mid) var(--ease-out),
     border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out);
 }
 .lamp__bulb::before {
   content: ""; position: absolute; top: -6px; left: 50%; translate: -50% 0;
-  width: 14px; height: 8px; border-radius: 2px; background: rgba(64, 55, 46, 0.9);
+  width: 14px; height: 8px; border-radius: 2px; background: rgba(52, 52, 54, 0.95);
 }
 .lamp__filament {
   position: absolute; left: 50%; top: 52%; translate: -50% -50%;
-  width: 15px; height: 15px; border: 1.6px solid rgba(255, 190, 120, 0.35);
+  width: 15px; height: 15px; border: 1.6px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%; opacity: 0.5;
   transition: opacity var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out);
 }
 .lamp__halo {
-  position: absolute; left: 50%; top: 46%; width: 340px; height: 340px; translate: -50% -50%;
+  position: absolute; left: 50%; top: 46%; width: 360px; height: 360px; translate: -50% -50%;
   border-radius: 50%; pointer-events: none; opacity: 0;
-  background: radial-gradient(circle, var(--c-light-glow) 0%, rgba(255, 168, 92, 0.12) 32%, transparent 62%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.12) 32%, transparent 62%);
 }
 .lamp__cord {
   position: relative; width: 1.5px; height: 42px; margin-top: 2px;
-  background: linear-gradient(to bottom, rgba(255, 210, 160, 0.4), rgba(255, 200, 150, 0.12));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.14));
   transform-origin: 50% 0;
 }
 .lamp__knob {
   position: absolute; bottom: -7px; left: 50%; translate: -50% 0;
   width: 12px; height: 12px; border-radius: 50%;
-  background: var(--c-light-deep); border: 1px solid var(--c-light);
-  box-shadow: 0 0 8px rgba(255, 182, 115, 0.3);
+  background: #ffffff; border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
   transition: box-shadow var(--dur-fast) var(--ease-out);
 }
 .lamp:not([aria-checked="true"]) .lamp__cord { animation: cord-bob 2.8s var(--ease-in-out) infinite; }
-.lamp:hover .lamp__knob { box-shadow: 0 0 16px 3px var(--c-light-glow); }
+.lamp:hover .lamp__knob { box-shadow: 0 0 16px 3px rgba(255, 255, 255, 0.55); }
 
-/* ON — the bulb ignites, floods the room, and swings on its wire */
+/* ON — the bulb flares white, floods the room to white, swings on its wire */
 html[data-reveal="on"] .lamp__bulb {
-  background: radial-gradient(circle at 50% 40%, #fff3e2 0%, var(--c-light-soft) 42%, var(--c-light-deep) 100%);
-  border-color: var(--c-light-soft);
-  box-shadow: 0 0 60px 12px var(--c-light-glow), 0 0 150px 46px rgba(255, 168, 92, 0.22);
+  background: radial-gradient(circle at 50% 40%, #ffffff 0%, #ffffff 45%, #d0d0d0 100%);
+  border-color: #ffffff;
+  box-shadow: 0 0 60px 12px rgba(255, 255, 255, 0.55), 0 0 160px 52px rgba(255, 255, 255, 0.28);
   animation: bulb-ignite 0.62s var(--ease-out) 1;
 }
 html[data-reveal="on"] .lamp__filament { opacity: 1; border-color: #fff; }
@@ -112,11 +121,11 @@ html[data-reveal="on"] .lamp__halo { opacity: 1; animation: bulb-ignite 0.62s va
 html[data-reveal="on"] .lamp__cord { animation: none; }
 
 .lamp__hint {
-  margin-top: var(--space-md); max-width: 26ch; color: var(--c-warm-300);
+  margin-top: var(--space-md); max-width: 26ch; color: rgba(255, 255, 255, 0.72);
   font-size: 1rem; line-height: 1.55; pointer-events: none;
   transition: opacity var(--dur-mid) var(--ease-out);
 }
-.lamp__hint strong { display: block; color: var(--c-warm-100); font-weight: 600; margin-top: 0.4rem; }
+.lamp__hint strong { display: block; color: #ffffff; font-weight: 600; margin-top: 0.4rem; }
 html[data-reveal="on"] .lamp__hint { opacity: 0; }
 
 @keyframes lamp-swing {
@@ -528,14 +537,15 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
 
 .work-card__visual {
   aspect-ratio: 16 / 10; border-radius: var(--radius-lg); border: 1px solid var(--c-line);
-  background-color: var(--c-ink-600); background-size: cover; background-position: center;
+  background-color: #101011; background-size: cover; background-position: center;
   position: relative; box-shadow: var(--shadow-card);
+  filter: grayscale(1); /* keep the artifacts monochrome in the B&W theme */
 }
-.work-card__visual::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, transparent 45%, rgba(5, 4, 3, 0.5)); }
+.work-card__visual::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.35)); }
 .work-card__visual[data-visual="cropwise"]    { background-image: url("../assets/case-cropwise.svg"); }
 .work-card__visual[data-visual="designbesti"] { background-image: url("../assets/case-designbesti.svg"); }
-.work-card__visual[data-visual="voice"] { background-image: radial-gradient(80% 90% at 30% 15%, rgba(255,182,115,0.22), transparent 60%), linear-gradient(160deg, #17130f, #0a0806); }
-.work-card__visual[data-visual="ar"]    { background-image: radial-gradient(80% 90% at 72% 18%, rgba(255,182,115,0.20), transparent 60%), linear-gradient(160deg, #16120e, #0a0806); }
+.work-card__visual[data-visual="voice"] { background-image: radial-gradient(80% 90% at 30% 15%, rgba(255,255,255,0.16), transparent 60%), linear-gradient(160deg, #1b1b1d, #0d0d0e); }
+.work-card__visual[data-visual="ar"]    { background-image: radial-gradient(80% 90% at 72% 18%, rgba(255,255,255,0.14), transparent 60%), linear-gradient(160deg, #1b1b1d, #0d0d0e); }
 .work-card__meta { padding: var(--space-md) var(--space-2xs); }
 .work-card__tag { display: inline-block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-light); margin-bottom: var(--space-xs); }
 .work-card__title { font-size: var(--fs-h3); line-height: 1.12; letter-spacing: var(--tracking-tight); font-weight: 600; }

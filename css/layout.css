@@ -3,55 +3,25 @@
    ========================================================================== */
 
 /* ---------------------------------------------------------------------------
-   The continuous light field — one warm light that travels the whole page.
-   Position/size/intensity are updated live by js/modules/lightfield.js via the
-   --lx / --ly / --lsize / --lint custom properties. This is the only colour
-   event on the site and the connective tissue between sections.
+   The "lights off" cover. The portfolio starts in the dark: a black overlay
+   sits over the whole page until the visitor pulls the cord (Accessibility).
+   Switching on floods it away — black → white — revealing the interface.
    ------------------------------------------------------------------------- */
 #lightfield {
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: 40;
   pointer-events: none;
-  background:
-    radial-gradient(
-      circle var(--lsize) at var(--lx) var(--ly),
-      rgba(255, 208, 160, calc(var(--lint) * 0.9)) 0%,
-      rgba(255, 176, 112, calc(var(--lint) * 0.5)) 16%,
-      rgba(255, 150, 84, calc(var(--lint) * 0.16)) 38%,
-      transparent 62%
-    );
-  transition:
-    --lx var(--dur-slow) var(--ease-out),
-    --lsize var(--dur-slow) var(--ease-out),
-    --lint var(--dur-reveal) var(--ease-out);
-  will-change: background;
+  background: #0b0b0c;
+  opacity: 1;
+  transition: opacity var(--dur-reveal) var(--ease-out);
 }
-/* Deepen the far edges so the light always reads as a source in a dark room. */
-#lightfield::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(140% 120% at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.55));
+html[data-reveal="on"] #lightfield {
+  opacity: 0;
 }
-
-/* Fine grain to keep the dark from banding. */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: screen;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+html:not(.js) #lightfield {
+  display: none; /* no JS: no dark cover, page is simply visible */
 }
-
-/* Register --lx etc. as animatable so the light eases between section targets. */
-@supports (background: paint(x)) {}
-@property --lx { syntax: "<length-percentage>"; inherits: true; initial-value: 55%; }
-@property --lsize { syntax: "<length-percentage>"; inherits: true; initial-value: 70vmax; }
-@property --lint { syntax: "<number>"; inherits: true; initial-value: 0.18; }
 
 /* ---------------------------------------------------------------------------
    Section shell + editorial heads
@@ -153,12 +123,12 @@ main { counter-reset: sec 1; }
   inset-inline: 0;
   z-index: 100;
   padding: var(--space-sm) var(--gutter);
-  backdrop-filter: saturate(140%) blur(14px);
-  background: linear-gradient(to bottom, rgba(8, 7, 6, 0.82), rgba(8, 7, 6, 0));
+  backdrop-filter: saturate(120%) blur(14px);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0));
   transition: background var(--dur-mid) var(--ease-out);
 }
 .site-nav[data-scrolled="true"] {
-  background: linear-gradient(to bottom, rgba(8, 7, 6, 0.94), rgba(8, 7, 6, 0.72));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.78));
   border-bottom: 1px solid var(--c-line);
 }
 .site-nav__inner {

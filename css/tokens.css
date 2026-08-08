@@ -1,31 +1,32 @@
 /* ============================================================================
    DESIGN TOKENS
-   Locked visual direction: dark premium interface, warm white type,
-   a single warm architectural light as the only accent.
+   Theme: simple black & white. White ground, near-black type, black accent.
+   The hero still "switches on the light" — expressed as black → white.
+   (Token names are kept stable; their values are the B&W palette.)
    ========================================================================== */
 
 :root {
-  /* --- Colour · almost-black ground (warm-biased, not neutral) ----------- */
-  --c-ink-900: #050403;   /* deepest — behind the light */
-  --c-ink-800: #080706;   /* page background */
-  --c-ink-700: #0e0c0a;   /* raised surfaces */
-  --c-ink-600: #14110e;   /* framed artifacts */
-  --c-ink-500: #201b16;   /* hairlines on dark */
-  --c-line:    rgba(255, 236, 214, 0.09);
-  --c-line-strong: rgba(255, 236, 214, 0.17);
+  /* --- Neutrals · white ground ------------------------------------------- */
+  --c-ink-900: #ececec;   /* deepest neutral surface */
+  --c-ink-800: #ffffff;   /* page background (white) */
+  --c-ink-700: #f7f7f7;   /* raised surfaces */
+  --c-ink-600: #f1f1f1;   /* framed artifacts / cards */
+  --c-ink-500: #e4e4e4;   /* light fills */
+  --c-line:    rgba(0, 0, 0, 0.12);
+  --c-line-strong: rgba(0, 0, 0, 0.26);
 
-  /* --- Colour · warm white type ------------------------------------------ */
-  --c-warm-100: #f6f2ec;  /* primary text (warm white) */
-  --c-warm-200: #d8d3ca;  /* secondary */
-  --c-warm-300: #a39d92;  /* tertiary / muted */
-  --c-warm-400: #6f6a61;  /* faint / captions */
+  /* --- Type · near-black tiers ------------------------------------------- */
+  --c-warm-100: #0b0b0c;  /* primary text (near-black) */
+  --c-warm-200: #2a2a2c;  /* secondary */
+  --c-warm-300: #565658;  /* tertiary / muted */
+  --c-warm-400: #8a8a8d;  /* faint / captions */
 
-  /* --- The one accent: a warm architectural light ------------------------ */
-  --c-light:      #ffb673;         /* the warm light source */
-  --c-light-soft: #ffd3a3;
-  --c-light-deep: #d98a45;
-  --c-light-glow: rgba(255, 182, 115, 0.55);
-  --c-light-haze: rgba(255, 168, 92, 0.12);
+  /* --- Accent · black (the only "colour" is contrast) -------------------- */
+  --c-light:      #0b0b0c;
+  --c-light-soft: #333333;
+  --c-light-deep: #000000;
+  --c-light-glow: rgba(0, 0, 0, 0.14);
+  --c-light-haze: rgba(0, 0, 0, 0.05);
 
   /* --- Typography -------------------------------------------------------- */
   --font-sans: "Geist", "Inter Tight", -apple-system, BlinkMacSystemFont,
@@ -92,8 +93,8 @@
   --dur-reveal: 1400ms;
 
   /* --- Elevation --------------------------------------------------------- */
-  --shadow-card: 0 24px 60px -30px rgba(0, 0, 0, 0.8);
-  --shadow-lift: 0 40px 90px -40px rgba(0, 0, 0, 0.9);
+  --shadow-card: 0 18px 44px -28px rgba(0, 0, 0, 0.28);
+  --shadow-lift: 0 30px 70px -36px rgba(0, 0, 0, 0.32);
 
-  color-scheme: dark;
+  color-scheme: light;
 }

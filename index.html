@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#080706" />
+  <meta name="theme-color" content="#ffffff" />
 
   <title>Anirudh Thata — Product Designer</title>
   <meta
@@ -30,6 +30,24 @@
 <body>
   <a class="skip-link" href="#work">Skip to work</a>
   <div id="lightfield" aria-hidden="true"></div>
+
+  <!-- The hanging light — a top-level overlay so it sits above the dark cover.
+       Off in a dark room, with a pull-cord. Pulling it floods the page to white. -->
+  <div class="lamp-rig" data-reveal-persist>
+    <button type="button" class="lamp" id="hero-switch" role="switch" aria-checked="false" aria-describedby="hero-switch-hint">
+      <span class="lamp__wire" aria-hidden="true"></span>
+      <span class="lamp__bulb" aria-hidden="true">
+        <span class="lamp__filament"></span>
+        <span class="lamp__halo"></span>
+      </span>
+      <span class="lamp__cord" aria-hidden="true"><span class="lamp__knob"></span></span>
+      <span class="sr-only">Switch on the light</span>
+    </button>
+    <p class="lamp__hint" id="hero-switch-hint">
+      This portfolio begins in the dark.
+      <strong>Pull the cord to switch it on.</strong>
+    </p>
+  </div>
 
   <!-- ===================================================================
        NAV — revealed by the hero light
@@ -63,23 +81,6 @@
           <span class="hero__plane hero__plane--c"></span>
         </div>
         <div class="hero__floor"></div>
-      </div>
-
-      <!-- A real hanging light. Off, in a dark room, with a pull-cord. -->
-      <div class="lamp-rig" data-reveal-persist>
-        <button type="button" class="lamp" id="hero-switch" role="switch" aria-checked="false" aria-describedby="hero-switch-hint">
-          <span class="lamp__wire" aria-hidden="true"></span>
-          <span class="lamp__bulb" aria-hidden="true">
-            <span class="lamp__filament"></span>
-            <span class="lamp__halo"></span>
-          </span>
-          <span class="lamp__cord" aria-hidden="true"><span class="lamp__knob"></span></span>
-          <span class="sr-only">Switch on the light</span>
-        </button>
-        <p class="lamp__hint" id="hero-switch-hint">
-          This portfolio begins in the dark.
-          <strong>Pull the cord to switch it on.</strong>
-        </p>
       </div>
 
       <div class="hero__content">
