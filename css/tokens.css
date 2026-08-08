@@ -1,0 +1,100 @@
+/* ============================================================================
+   DESIGN TOKENS
+   Theme: simple black & white. White ground, near-black type, black accent.
+   The hero still "switches on the light" — expressed as black → white.
+   (Token names are kept stable; their values are the B&W palette.)
+   ========================================================================== */
+
+:root {
+  /* --- Neutrals · white ground ------------------------------------------- */
+  --c-ink-900: #ececec;   /* deepest neutral surface */
+  --c-ink-800: #ffffff;   /* page background (white) */
+  --c-ink-700: #f7f7f7;   /* raised surfaces */
+  --c-ink-600: #f1f1f1;   /* framed artifacts / cards */
+  --c-ink-500: #e4e4e4;   /* light fills */
+  --c-line:    rgba(0, 0, 0, 0.12);
+  --c-line-strong: rgba(0, 0, 0, 0.26);
+
+  /* --- Type · near-black tiers ------------------------------------------- */
+  --c-warm-100: #0b0b0c;  /* primary text (near-black) */
+  --c-warm-200: #2a2a2c;  /* secondary */
+  --c-warm-300: #565658;  /* tertiary / muted */
+  --c-warm-400: #8a8a8d;  /* faint / captions */
+
+  /* --- Accent · black (the only "colour" is contrast) -------------------- */
+  --c-light:      #0b0b0c;
+  --c-light-soft: #333333;
+  --c-light-deep: #000000;
+  --c-light-glow: rgba(0, 0, 0, 0.14);
+  --c-light-haze: rgba(0, 0, 0, 0.05);
+
+  /* --- Typography -------------------------------------------------------- */
+  --font-sans: "Geist", "Inter Tight", -apple-system, BlinkMacSystemFont,
+    "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    Consolas, monospace;
+
+  --fs-eyebrow: clamp(0.72rem, 0.68rem + 0.2vw, 0.82rem);
+  --fs-body:    clamp(1rem, 0.96rem + 0.25vw, 1.18rem);
+  --fs-lede:    clamp(1.18rem, 1.05rem + 0.7vw, 1.6rem);
+  --fs-h3:      clamp(1.25rem, 1.1rem + 0.9vw, 1.9rem);
+  --fs-h2:      clamp(1.9rem, 1.4rem + 2.4vw, 3.4rem);
+  --fs-display: clamp(2.3rem, 1.7rem + 3vw, 4.25rem);
+  --fs-mega:    clamp(3rem, 1.9rem + 5.6vw, 7rem);
+
+  --lh-tight: 1.02;
+  --lh-snug:  1.12;
+  --lh-body:  1.55;
+
+  --tracking-eyebrow: 0.16em;
+  --tracking-tight: -0.02em;
+  --tracking-display: -0.03em;
+
+  /* --- Spacing scale ----------------------------------------------------- */
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6.5rem;
+  --space-3xl: clamp(6rem, 4rem + 10vw, 12rem);
+
+  /* --- Layout ------------------------------------------------------------ */
+  --measure: 65ch;
+  --container: 1200px;
+  --gutter: clamp(1.25rem, 0.5rem + 4vw, 4rem);
+  --grid-gap: clamp(16px, 2vw, 32px);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* Breakpoints (reference values; used in media queries) ----------------- */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+
+  /* --- The continuous light field --------------------------------------- */
+  /* Position/size/intensity are driven live by js/modules/lightfield.js.    */
+  --lx: 50%;
+  --ly: 12%;
+  --lsize: 66vmax;
+  --lint: 0.06;
+
+  /* --- Motion ------------------------------------------------------------ */
+  /* Calm, intentional. No bounce, no overshoot. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 220ms;
+  --dur-mid: 480ms;
+  --dur-slow: 900ms;
+  --dur-reveal: 1400ms;
+
+  /* --- Elevation --------------------------------------------------------- */
+  --shadow-card: 0 18px 44px -28px rgba(0, 0, 0, 0.28);
+  --shadow-lift: 0 30px 70px -36px rgba(0, 0, 0, 0.32);
+
+  color-scheme: light;
+}

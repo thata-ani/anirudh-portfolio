@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Abstract product interface representing the Cropwise Grower platform, lit warmly.">
+  <defs>
+    <linearGradient id="cw-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14110e"/><stop offset="1" stop-color="#0a0908"/>
+    </linearGradient>
+    <radialGradient id="cw-light" cx="24%" cy="6%" r="70%">
+      <stop offset="0" stop-color="#ffb673" stop-opacity="0.30"/>
+      <stop offset="45%" stop-color="#ffb673" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#ffb673" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cw-area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb673" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ffb673" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#cw-bg)"/>
+  <rect width="960" height="540" fill="url(#cw-light)"/>
+
+  <!-- window chrome -->
+  <line x1="0" y1="52" x2="960" y2="52" stroke="#ffffff" stroke-opacity="0.06"/>
+  <circle cx="34" cy="27" r="5" fill="#ffffff" fill-opacity="0.14"/>
+  <circle cx="54" cy="27" r="5" fill="#ffffff" fill-opacity="0.10"/>
+  <circle cx="74" cy="27" r="5" fill="#ffb673" fill-opacity="0.5"/>
+
+  <!-- left rail -->
+  <line x1="150" y1="52" x2="150" y2="540" stroke="#ffffff" stroke-opacity="0.06"/>
+  <rect x="30" y="86" width="86" height="10" rx="5" fill="#ffffff" fill-opacity="0.14"/>
+  <rect x="30" y="118" width="64" height="8" rx="4" fill="#ffffff" fill-opacity="0.08"/>
+  <rect x="30" y="146" width="72" height="8" rx="4" fill="#ffffff" fill-opacity="0.08"/>
+  <rect x="30" y="174" width="56" height="8" rx="4" fill="#ffffff" fill-opacity="0.08"/>
+
+  <!-- main chart card -->
+  <rect x="182" y="84" width="740" height="230" rx="14" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.08"/>
+  <path d="M212 258 L300 230 L370 244 L450 196 L540 214 L640 160 L740 184 L890 132 L890 292 L212 292 Z" fill="url(#cw-area)"/>
+  <path d="M212 258 L300 230 L370 244 L450 196 L540 214 L640 160 L740 184 L890 132" fill="none" stroke="#ffb673" stroke-opacity="0.8" stroke-width="2"/>
+  <circle cx="640" cy="160" r="4" fill="#ffd3a3"/>
+
+  <!-- stat cards -->
+  <g fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.08">
+    <rect x="182" y="336" width="235" height="150" rx="14"/>
+    <rect x="437" y="336" width="235" height="150" rx="14"/>
+    <rect x="692" y="336" width="230" height="150" rx="14"/>
+  </g>
+  <g fill="#f6f2ec" fill-opacity="0.85">
+    <rect x="206" y="368" width="70" height="20" rx="4"/>
+    <rect x="461" y="368" width="70" height="20" rx="4"/>
+    <rect x="716" y="368" width="70" height="20" rx="4"/>
+  </g>
+  <g fill="#ffffff" fill-opacity="0.08">
+    <rect x="206" y="404" width="150" height="8" rx="4"/>
+    <rect x="461" y="404" width="150" height="8" rx="4"/>
+    <rect x="716" y="404" width="150" height="8" rx="4"/>
+    <rect x="206" y="424" width="110" height="8" rx="4"/>
+    <rect x="461" y="424" width="120" height="8" rx="4"/>
+    <rect x="716" y="424" width="100" height="8" rx="4"/>
+  </g>
+</svg>

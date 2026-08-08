@@ -1,0 +1,236 @@
+/* ============================================================================
+   LAYOUT — light field, section shell, nav, footer, hero reveal
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   The "lights off" cover. The portfolio starts in the dark: a black overlay
+   sits over the whole page until the visitor pulls the cord (Accessibility).
+   Switching on floods it away — black → white — revealing the interface.
+   ------------------------------------------------------------------------- */
+#lightfield {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  background: #0b0b0c;
+  opacity: 1;
+  transition: opacity var(--dur-reveal) var(--ease-out);
+}
+html[data-reveal="on"] #lightfield {
+  opacity: 0;
+}
+html:not(.js) #lightfield {
+  display: none; /* no JS: no dark cover, page is simply visible */
+}
+
+/* ---------------------------------------------------------------------------
+   Section shell + editorial heads
+   ------------------------------------------------------------------------- */
+main { counter-reset: sec 1; }
+
+.section {
+  position: relative;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: var(--space-3xl);
+  counter-increment: sec;
+}
+/* No section indices, no separators — this is one continuous product, not a
+   document. Chapters are marked only by the quiet accent tick on each label. */
+
+.section__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-warm-300);
+}
+.section__label::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-light);
+  box-shadow: 0 0 10px 1px var(--c-light-glow);
+}
+
+.section__lead {
+  margin-top: var(--space-md);
+  max-width: 22ch;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-display);
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.section__principle {
+  margin-top: var(--space-md);
+  max-width: 46ch;
+  font-size: var(--fs-lede);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--c-warm-200);
+}
+.section__principle-name {
+  display: block;
+  color: var(--c-warm-100);
+  font-weight: 600;
+}
+
+.section__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+  flex-wrap: wrap;
+}
+.section__head--stacked {
+  display: block;
+  margin-bottom: var(--space-2xl);
+}
+
+/* ---------------------------------------------------------------------------
+   Primary navigation
+   ------------------------------------------------------------------------- */
+.site-nav {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 100;
+  padding: var(--space-sm) var(--gutter);
+  backdrop-filter: saturate(120%) blur(14px);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0));
+  transition: background var(--dur-mid) var(--ease-out);
+}
+.site-nav[data-scrolled="true"] {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.78));
+  border-bottom: 1px solid var(--c-line);
+}
+.site-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  max-width: var(--container);
+  margin-inline: auto;
+}
+.site-nav__mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+}
+.site-nav__mark-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-light);
+  box-shadow: 0 0 14px 2px var(--c-light-glow);
+}
+.site-nav__links {
+  display: flex;
+  gap: clamp(1rem, 2vw, 2.2rem);
+  font-size: 0.95rem;
+  color: var(--c-warm-300);
+}
+.site-nav__links a { transition: color var(--dur-fast) var(--ease-out); }
+.site-nav__links a:hover { color: var(--c-warm-100); }
+.site-nav__cta {
+  padding: 0.55rem 1.15rem;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.site-nav__cta:hover { border-color: var(--c-light); color: var(--c-light-soft); }
+
+@media (max-width: 768px) {
+  .site-nav__links { display: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------------------- */
+/* The final signature — not a footer. Oversized type that spans the viewport
+   and is intentionally cropped at the bottom; the last statement of the piece. */
+.site-footer {
+  margin-top: var(--space-lg);
+  padding: 0 var(--gutter);
+  overflow: hidden;
+}
+.site-footer__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--c-line);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-warm-400);
+}
+.site-footer__signature {
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+  color: var(--c-warm-100);
+  font-size: clamp(3rem, 12.8vw, 15rem);
+  white-space: nowrap;
+  margin-block: 0.1em -0.16em; /* crop the baseline slightly */
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .site-footer__signature { white-space: normal; text-align: left; font-size: 18vw; }
+}
+
+/* ============================================================================
+   HERO REVEAL ORCHESTRATION (Accessibility)
+   Gated on html.js so a no-JS visitor sees everything.
+   ========================================================================== */
+html.js [data-reveal-item] {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(6px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out),
+    filter var(--dur-slow) var(--ease-out);
+  pointer-events: none;
+}
+html[data-reveal="on"] [data-reveal-item] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  pointer-events: auto;
+}
+html[data-reveal="on"] [data-reveal-item="nav"]     { transition-delay: 120ms; }
+html[data-reveal="on"] [data-reveal-item="eyebrow"] { transition-delay: 260ms; }
+html[data-reveal="on"] [data-reveal-item="kicker"]  { transition-delay: 380ms; }
+html[data-reveal="on"] [data-reveal-item="title"]   { transition-delay: 520ms; }
+html[data-reveal="on"] [data-reveal-item="lede"]    { transition-delay: 760ms; }
+html[data-reveal="on"] [data-reveal-item="actions"] { transition-delay: 920ms; }
+html[data-reveal="on"] [data-reveal-item="note"]    { transition-delay: 1080ms; }
+html[data-reveal="on"] [data-reveal-item="scroll"]  { transition-delay: 1240ms; }
+
+html.js[data-reveal="off"] [data-reveal-item] { visibility: hidden; }
+html[data-reveal="on"] [data-reveal-item] { visibility: visible; }
+
+@media (prefers-reduced-motion: reduce) {
+  #lightfield { transition: none; }
+  html { scroll-behavior: auto; }
+  [data-reveal-item] { filter: none; transform: none; }
+}
