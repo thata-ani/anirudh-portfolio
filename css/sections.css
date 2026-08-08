@@ -560,50 +560,87 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 }
 .believe__body p:first-child { color: var(--c-warm-200); font-weight: 500; }
 
-/* 03 · Selected Work — cards, scattered → organized ------------------------- */
+/* 03 · Selected Work — the result is an organized index, not a box grid ----- */
 .work__head { align-items: flex-start; }
 .work__intro { margin-top: var(--space-sm); color: var(--c-warm-400); max-width: 46ch; }
-.work__grid {
-  margin-top: var(--space-xl); position: relative;
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.25rem, 3vw, 2.4rem);
-}
-.work-card {
-  position: relative; will-change: transform;
-  transition: transform var(--dur-slow) var(--ease-out), opacity var(--dur-slow) var(--ease-out);
-}
-.work[data-state="scattered"] .work-card {
-  transform: translate(var(--sx, 0), var(--sy, 0)) rotate(var(--sr, 0deg)) scale(var(--ss, 1));
-  z-index: var(--sz, 1);
-}
-.work[data-state="scattered"] .work-card:nth-child(1) { --sx: 5%;  --sy: 24px;  --sr: -3deg; --ss: 1.02; --sz: 3; }
-.work[data-state="scattered"] .work-card:nth-child(2) { --sx: -7%; --sy: -14px; --sr: 2.6deg; --ss: 0.96; --sz: 2; }
-.work[data-state="scattered"] .work-card:nth-child(3) { --sx: 6%;  --sy: -6px;  --sr: 3deg;  --ss: 0.98; --sz: 4; }
-.work[data-state="scattered"] .work-card:nth-child(4) { --sx: -5%; --sy: 20px;  --sr: -2deg; --ss: 1.01; --sz: 1; }
-.work[data-state="organized"] .work-card { transform: none; z-index: 1; }
 
-.work-card__visual {
-  aspect-ratio: 16 / 10; border-radius: var(--radius-lg); border: 1px solid var(--c-line-strong);
-  background-color: #ffffff; background-size: cover; background-position: center;
-  position: relative; box-shadow: var(--shadow-card);
-  /* Light system wireframes on white — structure, not a dark image. */
-  filter: grayscale(1) invert(1) contrast(1.02);
+/* The four projects resolve from a scattered pile into a single aligned
+   structure — a system being organized, integrated into the page. */
+.work-result { margin-top: var(--space-2xl); }
+.work-index { position: relative; list-style: none; display: grid; gap: 0; }
+/* the trunk of the organized structure (drawn only once organized) */
+.work-index::before {
+  content: ""; position: absolute; left: 8px; top: 4%; bottom: 4%;
+  width: 2px; background: var(--c-line-strong);
+  opacity: 0; transform: scaleY(0.4); transform-origin: top;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
 }
-.work-card__visual[data-visual="cropwise"]    { background-image: url("../assets/case-cropwise.svg"); }
-.work-card__visual[data-visual="designbesti"] { background-image: url("../assets/case-designbesti.svg"); }
-.work-card__visual[data-visual="voice"] { background-image: radial-gradient(80% 90% at 30% 15%, rgba(255,255,255,0.16), transparent 60%), linear-gradient(160deg, #1b1b1d, #0d0d0e); }
-.work-card__visual[data-visual="ar"]    { background-image: radial-gradient(80% 90% at 72% 18%, rgba(255,255,255,0.14), transparent 60%), linear-gradient(160deg, #1b1b1d, #0d0d0e); }
-.work-card__meta { padding: var(--space-md) var(--space-2xs); }
-.work-card__tag { display: inline-block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-light); margin-bottom: var(--space-xs); }
-.work-card__title { font-size: var(--fs-h3); line-height: 1.12; letter-spacing: var(--tracking-tight); font-weight: 600; }
-.work-card__desc { margin-top: var(--space-2xs); color: var(--c-warm-300); line-height: 1.5; }
-.work__note { margin-top: var(--space-xl); color: var(--c-warm-400); transition: opacity var(--dur-mid) var(--ease-out); }
-.work__note strong { color: var(--c-warm-200); }
-.work[data-state="organized"] .work__note { opacity: 0; visibility: hidden; }
+.work[data-state="organized"] .work-index::before { opacity: 1; transform: scaleY(1); }
 
-@media (max-width: 640px) {
-  .work__grid { grid-template-columns: 1fr; }
-  .work[data-state="scattered"] .work-card:nth-child(odd) { --sx: 3%; }
-  .work[data-state="scattered"] .work-card:nth-child(even) { --sx: -3%; }
+.work-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: clamp(42px, 6vw, 74px) 1fr clamp(150px, 21vw, 250px);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.6rem);
+  padding: clamp(1.4rem, 2.6vw, 2.3rem) 0;
+  transform: translate(var(--sx, 0), var(--sy, 0)) rotate(var(--sr, 0deg));
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.work-item + .work-item { border-top: 1px solid var(--c-line); transition: border-color var(--dur-slow) var(--ease-out); }
+/* scattered: tangled + offset, no dividers, node hidden */
+.work[data-state="scattered"] .work-item:nth-child(1) { --sx: 4%;  --sy: 12px; --sr: -1.4deg; }
+.work[data-state="scattered"] .work-item:nth-child(2) { --sx: -6%; --sy: -8px; --sr: 1.7deg; }
+.work[data-state="scattered"] .work-item:nth-child(3) { --sx: 3%;  --sy: 9px;  --sr: -1.1deg; }
+.work[data-state="scattered"] .work-item:nth-child(4) { --sx: -4%; --sy: -5px; --sr: 1.3deg; }
+.work[data-state="scattered"] .work-item + .work-item { border-top-color: transparent; }
+
+.work-item__no {
+  align-self: start;
+  font-family: var(--font-mono); font-size: 0.92rem; letter-spacing: 0.08em;
+  color: var(--c-warm-400); position: relative;
+  padding-left: 30px; padding-top: 0.3rem;
+  transition: color var(--dur-mid) var(--ease-out);
+}
+/* a node sits on the trunk once organized (dot centred on the spine at 8px) */
+.work-item__no::before {
+  content: ""; position: absolute; left: 3px; top: 0.55rem;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--c-light);
+  box-shadow: 0 0 0 4px var(--c-ink-800);
+  opacity: 0; scale: 0.3; transition: opacity var(--dur-slow) var(--ease-out), scale var(--dur-slow) var(--ease-out);
+}
+.work[data-state="organized"] .work-item__no { color: var(--c-warm-100); }
+.work[data-state="organized"] .work-item__no::before { opacity: 1; scale: 1; }
+
+.work-item__tag {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-light); margin-bottom: 0.5rem;
+}
+.work-item__title { font-size: var(--fs-h3); line-height: 1.1; letter-spacing: var(--tracking-tight); font-weight: 600; }
+.work-item__desc { margin-top: 0.4rem; color: var(--c-warm-300); line-height: 1.5; max-width: 46ch; }
+
+.work-item__screen {
+  aspect-ratio: 16 / 10; width: 100%; border-radius: var(--radius-md);
+  border: 1px solid var(--c-line-strong);
+  background: #fbfbfa center / cover no-repeat;
+  box-shadow: 0 14px 34px -26px rgba(0, 0, 0, 0.55);
+  transition: transform var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out);
+}
+.work-item__screen[data-visual="cropwise"]    { background-image: url("../assets/wire-cropwise.svg"); }
+.work-item__screen[data-visual="designbesti"] { background-image: url("../assets/wire-designbesti.svg"); }
+.work-item__screen[data-visual="voice"]       { background-image: url("../assets/wire-voice.svg"); }
+.work-item__screen[data-visual="ar"]          { background-image: url("../assets/wire-ar.svg"); }
+.work-item:hover .work-item__screen { transform: translateY(-3px); box-shadow: 0 20px 44px -28px rgba(0, 0, 0, 0.6); }
+
+@media (max-width: 720px) {
+  .work-item {
+    grid-template-columns: 48px 1fr;
+    grid-template-areas: "no body" "screen screen";
+    row-gap: var(--space-md);
+  }
+  .work-item__no { grid-area: no; }
+  .work-item__body { grid-area: body; }
+  .work-item__screen { grid-area: screen; max-width: 360px; }
 }
 
 /* 04 · Companies — marquee -------------------------------------------------- */
@@ -796,16 +833,11 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .work[data-state="organized"] .ia-caption--organized { display: inline; color: var(--c-warm-200); }
 .ia-caption strong { color: var(--c-warm-100); font-weight: 600; }
 
-/* The work grid is the *result* — a calm gallery, no scatter, minimal framing. */
+/* Lead-in to the organized result. */
 .work__resulted {
-  margin: var(--space-3xl) 0 var(--space-md);
-  font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--c-warm-400);
+  margin: 0 0 var(--space-md);
+  font-size: 1.05rem; color: var(--c-warm-300); max-width: 52ch;
 }
-.work .work-card { transform: none !important; }
-.work-card__visual { box-shadow: none; }
-.work-card { transition: transform var(--dur-mid) var(--ease-out); }
-.work-card:hover { transform: translateY(-4px) !important; }
 
 /* Primary section controls breathe until first used, so they read as controls. */
 .action-btn[aria-pressed="false"] { animation: ctrl-breathe 3s var(--ease-in-out) infinite; }

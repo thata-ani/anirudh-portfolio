@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" role="img" aria-label="Cropwise Grower dashboard wireframe">
+  <rect width="400" height="250" fill="#fbfbfa"/>
+  <line x1="0" y1="34" x2="400" y2="34" stroke="#0b0b0c" stroke-opacity="0.10"/>
+  <circle cx="20" cy="17" r="4" fill="#0b0b0c" fill-opacity="0.20"/>
+  <circle cx="34" cy="17" r="4" fill="#0b0b0c" fill-opacity="0.10"/>
+  <circle cx="48" cy="17" r="4" fill="#0b0b0c" fill-opacity="0.10"/>
+  <rect x="300" y="11" width="84" height="12" rx="6" fill="#0b0b0c" fill-opacity="0.06"/>
+  <line x1="96" y1="34" x2="96" y2="250" stroke="#0b0b0c" stroke-opacity="0.08"/>
+  <rect x="16" y="54" width="60" height="8" rx="4" fill="#0b0b0c" fill-opacity="0.16"/>
+  <rect x="16" y="74" width="48" height="8" rx="4" fill="#0b0b0c" fill-opacity="0.08"/>
+  <rect x="16" y="94" width="52" height="8" rx="4" fill="#0b0b0c" fill-opacity="0.08"/>
+  <rect x="16" y="114" width="42" height="8" rx="4" fill="#0b0b0c" fill-opacity="0.08"/>
+  <rect x="116" y="54" width="268" height="96" rx="8" fill="#0b0b0c" fill-opacity="0.03"/>
+  <polyline points="128,132 168,110 200,120 236,86 272,98 312,64 372,76" fill="none" stroke="#0b0b0c" stroke-opacity="0.72" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="116" y="166" width="82" height="64" rx="8" fill="#0b0b0c" fill-opacity="0.04"/>
+  <rect x="209" y="166" width="82" height="64" rx="8" fill="#0b0b0c" fill-opacity="0.04"/>
+  <rect x="302" y="166" width="82" height="64" rx="8" fill="#0b0b0c" fill-opacity="0.04"/>
+  <rect x="128" y="180" width="34" height="10" rx="5" fill="#0b0b0c" fill-opacity="0.80"/>
+  <rect x="221" y="180" width="34" height="10" rx="5" fill="#0b0b0c" fill-opacity="0.80"/>
+  <rect x="314" y="180" width="34" height="10" rx="5" fill="#0b0b0c" fill-opacity="0.80"/>
+  <rect x="128" y="204" width="52" height="7" rx="3.5" fill="#0b0b0c" fill-opacity="0.10"/>
+  <rect x="221" y="204" width="52" height="7" rx="3.5" fill="#0b0b0c" fill-opacity="0.10"/>
+  <rect x="314" y="204" width="52" height="7" rx="3.5" fill="#0b0b0c" fill-opacity="0.10"/>
+</svg>
