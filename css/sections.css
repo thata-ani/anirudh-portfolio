@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* ===========================================================================
-   01 · HERO — Accessibility
+   01 · HERO — visibility, shown (the principle is experienced, not named)
    =========================================================================== */
 .hero {
   position: relative;
@@ -11,12 +11,34 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(6.5rem, 13vh, 9.5rem) var(--gutter) var(--space-2xl);
-  max-width: var(--container);
-  margin-inline: auto;
+  /* Full-bleed: the light field spans the whole viewport; the copy stays on
+     the container grid via the padding-inline centring technique. */
+  padding-block: clamp(6.5rem, 13vh, 9.5rem) var(--space-2xl);
+  padding-inline: max(var(--gutter), calc((100% - var(--container)) / 2));
   overflow: hidden;
   isolation: isolate;
 }
+/* Readability scrim — keeps the copy crisp while the light field stays vivid
+   on the open right/lower field. Fades in with the reveal. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-reveal) var(--ease-out);
+  background:
+    linear-gradient(102deg,
+      var(--c-ink-800) 0%,
+      var(--c-ink-800) 26%,
+      rgba(255, 255, 255, 0.72) 44%,
+      rgba(255, 255, 255, 0) 66%),
+    linear-gradient(0deg,
+      var(--c-ink-800) 0%,
+      rgba(255, 255, 255, 0) 30%);
+}
+html[data-reveal="on"] .hero::before { opacity: 1; }
 /* When the content is taller than the viewport, anchor to the top so the name
    and headline never clip and the primary CTA stays reachable. */
 @media (max-height: 900px) {
@@ -168,8 +190,13 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   box-shadow: 0 0 10px 1px var(--c-light-glow);
 }
 .hero__kicker {
-  font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;
-  color: var(--c-warm-300); margin-bottom: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.9rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--c-warm-100); margin-bottom: var(--space-md);
+  display: inline-flex; align-items: center; gap: 0.75rem;
+}
+.hero__kicker::before {
+  content: ""; width: 26px; height: 1px; background: var(--c-light);
 }
 .hero__title {
   font-size: var(--fs-display); line-height: var(--lh-tight);
@@ -189,7 +216,9 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 }
 .hero__stat-l { font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-warm-400); }
 .hero__scroll {
-  position: absolute; bottom: var(--space-lg); left: var(--gutter);
+  position: absolute; bottom: var(--space-lg);
+  left: max(var(--gutter), calc((100% - var(--container)) / 2));
+  z-index: 2;
   display: flex; align-items: center; gap: 0.7rem; font-size: 0.78rem;
   letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-warm-400);
 }
