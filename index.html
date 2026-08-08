@@ -2,28 +2,22 @@
 <html lang="en" data-reveal="off">
 <head>
   <meta charset="UTF-8" />
-  <!-- Set synchronously so JS-gated hidden states apply from the first paint,
-       and so the page degrades to fully-visible content if JS never runs. -->
+  <!-- Set synchronously so JS-gated states apply from the first paint, and so
+       the page degrades to fully-visible content if JS never runs. -->
   <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a0a0b" />
+  <meta name="theme-color" content="#080706" />
 
-  <title>Anirudh Thata — Product Designer</title>
+  <title>Anirudh Thata — Senior Product Designer</title>
   <meta
     name="description"
-    content="Anirudh Thata — Lead Product Designer. I build products people use, then build the systems that make designing them better. Experience product design, don't just read about it."
+    content="Anirudh Thata — Senior Product Designer. I design digital products that solve complex business problems by aligning user needs, business goals, and technical feasibility. Leading UX for products serving 4M+ farmers across AMEA at Syngenta, and building AI products independently."
   />
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Anirudh Thata — Product Designer" />
-  <meta
-    property="og:description"
-    content="A portfolio that teaches Product Design through interaction. Experience it."
-  />
+  <meta property="og:title" content="Anirudh Thata — Senior Product Designer" />
+  <meta property="og:description" content="Designing Products That Scale. Solving Problems That Matter." />
   <meta property="og:locale" content="en_US" />
 
-  <!-- Fonts: Inter Tight (editorial) with a system fallback stack (SF Pro et al). -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -33,26 +27,24 @@
     onload="this.media='all'"
   />
   <noscript>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" />
   </noscript>
 
-  <!-- Styles -->
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/sections.css" />
-
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 </head>
 
 <body>
   <a class="skip-link" href="#work">Skip to work</a>
 
+  <!-- The single warm light — the one continuous element that travels the page. -->
+  <div id="lightfield" aria-hidden="true"></div>
+
   <!-- ===================================================================
-       NAV  —  revealed by the hero light
+       NAV — revealed by the hero light
        =================================================================== -->
   <header class="site-nav" data-reveal-item="nav" aria-label="Primary">
     <nav class="site-nav__inner">
@@ -62,9 +54,9 @@
       </a>
       <ul class="site-nav__links">
         <li><a href="#work">Work</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#principles">Principles</a></li>
-        <li><a href="#experience">Experience</a></li>
+        <li><a href="#framework">Framework</a></li>
+        <li><a href="#innovation">Innovation</a></li>
+        <li><a href="#career">Career</a></li>
       </ul>
       <a class="site-nav__cta" href="#contact">Let's Connect</a>
     </nav>
@@ -73,34 +65,21 @@
   <main id="main">
 
     <!-- ===============================================================
-         01 · HERO  —  Principle: Accessibility
+         01 · HERO — Principle: Accessibility
          =============================================================== -->
-    <section id="hero" class="hero" aria-labelledby="hero-title">
-      <!-- The single warm architectural light. Only this is visible before "Switch ON". -->
+    <section id="hero" class="hero" data-lx="58%" data-lsize="70vmax" aria-labelledby="hero-title">
       <div class="hero__stage" aria-hidden="true">
-        <div class="hero__light"></div>
-        <div class="hero__monolith">
-          <div class="hero__monolith-slab hero__monolith-slab--a"></div>
-          <div class="hero__monolith-slab hero__monolith-slab--b"></div>
-          <div class="hero__monolith-slab hero__monolith-slab--c"></div>
-          <div class="hero__monolith-floor"></div>
+        <div class="hero__planes">
+          <span class="hero__plane hero__plane--a"></span>
+          <span class="hero__plane hero__plane--b"></span>
+          <span class="hero__plane hero__plane--c"></span>
         </div>
-        <div class="hero__grain"></div>
+        <div class="hero__floor"></div>
       </div>
 
-      <!-- The accessibility control. Present and reachable from the very first frame. -->
       <div class="hero__switch-wrap" data-reveal-persist>
-        <button
-          type="button"
-          class="switch"
-          id="hero-switch"
-          role="switch"
-          aria-checked="false"
-          aria-describedby="hero-switch-hint"
-        >
-          <span class="switch__track" aria-hidden="true">
-            <span class="switch__thumb"></span>
-          </span>
+        <button type="button" class="switch" id="hero-switch" role="switch" aria-checked="false" aria-describedby="hero-switch-hint">
+          <span class="switch__track" aria-hidden="true"><span class="switch__thumb"></span></span>
           <span class="switch__label">
             <span class="switch__label-off">Switch ON</span>
             <span class="switch__label-on">Light on</span>
@@ -113,199 +92,304 @@
 
       <div class="hero__content">
         <p class="hero__eyebrow" data-reveal-item="eyebrow">
-          <span>Product Principle</span>
-          <span class="hero__eyebrow-mark">Accessibility</span>
+          <span>Product Principle</span><span class="hero__eyebrow-mark">Accessibility</span>
         </p>
-
         <p class="hero__kicker" data-reveal-item="kicker">
-          Anirudh&nbsp;Thata <span aria-hidden="true">·</span> 11+&nbsp;Years
+          Anirudh&nbsp;Thata <span aria-hidden="true">·</span> Senior Product Designer
+          <span aria-hidden="true">·</span> Product Design · Strategy · AI
         </p>
-
         <h1 class="hero__title" id="hero-title" data-reveal-item="title">
-          I build products people use.
-          <span class="hero__title-line">
-            Then I build the systems that make designing them better.
-          </span>
+          Designing Products That Scale.
+          <span class="hero__title-line">Solving Problems That Matter.</span>
         </h1>
-
-        <p class="hero__lede" data-reveal-item="lede">
-          Experience product design, don't just read about it.
-        </p>
-
-        <div class="hero__actions" data-reveal-item="actions">
-          <a class="btn btn--primary" href="#work">View Selected Work</a>
-          <a class="btn btn--ghost" href="#contact">Let's Connect</a>
+        <div class="hero__lede" data-reveal-item="lede">
+          <p>
+            I design digital products that solve complex business problems by aligning
+            user needs, business goals, and technical feasibility.
+          </p>
+          <p class="hero__lede-sub">
+            Over the past 11+ years, I've partnered with Product Managers, Engineers,
+            Researchers, and business leaders to build scalable products across Agritech,
+            Enterprise, Retail, and AI. Currently leading UX for key product initiatives
+            serving 4M+ farmers across the AMEA region at Syngenta, while independently
+            building AI-powered products from strategy to launch.
+          </p>
         </div>
-
-        <p class="hero__principle-note" data-reveal-item="note">
-          Everyone should be able to experience the product. You just did.
-        </p>
+        <div class="hero__actions" data-reveal-item="actions">
+          <a class="btn btn--primary" href="#work">Explore My Work</a>
+          <a class="btn btn--ghost" href="assets/anirudh-thata-resume.pdf" download>Download Resume</a>
+        </div>
+        <ul class="hero__stats" data-reveal-item="note">
+          <li><span class="hero__stat-n">11+</span><span class="hero__stat-l">Years</span></li>
+          <li><span class="hero__stat-n">4M+</span><span class="hero__stat-l">Farmers</span></li>
+          <li><span class="hero__stat-n">10+</span><span class="hero__stat-l">Countries</span></li>
+          <li><span class="hero__stat-n">AI</span><span class="hero__stat-l">Product Builder</span></li>
+        </ul>
       </div>
 
       <div class="hero__scroll" data-reveal-item="scroll" aria-hidden="true">
-        <span>Scroll</span>
-        <span class="hero__scroll-line"></span>
+        <span>Scroll</span><span class="hero__scroll-line"></span>
       </div>
     </section>
 
     <!-- ===============================================================
-         02 · WHAT I BELIEVE  —  editorial, no interaction
+         02 · HOW I CREATE PRODUCT IMPACT
          =============================================================== -->
-    <section id="believe" class="believe section" aria-labelledby="believe-title">
-      <div class="section__index" aria-hidden="true">02</div>
-      <div class="believe__inner">
-        <h2 class="section__eyebrow" id="believe-title">What I Believe</h2>
-        <p class="believe__statement" data-anim="rise">
-          Design isn't the act of making interfaces. It's the discipline of
-          <em>reducing uncertainty.</em>
+    <section id="impact" class="section impact" data-lx="36%" data-lsize="64vmax" aria-labelledby="impact-title">
+      <div class="section__head section__head--stacked">
+        <p class="section__label" id="impact-title">How I Create Product Impact</p>
+        <p class="section__lead" data-anim="rise">
+          I solve business problems — not just design interfaces — creating products that
+          deliver measurable value.
         </p>
-        <div class="believe__body">
-          <p data-anim="rise">The screen is only one output.</p>
-          <p data-anim="rise">
-            The real work is understanding people, aligning teams, making difficult
-            decisions, and shipping products that create measurable value.
-          </p>
+      </div>
+
+      <ol class="pillars">
+        <li class="pillar" data-anim="rise">
+          <h3 class="pillar__title">Strategic Product Thinking</h3>
+          <p class="pillar__body">I solve business problems—not just design interfaces—by balancing user needs, business objectives, and technical feasibility to create products that deliver measurable value.</p>
+        </li>
+        <li class="pillar" data-anim="rise">
+          <h3 class="pillar__title">Cross-Functional Collaboration</h3>
+          <p class="pillar__body">I collaborate with Product Managers, Engineers, Researchers, and business stakeholders to align teams, reduce ambiguity, and guide products from discovery to delivery.</p>
+        </li>
+        <li class="pillar" data-anim="rise">
+          <h3 class="pillar__title">Designing at Scale</h3>
+          <p class="pillar__body">From enterprise platforms to farmer-facing mobile products, I've designed experiences serving millions of users across multiple countries, languages, and levels of digital literacy.</p>
+        </li>
+        <li class="pillar" data-anim="rise">
+          <h3 class="pillar__title">Systems Thinking</h3>
+          <p class="pillar__body">I create scalable design systems, reusable interaction patterns, and design frameworks that improve consistency, accelerate delivery, and support long-term product growth.</p>
+        </li>
+        <li class="pillar" data-anim="rise">
+          <h3 class="pillar__title">Entrepreneurial Mindset</h3>
+          <p class="pillar__body">Beyond my role at Syngenta, I build AI-powered products independently—taking ideas from problem identification through product strategy, design, validation, and launch.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===============================================================
+         03 · SCALE & PROVEN IMPACT  (held beat — numbers resolve)
+         =============================================================== -->
+    <section id="scale" class="section scale" data-lx="50%" data-lsize="52vmax" aria-labelledby="scale-title">
+      <p class="section__label scale__label" id="scale-title">Scale &amp; Proven Impact</p>
+
+      <div class="scale__figures" data-anim="rise">
+        <div class="scale__figure">
+          <span class="scale__n">4M+</span>
+          <span class="scale__l">Farmers reached across Africa, the Middle East &amp; Asia</span>
+        </div>
+        <div class="scale__figure">
+          <span class="scale__n">10+</span>
+          <span class="scale__l">Countries, languages &amp; business environments</span>
         </div>
       </div>
+
+      <dl class="proof">
+        <div class="proof__row" data-anim="rise"><dt>11+ Years</dt><dd>Designing products across Agritech, Enterprise, Retail, and AI.</dd></div>
+        <div class="proof__row" data-anim="rise"><dt>4M+ Farmers</dt><dd>Digital experiences supporting users across AMEA.</dd></div>
+        <div class="proof__row" data-anim="rise"><dt>10+ Countries</dt><dd>Products designed for diverse markets, languages, and business environments.</dd></div>
+        <div class="proof__row" data-anim="rise"><dt>UX Owner — Cropwise Grower</dt><dd>Leading UX initiatives for Cropwise Grower from discovery through delivery.</dd></div>
+        <div class="proof__row" data-anim="rise"><dt>5 Organizations</dt><dd>Experience across global enterprises, consulting, and product teams.</dd></div>
+        <div class="proof__row" data-anim="rise"><dt>AI Product Builder</dt><dd>Founder of DesignBesti, an AI-powered design critique platform.</dd></div>
+        <div class="proof__row" data-anim="rise"><dt>Cross-Functional Collaboration</dt><dd>Partnering with Product, Engineering, Agronomy, and Business teams to drive product outcomes.</dd></div>
+        <div class="proof__row" data-anim="rise"><dt>Continuous Innovation</dt><dd>Exploring AI, Voice, and AR to shape the next generation of digital experiences.</dd></div>
+      </dl>
     </section>
 
     <!-- ===============================================================
-         03 · SELECTED WORK  —  Principle: Information Architecture
+         04 · SELECTED PRODUCT WORK — Principle: Information Architecture
          =============================================================== -->
-    <section id="work" class="work section" aria-labelledby="work-title" data-state="scattered">
-      <div class="section__index" aria-hidden="true">03</div>
-
+    <section id="work" class="section work" data-lx="50%" data-lsize="82vmax" aria-labelledby="work-title">
       <div class="section__head work__head">
         <div>
-          <h2 class="section__eyebrow" id="work-title">Selected Work</h2>
+          <p class="section__label" id="work-title">Selected Product Work</p>
           <p class="section__principle">
             <span class="section__principle-name">Information Architecture.</span>
             Information should be organized before it can be understood.
           </p>
         </div>
-        <button type="button" class="action-btn" id="work-organize" aria-pressed="false">
-          <span class="action-btn__icon" aria-hidden="true"></span>
-          <span class="action-btn__label">
-            <span class="action-btn__label-idle">Organize</span>
-            <span class="action-btn__label-done">Organized</span>
-          </span>
-        </button>
       </div>
 
-      <ol class="work__grid" id="work-grid">
-        <li class="work-card" style="--i: 0">
-          <a class="work-card__link" href="#contact">
-            <div class="work-card__visual" data-visual="tower" aria-hidden="true"></div>
-            <div class="work-card__meta">
-              <span class="work-card__tag">Fintech · 0→1</span>
-              <h3 class="work-card__title">A lending platform that approves in minutes, not weeks</h3>
-              <p class="work-card__desc">
-                Rebuilt the underwriting flow around a single question at a time.
-                Approval time down 74%.
-              </p>
-            </div>
-          </a>
-        </li>
-        <li class="work-card" style="--i: 1">
-          <a class="work-card__link" href="#contact">
-            <div class="work-card__visual" data-visual="arch" aria-hidden="true"></div>
-            <div class="work-card__meta">
-              <span class="work-card__tag">Design Systems</span>
-              <h3 class="work-card__title">One system, forty product teams</h3>
-              <p class="work-card__desc">
-                Designed and shipped the system that made every other product decision faster.
-              </p>
-            </div>
-          </a>
-        </li>
-        <li class="work-card" style="--i: 2">
-          <a class="work-card__link" href="#contact">
-            <div class="work-card__visual" data-visual="vault" aria-hidden="true"></div>
-            <div class="work-card__meta">
-              <span class="work-card__tag">AI Product</span>
-              <h3 class="work-card__title">Making an AI assistant feel trustworthy</h3>
-              <p class="work-card__desc">
-                Turned model uncertainty into an interface people could actually reason about.
-              </p>
-            </div>
-          </a>
-        </li>
-        <li class="work-card" style="--i: 3">
-          <a class="work-card__link" href="#contact">
-            <div class="work-card__visual" data-visual="span" aria-hidden="true"></div>
-            <div class="work-card__meta">
-              <span class="work-card__tag">Enterprise · Scale</span>
-              <h3 class="work-card__title">Untangling a decade of enterprise workflows</h3>
-              <p class="work-card__desc">
-                Reduced a 40-step operational tool to the six steps that mattered.
-              </p>
-            </div>
-          </a>
-        </li>
-      </ol>
+      <!-- ---- Case study: Cropwise Grower ---- -->
+      <article class="case" data-state="scattered">
+        <header class="case__head" data-anim="rise">
+          <h3 class="case__title">Cropwise Grower</h3>
+          <p class="case__role">UX Owner · Senior UX Designer — Syngenta <span aria-hidden="true">|</span> 2022 – Present</p>
+        </header>
 
-      <p class="work__note" data-state-note>
-        Every project appears scattered. Press <strong>Organize</strong> to experience
-        Information Architecture.
-      </p>
+        <figure class="case__artifact" data-anim="rise">
+          <div class="case__visual" data-visual="tower" role="img" aria-label="Abstract lit study representing the Cropwise Grower platform."></div>
+          <figcaption>Cropwise Grower — a digital farming platform serving 4M+ farmers across 10+ countries.</figcaption>
+        </figure>
+
+        <div class="case__body">
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">Overview</h4>
+            <p>Cropwise Grower is a digital farming platform serving 4M+ farmers across 10+ countries throughout Africa, the Middle East, and Asia. The platform helps farmers make informed decisions through agronomic guidance, product information, community engagement, and digital services.</p>
+          </div>
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">Challenge</h4>
+            <p>Design a scalable product experience that works across multiple countries, languages, literacy levels, and farming practices while balancing user needs, business priorities, and technical feasibility.</p>
+          </div>
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">My Role</h4>
+            <ul class="case__list">
+              <li>Drove UX initiatives from discovery through delivery by facilitating product discussions, evaluating trade-offs, and aligning user needs with business priorities.</li>
+              <li>Partnered with Product Managers, Engineers, Agronomy experts, and regional stakeholders.</li>
+              <li>Defined user journeys, interaction models, and product experiences.</li>
+              <li>Contributed reusable design system components and interaction standards.</li>
+              <li>Facilitated design discussions that aligned business, user, and technical priorities.</li>
+            </ul>
+          </div>
+
+          <!-- The Information Architecture interaction lives here: initiatives
+               begin scattered and organize into the system. -->
+          <div class="case__block case__block--initiatives" data-anim="rise">
+            <div class="initiatives__head">
+              <h4 class="case__h">Key Initiatives</h4>
+              <button type="button" class="action-btn" id="work-organize" aria-pressed="false">
+                <span class="action-btn__icon" aria-hidden="true"></span>
+                <span class="action-btn__label">
+                  <span class="action-btn__label-idle">Organize</span>
+                  <span class="action-btn__label-done">Organized</span>
+                </span>
+              </button>
+            </div>
+            <ul class="initiatives" id="initiatives">
+              <li class="initiative" style="--i:0">Crop Doctor</li>
+              <li class="initiative" style="--i:1">Farmer Community</li>
+              <li class="initiative" style="--i:2">Loyalty Program</li>
+              <li class="initiative" style="--i:3">Product Authentication</li>
+              <li class="initiative" style="--i:4">QR Experience</li>
+              <li class="initiative" style="--i:5">Service Booking</li>
+              <li class="initiative" style="--i:6">Design System</li>
+            </ul>
+            <p class="initiatives__note" data-state-note>
+              Every initiative appears scattered. Press <strong>Organize</strong> to experience Information Architecture.
+            </p>
+          </div>
+
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">Product Impact</h4>
+            <p>Rather than focusing solely on interface design, I helped shape product decisions by facilitating cross-functional alignment, simplifying complex workflows, and promoting scalable product patterns across multiple initiatives.</p>
+          </div>
+
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">Product Thinking</h4>
+            <p>Every decision balanced four dimensions:</p>
+            <ul class="dimensions dimensions--inline">
+              <li>User Value</li>
+              <li>Business Value</li>
+              <li>Technical Feasibility</li>
+              <li>Long-Term Scalability</li>
+            </ul>
+          </div>
+
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">Impact</h4>
+            <ul class="case__list">
+              <li>Digital experiences supporting 4M+ farmers.</li>
+              <li>Products used across 10+ countries.</li>
+              <li>Improved design consistency through reusable systems.</li>
+              <li>Enabled stronger collaboration across Design, Product, Engineering, and Business teams through shared UX direction and scalable design patterns.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---- Case study: DesignBesti ---- -->
+      <article class="case case--compact">
+        <header class="case__head" data-anim="rise">
+          <h3 class="case__title">DesignBesti</h3>
+          <p class="case__role">Founder · Product Strategist · Product Designer — Independent AI Product <span aria-hidden="true">|</span> Live</p>
+        </header>
+
+        <figure class="case__artifact" data-anim="rise">
+          <div class="case__visual" data-visual="vault" role="img" aria-label="Abstract lit study representing the DesignBesti AI critique platform."></div>
+          <figcaption>DesignBesti — an AI-powered platform for structured, objective, instant design critique.</figcaption>
+        </figure>
+
+        <div class="case__body">
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">Opportunity</h4>
+            <p>Design feedback is often slow, inconsistent, and dependent on the availability of experienced designers.</p>
+          </div>
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">Vision</h4>
+            <p>Build an AI-powered platform that helps designers improve decision-making through structured, objective, and instant design critique.</p>
+          </div>
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">My Role</h4>
+            <p>Owned the complete product lifecycle:</p>
+            <ul class="case__list case__list--tight">
+              <li>Product Strategy</li><li>UX Research</li><li>Product Design</li>
+              <li>AI Experience Design</li><li>Prompt Design</li><li>Product Direction</li><li>Launch Strategy</li>
+            </ul>
+          </div>
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">What I Built</h4>
+            <ul class="case__list case__list--tight">
+              <li>Standard Analysis</li><li>Stress Test</li><li>Roast Mode</li>
+              <li>Stakeholder Translator</li><li>Zone-Based Feedback</li><li>Brief Analysis</li>
+            </ul>
+          </div>
+          <div class="case__block" data-anim="rise">
+            <h4 class="case__h">Why It Matters</h4>
+            <p>DesignBesti demonstrates my ability to identify market opportunities, define product strategy, integrate AI into meaningful workflows, and independently build products from concept to launch.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ---- Concepts: Voice First & AR ---- -->
+      <div class="concepts">
+        <article class="concept" data-anim="rise">
+          <h3 class="concept__title">Voice First Farming</h3>
+          <p class="concept__role">Product Designer · Concept Lead</p>
+          <p>Designed a voice-first farming experience to improve accessibility for users with varying levels of digital literacy. Developed the product concept, interaction model, and high-fidelity prototype, presenting the vision to senior stakeholders as a potential future direction for digital agriculture.</p>
+        </article>
+        <article class="concept" data-anim="rise">
+          <h3 class="concept__title">AR Product Visualizer</h3>
+          <p class="concept__role">Product Designer · Innovation Concept</p>
+          <p>Explored how Augmented Reality could help farmers better understand agricultural products before purchase by visualizing them within their own environment. Created the product concept, interaction strategy, and interactive prototype to demonstrate the potential of immersive technologies in agriculture.</p>
+        </article>
+      </div>
     </section>
 
     <!-- ===============================================================
-         04 · COMPANIES I'VE BUILT WITH  —  marquee
+         05 · LEADERSHIP BEYOND DESIGN
          =============================================================== -->
-    <section id="companies" class="companies section" aria-labelledby="companies-title">
-      <div class="section__index" aria-hidden="true">04</div>
-      <h2 class="section__eyebrow companies__title" id="companies-title">Companies I've Built With</h2>
-
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track" id="marquee-track"></div>
-      </div>
-      <p class="sr-only">
-        Anirudh has built with Northwind, Meridian, Atlas, Vantage, Foundry, Beacon,
-        Coreline, Praxis, Lattice, and Halcyon.
-      </p>
-    </section>
-
-    <!-- ===============================================================
-         05 · MY PROCESS  —  editorial flow, no interaction
-         =============================================================== -->
-    <section id="process" class="process section" aria-labelledby="process-title">
-      <div class="section__index" aria-hidden="true">05</div>
-      <div class="section__head">
-        <div>
-          <h2 class="section__eyebrow" id="process-title">My Process</h2>
-          <p class="section__principle">
-            The screen is the last step. Everything before it is where the product is decided.
-          </p>
+    <section id="leadership" class="section leadership" data-lx="36%" data-lsize="66vmax" aria-labelledby="leadership-title">
+      <div class="section__head section__head--stacked">
+        <p class="section__label" id="leadership-title">Leadership Beyond Design</p>
+        <div class="leadership__intro" data-anim="rise">
+          <p>I believe product leadership is demonstrated through ownership, collaboration, sound decision-making, and the ability to bring cross-functional teams together around shared outcomes.</p>
+          <p>Throughout my career, I've partnered with Product Managers, Engineers, Researchers, Agronomy experts, and business stakeholders to translate complex problems into scalable product solutions.</p>
         </div>
       </div>
 
-      <ol class="process__flow">
-        <li class="process__step" data-anim="rise"><span class="process__num">01</span><span class="process__word">Understand</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">02</span><span class="process__word">Define</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">03</span><span class="process__word">Explore</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">04</span><span class="process__word">Validate</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">05</span><span class="process__word">Build</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">06</span><span class="process__word">Measure</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">07</span><span class="process__word">Improve</span></li>
+      <ol class="pillars pillars--lead">
+        <li class="pillar" data-anim="rise"><h3 class="pillar__title">Driving Product Direction</h3><p class="pillar__body">Drove UX initiatives from discovery through delivery in partnership with Product Managers and Engineering, facilitating product discussions, evaluating trade-offs, and aligning user needs with business priorities and technical feasibility.</p></li>
+        <li class="pillar" data-anim="rise"><h3 class="pillar__title">Building Alignment</h3><p class="pillar__body">Worked across cross-functional teams to reduce ambiguity, establish a shared product vision, and support informed decision-making throughout the product lifecycle.</p></li>
+        <li class="pillar" data-anim="rise"><h3 class="pillar__title">Scaling Through Systems</h3><p class="pillar__body">Contributed reusable design patterns, interaction standards, and design system improvements that increased consistency and supported faster product development.</p></li>
+        <li class="pillar" data-anim="rise"><h3 class="pillar__title">Thinking Beyond Delivery</h3><p class="pillar__body">Explored future opportunities through Voice AI, Augmented Reality, and AI-assisted workflows—bringing new ideas into product conversations before they became roadmap items.</p></li>
+        <li class="pillar" data-anim="rise"><h3 class="pillar__title">Entrepreneurial Ownership</h3><p class="pillar__body">Built DesignBesti independently, gaining hands-on experience in product strategy, prioritization, AI integration, validation, and launching a product from concept to market.</p></li>
       </ol>
     </section>
 
     <!-- ===============================================================
-         06 · THE PRINCIPLES BEHIND MY WORK  —  Principle: Clarity
+         06 · MY DECISION-MAKING FRAMEWORK — Principle: Clarity
          =============================================================== -->
-    <section id="principles" class="principles section" aria-labelledby="principles-title" data-state="complex">
-      <div class="section__index" aria-hidden="true">06</div>
-
-      <div class="section__head">
+    <section id="framework" class="section framework" data-lx="50%" data-lsize="56vmax" aria-labelledby="framework-title" data-state="complex">
+      <div class="section__head work__head">
         <div>
-          <h2 class="section__eyebrow" id="principles-title">The Principles Behind My Work</h2>
+          <p class="section__label" id="framework-title">My Decision-Making Framework</p>
           <p class="section__principle">
             <span class="section__principle-name">Clarity.</span>
             Complex ideas should be easy to understand.
           </p>
         </div>
-        <button type="button" class="action-btn" id="principles-simplify" aria-pressed="false">
+        <button type="button" class="action-btn" id="framework-simplify" aria-pressed="false">
           <span class="action-btn__icon" aria-hidden="true"></span>
           <span class="action-btn__label">
             <span class="action-btn__label-idle">Simplify</span>
@@ -314,41 +398,123 @@
         </button>
       </div>
 
-      <ol class="principles__list">
-        <li class="principle" data-anim="rise">
-          <span class="principle__num" aria-hidden="true">01</span>
-          <p class="principle__text">Don't open Figma until you know what you're solving.</p>
+      <p class="framework__intro" data-anim="rise">
+        Every product decision begins with understanding the problem—not jumping to the
+        solution. I evaluate opportunities using four principles:
+      </p>
+
+      <ol class="dimensions">
+        <li class="dimension" data-anim="rise">
+          <span class="dimension__num" aria-hidden="true">01</span>
+          <h3 class="dimension__name">User Value</h3>
+          <p class="dimension__q">Does this solve a meaningful user problem?</p>
         </li>
-        <li class="principle" data-anim="rise">
-          <span class="principle__num" aria-hidden="true">02</span>
-          <p class="principle__text">Good design makes hard decisions visible.</p>
+        <li class="dimension" data-anim="rise">
+          <span class="dimension__num" aria-hidden="true">02</span>
+          <h3 class="dimension__name">Business Value</h3>
+          <p class="dimension__q">Will it contribute to measurable product or business outcomes?</p>
         </li>
-        <li class="principle" data-anim="rise">
-          <span class="principle__num" aria-hidden="true">03</span>
-          <p class="principle__text">If it doesn't help the user or the business, it doesn't ship.</p>
+        <li class="dimension" data-anim="rise">
+          <span class="dimension__num" aria-hidden="true">03</span>
+          <h3 class="dimension__name">Technical Feasibility</h3>
+          <p class="dimension__q">Can it be implemented, maintained, and scaled effectively?</p>
         </li>
-        <li class="principle" data-anim="rise">
-          <span class="principle__num" aria-hidden="true">04</span>
-          <p class="principle__text">A product is never finished. Only the next decision is.</p>
+        <li class="dimension" data-anim="rise">
+          <span class="dimension__num" aria-hidden="true">04</span>
+          <h3 class="dimension__name">Long-Term Sustainability</h3>
+          <p class="dimension__q">Will this decision continue delivering value as the product evolves?</p>
         </li>
+      </ol>
+
+      <p class="framework__close" data-anim="rise">
+        This framework has guided my work across enterprise platforms, farmer-facing mobile
+        products, AI-powered tools, and innovation initiatives.
+      </p>
+    </section>
+
+    <!-- ===============================================================
+         07 · DRIVING INNOVATION
+         =============================================================== -->
+    <section id="innovation" class="section innovation" data-lx="20%" data-lsize="60vmax" aria-labelledby="innovation-title">
+      <div class="section__head section__head--stacked">
+        <p class="section__label" id="innovation-title">Driving Innovation</p>
+        <div class="innovation__intro" data-anim="rise">
+          <p>I believe innovation should solve real problems—not simply introduce new technology.</p>
+          <p>Over the past few years, I've consistently explored emerging technologies to understand how they can improve user experiences and product outcomes.</p>
+        </div>
+      </div>
+
+      <ol class="innov-timeline">
+        <li class="innov" data-anim="rise"><span class="innov__year">2023</span><div class="innov__body"><h3 class="innov__title">Voice First Farming</h3><p>Designed a voice-first product concept to improve accessibility for farmers with varying levels of digital literacy, demonstrating how conversational interfaces could reduce complexity.</p></div></li>
+        <li class="innov" data-anim="rise"><span class="innov__year">2024</span><div class="innov__body"><h3 class="innov__title">AR Product Visualization</h3><p>Developed an interactive concept showing how Augmented Reality could help farmers better understand products before purchase through contextual visualization.</p></div></li>
+        <li class="innov" data-anim="rise"><span class="innov__year">2025</span><div class="innov__body"><h3 class="innov__title">AI-Assisted Design</h3><p>Integrated AI into research synthesis, ideation, prototyping, and design critique to improve speed, quality, and decision-making across the design process.</p></div></li>
+        <li class="innov" data-anim="rise"><span class="innov__year">2026</span><div class="innov__body"><h3 class="innov__title">DesignBesti</h3><p>Built and launched an AI-powered design critique platform from concept to production, combining Product Strategy, UX, AI, and entrepreneurship into a single product.</p></div></li>
       </ol>
     </section>
 
     <!-- ===============================================================
-         07 · TESTIMONIALS  —  Principle: Collaboration
+         08 · HOW I THINK
          =============================================================== -->
-    <section id="testimonials" class="testimonials section" aria-labelledby="testimonials-title" data-state="disconnected">
-      <div class="section__index" aria-hidden="true">07</div>
+    <section id="how-i-think" class="section think" data-lx="50%" data-lsize="58vmax" aria-labelledby="think-title">
+      <div class="section__head section__head--stacked">
+        <p class="section__label" id="think-title">How I Think</p>
+        <p class="section__lead" data-anim="rise">
+          My approach to Product Design is guided by a few principles that remain constant
+          regardless of industry or technology.
+        </p>
+      </div>
 
-      <div class="section__head">
+      <ol class="tenets">
+        <li class="tenet" data-anim="rise"><p>Solve the right problem before designing the solution.</p></li>
+        <li class="tenet" data-anim="rise"><p>Balance user needs, business goals, and technical feasibility.</p></li>
+        <li class="tenet" data-anim="rise"><p>Build scalable systems rather than isolated features.</p></li>
+        <li class="tenet" data-anim="rise"><p>Use evidence and collaboration to reduce assumptions.</p></li>
+        <li class="tenet" data-anim="rise"><p>Design for long-term product value.</p></li>
+        <li class="tenet" data-anim="rise"><p>Embrace AI as a tool to improve thinking—not replace it.</p></li>
+        <li class="tenet" data-anim="rise"><p>Stay curious, keep learning, and continuously experiment.</p></li>
+      </ol>
+    </section>
+
+    <!-- ===============================================================
+         09 · CAREER JOURNEY
+         =============================================================== -->
+    <section id="career" class="section career" data-lx="50%" data-lsize="64vmax" aria-labelledby="career-title">
+      <div class="section__head section__head--stacked">
+        <p class="section__label" id="career-title">Career Journey</p>
+        <p class="section__lead" data-anim="rise">
+          Building Products. Solving Problems. Growing with Every Opportunity.
+        </p>
+      </div>
+
+      <ol class="timeline">
+        <li class="timeline__row" data-anim="rise"><div class="timeline__years">2022 – Present <span class="timeline__loc">Pune</span></div><div class="timeline__body"><h3 class="timeline__role">Syngenta <span class="timeline__title">— Senior UX Designer / UX Owner</span></h3><p class="timeline__note">Leading UX for Cropwise Grower, serving 4M+ farmers across 10+ countries, while collaborating with Product, Engineering, and Business teams to build scalable digital experiences.</p></div></li>
+        <li class="timeline__row" data-anim="rise"><div class="timeline__years">2021 – 2022 <span class="timeline__loc">Hyderabad</span></div><div class="timeline__body"><h3 class="timeline__role">PwC <span class="timeline__title">— UX Designer</span></h3><p class="timeline__note">Designed enterprise products and explored emerging technologies, including Augmented Reality, to improve business workflows.</p></div></li>
+        <li class="timeline__row" data-anim="rise"><div class="timeline__years">2019 – 2021 <span class="timeline__loc">Hyderabad</span></div><div class="timeline__body"><h3 class="timeline__role">Deloitte <span class="timeline__title">— UX Designer</span></h3><p class="timeline__note">Designed retail experiences for global clients, simplifying complex workflows and improving user experiences.</p></div></li>
+        <li class="timeline__row" data-anim="rise"><div class="timeline__years">2018 – 2019 <span class="timeline__loc">Hyderabad</span></div><div class="timeline__body"><h3 class="timeline__role">Innovapptive <span class="timeline__title">— UI/UX Designer</span></h3><p class="timeline__note">Designed enterprise mobile applications within the SAP ecosystem for field operations.</p></div></li>
+        <li class="timeline__row" data-anim="rise"><div class="timeline__years">2017 – 2018</div><div class="timeline__body"><h3 class="timeline__role">Xtream IT Solutions <span class="timeline__title">— UI/UX Designer</span></h3><p class="timeline__note">Designed web and mobile products across multiple domains.</p></div></li>
+        <li class="timeline__row" data-anim="rise"><div class="timeline__years">2014 – 2017</div><div class="timeline__body"><h3 class="timeline__role">UI Solutions <span class="timeline__title">— UI Designer</span></h3><p class="timeline__note">Started my design career building digital products across web and mobile platforms.</p></div></li>
+      </ol>
+
+      <div class="evolution" data-anim="rise">
+        <p class="evolution__label">Career Evolution</p>
+        <p class="evolution__line">UI Designer <span aria-hidden="true">→</span> UX Designer <span aria-hidden="true">→</span> UX Owner <span aria-hidden="true">→</span> Product Thinker <span aria-hidden="true">→</span> AI Product Builder</p>
+        <p class="evolution__now">Today, I'm focused on expanding my impact by leading larger product initiatives, mentoring designers, and contributing more strategically to product direction.</p>
+      </div>
+    </section>
+
+    <!-- ===============================================================
+         10 · RECOMMENDATIONS — Principle: Collaboration
+         =============================================================== -->
+    <section id="recommendations" class="section recommendations" data-lx="50%" data-lsize="60vmax" aria-labelledby="rec-title" data-state="disconnected">
+      <div class="section__head work__head">
         <div>
-          <h2 class="section__eyebrow" id="testimonials-title">Testimonials</h2>
+          <p class="section__label" id="rec-title">Recommendations</p>
           <p class="section__principle">
             <span class="section__principle-name">Collaboration.</span>
             Great products are built together.
           </p>
         </div>
-        <button type="button" class="action-btn" id="testimonials-connect" aria-pressed="false">
+        <button type="button" class="action-btn" id="recommendations-connect" aria-pressed="false">
           <span class="action-btn__icon" aria-hidden="true"></span>
           <span class="action-btn__label">
             <span class="action-btn__label-idle">Connect the team</span>
@@ -362,123 +528,72 @@
         <ul class="team__nodes" id="team-nodes">
           <li class="team-node" data-role="Product"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Product</span></li>
           <li class="team-node" data-role="Engineering"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Engineering</span></li>
+          <li class="team-node" data-role="Agronomy"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Agronomy</span></li>
           <li class="team-node" data-role="Research"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Research</span></li>
-          <li class="team-node" data-role="Data"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Data</span></li>
-          <li class="team-node" data-role="Design"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Design</span></li>
+          <li class="team-node" data-role="Business"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Business</span></li>
         </ul>
       </div>
 
       <ul class="quotes" id="quotes">
         <li class="quote">
-          <blockquote class="quote__text">
-            Working with Anirudh changed the conversation our whole team was having — not just the screens.
-          </blockquote>
-          <p class="quote__by"><span class="quote__name">VP Product</span><span class="quote__co">Fintech scale-up</span></p>
+          <blockquote class="quote__text">Anirudh's ability to quickly understand expectations and translate them into exceptional design solutions consistently impressed me.</blockquote>
+          <p class="quote__by"><span class="quote__name">Lori Yeh</span><span class="quote__co">Senior Product Designer, Bank of America</span></p>
         </li>
         <li class="quote">
-          <blockquote class="quote__text">
-            Anirudh made our hardest trade-offs visible, so we could finally decide together.
-          </blockquote>
-          <p class="quote__by"><span class="quote__name">Head of Engineering</span><span class="quote__co">Enterprise SaaS</span></p>
-        </li>
-        <li class="quote">
-          <blockquote class="quote__text">
-            The design system Anirudh built is still how we ship, three years later.
-          </blockquote>
-          <p class="quote__by"><span class="quote__name">Director of Design</span><span class="quote__co">Platform company</span></p>
+          <blockquote class="quote__text">I was consistently impressed by his professionalism, design quality, attention to detail, and ability to deliver. He would be an asset to any product team.</blockquote>
+          <p class="quote__by"><span class="quote__name">Grace Wolford</span><span class="quote__co">UX Researcher, Deloitte</span></p>
         </li>
       </ul>
-
-      <p class="testimonials__note" data-state-note>
-        The team appears disconnected. Connect them to hear what they have to say.
-      </p>
+      <p class="team__note" data-state-note>The team appears disconnected. Connect them to hear what they have to say.</p>
     </section>
 
     <!-- ===============================================================
-         08 · EXPERIENCE  —  editorial timeline
+         11 · LET'S BUILD WHAT'S NEXT — Principle: Connection
          =============================================================== -->
-    <section id="experience" class="experience section" aria-labelledby="experience-title">
-      <div class="section__index" aria-hidden="true">08</div>
-      <div class="section__head">
-        <h2 class="section__eyebrow" id="experience-title">Experience</h2>
-      </div>
-
-      <ol class="timeline">
-        <li class="timeline__row" data-anim="rise">
-          <div class="timeline__years">2021 — Now</div>
-          <div class="timeline__body">
-            <h3 class="timeline__role">Lead Product Designer</h3>
-            <p class="timeline__org">Platform &amp; AI Products</p>
-            <p class="timeline__note">Leading design for products and the systems the org designs them with.</p>
-          </div>
-        </li>
-        <li class="timeline__row" data-anim="rise">
-          <div class="timeline__years">2017 — 2021</div>
-          <div class="timeline__body">
-            <h3 class="timeline__role">Senior Product Designer</h3>
-            <p class="timeline__org">Fintech &amp; Enterprise</p>
-            <p class="timeline__note">0→1 products, complex workflows, and the first design system.</p>
-          </div>
-        </li>
-        <li class="timeline__row" data-anim="rise">
-          <div class="timeline__years">2014 — 2017</div>
-          <div class="timeline__body">
-            <h3 class="timeline__role">Product Designer</h3>
-            <p class="timeline__org">Consumer &amp; Mobile</p>
-            <p class="timeline__note">Learned that the interface is the easy part.</p>
-          </div>
-        </li>
-        <li class="timeline__row" data-anim="rise">
-          <div class="timeline__years">2013 — 2014</div>
-          <div class="timeline__body">
-            <h3 class="timeline__role">Where it started</h3>
-            <p class="timeline__org">Design &amp; the discipline of reducing uncertainty</p>
-            <p class="timeline__note">11+ years of asking what we're really solving.</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <!-- ===============================================================
-         09 · CONTACT  —  Principle: Connection
-         =============================================================== -->
-    <section id="contact" class="contact section" aria-labelledby="contact-title" data-state="idle">
-      <div class="section__index" aria-hidden="true">09</div>
-      <div class="contact__glow" aria-hidden="true"></div>
-
+    <section id="contact" class="section contact" data-lx="50%" data-lsize="92vmax" aria-labelledby="contact-title" data-state="idle">
       <div class="contact__inner">
         <p class="section__principle contact__principle">
           <span class="section__principle-name">Connection.</span>
           Every opportunity starts with a conversation.
         </p>
+        <h2 class="contact__title" id="contact-title">Let's build what's next.</h2>
+        <p class="contact__lede" data-anim="rise">
+          I'm interested in opportunities where Product Design contributes to business
+          strategy, product direction, and long-term growth—not just interface design.
+        </p>
 
-        <h2 class="contact__title" id="contact-title">Let's build products together.</h2>
-
-        <div class="contact__available">
-          <span class="contact__available-label">Currently available for</span>
+        <div class="contact__interests" data-anim="rise">
+          <span class="contact__interests-label">My interests include</span>
           <ul class="contact__roles">
-            <li>Lead Product Designer</li>
-            <li>Principal Product Designer</li>
-            <li>AI Product Design</li>
+            <li>Product Design Leadership</li>
+            <li>Enterprise Platforms</li>
+            <li>AI-Powered Products</li>
+            <li>Design Systems</li>
+            <li>Product Strategy</li>
+            <li>Emerging Technologies</li>
           </ul>
         </div>
 
-        <div class="contact__actions">
-          <button type="button" class="btn btn--primary btn--lg" id="contact-cta">
-            Get in Touch
-          </button>
-          <a class="contact__email" href="mailto:anirudh.thata@gmail.com">anirudh.thata@gmail.com</a>
+        <div class="contact__actions" data-anim="rise">
+          <button type="button" class="btn btn--primary btn--lg" id="contact-cta">Get in Touch</button>
+          <div class="contact__links">
+            <a href="mailto:anirudh.thata@gmail.com">anirudh.thata@gmail.com</a>
+            <a href="https://linkedin.com/in/anirudh-thata-a611a57b" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="assets/anirudh-thata-resume.pdf" download>Resume</a>
+          </div>
         </div>
         <p class="contact__ping" id="contact-ping" role="status" aria-live="polite"></p>
+
+        <p class="contact__final" data-anim="rise">
+          Great products simplify complexity, enable better decisions, and create lasting
+          value for users and businesses. That's the kind of impact I strive to deliver.
+        </p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p class="site-footer__line">
-      Anirudh Thata <span aria-hidden="true">·</span> Lead Product Designer
-      <span aria-hidden="true">·</span> Pune, India
-    </p>
+    <p class="site-footer__line">Anirudh Thata <span aria-hidden="true">·</span> Senior Product Designer <span aria-hidden="true">·</span> Pune, India</p>
     <p class="site-footer__meta">Built to be experienced, not just read.</p>
   </footer>
 

@@ -5,14 +5,14 @@
    ========================================================================== */
 
 :root {
-  /* --- Colour · almost-black ground -------------------------------------- */
-  --c-ink-900: #060607;   /* deepest — behind the light */
-  --c-ink-800: #0a0a0b;   /* page background */
-  --c-ink-700: #101012;   /* raised surfaces */
-  --c-ink-600: #17171a;   /* cards */
-  --c-ink-500: #202024;   /* hairlines on dark */
-  --c-line:    rgba(255, 255, 255, 0.09);
-  --c-line-strong: rgba(255, 255, 255, 0.16);
+  /* --- Colour · almost-black ground (warm-biased, not neutral) ----------- */
+  --c-ink-900: #050403;   /* deepest — behind the light */
+  --c-ink-800: #080706;   /* page background */
+  --c-ink-700: #0e0c0a;   /* raised surfaces */
+  --c-ink-600: #14110e;   /* framed artifacts */
+  --c-ink-500: #201b16;   /* hairlines on dark */
+  --c-line:    rgba(255, 236, 214, 0.09);
+  --c-line-strong: rgba(255, 236, 214, 0.17);
 
   /* --- Colour · warm white type ------------------------------------------ */
   --c-warm-100: #f6f2ec;  /* primary text (warm white) */
@@ -36,7 +36,7 @@
   --fs-lede:    clamp(1.18rem, 1.05rem + 0.7vw, 1.6rem);
   --fs-h3:      clamp(1.25rem, 1.1rem + 0.9vw, 1.9rem);
   --fs-h2:      clamp(1.9rem, 1.4rem + 2.4vw, 3.4rem);
-  --fs-display: clamp(2.5rem, 1.7rem + 4vw, 5.25rem);
+  --fs-display: clamp(2.3rem, 1.7rem + 3vw, 4.25rem);
   --fs-mega:    clamp(3rem, 1.9rem + 5.6vw, 7rem);
 
   --lh-tight: 1.02;
@@ -58,13 +58,27 @@
   --space-3xl: clamp(6rem, 4rem + 10vw, 12rem);
 
   /* --- Layout ------------------------------------------------------------ */
-  --measure: 68ch;
+  --measure: 65ch;
   --container: 1200px;
   --gutter: clamp(1.25rem, 0.5rem + 4vw, 4rem);
+  --grid-gap: clamp(16px, 2vw, 32px);
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-pill: 999px;
+
+  /* Breakpoints (reference values; used in media queries) ----------------- */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+
+  /* --- The continuous light field --------------------------------------- */
+  /* Position/size/intensity are driven live by js/modules/lightfield.js.    */
+  --lx: 55%;
+  --ly: 12%;
+  --lsize: 70vmax;
+  --lint: 0.18;
 
   /* --- Motion ------------------------------------------------------------ */
   /* Calm, intentional. No bounce, no overshoot. */

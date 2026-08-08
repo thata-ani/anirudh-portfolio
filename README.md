@@ -1,72 +1,71 @@
-# Anirudh Thata — Product Designer Portfolio
+# Anirudh Thata — Senior Product Designer
 
-A portfolio built to be **experienced, not just read**. Every interaction
-teaches one Product Design principle — the visitor feels the principle before
-they read about it.
+A portfolio built to be **experienced, not just read**. It's a single continuous,
+dark, editorial space lit by one warm light that travels the page as you scroll —
+and five moments where the visitor *does* something that demonstrates a Product
+Design principle before reading about it.
 
-> Design isn't the act of making interfaces. It's the discipline of reducing
-> uncertainty.
+> Designing Products That Scale. Solving Problems That Matter.
 
-## The idea
+## Creative direction
 
-Each section demonstrates a principle through interaction:
+- **Premium editorial product experience** — dark, warm, typographic, continuous.
+- **One warm light** is the only accent and the only colour event, and the
+  connective tissue between sections (it never resets — it travels).
+- **Architecture** informs only *space, light, proportion, and composition*.
+- **Typography leads**; imagery is supporting evidence. Product work is presented
+  as framed artifacts, given air.
+- **Motion is calm** — smooth, eased, no bounce or spectacle.
+
+## The eleven sections (locked)
+
+01 Hero · 02 How I Create Product Impact · 03 Scale & Proven Impact ·
+04 Selected Product Work · 05 Leadership Beyond Design · 06 My Decision-Making
+Framework · 07 Driving Innovation · 08 How I Think · 09 Career Journey ·
+10 Recommendations · 11 Let's Build What's Next
+
+## The five principle-interactions
 
 | Section | Principle | Interaction |
 | --- | --- | --- |
-| Hero | **Accessibility** | The page begins almost inaccessible — only the light. *Switch ON* reveals the interface, staggered, as the light spreads. |
-| Selected Work | **Information Architecture** | Cards start scattered and overlapping. *Organize* aligns them into a clean editorial grid. |
-| Principles | **Clarity** | The principles start visually difficult. *Simplify* makes them clear and readable. |
-| Testimonials | **Collaboration** | The cross-functional team starts disconnected. *Connect* draws the mesh — and only then do the testimonials appear. |
-| Contact | **Connection** | *Get in Touch* plays a single subtle, premium notification tone — a conversation beginning. |
-
-## Design direction
-
-- **Dark premium interface** — almost-black ground, warm-white type.
-- **One accent**: a single warm architectural light.
-- **Typography**: Inter Tight with a system fallback stack (SF Pro / Söhne).
-- **Imagery**: monolithic, brutalist concrete rendered as crafted SVG — a
-  metaphor for reducing uncertainty and revealing clarity. No stock photos.
-- **Motion**: calm and intentional. No bounce, no overshoot.
+| Hero | **Accessibility** | The page begins almost inaccessible; *Switch ON* brings up the light and reveals the interface. |
+| Selected Product Work | **Information Architecture** | Cropwise's initiatives start scattered; *Organize* aligns them into the system. |
+| My Decision-Making Framework | **Clarity** | The four dimensions start visually complex; *Simplify* resolves them. |
+| Recommendations | **Collaboration** | A disconnected cross-functional team connects into a mesh — then the recommendations appear. |
+| Let's Build What's Next | **Connection** | *Get in Touch* plays a single subtle, premium notification tone. |
 
 ## Tech
 
-Zero dependencies, no build step. Semantic HTML, modern CSS with design tokens,
-and small ES modules — one per interaction.
+Zero dependencies, no build step. Semantic HTML, tokenised modern CSS, and small
+ES modules — one per interaction, plus the continuous light field.
 
 ```
 index.html
-css/
-  tokens.css      # design tokens (colour, type, motion, spacing)
-  base.css        # reset, typography, buttons, reveal primitives
-  layout.css      # shell, nav, section rhythm, hero reveal orchestration
-  sections.css    # per-section styling + the interactive states
-js/
-  main.js         # wires the modules together
-  modules/        # env, hero, nav, reveal, marquee, team, contact, state-toggle
-assets/           # architectural SVGs + favicon
+css/  tokens · base · layout · sections
+js/   main.js + modules/ (env, lightfield, hero, nav, reveal, team, contact, state-toggle)
+assets/  architectural SVG studies + favicon
 ```
 
-### Craft notes
-
-- **Progressive enhancement** — the full page is readable without JavaScript;
-  the interactions are enhancements layered on top (`html.js` gates every
+- **Progressive enhancement** — fully readable without JS (`html.js` gates every
   JS-dependent hidden state).
-- **Accessibility** — semantic landmarks, a real `role="switch"`, focus
-  hand-off after the reveal, visible focus rings, and full
-  `prefers-reduced-motion` support.
-- **Performance** — no frameworks, no images to download (SVG only), fonts
-  loaded non-render-blocking.
+- **Accessibility** — semantic landmarks, real `role="switch"`, focus hand-off,
+  visible focus, full `prefers-reduced-motion` support (light static, no parallax).
+- **Performance** — no frameworks, SVG-only imagery, non-render-blocking fonts.
+
+## Asset slots (swap when available)
+
+- `assets/anirudh-thata-resume.pdf` — résumé download (Hero + Contact).
+- Real Cropwise Grower / DesignBesti product screens (Selected Product Work) —
+  currently abstract lit placeholders.
+- Company logos (Career) — text-only until provided.
 
 ## Run locally
 
-It's static — serve the folder over HTTP (ES modules need a server, not
-`file://`):
-
 ```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
+python3 -m http.server 8000   # ES modules need HTTP, not file://
+# open http://localhost:8000
 ```
 
 ---
 
-Anirudh Thata · Lead Product Designer · Pune, India
+Anirudh Thata · Senior Product Designer · Pune, India
