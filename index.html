@@ -44,8 +44,8 @@
       <span class="sr-only">Switch on the light</span>
     </button>
     <p class="lamp__hint" id="hero-switch-hint">
-      This portfolio begins in the dark.
-      <strong>Pull the cord to switch it on.</strong>
+      In a product, what can't be seen doesn't exist.
+      <strong>Pull the cord to make the work visible.</strong>
     </p>
   </div>
 
@@ -203,16 +203,20 @@
     <section id="process" class="section process" data-lx="30%" data-lsize="62vmax" aria-labelledby="process-title">
       <div class="section__head section__head--stacked">
         <p class="section__label" id="process-title">My Process</p>
-        <p class="section__lead" data-anim="rise">The screen is the last step. Everything before it is where the product is decided.</p>
+        <p class="process__anchor" data-anim="rise">
+          The screen is the last step.
+          <span>Everything before it is where the product is decided.</span>
+        </p>
       </div>
-      <ol class="process__flow">
-        <li class="process__step" data-anim="rise"><span class="process__num">01</span><span class="process__word">Understand</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">02</span><span class="process__word">Define</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">03</span><span class="process__word">Explore</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">04</span><span class="process__word">Validate</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">05</span><span class="process__word">Build</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">06</span><span class="process__word">Measure</span></li>
-        <li class="process__step" data-anim="rise"><span class="process__num">07</span><span class="process__word">Improve</span></li>
+
+      <ol class="process__track">
+        <li class="process__stage" data-anim="rise"><span class="process__num">01</span><div><h3 class="process__word">Understand</h3><p class="process__q">What are we really solving?</p></div></li>
+        <li class="process__stage" data-anim="rise"><span class="process__num">02</span><div><h3 class="process__word">Define</h3><p class="process__q">What does success look like?</p></div></li>
+        <li class="process__stage" data-anim="rise"><span class="process__num">03</span><div><h3 class="process__word">Explore</h3><p class="process__q">What are the possible directions?</p></div></li>
+        <li class="process__stage" data-anim="rise"><span class="process__num">04</span><div><h3 class="process__word">Validate</h3><p class="process__q">What does the evidence say?</p></div></li>
+        <li class="process__stage" data-anim="rise"><span class="process__num">05</span><div><h3 class="process__word">Build</h3><p class="process__q">What ships now, and what waits?</p></div></li>
+        <li class="process__stage" data-anim="rise"><span class="process__num">06</span><div><h3 class="process__word">Measure</h3><p class="process__q">Did it move the outcome?</p></div></li>
+        <li class="process__stage" data-anim="rise"><span class="process__num">07</span><div><h3 class="process__word">Improve</h3><p class="process__q">What's the next decision?</p></div></li>
       </ol>
     </section>
 
@@ -270,11 +274,12 @@
       <div class="team" id="team">
         <svg class="team__wires" id="team-wires" aria-hidden="true" preserveAspectRatio="none"></svg>
         <ul class="team__nodes" id="team-nodes">
-          <li class="team-node" data-role="Product"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Product</span></li>
+          <li class="team-node team-node--center" data-role="Product"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Product</span></li>
           <li class="team-node" data-role="Engineering"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Engineering</span></li>
           <li class="team-node" data-role="Research"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Research</span></li>
-          <li class="team-node" data-role="Data"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Data</span></li>
+          <li class="team-node" data-role="Business"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Business</span></li>
           <li class="team-node" data-role="Design"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Design</span></li>
+          <li class="team-node" data-role="Domain"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Domain experts</span></li>
         </ul>
       </div>
 
@@ -320,6 +325,7 @@
          =============================================================== -->
     <section id="contact" class="section contact" data-lx="50%" data-lsize="92vmax" aria-labelledby="contact-title" data-state="idle">
       <div class="contact__inner">
+        <p class="contact__reflection" data-anim="rise">Thank you for moving through the work.</p>
         <p class="section__principle contact__principle">
           <span class="section__principle-name">Connection.</span>
           Every opportunity starts with a conversation.
@@ -337,19 +343,23 @@
 
         <div class="contact__actions" data-anim="rise">
           <button type="button" class="btn btn--primary btn--lg" id="contact-cta">Get in Touch</button>
-          <div class="contact__links">
+          <p class="contact__ping" id="contact-ping" role="status" aria-live="polite"></p>
+          <!-- The ways to reach out appear only after the final product action. -->
+          <div class="contact__links" id="contact-links">
             <a href="mailto:anirudh.thata@gmail.com">anirudh.thata@gmail.com</a>
             <a href="https://linkedin.com/in/anirudh-thata-a611a57b" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
-        <p class="contact__ping" id="contact-ping" role="status" aria-live="polite"></p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p class="site-footer__line">Anirudh Thata <span aria-hidden="true">·</span> Pune, India</p>
-    <p class="site-footer__meta">Built to be experienced, not just read.</p>
+    <p class="site-footer__meta">
+      <span>Senior Product Designer · Pune, India</span>
+      <span>Built to be experienced, not just read.</span>
+    </p>
+    <p class="site-footer__signature" aria-label="Anirudh Thata">ANIRUDH THATA</p>
   </footer>
 
   <script type="module" src="js/main.js"></script>

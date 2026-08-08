@@ -1,10 +1,11 @@
 /**
  * TESTIMONIALS — Principle: Collaboration.
  *
- * Cross-functional roles start scattered and disconnected. Pressing "Connect"
- * pulls them into a balanced constellation and draws the mesh between them —
- * and only then do the testimonials appear. Great products are built together;
- * the quotes are earned by the act of connecting the team.
+ * The product sits at the centre; disciplines orbit it, scattered and
+ * disconnected. Pressing "Connect" pulls them onto a circle and draws the
+ * system: spokes from the product to each discipline, plus a ring between
+ * neighbours. The network visibly becomes stronger — different perspectives →
+ * alignment → a stronger product — and only then do the recommendations appear.
  */
 import { prefersReducedMotion } from "./env.js";
 
@@ -16,69 +17,66 @@ export function initTeam() {
   const button = document.getElementById("testimonials-connect");
   if (!section || !team || !nodesEl || !wiresEl || !button) return;
 
-  const nodes = [...nodesEl.querySelectorAll(".team-node")];
-  const count = nodes.length;
+  const all = [...nodesEl.querySelectorAll(".team-node")];
+  const center = nodesEl.querySelector(".team-node--center") || all[0];
+  const ring = all.filter((n) => n !== center);
+  const n = ring.length;
 
-  // Balanced ring layout (percentages within the team box).
   const cx = 50;
   const cy = 50;
-  const rx = 34;
-  const ry = 36;
-  const points = nodes.map((_, i) => {
-    const angle = (-90 + (360 / count) * i) * (Math.PI / 180);
-    return { x: cx + rx * Math.cos(angle), y: cy + ry * Math.sin(angle) };
+  const rx = 33;
+  const ry = 34;
+
+  // Place the centre; place the ring evenly around it.
+  center.style.left = `${cx}%`;
+  center.style.top = `${cy}%`;
+  const points = ring.map((_, i) => {
+    const a = (-90 + (360 / n) * i) * (Math.PI / 180);
+    return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a) };
   });
 
-  // Fixed, deterministic scatter offsets for the disconnected state (no RNG,
-  // so the layout is stable across loads and resize).
+  // Deterministic scatter offsets for the disconnected state.
   const scatter = [
-    { dx: -7, dy: -9 },
-    { dx: 9, dy: -5 },
-    { dx: 6, dy: 8 },
-    { dx: -8, dy: 7 },
-    { dx: 2, dy: -11 },
+    { dx: -9, dy: -7 }, { dx: 10, dy: -6 }, { dx: 8, dy: 9 },
+    { dx: -7, dy: 10 }, { dx: -11, dy: 2 }, { dx: 6, dy: -11 },
   ];
-
-  nodes.forEach((node, i) => {
+  ring.forEach((node, i) => {
     node.style.left = `${points[i].x}%`;
     node.style.top = `${points[i].y}%`;
     const s = scatter[i % scatter.length];
     node.style.setProperty("--scatter", `translate(${s.dx}%, ${s.dy}%)`);
-    node.style.transform = `var(--scatter)`;
   });
 
-  // Draw a line between every pair — the collaboration mesh.
+  // Wires: spokes (centre → each) then the neighbour ring.
   wiresEl.setAttribute("viewBox", "0 0 100 100");
   const NS = "http://www.w3.org/2000/svg";
-  for (let a = 0; a < count; a++) {
-    for (let b = a + 1; b < count; b++) {
-      const line = document.createElementNS(NS, "line");
-      line.setAttribute("x1", points[a].x);
-      line.setAttribute("y1", points[a].y);
-      line.setAttribute("x2", points[b].x);
-      line.setAttribute("y2", points[b].y);
-      line.setAttribute("class", "team__wire");
-      const len = Math.hypot(points[b].x - points[a].x, points[b].y - points[a].y);
-      line.style.setProperty("--len", len.toFixed(2));
-      wiresEl.appendChild(line);
-    }
+  const line = (x1, y1, x2, y2, cls) => {
+    const el = document.createElementNS(NS, "line");
+    el.setAttribute("x1", x1); el.setAttribute("y1", y1);
+    el.setAttribute("x2", x2); el.setAttribute("y2", y2);
+    el.setAttribute("class", cls);
+    const len = Math.hypot(x2 - x1, y2 - y1);
+    el.style.setProperty("--len", len.toFixed(2));
+    wiresEl.appendChild(el);
+  };
+  points.forEach((p) => line(cx, cy, p.x, p.y, "team__wire team__wire--spoke"));
+  for (let i = 0; i < n; i++) {
+    const a = points[i], b = points[(i + 1) % n];
+    line(a.x, a.y, b.x, b.y, "team__wire team__wire--ring");
   }
 
   const reduce = prefersReducedMotion();
-
-  const connect = (isOn) => {
-    team.setAttribute("data-connected", String(isOn));
-    section.setAttribute("data-state", isOn ? "connected" : "disconnected");
-    button.setAttribute("aria-pressed", String(isOn));
-    nodes.forEach((node) => {
-      // No positional jitter under reduced motion — still fully functional.
-      node.style.transform = isOn || reduce ? "translate(0, 0)" : "var(--scatter)";
+  const connect = (on) => {
+    team.setAttribute("data-connected", String(on));
+    section.setAttribute("data-state", on ? "connected" : "disconnected");
+    button.setAttribute("aria-pressed", String(on));
+    // Centering is handled by the CSS `translate` property; transform only
+    // carries the scatter offset for the disconnected state.
+    ring.forEach((node) => {
+      node.style.transform = on || reduce ? "none" : "var(--scatter)";
     });
   };
 
-  button.addEventListener("click", () => {
-    connect(button.getAttribute("aria-pressed") !== "true");
-  });
-
+  button.addEventListener("click", () => connect(button.getAttribute("aria-pressed") !== "true"));
   connect(false);
 }

@@ -36,26 +36,8 @@ main { counter-reset: sec 1; }
   padding-block: var(--space-3xl);
   counter-increment: sec;
 }
-/* Editorial hairline rule between movements + an auto index, mono. */
-.section::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: var(--gutter);
-  right: var(--gutter);
-  height: 1px;
-  background: var(--c-line);
-}
-.section::before {
-  content: counter(sec, decimal-leading-zero) " / 09";
-  position: absolute;
-  top: calc(var(--space-3xl) - 3rem);
-  right: var(--gutter);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  color: var(--c-warm-400);
-}
+/* No section indices, no separators — this is one continuous product, not a
+   document. Chapters are marked only by the quiet accent tick on each label. */
 
 .section__label {
   display: inline-flex;
@@ -178,17 +160,42 @@ main { counter-reset: sec 1; }
 /* ---------------------------------------------------------------------------
    Footer
    ------------------------------------------------------------------------- */
+/* The final signature — not a footer. Oversized type that spans the viewport
+   and is intentionally cropped at the bottom; the last statement of the piece. */
 .site-footer {
+  margin-top: var(--space-3xl);
+  padding: 0 var(--gutter);
+  overflow: hidden;
+}
+.site-footer__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
   max-width: var(--container);
   margin-inline: auto;
-  padding: var(--space-2xl) var(--gutter) var(--space-xl);
-  border-top: 1px solid var(--c-line);
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--c-line);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-warm-400);
 }
-.site-footer__line { font-weight: 600; letter-spacing: 0.02em; color: var(--c-warm-200); }
-.site-footer__meta { color: var(--c-warm-400); font-size: 0.92rem; }
+.site-footer__signature {
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+  color: var(--c-warm-100);
+  font-size: clamp(3rem, 12.8vw, 15rem);
+  white-space: nowrap;
+  margin-block: 0.1em -0.16em; /* crop the baseline slightly */
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .site-footer__signature { white-space: normal; text-align: left; font-size: 22vw; }
+}
 
 /* ============================================================================
    HERO REVEAL ORCHESTRATION (Accessibility)

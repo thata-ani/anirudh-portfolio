@@ -503,16 +503,21 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
 
 /* 02 · What I Believe ------------------------------------------------------- */
 .believe__statement {
-  margin-top: var(--space-lg); max-width: 20ch;
-  font-size: var(--fs-h2); line-height: 1.08; letter-spacing: var(--tracking-display);
-  font-weight: 600; text-wrap: balance;
+  margin-top: var(--space-lg); max-width: 18ch;
+  font-size: clamp(2.4rem, 1.4rem + 4.4vw, 5.5rem); line-height: 1.02;
+  letter-spacing: var(--tracking-display); font-weight: 600; text-wrap: balance;
 }
-.believe__statement em { color: var(--c-light); }
+.believe__statement em {
+  color: var(--c-warm-100);
+  border-bottom: 3px solid var(--c-light); padding-bottom: 0.02em;
+}
+/* Explanation is clearly secondary — smaller, muted, offset to the right. */
 .believe__body {
-  margin-top: var(--space-xl); margin-left: auto; max-width: 52ch;
-  display: grid; gap: var(--space-md); font-size: var(--fs-lede);
-  color: var(--c-warm-300); line-height: 1.4;
+  margin-top: var(--space-2xl); margin-left: auto; max-width: 44ch;
+  display: grid; gap: var(--space-sm); font-size: 1.05rem;
+  color: var(--c-warm-400); line-height: 1.55;
 }
+.believe__body p:first-child { color: var(--c-warm-200); font-weight: 500; }
 
 /* 03 · Selected Work — cards, scattered → organized ------------------------- */
 .work__head { align-items: flex-start; }
@@ -536,12 +541,12 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
 .work[data-state="organized"] .work-card { transform: none; z-index: 1; }
 
 .work-card__visual {
-  aspect-ratio: 16 / 10; border-radius: var(--radius-lg); border: 1px solid var(--c-line);
-  background-color: #101011; background-size: cover; background-position: center;
+  aspect-ratio: 16 / 10; border-radius: var(--radius-lg); border: 1px solid var(--c-line-strong);
+  background-color: #ffffff; background-size: cover; background-position: center;
   position: relative; box-shadow: var(--shadow-card);
-  filter: grayscale(1); /* keep the artifacts monochrome in the B&W theme */
+  /* Light system wireframes on white — structure, not a dark image. */
+  filter: grayscale(1) invert(1) contrast(1.02);
 }
-.work-card__visual::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.35)); }
 .work-card__visual[data-visual="cropwise"]    { background-image: url("../assets/case-cropwise.svg"); }
 .work-card__visual[data-visual="designbesti"] { background-image: url("../assets/case-designbesti.svg"); }
 .work-card__visual[data-visual="voice"] { background-image: radial-gradient(80% 90% at 30% 15%, rgba(255,255,255,0.16), transparent 60%), linear-gradient(160deg, #1b1b1d, #0d0d0e); }
@@ -619,3 +624,107 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
 /* Contact — one subtle movement on arrival (Connection) */
 @keyframes contact-nudge { 0% { transform: translateY(7px); opacity: 0.85; } 100% { transform: none; opacity: 1; } }
 #contact-cta.is-arrived { animation: contact-nudge 0.6s var(--ease-out) 1; }
+
+/* ===========================================================================
+   EXPERIENCE REVISION — connected, product-like interactions
+   =========================================================================== */
+
+/* 05 · My Process — a decision journey, not a list ------------------------- */
+.process { padding-block: calc(var(--space-3xl) * 1.15); }
+.process__anchor {
+  margin-top: var(--space-md); max-width: 20ch;
+  font-size: clamp(2rem, 1.3rem + 3vw, 4rem); line-height: 1.05;
+  letter-spacing: var(--tracking-display); font-weight: 600; text-wrap: balance;
+}
+.process__anchor span { display: block; color: var(--c-warm-300); font-weight: 500; }
+.process__track {
+  margin-top: var(--space-2xl); position: relative;
+  display: grid; gap: 0; padding-left: clamp(1.5rem, 4vw, 3rem);
+}
+/* the spine the product travels down */
+.process__track::before {
+  content: ""; position: absolute; left: 6px; top: 0.6em; bottom: 0.6em; width: 2px;
+  background: linear-gradient(to bottom, var(--c-light), var(--c-line-strong));
+}
+.process__stage {
+  position: relative; display: grid;
+  grid-template-columns: minmax(2.4rem, auto) 1fr; align-items: baseline;
+  gap: clamp(1rem, 3vw, 2.5rem); padding-block: clamp(1.1rem, 2.2vw, 2rem);
+  border-top: 1px solid var(--c-line);
+}
+.process__stage:first-child { border-top: 0; }
+.process__stage::before { /* node on the spine */
+  content: ""; position: absolute; left: calc(-1 * clamp(1.5rem, 4vw, 3rem) + 1px);
+  top: 1.35em; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--c-ink-800); border: 2px solid var(--c-light);
+  transform: translateX(-1px);
+}
+.process__num { font-family: var(--font-mono); font-size: 0.8rem; color: var(--c-light); padding-top: 0.5em; }
+.process__word {
+  font-size: clamp(1.8rem, 1.1rem + 3vw, 3.6rem); font-weight: 600;
+  line-height: 1; letter-spacing: var(--tracking-tight);
+}
+.process__q { margin-top: 0.4rem; color: var(--c-warm-400); font-size: 1.05rem; }
+.process__stage:hover .process__word { color: var(--c-warm-100); }
+
+/* 04 · Companies — a focal trajectory ------------------------------------- */
+.companies { position: relative; }
+.marquee { position: relative; }
+.marquee::before { /* focal point marker at centre */
+  content: ""; position: absolute; left: 50%; top: -14px; bottom: -14px; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--c-line-strong), transparent);
+  z-index: 2;
+}
+.marquee::after { /* a soft focus pool at centre */
+  content: ""; position: absolute; left: 50%; top: 50%; width: 220px; height: 220px;
+  translate: -50% -50%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.04), transparent 70%);
+}
+
+/* 07 · Collaboration — product at the centre of a living system ----------- */
+.team-node--center .team-node__dot { width: 22px; height: 22px; }
+.team-node--center .team-node__label { color: var(--c-warm-100); font-weight: 600; }
+.team[data-connected="true"] .team-node--center .team-node__dot {
+  background: var(--c-light); border-color: var(--c-light);
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.06), 0 0 22px 3px var(--c-light-glow);
+  animation: team-pulse 2.6s var(--ease-in-out) infinite;
+}
+@keyframes team-pulse {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.06), 0 0 18px 2px var(--c-light-glow); }
+  50% { box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.02), 0 0 30px 6px var(--c-light-glow); }
+}
+.team__wire--spoke { opacity: 0.5; }
+.team__wire--ring { opacity: 0.22; }
+
+/* 08 · Experience — roadmap spine + growing emphasis ---------------------- */
+.roadmap { position: relative; padding-left: clamp(1.5rem, 4vw, 3rem); }
+.roadmap::before {
+  content: ""; position: absolute; left: 6px; top: 1em; bottom: 1em; width: 2px;
+  background: linear-gradient(to bottom, var(--c-line-strong), var(--c-light));
+}
+.roadmap__stop { position: relative; border-top: 0; padding-block: var(--space-lg); }
+.roadmap__stop + .roadmap__stop { border-top: 1px solid var(--c-line); }
+.roadmap__stop:last-of-type { border-bottom: 0; }
+.roadmap__stop::before {
+  content: ""; position: absolute; left: calc(-1 * clamp(1.5rem, 4vw, 3rem) + 1px);
+  top: 1.7em; width: 11px; height: 11px; border-radius: 50%;
+  background: var(--c-ink-800); border: 2px solid var(--c-line-strong);
+  transform: translateX(-1px); transition: border-color var(--dur-mid) var(--ease-out);
+}
+.roadmap__stop:hover::before { border-color: var(--c-light); }
+.roadmap__stop--next::before { background: var(--c-light); border-color: var(--c-light); }
+.roadmap__cap { transition: transform var(--dur-mid) var(--ease-out); }
+.roadmap__stop:hover .roadmap__cap { transform: translateX(4px); }
+
+/* 09 · Contact — reflection + gated reveal -------------------------------- */
+.contact__reflection {
+  font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--c-warm-400); margin-bottom: var(--space-lg);
+}
+.contact__actions { position: relative; }
+.contact__links {
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
+}
+.contact[data-state="pinged"] .contact__links { opacity: 1; visibility: visible; transform: none; }

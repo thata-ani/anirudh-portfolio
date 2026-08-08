@@ -5,9 +5,12 @@
  * is visible. Pressing the switch turns the light on; it expands and, staggered
  * like light spreading, reveals nav → name → headline → copy → buttons.
  *
- * The reveal itself is CSS-driven (html[data-reveal="on"]). This module only
- * flips that state and manages the switch's ARIA + focus hand-off.
+ * The reveal itself is CSS-driven (html[data-reveal="on"]). This module flips
+ * that state, sounds the product "powering on", and hands off focus. The reveal
+ * is the first product-design lesson: what can't be seen doesn't exist.
  */
+import { playCue, haptic } from "./sound.js";
+
 export function initHero() {
   const root = document.documentElement;
   const switchBtn = document.getElementById("hero-switch");
@@ -21,6 +24,10 @@ export function initHero() {
   const reveal = () => {
     if (root.getAttribute("data-reveal") === "on") return;
     setLit(true);
+
+    // The product comes alive: action → system response.
+    playCue("on");
+    haptic(14);
 
     // Move focus to the now-available heading so keyboard/AT users land on the
     // content the light just revealed — accessibility made real, not decorative.
