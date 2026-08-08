@@ -728,3 +728,79 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
     transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
 }
 .contact[data-state="pinged"] .contact__links { opacity: 1; visibility: visible; transform: none; }
+
+/* ===========================================================================
+   IA SYSTEM — structure emerging from complexity (Selected Work)
+   =========================================================================== */
+.ia-system { margin-top: var(--space-xl); }
+.ia-stage { position: relative; height: clamp(240px, 32vw, 360px); }
+.ia-links { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ia-link { fill: none; transition: opacity var(--dur-slow) var(--ease-out); }
+.ia-link--scattered { stroke: var(--c-line-strong); stroke-width: 1; opacity: 1; }
+.ia-link--organized { stroke: var(--c-light); stroke-width: 0.7; opacity: 0; }
+.work[data-state="organized"] .ia-link--scattered { opacity: 0; }
+.work[data-state="organized"] .ia-link--organized { opacity: 0.5; transition-delay: 0.35s; }
+.ia-nodes { position: absolute; inset: 0; }
+.ia-node {
+  position: absolute; width: var(--s); height: var(--s); border-radius: 50%;
+  background: var(--c-warm-300); translate: -50% -50%;
+  transition: left 0.9s var(--ease-out), top 0.9s var(--ease-out), background var(--dur-mid) var(--ease-out);
+}
+.work[data-state="organized"] .ia-node { background: var(--c-warm-100); }
+.ia-node--root { background: var(--c-light); }
+.work[data-state="organized"] .ia-node--root { box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.05); }
+.ia-caption { margin-top: var(--space-lg); font-size: 1.05rem; color: var(--c-warm-400); }
+.ia-caption--organized { display: none; }
+.work[data-state="organized"] .ia-caption--scattered { display: none; }
+.work[data-state="organized"] .ia-caption--organized { display: inline; color: var(--c-warm-200); }
+.ia-caption strong { color: var(--c-warm-100); font-weight: 600; }
+
+/* The work grid is the *result* — a calm gallery, no scatter, minimal framing. */
+.work__resulted {
+  margin: var(--space-3xl) 0 var(--space-md);
+  font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--c-warm-400);
+}
+.work .work-card { transform: none !important; }
+.work-card__visual { box-shadow: none; }
+.work-card { transition: transform var(--dur-mid) var(--ease-out); }
+.work-card:hover { transform: translateY(-4px) !important; }
+
+/* Primary section controls breathe until first used, so they read as controls. */
+.action-btn[aria-pressed="false"] { animation: ctrl-breathe 3s var(--ease-in-out) infinite; }
+@keyframes ctrl-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); border-color: var(--c-line-strong); }
+  50% { box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04); border-color: var(--c-light); }
+}
+
+/* ===========================================================================
+   CLARITY — the words themselves transform (complex jargon → plain principle)
+   =========================================================================== */
+.principle__text { display: grid; }
+.principle__complex, .principle__simple {
+  grid-area: 1 / 1;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+}
+/* Complex state: dense, dim, verbose jargon — technically readable, but work. */
+.principles[data-state="complex"] .principle__text { filter: none; opacity: 1; transform: none; letter-spacing: var(--tracking-tight); }
+.principles[data-state="complex"] .principle__complex { opacity: 1; color: var(--c-warm-400); font-size: 0.62em; line-height: 1.35; letter-spacing: 0; font-weight: 500; transform: none; }
+.principles[data-state="complex"] .principle__simple { opacity: 0; transform: translateY(8px); pointer-events: none; }
+/* Clear state: the plain principle takes over. */
+.principles[data-state="clear"] .principle__complex { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+.principles[data-state="clear"] .principle__simple { opacity: 1; color: var(--c-warm-100); transform: none; }
+.principles[data-state="clear"] .principle__num { color: var(--c-light); }
+
+/* Companies focal items (scale/opacity set per-frame in companies.js) */
+.marquee__item { transform-origin: center; will-change: transform, opacity; }
+.marquee__item.is-focal { color: var(--c-warm-100); }
+
+/* Continuity thread — a quiet scroll progress line tying the journey together.
+   Hidden until the lights are on, so it never competes with the dark opening. */
+#progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 100%;
+  transform: scaleX(var(--p, 0)); transform-origin: left; z-index: 60;
+  background: var(--c-light); opacity: 0; pointer-events: none;
+  transition: opacity var(--dur-mid) var(--ease-out);
+}
+html[data-reveal="on"] #progress { opacity: 0.85; }
+@media (prefers-reduced-motion: reduce) { #progress { display: none; } }

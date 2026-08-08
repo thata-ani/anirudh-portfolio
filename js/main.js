@@ -14,7 +14,8 @@ import { initHero } from "./modules/hero.js";
 import { initNav } from "./modules/nav.js";
 import { initReveal } from "./modules/reveal.js";
 import { initLightField } from "./modules/lightfield.js";
-import { initMarquee } from "./modules/marquee.js";
+import { initCompanies } from "./modules/companies.js";
+import { initIA } from "./modules/ia.js";
 import { initTeam } from "./modules/team.js";
 import { initContact } from "./modules/contact.js";
 import { createStateToggle } from "./modules/state-toggle.js";
@@ -24,7 +25,8 @@ const boot = () => {
   initHero();
   initNav();
   initReveal();
-  initMarquee();
+  initCompanies();
+  initIA();
   initTeam();
   initContact();
 

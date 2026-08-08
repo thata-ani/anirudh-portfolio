@@ -30,6 +30,7 @@
 <body>
   <a class="skip-link" href="#work">Skip to work</a>
   <div id="lightfield" aria-hidden="true"></div>
+  <div id="progress" aria-hidden="true"></div>
 
   <!-- The hanging light — a top-level overlay so it sits above the dark cover.
        Off in a dark room, with a pull-cord. Pulling it floods the page to white. -->
@@ -146,6 +147,19 @@
         </button>
       </div>
 
+      <!-- Information Architecture, demonstrated: tangled system → structure. -->
+      <div class="ia-system">
+        <div class="ia-stage">
+          <svg class="ia-links" id="ia-links" aria-hidden="true" preserveAspectRatio="none"></svg>
+          <div class="ia-nodes" id="ia-nodes" aria-hidden="true"></div>
+        </div>
+        <p class="ia-caption">
+          <span class="ia-caption--scattered">Scattered information is hard to understand. Press <strong>Organize</strong>.</span>
+          <span class="ia-caption--organized">Same information, structured — now it can be understood.</span>
+        </p>
+      </div>
+
+      <p class="work__resulted">The work that resulted</p>
       <ol class="work__grid" id="work-grid">
         <li class="work-card" style="--i:0">
           <div class="work-card__visual" data-visual="cropwise" role="img" aria-label="Cropwise Grower product interface."></div>
@@ -181,9 +195,6 @@
         </li>
       </ol>
 
-      <p class="work__note" data-state-note>
-        Every project appears scattered. Press <strong>Organize</strong> to experience Information Architecture.
-      </p>
     </section>
 
     <!-- ===============================================================
@@ -243,10 +254,34 @@
       </div>
 
       <ol class="principles__list">
-        <li class="principle" data-anim="rise"><span class="principle__num" aria-hidden="true">01</span><p class="principle__text">Don't open Figma until you know what you're solving.</p></li>
-        <li class="principle" data-anim="rise"><span class="principle__num" aria-hidden="true">02</span><p class="principle__text">Good design makes hard decisions visible.</p></li>
-        <li class="principle" data-anim="rise"><span class="principle__num" aria-hidden="true">03</span><p class="principle__text">If it doesn't help the user or the business, it doesn't ship.</p></li>
-        <li class="principle" data-anim="rise"><span class="principle__num" aria-hidden="true">04</span><p class="principle__text">A product is never finished. Only the next decision is.</p></li>
+        <li class="principle" data-anim="rise">
+          <span class="principle__num" aria-hidden="true">01</span>
+          <p class="principle__text">
+            <span class="principle__complex" aria-hidden="true">Refrain from initiating high-fidelity interface production prior to attaining sufficient problem-space clarity.</span>
+            <span class="principle__simple">Don't open Figma until you know what you're solving.</span>
+          </p>
+        </li>
+        <li class="principle" data-anim="rise">
+          <span class="principle__num" aria-hidden="true">02</span>
+          <p class="principle__text">
+            <span class="principle__complex" aria-hidden="true">Effective design surfaces and renders explicit the non-trivial trade-offs inherent to the solution space.</span>
+            <span class="principle__simple">Good design makes hard decisions visible.</span>
+          </p>
+        </li>
+        <li class="principle" data-anim="rise">
+          <span class="principle__num" aria-hidden="true">03</span>
+          <p class="principle__text">
+            <span class="principle__complex" aria-hidden="true">Any proposed capability lacking demonstrable user or commercial value shall not proceed to release.</span>
+            <span class="principle__simple">If it doesn't help the user or the business, it doesn't ship.</span>
+          </p>
+        </li>
+        <li class="principle" data-anim="rise">
+          <span class="principle__num" aria-hidden="true">04</span>
+          <p class="principle__text">
+            <span class="principle__complex" aria-hidden="true">The artifact persists in a state of perpetual iteration; finality pertains solely to the subsequent decision instance.</span>
+            <span class="principle__simple">A product is never finished. Only the next decision is.</span>
+          </p>
+        </li>
       </ol>
     </section>
 

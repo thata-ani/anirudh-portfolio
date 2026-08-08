@@ -39,7 +39,7 @@ export function initLightField() {
     return;
   }
 
-  const planes = document.querySelector(".hero__planes");
+  const progress = document.getElementById("progress");
   let ticking = false;
 
   const onScroll = () => {
@@ -48,8 +48,8 @@ export function initLightField() {
     requestAnimationFrame(() => {
       const max = html.scrollHeight - window.innerHeight;
       const p = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
-      field.style.setProperty("--ly", (8 + p * 82).toFixed(2) + "%");
-      if (planes) planes.style.setProperty("--pY", (window.scrollY * -0.04).toFixed(1) + "px");
+      // The continuity thread — one product, progressing.
+      if (progress) progress.style.setProperty("--p", p.toFixed(4));
       ticking = false;
     });
   };
