@@ -143,7 +143,19 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
   .lamp-rig { right: auto; left: 50%; translate: -50% 0; }
 }
 
+/* Hero graphic — a field of information that is only visible where a moving
+   light of attention falls. The principle (visibility/discoverability), shown. */
+.hero__canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 0; opacity: 0; pointer-events: none;
+  transition: opacity 1.4s var(--ease-out);
+}
+html[data-reveal="on"] .hero__canvas { opacity: 1; }
+
 .hero__content { position: relative; z-index: 2; }
+.hero__kicker {
+  color: var(--c-warm-100); font-size: 0.98rem; letter-spacing: 0.16em;
+}
 .hero__eyebrow {
   display: inline-flex; align-items: center; gap: 0.7rem;
   font-size: var(--fs-eyebrow); letter-spacing: var(--tracking-eyebrow);
@@ -877,3 +889,51 @@ html[data-reveal="on"] #progress { opacity: 0.85; }
 .roadmap__stop.is-active .roadmap__resp { max-height: 3em; opacity: 1; }
 .roadmap__stop:hover::before,
 .roadmap__stop.is-active::before { background: var(--c-light); border-color: var(--c-light); }
+
+/* ===========================================================================
+   MUSIC / VIBE control
+   =========================================================================== */
+html:not(.js) .vibe { display: none; }
+.vibe {
+  position: fixed; right: var(--gutter); bottom: var(--space-md); z-index: 70;
+  display: flex; align-items: center; justify-content: flex-end;
+  flex-direction: row-reverse; gap: var(--space-sm); flex-wrap: wrap-reverse;
+  max-width: calc(100vw - 2 * var(--gutter));
+  opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
+}
+html[data-reveal="on"] .vibe { opacity: 1; transform: none; pointer-events: auto; }
+.vibe__toggle {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.55rem 1rem; border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(8px);
+  font-size: 0.85rem; color: var(--c-warm-200); cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.vibe__toggle:hover { border-color: var(--c-light); color: var(--c-warm-100); }
+.vibe__eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+.vibe__eq i { width: 2px; height: 4px; background: var(--c-warm-400); border-radius: 1px; }
+.vibe[data-playing="true"] .vibe__eq i { background: var(--c-light); animation: eq 0.9s var(--ease-in-out) infinite; }
+.vibe[data-playing="true"] .vibe__eq i:nth-child(2) { animation-delay: 0.15s; }
+.vibe[data-playing="true"] .vibe__eq i:nth-child(3) { animation-delay: 0.3s; }
+.vibe[data-playing="true"] .vibe__eq i:nth-child(4) { animation-delay: 0.45s; }
+@keyframes eq { 0%, 100% { height: 4px; } 50% { height: 12px; } }
+.vibe__panel {
+  display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; overflow: hidden;
+  max-width: 0; opacity: 0;
+  transition: max-width var(--dur-mid) var(--ease-out), opacity var(--dur-mid) var(--ease-out);
+}
+.vibe[data-open="true"] .vibe__panel { max-width: 560px; opacity: 1; }
+.vibe__chip {
+  padding: 0.5rem 0.9rem; border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(8px);
+  font-size: 0.85rem; color: var(--c-warm-300); cursor: pointer; white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+.vibe__chip:hover { border-color: var(--c-light); color: var(--c-warm-100); }
+.vibe__chip[aria-pressed="true"] { background: var(--c-light); color: #fff; border-color: var(--c-light); }
+.vibe__chip--off { color: var(--c-warm-400); }
+@media (prefers-reduced-motion: reduce) {
+  .vibe[data-playing="true"] .vibe__eq i { animation: none; height: 8px; }
+}

@@ -9,6 +9,8 @@
  * The transformation lives entirely in CSS — this only flips state + ARIA,
  * so it stays replayable and honours reduced-motion automatically.
  */
+import { haptic } from "./sound.js";
+
 export function createStateToggle({ button, target, offState, onState }) {
   if (!button || !target) return;
 
@@ -18,6 +20,7 @@ export function createStateToggle({ button, target, offState, onState }) {
   };
 
   button.addEventListener("click", () => {
+    haptic(10);
     apply(button.getAttribute("aria-pressed") !== "true");
   });
 

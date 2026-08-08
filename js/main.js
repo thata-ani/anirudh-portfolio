@@ -19,6 +19,8 @@ import { initIA } from "./modules/ia.js";
 import { initTeam } from "./modules/team.js";
 import { initContact } from "./modules/contact.js";
 import { initExplore } from "./modules/explore.js";
+import { initHeroGraphic } from "./modules/herographic.js";
+import { initMusic } from "./modules/music.js";
 import { createStateToggle } from "./modules/state-toggle.js";
 
 const boot = () => {
@@ -31,6 +33,8 @@ const boot = () => {
   initTeam();
   initContact();
   initExplore();
+  initHeroGraphic();
+  initMusic();
 
   // Selected Work — Information Architecture: scattered → organized.
   createStateToggle({

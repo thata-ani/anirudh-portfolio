@@ -32,6 +32,20 @@
   <div id="lightfield" aria-hidden="true"></div>
   <div id="progress" aria-hidden="true"></div>
 
+  <!-- Music / vibe — the visitor personalises the experience. -->
+  <div class="vibe" id="vibe" data-open="false" data-playing="false">
+    <button class="vibe__toggle" id="vibe-toggle" aria-expanded="false" aria-label="Choose your vibe — background music">
+      <span class="vibe__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="vibe__toggle-label" id="vibe-toggle-label">What's your vibe?</span>
+    </button>
+    <div class="vibe__panel" role="group" aria-label="Music vibe">
+      <button class="vibe__chip" data-vibe="melody" aria-pressed="false">Melody</button>
+      <button class="vibe__chip" data-vibe="rock" aria-pressed="false">Rock</button>
+      <button class="vibe__chip" data-vibe="emotion" aria-pressed="false">Emotion</button>
+      <button class="vibe__chip vibe__chip--off" data-vibe="off" aria-pressed="true">Off</button>
+    </div>
+  </div>
+
   <!-- The hanging light — a top-level overlay so it sits above the dark cover.
        Off in a dark room, with a pull-cord. Pulling it floods the page to white. -->
   <div class="lamp-rig" data-reveal-persist>
@@ -57,7 +71,7 @@
     <nav class="site-nav__inner">
       <a class="site-nav__mark" href="#hero" aria-label="Anirudh Thata, home">
         <span class="site-nav__mark-dot" aria-hidden="true"></span>
-        <span class="site-nav__mark-name">Anirudh&nbsp;Thata</span>
+        <span class="site-nav__mark-name" aria-hidden="true">AT</span>
       </a>
       <ul class="site-nav__links">
         <li><a href="#work">Work</a></li>
@@ -84,10 +98,9 @@
         <div class="hero__floor"></div>
       </div>
 
+      <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
+
       <div class="hero__content">
-        <p class="hero__eyebrow" data-reveal-item="eyebrow">
-          <span>Product Principle</span><span class="hero__eyebrow-mark">Accessibility</span>
-        </p>
         <p class="hero__kicker" data-reveal-item="kicker">Anirudh&nbsp;Thata</p>
         <h1 class="hero__title" id="hero-title" data-reveal-item="title">
           I build products people use.
