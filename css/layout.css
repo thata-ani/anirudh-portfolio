@@ -163,7 +163,7 @@ main { counter-reset: sec 1; }
 /* The final signature — not a footer. Oversized type that spans the viewport
    and is intentionally cropped at the bottom; the last statement of the piece. */
 .site-footer {
-  margin-top: var(--space-3xl);
+  margin-top: var(--space-lg);
   padding: 0 var(--gutter);
   overflow: hidden;
 }
@@ -194,7 +194,7 @@ main { counter-reset: sec 1; }
 }
 
 @media (max-width: 768px) {
-  .site-footer__signature { white-space: normal; text-align: left; font-size: 22vw; }
+  .site-footer__signature { white-space: normal; text-align: left; font-size: 18vw; }
 }
 
 /* ============================================================================

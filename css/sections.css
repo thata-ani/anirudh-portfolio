@@ -415,7 +415,7 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
 /* ===========================================================================
    11 · LET'S BUILD WHAT'S NEXT — Connection
    =========================================================================== */
-.contact { text-align: center; overflow: hidden; isolation: isolate; }
+.contact { text-align: center; overflow: hidden; isolation: isolate; padding-bottom: var(--space-xl); }
 .contact__inner { max-width: 46ch; margin-inline: auto; display: flex; flex-direction: column; align-items: center; }
 .contact__principle { max-width: 44ch; text-align: center; }
 .contact__title { margin-top: var(--space-md); font-size: var(--fs-mega); line-height: 0.98; letter-spacing: var(--tracking-display); font-weight: 600; max-width: 14ch; text-wrap: balance; }
@@ -804,3 +804,20 @@ html[data-reveal="on"] .lamp__hint { opacity: 0; }
 }
 html[data-reveal="on"] #progress { opacity: 0.85; }
 @media (prefers-reduced-motion: reduce) { #progress { display: none; } }
+
+/* Audit fixes ------------------------------------------------------------- */
+/* Uniform strokes despite the stretched viewBox; the dash-draw distorts under
+   preserveAspectRatio="none", so the network forms via a clean opacity fade —
+   spokes read stronger than the neighbour ring (product at the core). */
+.team__wire {
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: none; stroke-dashoffset: 0;
+  opacity: 0; transition: opacity var(--dur-slow) var(--ease-out);
+}
+.team__wire--spoke { stroke-width: 2; }
+.team__wire--ring { stroke-width: 1.3; }
+.team[data-connected="true"] .team__wire--spoke { opacity: 0.6; }
+.team[data-connected="true"] .team__wire--ring { opacity: 0.34; transition-delay: 0.15s; }
+.ia-link { vector-effect: non-scaling-stroke; }
+.ia-link--scattered { stroke-width: 1.4; }
+.ia-link--organized { stroke-width: 1.6; }
