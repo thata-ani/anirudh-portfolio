@@ -932,10 +932,10 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .rules__count { font-family: var(--font-mono); font-size: 0.82rem; color: var(--c-warm-300); font-variant-numeric: tabular-nums; }
 .rules__nudge { font-size: 0.95rem; color: var(--c-warm-400); }
 
-/* The five rules fill the space from the start as clearly-present "locked"
-   rows — you can see there are five, numbered, waiting. The text is obscured,
-   not hidden, so the section never reads as empty. Each click brings them a
-   step into focus; the fourth resolves them fully. */
+/* The five rows fill the space from the start, but the text is ENCODED —
+   difficult-to-read scrambled glyphs, not the rules. Clicking "decodes" it;
+   only on the fourth click does it resolve into the real rules. You literally
+   work to read what one clear line could have said — that is rule 01. */
 .rules__list { display: grid; gap: 0; list-style: none; margin-top: 0; }
 .rule {
   display: grid; grid-template-columns: auto 1fr auto; gap: clamp(1rem, 3vw, 2.5rem);
@@ -944,23 +944,19 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .rule__num { font-family: var(--font-mono); font-size: 1rem; color: var(--c-warm-300); }
 .rule__text {
   font-size: clamp(1.3rem, 0.95rem + 2.1vw, 2.6rem); line-height: 1.12;
-  letter-spacing: var(--tracking-tight); font-weight: 600; color: var(--c-warm-100);
-  filter: blur(4px); opacity: 0.58; user-select: none;
-  transition: filter var(--dur-slow) var(--ease-out), opacity var(--dur-slow) var(--ease-out);
+  letter-spacing: var(--tracking-tight); font-weight: 600; color: var(--c-warm-300);
+  user-select: none; overflow-wrap: anywhere;
+  transition: color var(--dur-slow) var(--ease-out);
 }
-/* A small lock marker on each row makes the "waiting to unlock" state explicit
-   while the text is obscured; it fades out once the rules are revealed. */
+/* A small lock marker while the text is still encoded; fades on reveal. */
 .rule__lock {
   justify-self: end; width: 15px; height: 15px; color: var(--c-warm-400);
   opacity: 0.9; transition: opacity var(--dur-slow) var(--ease-out);
 }
 .rule__lock svg { display: block; width: 100%; height: 100%; }
-.rules[data-clicks="1"] .rule__text { filter: blur(3px);   opacity: 0.7; }
-.rules[data-clicks="2"] .rule__text { filter: blur(2px);   opacity: 0.8; }
-.rules[data-clicks="3"] .rule__text { filter: blur(1px);   opacity: 0.9; }
 .rules[data-revealed="true"] .rule__text {
-  filter: none; opacity: 1; user-select: auto;
-  transition-delay: calc(var(--i, 0) * 90ms);
+  color: var(--c-warm-100); user-select: auto;
+  transition-delay: calc(var(--i, 0) * 60ms);
 }
 .rules[data-revealed="true"] .rule__lock { opacity: 0; }
 .rule--key .rule__num { color: var(--c-light); }
