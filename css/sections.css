@@ -463,20 +463,30 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   position: absolute; translate: -50% -50%;
   transition: transform var(--dur-slow) var(--ease-out); will-change: transform;
 }
+/* Each discipline is a little face: apart it frowns (muted), together it
+   smiles (present) — the emotional payoff of collaboration. */
 .eco-node__dot {
   position: absolute; left: 50%; top: 50%; translate: -50% -50%;
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--c-ink-500); border: 1px solid var(--c-line-strong);
-  transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--c-ink-700); border: 1px solid var(--c-line-strong);
+  color: var(--c-warm-400); display: grid; place-items: center;
+  transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out), color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
 }
+.eco-face { width: 22px; height: 22px; display: block; }
+.eco-face circle { fill: currentColor; transition: transform var(--dur-mid) var(--ease-out); transform-origin: center; }
+.eco-face path { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+.eco-face .mouth--happy { opacity: 0; transition: opacity var(--dur-mid) var(--ease-out); }
+.eco-face .mouth--sad { opacity: 1; transition: opacity var(--dur-mid) var(--ease-out); }
 .eco-node__label {
   position: absolute; white-space: nowrap; font-size: 0.9rem; letter-spacing: 0.02em;
   color: var(--c-warm-400); transition: color var(--dur-mid) var(--ease-out);
 }
 .ecosystem[data-connected="true"] .eco-node__dot {
-  background: var(--c-light); border-color: var(--c-light);
-  box-shadow: 0 0 0 5px var(--c-light-haze); transform: scale(1.08);
+  background: var(--c-light); border-color: var(--c-light); color: #fff;
+  box-shadow: 0 0 0 5px var(--c-light-haze); transform: scale(1.1);
 }
+.ecosystem[data-connected="true"] .eco-face .mouth--happy { opacity: 1; }
+.ecosystem[data-connected="true"] .eco-face .mouth--sad { opacity: 0; }
 .ecosystem[data-connected="true"] .eco-node__label { color: var(--c-warm-100); }
 
 /* The central action = the shared product forming at the centre. */
