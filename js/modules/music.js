@@ -91,16 +91,16 @@ export function initMusic() {
   document.addEventListener("click", (e) => { if (!root.contains(e.target)) setOpen(false); });
 
   // Turn on the light → music begins. The reveal click is a real user gesture,
-  // so we unlock the audio synchronously here and start a default vibe a beat
-  // later (after the power-on cue). The visitor can change it or switch it Off.
+  // so we start a default vibe SYNCHRONOUSLY here (starting audio inside the
+  // gesture is what satisfies strict autoplay policies — a delayed start can be
+  // blocked). The visitor can then change it or switch it Off.
   const heroSwitch = document.getElementById("hero-switch");
   if (heroSwitch) {
     let autostarted = false;
     heroSwitch.addEventListener("click", () => {
-      if (autostarted) return;
+      if (autostarted || current) return;
       autostarted = true;
-      unlock(); // resume the context within the gesture; the synth can start later
-      window.setTimeout(() => { if (!current) select("melody"); }, 600);
+      select("melody");
     });
   }
 }
@@ -117,12 +117,11 @@ function fadeTo(el, target, ms) {
 }
 
 /**
- * A calm, warm, looping ORIGINAL melody per vibe (the built-in fallback). Soft
- * sine/triangle voices only — no harsh saw/square — with gentle attacks, notes
- * that overlap into a legato line, a mellow low-pass and a light delay for air.
- * Meant to feel like quiet background music, not a synth test tone. It is an
- * original composition, NOT any copyrighted recording. Drop a legally-provided
- * track at assets/music/<vibe>.mp3 to use a real song instead.
+ * A warm, slowly-evolving CHORD PAD per vibe (the built-in fallback). Pure sine
+ * voices spell soft jazz/ambient chords that crossfade every few seconds over a
+ * gentle low-pass with slow filter movement — calm background music, not a
+ * beeping melody. It is an original composition, NOT any copyrighted recording.
+ * Drop a legally-provided track at assets/music/<vibe>.mp3 to use a real song.
  */
 function makeMelody(id, ctx) {
   if (!ctx) return { stop() {} };
@@ -132,58 +131,79 @@ function makeMelody(id, ctx) {
   const master = ctx.createGain();
   master.gain.value = 0.0001;
   master.connect(ctx.destination);
-  const peak = id === "rock" ? 0.5 : 0.42; // gentle overall level
-  master.gain.exponentialRampToValueAtTime(peak, now + 1.2);
+  master.gain.exponentialRampToValueAtTime(0.5, now + 1.4); // slow, gentle fade-in
 
-  // Mellow low-pass so nothing is bright or harsh.
+  // Mellow low-pass with slow movement so the pad breathes.
   const lp = ctx.createBiquadFilter();
   lp.type = "lowpass";
-  lp.frequency.value = id === "rock" ? 1900 : 1500;
-  lp.Q.value = 0.3;
+  lp.frequency.value = 1300;
+  lp.Q.value = 0.2;
   lp.connect(master);
+  const lfo = ctx.createOscillator();
+  const lfoGain = ctx.createGain();
+  lfo.frequency.value = 0.05; lfoGain.gain.value = 300;
+  lfo.connect(lfoGain).connect(lp.frequency); lfo.start();
 
-  // A light, low-feedback delay for air (not a wash).
-  const delay = ctx.createDelay(1.0);
-  delay.delayTime.value = 0.3;
-  const fb = ctx.createGain(); fb.gain.value = 0.16;
-  const wet = ctx.createGain(); wet.gain.value = 0.16;
-  lp.connect(delay); delay.connect(fb).connect(delay); delay.connect(wet).connect(master);
-
-  // Smooth, mostly-stepwise pentatonic phrases — easy on the ear.
-  const SEQ = {
-    melody:  [523.25, 587.33, 659.25, 783.99, 880.0, 783.99, 659.25, 587.33],
-    emotion: [440.0, 523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25],
-    rock:    [329.63, 392.0, 440.0, 493.88, 587.33, 493.88, 440.0, 392.0],
+  // Soft chord progressions (Hz). Warm 7th chords that resolve gently.
+  const PROG = {
+    // Cmaj7 · Fmaj7 · Am7 · G  — calm, bright
+    melody: [
+      [130.81, 164.81, 196.0, 246.94],
+      [174.61, 220.0, 261.63, 329.63],
+      [220.0, 261.63, 329.63, 392.0],
+      [196.0, 246.94, 293.66, 392.0],
+    ],
+    // Am7 · Fmaj7 · Cmaj7 · G  — wistful (vi–IV–I–V)
+    emotion: [
+      [220.0, 261.63, 329.63, 392.0],
+      [174.61, 220.0, 261.63, 329.63],
+      [130.81, 164.81, 196.0, 246.94],
+      [196.0, 246.94, 293.66, 392.0],
+    ],
+    // Em7 · Cmaj7 · G · D  — a touch more movement
+    rock: [
+      [164.81, 196.0, 246.94, 293.66],
+      [130.81, 164.81, 196.0, 246.94],
+      [196.0, 246.94, 293.66, 392.0],
+      [146.83, 185.0, 220.0, 293.66],
+    ],
   };
-  const seq = SEQ[id] || SEQ.melody;
-  const step = id === "emotion" ? 0.72 : id === "rock" ? 0.44 : 0.6; // seconds/note
+  const prog = PROG[id] || PROG.melody;
+  const chordDur = id === "rock" ? 2.8 : 3.8; // seconds per chord
 
-  // Soft low pad (root + fifth) for warmth.
-  const padNotes = id === "emotion" ? [220.0, 329.63] : id === "rock" ? [196.0, 293.66] : [261.63, 392.0];
-  const drones = [];
-  padNotes.forEach((f) => {
-    const o = ctx.createOscillator(); const g = ctx.createGain();
-    o.type = "sine"; o.frequency.value = f; g.gain.value = 0.05;
-    o.connect(g).connect(lp); o.start(); drones.push(o);
-  });
+  let idx = 0, stopped = false, timer = null, live = [];
 
-  let i = 0, stopped = false, timer = null;
-  const playNote = () => {
+  const release = (voice, t) => {
+    try {
+      voice.g.gain.cancelScheduledValues(t);
+      voice.g.gain.setValueAtTime(voice.g.gain.value, t);
+      voice.g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
+      voice.o.stop(t + 1.8);
+    } catch {}
+  };
+
+  const playChord = () => {
     if (stopped) return;
-    const f = seq[i % seq.length];
+    const freqs = prog[idx % prog.length];
     const t = ctx.currentTime;
-    const ring = step * 1.8; // notes overlap → a connected, legato line
-    const o = ctx.createOscillator(); const g = ctx.createGain();
-    o.type = "triangle"; o.frequency.setValueAtTime(f, t);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.14, t + 0.09); // soft, rounded attack
-    g.gain.exponentialRampToValueAtTime(0.0001, t + ring); // long gentle decay
-    o.connect(g).connect(lp);
-    o.start(t); o.stop(t + ring + 0.05);
-    i += 1;
-    timer = setTimeout(playNote, step * 1000);
+    live.forEach((v) => release(v, t)); // crossfade out the previous chord
+    live = [];
+    freqs.forEach((f, k) => {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = "sine";
+      o.frequency.value = f;
+      o.detune.value = k === 0 ? 0 : 3; // a hair of width, not chorus-y
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.06, t + 1.0); // slow attack
+      o.connect(g).connect(lp);
+      o.start(t);
+      live.push({ o, g });
+    });
+    idx += 1;
+    timer = setTimeout(playChord, chordDur * 1000);
   };
-  playNote();
+  playChord();
 
   return {
     stop() {
@@ -193,9 +213,12 @@ function makeMelody(id, ctx) {
       try {
         master.gain.cancelScheduledValues(t);
         master.gain.setValueAtTime(master.gain.value, t);
-        master.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+        master.gain.exponentialRampToValueAtTime(0.0001, t + 0.6);
       } catch {}
-      setTimeout(() => drones.forEach((n) => { try { n.stop(); } catch {} }), 560);
+      window.setTimeout(() => {
+        live.forEach((v) => { try { v.o.stop(); } catch {} });
+        try { lfo.stop(); } catch {}
+      }, 700);
     },
   };
 }
