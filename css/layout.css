@@ -251,3 +251,25 @@ html[data-reveal="on"] [data-reveal-item] { visibility: visible; }
   html { scroll-behavior: auto; }
   [data-reveal-item] { filter: none; transform: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   CTA attention — when a call-to-action scrolls into its section it gives a
+   short "vibrate" (shake) so it clearly reads as clickable. Uses the `translate`
+   property (independent of `transform`) so it never fights a button's own
+   hover transform or centering. JS toggles .is-attn (see modules/attention.js).
+   ------------------------------------------------------------------------- */
+@keyframes cta-attn {
+  0%, 100% { translate: 0 0; }
+  10% { translate: -2.5px 0; }
+  22% { translate: 2.5px 0; }
+  34% { translate: -2px 0; }
+  46% { translate: 2px 0; }
+  58% { translate: -1.3px 0; }
+  70% { translate: 1.3px 0; }
+  82% { translate: -0.6px 0; }
+  91% { translate: 0.6px 0; }
+}
+.is-attn { animation: cta-attn 0.72s var(--ease-out); }
+@media (prefers-reduced-motion: reduce) {
+  .is-attn { animation: none; }
+}
