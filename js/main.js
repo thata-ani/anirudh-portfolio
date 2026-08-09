@@ -23,6 +23,7 @@ import { initMusic } from "./modules/music.js";
 import { initRules } from "./modules/rules.js";
 import { initSketch } from "./modules/sketch.js";
 import { initAnalytics } from "./modules/analytics.js";
+import { initAttention } from "./modules/attention.js";
 import { createStateToggle } from "./modules/state-toggle.js";
 
 const boot = () => {
@@ -39,6 +40,7 @@ const boot = () => {
   initRules();
   initSketch();
   initAnalytics();
+  initAttention();
 
   // Selected Work — Information Architecture: scattered → organized.
   createStateToggle({
