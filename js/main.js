@@ -22,6 +22,7 @@ import { initExplore } from "./modules/explore.js";
 import { initHeroGraphic } from "./modules/herographic.js";
 import { initMusic } from "./modules/music.js";
 import { initRules } from "./modules/rules.js";
+import { initSketch } from "./modules/sketch.js";
 import { createStateToggle } from "./modules/state-toggle.js";
 
 const boot = () => {
@@ -37,6 +38,7 @@ const boot = () => {
   initHeroGraphic();
   initMusic();
   initRules();
+  initSketch();
 
   // Selected Work — Information Architecture: scattered → organized.
   createStateToggle({

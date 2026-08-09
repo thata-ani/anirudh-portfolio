@@ -71,6 +71,7 @@
     <nav class="site-nav__inner">
       <a class="site-nav__mark" href="#hero" aria-label="Anirudh Thata, home">
         <span class="site-nav__mark-dot" aria-hidden="true"></span>
+        <span class="site-nav__mark-name" aria-hidden="true">AT</span>
       </a>
       <ul class="site-nav__links">
         <li><a href="#work">Work</a></li>
@@ -254,6 +255,29 @@
         <li class="process__stage" data-explore-item data-anim="rise"><span class="process__num">06</span><div class="process__detail"><h3 class="process__word">Measure</h3><p class="process__q">Did it move the outcome?</p><p class="process__change">Opinions give way to outcomes.</p></div></li>
         <li class="process__stage" data-explore-item data-anim="rise"><span class="process__num">07</span><div class="process__detail"><h3 class="process__word">Improve</h3><p class="process__q">What's the next decision?</p><p class="process__change">The product compounds over time.</p></div></li>
       </ol>
+
+      <!-- A designer's workspace: the sketchbook where thinking becomes making.
+           Monochrome ink keeps it on-theme; the tools make the point tactile. -->
+      <figure class="sketch" aria-labelledby="sketch-cap" data-anim="rise">
+        <figcaption class="sketch__cap" id="sketch-cap">
+          <span class="sketch__cap-lead">Before the screen, there's the page.</span>
+          Think → explore → make → refine. This is where a product actually starts — try it.
+        </figcaption>
+        <div class="sketch__bar">
+          <div class="sketch__group" role="group" aria-label="Tool">
+            <button type="button" class="sketch__tool is-active" data-pen="pencil" aria-pressed="true">Pencil</button>
+            <button type="button" class="sketch__tool" data-pen="pen" aria-pressed="false">Pen</button>
+            <button type="button" class="sketch__tool" data-pen="marker" aria-pressed="false">Marker</button>
+          </div>
+          <div class="sketch__group" role="group" aria-label="Ink">
+            <button type="button" class="sketch__ink is-active" data-ink="#0b0b0c" style="--ink:#0b0b0c" aria-pressed="true" aria-label="Black ink"></button>
+            <button type="button" class="sketch__ink" data-ink="#565658" style="--ink:#565658" aria-pressed="false" aria-label="Graphite"></button>
+            <button type="button" class="sketch__ink" data-ink="#a6a6a9" style="--ink:#a6a6a9" aria-pressed="false" aria-label="Light"></button>
+          </div>
+          <button type="button" class="sketch__clear" data-sketch-clear>Clear</button>
+        </div>
+        <canvas class="sketch__pad" id="sketch-pad" aria-label="Sketch pad — draw with your pointer"></canvas>
+      </figure>
     </section>
 
     <!-- ===============================================================

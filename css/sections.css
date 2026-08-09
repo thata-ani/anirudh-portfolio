@@ -918,6 +918,54 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .process__q { margin-top: 0.4rem; color: var(--c-warm-400); font-size: 1.05rem; }
 .process__stage:hover .process__word { color: var(--c-warm-100); }
 
+/* The designer's workspace — a sketch pad on graph paper. Monochrome ink,
+   so it stays on-theme; drawing makes "thinking → making" tactile. */
+.sketch { margin-top: var(--space-3xl); }
+.sketch__cap {
+  max-width: 60ch; color: var(--c-warm-300); font-size: 1.02rem; line-height: 1.5;
+  margin-bottom: var(--space-md);
+}
+.sketch__cap-lead { display: block; color: var(--c-warm-100); font-weight: 600; font-size: 1.12rem; margin-bottom: 0.2rem; }
+.sketch__bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-md);
+  padding: 0.6rem 0.2rem; margin-bottom: var(--space-sm);
+}
+.sketch__group { display: inline-flex; align-items: center; gap: 0.4rem; }
+.sketch__tool {
+  font: inherit; font-size: 0.82rem; font-weight: 500; color: var(--c-warm-300);
+  padding: 0.4rem 0.85rem; border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
+  background: transparent; cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.sketch__tool:hover { color: var(--c-warm-100); border-color: var(--c-light); }
+.sketch__tool.is-active { color: #fff; background: var(--c-light); border-color: var(--c-light); }
+.sketch__ink {
+  width: 22px; height: 22px; border-radius: 50%; cursor: pointer; padding: 0;
+  background: var(--ink); border: 1px solid var(--c-line-strong);
+  box-shadow: 0 0 0 2px transparent; transition: box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.sketch__ink:hover { transform: scale(1.08); }
+.sketch__ink.is-active { box-shadow: 0 0 0 2px var(--c-ink-800), 0 0 0 4px var(--c-light); }
+.sketch__clear {
+  font: inherit; font-size: 0.82rem; color: var(--c-warm-400); margin-left: auto;
+  padding: 0.4rem 0.85rem; border: 1px solid transparent; border-radius: var(--radius-pill);
+  background: transparent; cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.sketch__clear:hover { color: var(--c-warm-100); border-color: var(--c-line-strong); }
+.sketch__pad {
+  display: block; width: 100%; height: clamp(280px, 42vh, 440px);
+  border: 1px solid var(--c-line-strong); border-radius: var(--radius-md);
+  background-color: #fbfbfa;
+  /* graph-paper dots */
+  background-image: radial-gradient(var(--c-line) 1px, transparent 1.4px);
+  background-size: 22px 22px; background-position: 11px 11px;
+  cursor: crosshair; touch-action: none;
+}
+html:not(.js) .sketch__bar { display: none; }
+html:not(.js) .sketch__pad { display: none; }
+@media (prefers-reduced-motion: reduce) { .sketch__ink { transition: none; } }
+
 /* 08 · Experience — roadmap spine + growing emphasis ---------------------- */
 .roadmap { position: relative; padding-left: clamp(1.5rem, 4vw, 3rem); }
 .roadmap::before {
@@ -1077,19 +1125,36 @@ html:not(.js) .vibe { display: none; }
 html[data-reveal="on"] .vibe { opacity: 1; transform: none; pointer-events: auto; }
 .vibe__toggle {
   display: inline-flex; align-items: center; gap: 0.6rem;
-  padding: 0.55rem 1rem; border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(8px);
-  font-size: 0.85rem; color: var(--c-warm-200); cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  padding: 0.6rem 1.05rem; border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-card);
+  font-size: 0.86rem; font-weight: 500; color: var(--c-warm-100); cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
-.vibe__toggle:hover { border-color: var(--c-light); color: var(--c-warm-100); }
-.vibe__eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
-.vibe__eq i { width: 2px; height: 4px; background: var(--c-warm-400); border-radius: 1px; }
-.vibe[data-playing="true"] .vibe__eq i { background: var(--c-light); animation: eq 0.9s var(--ease-in-out) infinite; }
-.vibe[data-playing="true"] .vibe__eq i:nth-child(2) { animation-delay: 0.15s; }
-.vibe[data-playing="true"] .vibe__eq i:nth-child(3) { animation-delay: 0.3s; }
-.vibe[data-playing="true"] .vibe__eq i:nth-child(4) { animation-delay: 0.45s; }
-@keyframes eq { 0%, 100% { height: 4px; } 50% { height: 12px; } }
+.vibe__toggle:hover { border-color: var(--c-light); transform: translateY(-1px); }
+/* A brief, one-time attention pulse after the lights come on, so the sound
+   control is discovered — then it settles and never nags. */
+html[data-reveal="on"] .vibe__toggle { animation: vibe-attn 2.6s var(--ease-out) 1.3s 3; }
+@keyframes vibe-attn {
+  0%, 100% { box-shadow: var(--shadow-card), 0 0 0 0 var(--c-light-haze); }
+  30% { box-shadow: var(--shadow-card), 0 0 0 8px var(--c-light-haze); }
+}
+.vibe__eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 13px; }
+.vibe__eq i {
+  width: 2px; height: 4px; background: var(--c-light); border-radius: 1px;
+  animation: eq-idle 2.2s var(--ease-in-out) infinite;
+}
+.vibe__eq i:nth-child(2) { animation-delay: 0.2s; }
+.vibe__eq i:nth-child(3) { animation-delay: 0.4s; }
+.vibe__eq i:nth-child(4) { animation-delay: 0.6s; }
+/* Idle: a slow, quiet shimmer that reads as "sound". Playing: livelier. */
+@keyframes eq-idle { 0%, 100% { height: 4px; opacity: 0.55; } 50% { height: 8px; opacity: 0.9; } }
+.vibe[data-playing="true"] .vibe__eq i { animation: eq 0.9s var(--ease-in-out) infinite; }
+@keyframes eq { 0%, 100% { height: 4px; opacity: 0.7; } 50% { height: 13px; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .vibe__toggle { animation: none; }
+  .vibe__eq i { animation: none; height: 7px; }
+}
 .vibe__panel {
   display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; overflow: hidden;
   max-width: 0; opacity: 0;
