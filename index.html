@@ -291,7 +291,7 @@
 
       <div class="rules__loader">
         <button type="button" class="rules__click" id="rules-click" aria-describedby="rules-title" aria-live="off">
-          <span class="rules__click-label" id="rules-click-label">Click to decode the rules</span>
+          <span class="rules__click-label" id="rules-click-label">Click to simplify</span>
         </button>
         <div class="rules__meter" aria-hidden="true"><span class="rules__meter-fill" id="rules-meter"></span></div>
         <p class="rules__status">
@@ -300,31 +300,45 @@
         </p>
       </div>
 
+      <!-- The rules, written the way most products are: dense, over-qualified,
+           hard to act on. Clicking "simplifies" it; on the fourth click this one
+           paragraph resolves into the five plain rules it was always trying to
+           say. Simpler language, better product — the section proves rule 01. -->
+      <p class="rules__cipher" id="rules-cipher">
+        Insofar as the interactive surface of any artefact ought to be
+        parsimoniously rationed, each engagement the user is compelled to
+        undertake must possess demonstrable intentionality; the premature
+        invocation of high-fidelity compositional instruments, absent a
+        rigorously delineated problem statement, constitutes a category error;
+        design, properly construed, is efficacious precisely to the degree that
+        it renders otherwise latent and consequential trade-offs conspicuously
+        legible; any feature — howsoever elegant — advancing neither the
+        interests of the end-user nor the commercial viability of the enterprise
+        must be adjudged unfit for release; and no artefact, finally, attains
+        terminal completion, there subsisting only the subsequent decision that
+        awaits its maker.
+      </p>
+
       <ol class="rules__list" id="rules-list">
         <li class="rule rule--key" style="--i:0">
           <span class="rule__num" aria-hidden="true">01</span>
           <p class="rule__text">Click less — every interaction should have meaning.</p>
-          <span class="rule__lock" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.2 7V5a2.8 2.8 0 0 1 5.6 0v2"/></svg></span>
         </li>
         <li class="rule" style="--i:1">
           <span class="rule__num" aria-hidden="true">02</span>
           <p class="rule__text">Don't open Figma until you know what you're solving.</p>
-          <span class="rule__lock" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.2 7V5a2.8 2.8 0 0 1 5.6 0v2"/></svg></span>
         </li>
         <li class="rule" style="--i:2">
           <span class="rule__num" aria-hidden="true">03</span>
           <p class="rule__text">Good design makes hard decisions visible.</p>
-          <span class="rule__lock" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.2 7V5a2.8 2.8 0 0 1 5.6 0v2"/></svg></span>
         </li>
         <li class="rule" style="--i:3">
           <span class="rule__num" aria-hidden="true">04</span>
           <p class="rule__text">If it doesn't help the user or the business, it doesn't ship.</p>
-          <span class="rule__lock" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.2 7V5a2.8 2.8 0 0 1 5.6 0v2"/></svg></span>
         </li>
         <li class="rule" style="--i:4">
           <span class="rule__num" aria-hidden="true">05</span>
           <p class="rule__text">A product is never finished. Only the next decision is.</p>
-          <span class="rule__lock" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.2 7V5a2.8 2.8 0 0 1 5.6 0v2"/></svg></span>
         </li>
       </ol>
 

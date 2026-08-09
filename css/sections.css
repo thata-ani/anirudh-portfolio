@@ -932,43 +932,51 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .rules__count { font-family: var(--font-mono); font-size: 0.82rem; color: var(--c-warm-300); font-variant-numeric: tabular-nums; }
 .rules__nudge { font-size: 0.95rem; color: var(--c-warm-400); }
 
-/* The five rows fill the space from the start, but the text is ENCODED —
-   difficult-to-read scrambled glyphs, not the rules. Clicking "decodes" it;
-   only on the fourth click does it resolve into the real rules. You literally
-   work to read what one clear line could have said — that is rule 01. */
+/* Before the effort, the rules exist only as one dense, over-qualified
+   paragraph — legible, but hard to act on (the way most products are written).
+   Clicking "simplifies" it; on the fourth click the paragraph gives way to the
+   five plain rules. Simpler language, better product — the section is rule 01.
+   Progressive enhancement: JS sets data-mode="locked" to show the paragraph and
+   hide the list. With no JS, the plain rules show by default. */
+.rules__cipher {
+  display: none; max-width: 62ch; margin: 0;
+  font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.35rem); line-height: 1.75;
+  color: var(--c-warm-200); text-align: justify; hyphens: auto;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), filter var(--dur-slow) var(--ease-out);
+}
+.rules[data-mode="locked"] .rules__cipher { display: block; }
+.rules[data-mode="locked"] .rules__list { display: none; }
+.rules__cipher.is-out { opacity: 0; transform: translateY(-6px); filter: blur(2px); }
+
 .rules__list { display: grid; gap: 0; list-style: none; margin-top: 0; }
 .rule {
-  display: grid; grid-template-columns: auto 1fr auto; gap: clamp(1rem, 3vw, 2.5rem);
-  align-items: center; padding: clamp(1.1rem, 2.4vw, 1.9rem) 0; border-top: 1px solid var(--c-line);
+  display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: baseline; padding: clamp(1.1rem, 2.4vw, 1.9rem) 0; border-top: 1px solid var(--c-line);
 }
-.rule__num { font-family: var(--font-mono); font-size: 1rem; color: var(--c-warm-300); }
+.rule__num { font-family: var(--font-mono); font-size: 1rem; color: var(--c-warm-300); padding-top: 0.35em; }
 .rule__text {
   font-size: clamp(1.3rem, 0.95rem + 2.1vw, 2.6rem); line-height: 1.12;
-  letter-spacing: var(--tracking-tight); font-weight: 600; color: var(--c-warm-300);
-  user-select: none; overflow-wrap: anywhere;
-  transition: color var(--dur-slow) var(--ease-out);
+  letter-spacing: var(--tracking-tight); font-weight: 600; color: var(--c-warm-100);
 }
-/* A small lock marker while the text is still encoded; fades on reveal. */
-.rule__lock {
-  justify-self: end; width: 15px; height: 15px; color: var(--c-warm-400);
-  opacity: 0.9; transition: opacity var(--dur-slow) var(--ease-out);
-}
-.rule__lock svg { display: block; width: 100%; height: 100%; }
-.rules[data-revealed="true"] .rule__text {
-  color: var(--c-warm-100); user-select: auto;
-  transition-delay: calc(var(--i, 0) * 60ms);
-}
-.rules[data-revealed="true"] .rule__lock { opacity: 0; }
 .rule--key .rule__num { color: var(--c-light); }
-.rules[data-revealed="true"] .rule--key { border-top-color: var(--c-line-strong); }
+.rule--key { border-top-color: var(--c-line-strong); }
+/* When the paragraph resolves, the plain rules arrive one after another. */
+.rules[data-mode="revealed"] .rule {
+  animation: ruleReveal var(--dur-slow) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+@keyframes ruleReveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
 .rules__aha {
   margin-top: var(--space-xl); max-width: 52ch; color: var(--c-warm-300);
   font-size: 1.05rem; opacity: 0; transition: opacity var(--dur-slow) var(--ease-out) 0.5s;
 }
 .rules[data-revealed="true"] .rules__aha { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
-  .rule__text { transition-duration: 1ms; }
-  .rules[data-revealed="true"] .rule__text { transition-delay: 0ms; }
+  .rules__cipher { transition-duration: 1ms; }
+  .rules[data-mode="revealed"] .rule { animation: none; }
 }
 
 /* 08 · Experience — roadmap ------------------------------------------------- */
