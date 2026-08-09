@@ -15,7 +15,6 @@ import { initNav } from "./modules/nav.js";
 import { initReveal } from "./modules/reveal.js";
 import { initLightField } from "./modules/lightfield.js";
 import { initCompanies } from "./modules/companies.js";
-import { initIA } from "./modules/ia.js";
 import { initTeam } from "./modules/team.js";
 import { initContact } from "./modules/contact.js";
 import { initExplore } from "./modules/explore.js";
@@ -31,7 +30,6 @@ const boot = () => {
   initNav();
   initReveal();
   initCompanies();
-  initIA();
   initTeam();
   initContact();
   initExplore();
@@ -47,6 +45,21 @@ const boot = () => {
     offState: "scattered",
     onState: "organized",
   });
+  // Hovering the CTA previews the transformation, so its effect is obvious
+  // before the click (and the preview clears once actually organized).
+  const workBtn = document.getElementById("work-organize");
+  const workSec = document.getElementById("work");
+  if (workBtn && workSec) {
+    const preview = (on) => {
+      if (on && workSec.getAttribute("data-state") === "scattered") workSec.classList.add("is-previewing");
+      else workSec.classList.remove("is-previewing");
+    };
+    workBtn.addEventListener("pointerenter", () => preview(true));
+    workBtn.addEventListener("pointerleave", () => preview(false));
+    workBtn.addEventListener("focus", () => preview(true));
+    workBtn.addEventListener("blur", () => preview(false));
+    workBtn.addEventListener("click", () => preview(false));
+  }
 };
 
 if (document.readyState === "loading") {

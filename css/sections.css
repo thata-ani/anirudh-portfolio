@@ -641,8 +641,8 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 
 /* The four projects resolve from a scattered pile into a single aligned
    structure — a system being organized, integrated into the page. */
-.work-result { margin-top: var(--space-2xl); }
-.work-index { position: relative; list-style: none; display: grid; gap: 0; }
+.ia-interaction { margin-top: var(--space-xl); position: relative; }
+.work-index { position: relative; list-style: none; display: grid; gap: 0; margin-top: var(--space-lg); }
 /* the trunk of the organized structure (drawn only once organized) */
 .work-index::before {
   content: ""; position: absolute; left: 8px; top: 4%; bottom: 4%;
@@ -663,12 +663,18 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   transition: transform var(--dur-slow) var(--ease-out);
 }
 .work-item + .work-item { border-top: 1px solid var(--c-line); transition: border-color var(--dur-slow) var(--ease-out); }
-/* scattered: tangled + offset, no dividers, node hidden */
-.work[data-state="scattered"] .work-item:nth-child(1) { --sx: 4%;  --sy: 12px; --sr: -1.4deg; }
-.work[data-state="scattered"] .work-item:nth-child(2) { --sx: -6%; --sy: -8px; --sr: 1.7deg; }
-.work[data-state="scattered"] .work-item:nth-child(3) { --sx: 3%;  --sy: 9px;  --sr: -1.1deg; }
-.work[data-state="scattered"] .work-item:nth-child(4) { --sx: -4%; --sy: -5px; --sr: 1.3deg; }
+/* scattered: clearly unaligned + tilted, no dividers/spine/numbers */
+.work[data-state="scattered"] .work-item { opacity: 0.9; }
+.work[data-state="scattered"] .work-item:nth-child(1) { --sx: 9%;  --sr: -2.6deg; }
+.work[data-state="scattered"] .work-item:nth-child(2) { --sx: -10%; --sr: 3deg; }
+.work[data-state="scattered"] .work-item:nth-child(3) { --sx: 7%;  --sr: -2deg; }
+.work[data-state="scattered"] .work-item:nth-child(4) { --sx: -8%; --sr: 2.4deg; }
 .work[data-state="scattered"] .work-item + .work-item { border-top-color: transparent; }
+/* Hover the CTA → the items begin to align: a live preview of the action. */
+.work.is-previewing[data-state="scattered"] .work-item {
+  opacity: 0.97;
+  transform: translate(calc(var(--sx, 0) * 0.4), 0) rotate(calc(var(--sr, 0deg) * 0.4));
+}
 
 .work-item__no {
   align-self: start;
@@ -716,6 +722,64 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   .work-item__no { grid-area: no; }
   .work-item__body { grid-area: body; }
   .work-item__screen { grid-area: screen; max-width: 360px; }
+}
+
+/* The prompt keeps the action WITH the result. It sticks just below the nav so
+   the CTA never scrolls away while the visitor watches the transformation. */
+.ia-prompt {
+  position: sticky; top: clamp(58px, 8vh, 76px); z-index: 6;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--space-md); padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--c-line);
+  background: color-mix(in srgb, var(--c-ink-800) 88%, transparent);
+  backdrop-filter: blur(8px);
+}
+.ia-prompt__state { max-width: 42ch; font-size: 1.02rem; color: var(--c-warm-300); }
+.ia-prompt__after { display: none; }
+.work[data-state="organized"] .ia-prompt__before { display: none; }
+.work[data-state="organized"] .ia-prompt__after { display: inline; color: var(--c-warm-100); }
+
+/* The CTA is an invitation to test the principle, not a generic button. */
+.ia-cta {
+  display: inline-flex; align-items: center; gap: 0.8rem; flex: none;
+  padding: 0.72rem 1.3rem; border-radius: var(--radius-pill);
+  border: 1px solid var(--c-line-strong); background: var(--c-ink-800);
+  font: inherit; font-weight: 600; font-size: 0.98rem; color: var(--c-warm-100); cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.ia-cta:hover { border-color: var(--c-light); transform: translateY(-1px); box-shadow: var(--shadow-card); }
+.ia-cta:focus-visible { outline: 2px solid var(--c-light); outline-offset: 3px; }
+.work[data-state="scattered"] .ia-cta { animation: cta-breathe 3.2s var(--ease-in-out) infinite; }
+@keyframes cta-breathe { 0%, 100% { box-shadow: 0 0 0 0 var(--c-light-haze); } 55% { box-shadow: 0 0 0 10px transparent; } }
+.work[data-state="organized"] .ia-cta {
+  background: var(--c-light); color: #fff; border-color: var(--c-light); animation: none;
+}
+.ia-cta__done { display: none; }
+.work[data-state="organized"] .ia-cta__idle { display: none; }
+.work[data-state="organized"] .ia-cta__done { display: inline; }
+
+/* Glyph: four dots that mirror the section — scattered by default, snapping to
+   a tidy grid on hover / when organized, so the button previews its own effect. */
+.ia-cta__glyph { position: relative; width: 20px; height: 20px; flex: none; }
+.ia-cta__glyph i {
+  position: absolute; width: 5px; height: 5px; border-radius: 1.5px; background: currentColor;
+  transition: transform var(--dur-mid) var(--ease-out);
+}
+.ia-cta__glyph i:nth-child(1) { left: 3px; top: 3px; }
+.ia-cta__glyph i:nth-child(2) { right: 3px; top: 3px; }
+.ia-cta__glyph i:nth-child(3) { left: 3px; bottom: 3px; }
+.ia-cta__glyph i:nth-child(4) { right: 3px; bottom: 3px; }
+.work[data-state="scattered"] .ia-cta:not(:hover) .ia-cta__glyph i:nth-child(1) { transform: translate(3px, -2px) rotate(12deg); }
+.work[data-state="scattered"] .ia-cta:not(:hover) .ia-cta__glyph i:nth-child(2) { transform: translate(-2px, 3px) rotate(-10deg); }
+.work[data-state="scattered"] .ia-cta:not(:hover) .ia-cta__glyph i:nth-child(3) { transform: translate(2px, -3px) rotate(-8deg); }
+.work[data-state="scattered"] .ia-cta:not(:hover) .ia-cta__glyph i:nth-child(4) { transform: translate(-3px, 2px) rotate(9deg); }
+
+@media (max-width: 720px) {
+  .ia-prompt { position: static; backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work[data-state="scattered"] .ia-cta { animation: none; }
 }
 
 /* 04 · Companies — a career trajectory running through the page ------------- */

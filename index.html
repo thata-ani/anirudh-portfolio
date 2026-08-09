@@ -142,39 +142,32 @@
          03 · SELECTED WORK — Information Architecture
          =============================================================== -->
     <section id="work" class="section work" data-lx="50%" data-lsize="82vmax" aria-labelledby="work-title" data-state="scattered">
-      <div class="section__head work__head">
-        <div>
-          <p class="section__label" id="work-title">Selected Work</p>
-          <p class="section__principle">
-            <span class="section__principle-name">Information Architecture.</span>
-            Information should be organized before it can be understood.
-          </p>
-          <p class="work__intro">A curated collection of product decisions, design systems, and real-world outcomes.</p>
-          <p class="section__invite">Right now it's scattered. <span>Put it in order</span> and watch it resolve.</p>
-        </div>
-        <button type="button" class="action-btn" id="work-organize" aria-pressed="false">
-          <span class="action-btn__icon" aria-hidden="true"></span>
-          <span class="action-btn__label">
-            <span class="action-btn__label-idle">Put it in order</span>
-            <span class="action-btn__label-done">In order</span>
-          </span>
-        </button>
-      </div>
-
-      <!-- Information Architecture, demonstrated: tangled system → structure. -->
-      <div class="ia-system">
-        <div class="ia-stage">
-          <svg class="ia-links" id="ia-links" aria-hidden="true" preserveAspectRatio="none"></svg>
-          <div class="ia-nodes" id="ia-nodes" aria-hidden="true"></div>
-        </div>
-        <p class="ia-caption">
-          <span class="ia-caption--scattered">Scattered information is hard to understand. Press <strong>Organize</strong>.</span>
-          <span class="ia-caption--organized">Same information, structured — now it can be understood.</span>
+      <div class="section__head section__head--stacked">
+        <p class="section__label" id="work-title">Selected Work</p>
+        <p class="section__principle">
+          <span class="section__principle-name">Information Architecture.</span>
+          Information should be organized before it can be understood.
         </p>
       </div>
 
-      <div class="work-result">
-        <p class="work__resulted">The work that resulted — organized into one clear structure.</p>
+      <!-- One co-located interaction: the four projects ARE the demonstration.
+           Scattered → (Put it in order) → an organized structure, in place.
+           The action sits with the result and previews itself on hover. -->
+      <div class="ia-interaction">
+        <div class="ia-prompt">
+          <p class="ia-prompt__state" aria-live="polite">
+            <span class="ia-prompt__before">Four projects, scattered — hard to read as a whole.</span>
+            <span class="ia-prompt__after">Reorganized into one clear structure. That's information architecture.</span>
+          </p>
+          <button type="button" class="ia-cta" id="work-organize" aria-pressed="false" aria-describedby="work-title">
+            <span class="ia-cta__glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="ia-cta__label">
+              <span class="ia-cta__idle">Put it in order</span>
+              <span class="ia-cta__done">In order</span>
+            </span>
+          </button>
+        </div>
+
         <ol class="work-index" id="work-grid">
           <li class="work-item" style="--i:0">
             <span class="work-item__no" aria-hidden="true">01</span>
