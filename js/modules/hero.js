@@ -16,6 +16,14 @@ export function initHero() {
   const switchBtn = document.getElementById("hero-switch");
   if (!switchBtn) return;
 
+  // Don't let the browser restore a previous scroll position behind the intro
+  // overlay — the experience must always begin at the hero, not wherever the
+  // page was last left (which looked like it "landed on the last section").
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.scrollTo(0, 0);
+  // Lock scrolling while the intro is up so the page can't drift off the hero.
+  document.body.style.overflow = "hidden";
+
   const setLit = (lit) => {
     root.setAttribute("data-reveal", lit ? "on" : "off");
     switchBtn.setAttribute("aria-pressed", String(lit));
@@ -24,6 +32,10 @@ export function initHero() {
   const reveal = () => {
     if (root.getAttribute("data-reveal") === "on") return;
     setLit(true);
+
+    // Begin at the hero and release the scroll lock.
+    document.body.style.overflow = "";
+    window.scrollTo(0, 0);
 
     // The product comes alive: action → system response.
     playCue("on");
@@ -35,7 +47,7 @@ export function initHero() {
     if (title) {
       title.setAttribute("tabindex", "-1");
       // Wait for the reveal transition to begin so focus doesn't fight the paint.
-      window.setTimeout(() => title.focus({ preventScroll: true }), 420);
+      window.setTimeout(() => { window.scrollTo(0, 0); title.focus({ preventScroll: true }); }, 420);
     }
   };
 
