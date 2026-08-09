@@ -315,34 +315,32 @@
          07 · TESTIMONIALS — Collaboration
          =============================================================== -->
     <section id="testimonials" class="section testimonials" data-lx="50%" data-lsize="60vmax" aria-labelledby="testimonials-title" data-state="disconnected">
-      <div class="section__head work__head">
-        <div>
-          <p class="section__label" id="testimonials-title">Testimonials</p>
-          <p class="section__principle">
-            <span class="section__principle-name">Collaboration.</span>
-            The best products are built together.
-          </p>
-          <p class="section__invite">These perspectives are disconnected. <span>Bring them together.</span></p>
-        </div>
-        <button type="button" class="action-btn" id="testimonials-connect" aria-pressed="false">
-          <span class="action-btn__icon" aria-hidden="true"></span>
-          <span class="action-btn__label">
-            <span class="action-btn__label-idle">Bring them together</span>
-            <span class="action-btn__label-done">Together</span>
-          </span>
-        </button>
+      <div class="section__head section__head--stacked">
+        <p class="section__label" id="testimonials-title">Testimonials</p>
+        <p class="section__principle">
+          <span class="section__principle-name">Collaboration.</span>
+          A better product happens when design, product, engineering, research and business build it together.
+        </p>
+        <p class="section__invite">Six perspectives, apart. <span>Bring them together.</span></p>
       </div>
 
-      <div class="team" id="team">
-        <svg class="team__wires" id="team-wires" aria-hidden="true" preserveAspectRatio="none"></svg>
-        <ul class="team__nodes" id="team-nodes">
-          <li class="team-node team-node--center" data-role="Product"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Product</span></li>
-          <li class="team-node" data-role="Engineering"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Engineering</span></li>
-          <li class="team-node" data-role="Research"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Research</span></li>
-          <li class="team-node" data-role="Business"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Business</span></li>
-          <li class="team-node" data-role="Design"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Design</span></li>
-          <li class="team-node" data-role="Domain"><span class="team-node__dot" aria-hidden="true"></span><span class="team-node__label">Domain experts</span></li>
+      <div class="ecosystem" id="team" data-connected="false">
+        <svg class="ecosystem__wires" id="team-wires" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="eco-ring" id="eco-ring" cx="50" cy="50" r="36" pathLength="1" />
+        </svg>
+        <ul class="ecosystem__nodes" id="team-nodes">
+          <li class="eco-node" data-role="Design"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Design</span></li>
+          <li class="eco-node" data-role="Product"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Product</span></li>
+          <li class="eco-node" data-role="Engineering"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Engineering</span></li>
+          <li class="eco-node" data-role="Research"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Research</span></li>
+          <li class="eco-node" data-role="Business"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Business</span></li>
+          <li class="eco-node" data-role="Domain"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Domain experts</span></li>
         </ul>
+        <button type="button" class="ecosystem__core" id="testimonials-connect" aria-pressed="false">
+          <span class="ecosystem__core-idle" aria-hidden="true">Bring them<br>together</span>
+          <span class="ecosystem__core-done" aria-hidden="true">Aligned</span>
+          <span class="sr-only">Bring the disciplines together into one aligned product</span>
+        </button>
       </div>
 
       <ul class="quotes" id="quotes">
@@ -355,7 +353,7 @@
           <p class="quote__by"><span class="quote__name">Grace Wolford</span><span class="quote__co">UX Researcher, Deloitte</span></p>
         </li>
       </ul>
-      <p class="team__note" data-state-note>The team appears disconnected. Connect them to hear what they have to say.</p>
+      <p class="team__note" data-state-note>Six disciplines, one product — bring them together to reveal what collaborators say.</p>
     </section>
 
     <!-- ===============================================================

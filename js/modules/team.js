@@ -1,82 +1,91 @@
 /**
  * TESTIMONIALS — Principle: Collaboration.
  *
- * The product sits at the centre; disciplines orbit it, scattered and
- * disconnected. Pressing "Connect" pulls them onto a circle and draws the
- * system: spokes from the product to each discipline, plus a ring between
- * neighbours. The network visibly becomes stronger — different perspectives →
- * alignment → a stronger product — and only then do the recommendations appear.
+ * A circular product ecosystem. Six disciplines rest apart on a circle; the
+ * central action ("Bring them together") is the product forming at the centre.
+ * Activating it draws the spokes from the centre to each discipline and closes
+ * the ring around them — separate perspectives → connected perspectives →
+ * one aligned product — and only then do the recommendations appear.
+ *
+ * Labels are anchored OUTSIDE the ring (radially), so the network lines never
+ * cross the type.
  */
 import { prefersReducedMotion } from "./env.js";
 
 export function initTeam() {
   const section = document.getElementById("testimonials");
-  const team = document.getElementById("team");
+  const eco = document.getElementById("team");
   const nodesEl = document.getElementById("team-nodes");
   const wiresEl = document.getElementById("team-wires");
+  const ring = document.getElementById("eco-ring");
   const button = document.getElementById("testimonials-connect");
-  if (!section || !team || !nodesEl || !wiresEl || !button) return;
+  if (!section || !eco || !nodesEl || !wiresEl || !ring || !button) return;
 
-  const all = [...nodesEl.querySelectorAll(".team-node")];
-  const center = nodesEl.querySelector(".team-node--center") || all[0];
-  const ring = all.filter((n) => n !== center);
-  const n = ring.length;
+  const nodes = [...nodesEl.querySelectorAll(".eco-node")];
+  const n = nodes.length;
+  const cx = 50, cy = 50, R = 36; // matches the ring radius in the markup
+  const dotR = 7, gap = 12;       // px clearance from a dot to its label
+  const NS = "http://www.w3.org/2000/svg";
 
-  const cx = 50;
-  const cy = 50;
-  const rx = 33;
-  const ry = 34;
+  // Deterministic "apart" offsets for the disconnected state.
+  const scatter = [
+    { dx: -7, dy: -8 }, { dx: 9, dy: -6 }, { dx: 8, dy: 8 },
+    { dx: -6, dy: 9 }, { dx: -10, dy: 2 }, { dx: 7, dy: -4 },
+  ];
 
-  // Place the centre; place the ring evenly around it.
-  center.style.left = `${cx}%`;
-  center.style.top = `${cy}%`;
-  const points = ring.map((_, i) => {
+  const geom = nodes.map((_, i) => {
     const a = (-90 + (360 / n) * i) * (Math.PI / 180);
-    return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a) };
+    const ux = Math.cos(a), uy = Math.sin(a);
+    return { ux, uy, x: cx + R * ux, y: cy + R * uy };
   });
 
-  // Deterministic scatter offsets for the disconnected state.
-  const scatter = [
-    { dx: -9, dy: -7 }, { dx: 10, dy: -6 }, { dx: 8, dy: 9 },
-    { dx: -7, dy: 10 }, { dx: -11, dy: 2 }, { dx: 6, dy: -11 },
-  ];
-  ring.forEach((node, i) => {
-    node.style.left = `${points[i].x}%`;
-    node.style.top = `${points[i].y}%`;
+  // Position nodes + spokes once.
+  geom.forEach((g, i) => {
+    const node = nodes[i];
+    node.style.left = `${g.x}%`;
+    node.style.top = `${g.y}%`;
     const s = scatter[i % scatter.length];
     node.style.setProperty("--scatter", `translate(${s.dx}%, ${s.dy}%)`);
+    const l = document.createElementNS(NS, "line");
+    l.setAttribute("x1", cx); l.setAttribute("y1", cy);
+    l.setAttribute("x2", g.x); l.setAttribute("y2", g.y);
+    l.setAttribute("class", "eco-spoke");
+    l.style.setProperty("--i", i);
+    wiresEl.insertBefore(l, ring);
   });
 
-  // Wires: spokes (centre → each) then the neighbour ring.
-  wiresEl.setAttribute("viewBox", "0 0 100 100");
-  const NS = "http://www.w3.org/2000/svg";
-  const line = (x1, y1, x2, y2, cls) => {
-    const el = document.createElementNS(NS, "line");
-    el.setAttribute("x1", x1); el.setAttribute("y1", y1);
-    el.setAttribute("x2", x2); el.setAttribute("y2", y2);
-    el.setAttribute("class", cls);
-    const len = Math.hypot(x2 - x1, y2 - y1);
-    el.style.setProperty("--len", len.toFixed(2));
-    wiresEl.appendChild(el);
+  // Anchor each label just outside its dot. On wide layouts the side labels
+  // sit left/right (radial); on narrow ones they stack above/below so they
+  // never run off-screen. Re-evaluated on resize.
+  const placeLabels = () => {
+    const narrow = eco.getBoundingClientRect().width < 420;
+    geom.forEach((g, i) => {
+      const label = nodes[i].querySelector(".eco-node__label");
+      label.style.top = "50%";
+      label.style.left = "50%";
+      const horizontal = !narrow && Math.abs(g.ux) >= Math.abs(g.uy);
+      if (horizontal && g.ux > 0) {
+        label.style.transform = `translate(${dotR + gap}px, -50%)`; label.style.textAlign = "left";
+      } else if (horizontal) {
+        label.style.transform = `translate(calc(-100% - ${dotR + gap}px), -50%)`; label.style.textAlign = "right";
+      } else {
+        label.style.textAlign = "center";
+        label.style.transform = g.uy > 0
+          ? `translate(-50%, ${dotR + gap}px)`
+          : `translate(-50%, calc(-100% - ${dotR + gap}px))`;
+      }
+    });
   };
-  points.forEach((p) => line(cx, cy, p.x, p.y, "team__wire team__wire--spoke"));
-  for (let i = 0; i < n; i++) {
-    const a = points[i], b = points[(i + 1) % n];
-    line(a.x, a.y, b.x, b.y, "team__wire team__wire--ring");
-  }
+  placeLabels();
+  window.addEventListener("resize", placeLabels, { passive: true });
 
   const reduce = prefersReducedMotion();
   const connect = (on) => {
-    team.setAttribute("data-connected", String(on));
+    eco.setAttribute("data-connected", String(on));
     section.setAttribute("data-state", on ? "connected" : "disconnected");
     button.setAttribute("aria-pressed", String(on));
-    // Centering is handled by the CSS `translate` property; transform only
-    // carries the scatter offset for the disconnected state.
-    ring.forEach((node) => {
-      node.style.transform = on || reduce ? "none" : "var(--scatter)";
-    });
+    nodes.forEach((node) => { node.style.transform = on || reduce ? "none" : "var(--scatter)"; });
   };
-
   button.addEventListener("click", () => connect(button.getAttribute("aria-pressed") !== "true"));
-  connect(false);
+  connect(reduce); // reduced motion → start connected & readable; otherwise apart
 }
