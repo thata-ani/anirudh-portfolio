@@ -899,7 +899,7 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 /* 06 · Rules — earned by clicking; the effort demonstrates rule 01 --------- */
 .rules__loader {
   display: flex; flex-direction: column; align-items: center; gap: var(--space-sm);
-  text-align: center; margin: var(--space-2xl) 0;
+  text-align: center; margin: var(--space-lg) 0;
   transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out),
     max-height var(--dur-slow) var(--ease-out);
   max-height: 260px; overflow: hidden;
@@ -929,22 +929,27 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .rules__count { font-family: var(--font-mono); font-size: 0.82rem; color: var(--c-warm-300); font-variant-numeric: tabular-nums; }
 .rules__nudge { font-size: 0.95rem; color: var(--c-warm-400); }
 
-/* The rules stay hidden until earned, then cascade in. */
-.rules__list { display: grid; gap: 0; list-style: none; }
+/* The five rules are present from the start but "locked" (blurred), so the
+   space is used and you can see what you're unlocking. Each click loads them a
+   little clearer; the fourth brings them fully into focus. */
+.rules__list { display: grid; gap: 0; list-style: none; margin-top: var(--space-md); }
 .rule {
   display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 3vw, 2.5rem);
   align-items: start; padding: var(--space-lg) 0; border-top: 1px solid var(--c-line);
-  opacity: 0; transform: translateY(16px); visibility: hidden;
-  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
-}
-.rules[data-revealed="true"] .rule {
-  opacity: 1; transform: none; visibility: visible;
-  transition-delay: calc(var(--i, 0) * 110ms);
 }
 .rule__num { font-family: var(--font-mono); font-size: 1rem; color: var(--c-warm-400); padding-top: 0.5em; }
 .rule__text {
   font-size: clamp(1.4rem, 1rem + 2.4vw, 3rem); line-height: 1.1;
   letter-spacing: var(--tracking-tight); font-weight: 600; color: var(--c-warm-100);
+  filter: blur(7px); opacity: 0.4; user-select: none;
+  transition: filter var(--dur-slow) var(--ease-out), opacity var(--dur-slow) var(--ease-out);
+}
+.rules[data-clicks="1"] .rule__text { filter: blur(5px);   opacity: 0.55; }
+.rules[data-clicks="2"] .rule__text { filter: blur(3.5px); opacity: 0.70; }
+.rules[data-clicks="3"] .rule__text { filter: blur(2px);   opacity: 0.82; }
+.rules[data-revealed="true"] .rule__text {
+  filter: none; opacity: 1; user-select: auto;
+  transition-delay: calc(var(--i, 0) * 90ms);
 }
 .rule--key .rule__num { color: var(--c-light); }
 .rules[data-revealed="true"] .rule--key { border-top-color: var(--c-line-strong); }
@@ -954,8 +959,8 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 }
 .rules[data-revealed="true"] .rules__aha { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
-  .rule { transition-duration: 1ms; }
-  .rules[data-revealed="true"] .rule { transition-delay: 0ms; }
+  .rule__text { transition-duration: 1ms; }
+  .rules[data-revealed="true"] .rule__text { transition-delay: 0ms; }
 }
 
 /* 08 · Experience — roadmap ------------------------------------------------- */
