@@ -899,7 +899,7 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 /* 06 · Rules — earned by clicking; the effort demonstrates rule 01 --------- */
 .rules__loader {
   display: flex; flex-direction: column; align-items: center; gap: var(--space-sm);
-  text-align: center; margin: var(--space-lg) 0;
+  text-align: center; margin: var(--space-md) 0 var(--space-lg);
   transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out),
     max-height var(--dur-slow) var(--ease-out);
   max-height: 260px; overflow: hidden;
@@ -929,28 +929,37 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .rules__count { font-family: var(--font-mono); font-size: 0.82rem; color: var(--c-warm-300); font-variant-numeric: tabular-nums; }
 .rules__nudge { font-size: 0.95rem; color: var(--c-warm-400); }
 
-/* The five rules are present from the start but "locked" (blurred), so the
-   space is used and you can see what you're unlocking. Each click loads them a
-   little clearer; the fourth brings them fully into focus. */
+/* The five rules fill the space from the start as clearly-present "locked"
+   rows — you can see there are five, numbered, waiting. The text is obscured,
+   not hidden, so the section never reads as empty. Each click brings them a
+   step into focus; the fourth resolves them fully. */
 .rules__list { display: grid; gap: 0; list-style: none; margin-top: var(--space-md); }
 .rule {
-  display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 3vw, 2.5rem);
-  align-items: start; padding: var(--space-lg) 0; border-top: 1px solid var(--c-line);
+  display: grid; grid-template-columns: auto 1fr auto; gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: center; padding: clamp(1.1rem, 2.4vw, 1.9rem) 0; border-top: 1px solid var(--c-line);
 }
-.rule__num { font-family: var(--font-mono); font-size: 1rem; color: var(--c-warm-400); padding-top: 0.5em; }
+.rule__num { font-family: var(--font-mono); font-size: 1rem; color: var(--c-warm-300); }
 .rule__text {
-  font-size: clamp(1.4rem, 1rem + 2.4vw, 3rem); line-height: 1.1;
+  font-size: clamp(1.3rem, 0.95rem + 2.1vw, 2.6rem); line-height: 1.12;
   letter-spacing: var(--tracking-tight); font-weight: 600; color: var(--c-warm-100);
-  filter: blur(7px); opacity: 0.4; user-select: none;
+  filter: blur(4px); opacity: 0.58; user-select: none;
   transition: filter var(--dur-slow) var(--ease-out), opacity var(--dur-slow) var(--ease-out);
 }
-.rules[data-clicks="1"] .rule__text { filter: blur(5px);   opacity: 0.55; }
-.rules[data-clicks="2"] .rule__text { filter: blur(3.5px); opacity: 0.70; }
-.rules[data-clicks="3"] .rule__text { filter: blur(2px);   opacity: 0.82; }
+/* A small lock marker on each row makes the "waiting to unlock" state explicit
+   while the text is obscured; it fades out once the rules are revealed. */
+.rule__lock {
+  justify-self: end; width: 15px; height: 15px; color: var(--c-warm-400);
+  opacity: 0.9; transition: opacity var(--dur-slow) var(--ease-out);
+}
+.rule__lock svg { display: block; width: 100%; height: 100%; }
+.rules[data-clicks="1"] .rule__text { filter: blur(3px);   opacity: 0.7; }
+.rules[data-clicks="2"] .rule__text { filter: blur(2px);   opacity: 0.8; }
+.rules[data-clicks="3"] .rule__text { filter: blur(1px);   opacity: 0.9; }
 .rules[data-revealed="true"] .rule__text {
   filter: none; opacity: 1; user-select: auto;
   transition-delay: calc(var(--i, 0) * 90ms);
 }
+.rules[data-revealed="true"] .rule__lock { opacity: 0; }
 .rule--key .rule__num { color: var(--c-light); }
 .rules[data-revealed="true"] .rule--key { border-top-color: var(--c-line-strong); }
 .rules__aha {
