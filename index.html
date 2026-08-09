@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <script>document.documentElement.classList.add("js");</script>
+  <!-- Optional real engagement stats (visitors · appreciations). Deploy the
+       tiny counter in docs/analytics.md and paste its URL below to show REAL
+       totals. Left empty by default — nothing is shown and nothing is faked. -->
+  <script>window.__PORTFOLIO_STATS_ENDPOINT = "";</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#ffffff" />
 
@@ -397,27 +401,33 @@
          =============================================================== -->
     <section id="contact" class="section contact" data-lx="50%" data-lsize="92vmax" aria-labelledby="contact-title" data-state="idle">
       <div class="contact__inner">
-        <p class="contact__reflection" data-anim="rise">Thank you for moving through the work.</p>
-        <p class="section__principle contact__principle">
-          <span class="section__principle-name">Connection.</span>
-          Every opportunity starts with a conversation.
-        </p>
-        <h2 class="contact__title" id="contact-title">Let's build products together.</h2>
+        <p class="contact__reflection" data-anim="rise">You didn't just read how I think — you experienced it.</p>
+        <h2 class="contact__title" id="contact-title" data-anim="rise">Did it resonate?</h2>
+        <p class="contact__lede" data-anim="rise">If this is the kind of thinking you'd want beside you, let's not leave it here.</p>
 
-        <div class="contact__available" data-anim="rise">
-          <span class="contact__available-label">Open to</span>
-          <ul class="contact__roles">
-            <li>Lead Product Designer</li>
-            <li>Principal Product Designer</li>
-            <li>AI Product Design</li>
-          </ul>
+        <!-- Appreciation: a lightweight, meaningful way to say the experience landed. -->
+        <div class="appreciate" data-anim="rise">
+          <button type="button" class="appreciate__btn" id="appreciate-btn" aria-pressed="false" aria-describedby="appreciate-note">
+            <span class="appreciate__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 21C12 21 3.5 15.5 3.5 9.4C3.5 6.6 5.7 4.8 8.1 4.8C9.8 4.8 11.2 5.8 12 7.2C12.8 5.8 14.2 4.8 15.9 4.8C18.3 4.8 20.5 6.6 20.5 9.4C20.5 15.5 12 21 12 21Z"/></svg>
+            </span>
+            <span class="appreciate__label">
+              <span class="appreciate__idle">Yes — I enjoyed this</span>
+              <span class="appreciate__done">Thank you — that means a lot</span>
+            </span>
+          </button>
+          <p class="appreciate__note" id="appreciate-note">A quiet way to say it landed.</p>
+          <p class="appreciate__stats" id="appreciate-stats" hidden aria-live="polite">
+            <span id="stat-likes">0</span> appreciations · <span id="stat-visitors">0</span> visitors
+          </p>
         </div>
 
-        <div class="contact__actions" data-anim="rise">
-          <button type="button" class="btn btn--primary btn--lg" id="contact-cta">Get in Touch</button>
+        <!-- Connection: the earned final action — a real conversation. -->
+        <div class="contact__connect" data-anim="rise">
+          <p class="contact__connect-lead">Let's build products together.</p>
+          <a class="btn btn--primary btn--lg" id="contact-cta" href="mailto:anirudh.thata@gmail.com?subject=Let's%20build%20something%20together">Let's build something together</a>
           <p class="contact__ping" id="contact-ping" role="status" aria-live="polite"></p>
-          <!-- The ways to reach out appear only after the final product action. -->
-          <div class="contact__links" id="contact-links">
+          <div class="contact__links">
             <a href="mailto:anirudh.thata@gmail.com">anirudh.thata@gmail.com</a>
             <a href="https://linkedin.com/in/anirudh-thata-a611a57b" target="_blank" rel="noopener">LinkedIn</a>
           </div>
