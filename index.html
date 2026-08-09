@@ -50,22 +50,28 @@
     </div>
   </div>
 
-  <!-- The hanging light — a top-level overlay so it sits above the dark cover.
-       Off in a dark room, with a pull-cord. Pulling it floods the page to white. -->
-  <div class="lamp-rig" data-reveal-persist>
-    <button type="button" class="lamp" id="hero-switch" role="switch" aria-checked="false" aria-describedby="hero-switch-hint">
-      <span class="lamp__wire" aria-hidden="true"></span>
-      <span class="lamp__bulb" aria-hidden="true">
-        <span class="lamp__filament"></span>
-        <span class="lamp__halo"></span>
-      </span>
-      <span class="lamp__cord" aria-hidden="true"><span class="lamp__knob"></span></span>
-      <span class="sr-only">Switch on the light</span>
-    </button>
-    <p class="lamp__hint" id="hero-switch-hint">
-      In a product, what can't be seen doesn't exist.
-      <strong>Pull the cord to make the work visible.</strong>
-    </p>
+  <!-- The opening — a composed, centred dark screen above the black cover. A
+       bulb hangs from the top; a clear button turns on the light and reveals
+       the interface. (Accessibility: a product needs visibility before value.) -->
+  <div class="intro" id="intro">
+    <div class="intro__lamp" aria-hidden="true">
+      <span class="intro__wire"></span>
+      <span class="intro__bulb"><span class="intro__glow"></span></span>
+    </div>
+    <div class="intro__content">
+      <h1 class="intro__title" id="intro-title">
+        You're about to experience a
+        <span class="intro__accent">Product Designer's</span> journey.
+      </h1>
+      <p class="intro__sub">
+        Let's start with <em class="intro__em">accessibility</em> — a product needs
+        visibility before it can create value.
+      </p>
+      <button type="button" class="intro__btn" id="hero-switch" aria-pressed="false" aria-describedby="intro-title">
+        <span class="intro__btn-dot" aria-hidden="true"></span>
+        <span class="intro__btn-label">Turn on the light</span>
+      </button>
+    </div>
   </div>
 
   <!-- ===================================================================
