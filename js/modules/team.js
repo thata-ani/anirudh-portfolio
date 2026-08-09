@@ -39,19 +39,32 @@ export function initTeam() {
     return { ux, uy, x: cx + R * ux, y: cy + R * uy };
   });
 
-  // Position nodes + spokes once.
+  const mkLine = (x1, y1, x2, y2, cls, idx) => {
+    const l = document.createElementNS(NS, "line");
+    l.setAttribute("x1", x1); l.setAttribute("y1", y1);
+    l.setAttribute("x2", x2); l.setAttribute("y2", y2);
+    l.setAttribute("class", cls);
+    l.style.setProperty("--i", idx);
+    wiresEl.insertBefore(l, ring); // all wires sit beneath the ring
+  };
+
+  // Full mesh first (every discipline connects to every other), drawn faint —
+  // so when connected, ALL perspectives are linked, not just to the centre.
+  let li = 0;
+  for (let i = 0; i < geom.length; i++) {
+    for (let j = i + 1; j < geom.length; j++) {
+      mkLine(geom[i].x, geom[i].y, geom[j].x, geom[j].y, "eco-link", li++);
+    }
+  }
+
+  // Position nodes; spokes (centre product → each discipline) on top of the mesh.
   geom.forEach((g, i) => {
     const node = nodes[i];
     node.style.left = `${g.x}%`;
     node.style.top = `${g.y}%`;
     const s = scatter[i % scatter.length];
     node.style.setProperty("--scatter", `translate(${s.dx}%, ${s.dy}%)`);
-    const l = document.createElementNS(NS, "line");
-    l.setAttribute("x1", cx); l.setAttribute("y1", cy);
-    l.setAttribute("x2", g.x); l.setAttribute("y2", g.y);
-    l.setAttribute("class", "eco-spoke");
-    l.style.setProperty("--i", i);
-    wiresEl.insertBefore(l, ring);
+    mkLine(cx, cy, g.x, g.y, "eco-spoke", i);
   });
 
   // Anchor each label just outside its dot. On wide layouts the side labels

@@ -444,6 +444,13 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   opacity: 0; transition: opacity var(--dur-mid) var(--ease-out) calc(var(--i, 0) * 70ms);
 }
 .ecosystem[data-connected="true"] .eco-spoke { opacity: 0.5; }
+/* the full web between every discipline — faint so it reads as connection,
+   not a scribble; every pair links when brought together */
+.eco-link {
+  stroke: var(--c-light); stroke-width: 1; vector-effect: non-scaling-stroke;
+  opacity: 0; transition: opacity var(--dur-mid) var(--ease-out) calc(var(--i, 0) * 45ms);
+}
+.ecosystem[data-connected="true"] .eco-link { opacity: 0.22; }
 .eco-ring {
   fill: none; stroke: var(--c-light); stroke-width: 1.4; vector-effect: non-scaling-stroke;
   stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0;
