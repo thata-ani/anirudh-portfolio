@@ -89,6 +89,20 @@ export function initMusic() {
     chip.addEventListener("click", () => { unlock(); haptic(10); select(chip.dataset.vibe); })
   );
   document.addEventListener("click", (e) => { if (!root.contains(e.target)) setOpen(false); });
+
+  // Turn on the light → music begins. The reveal click is a real user gesture,
+  // so we unlock the audio synchronously here and start a default vibe a beat
+  // later (after the power-on cue). The visitor can change it or switch it Off.
+  const heroSwitch = document.getElementById("hero-switch");
+  if (heroSwitch) {
+    let autostarted = false;
+    heroSwitch.addEventListener("click", () => {
+      if (autostarted) return;
+      autostarted = true;
+      unlock(); // resume the context within the gesture; the synth can start later
+      window.setTimeout(() => { if (!current) select("melody"); }, 600);
+    });
+  }
 }
 
 /* ---- helpers ------------------------------------------------------------ */
@@ -103,12 +117,12 @@ function fadeTo(el, target, ms) {
 }
 
 /**
- * A clearly-audible, looping ORIGINAL melody per vibe (the built-in fallback).
- * A plucked lead plays a pentatonic/raga-flavoured phrase over a soft pad, with
- * a warm delay for space — melodic and recognizable, not a drone. This is an
- * original composition inspired by that style; it is NOT any copyrighted
- * recording. Drop a legally-provided track at assets/music/<vibe>.mp3 to use a
- * real song instead. Uses the already-unlocked context so it plays at once.
+ * A calm, warm, looping ORIGINAL melody per vibe (the built-in fallback). Soft
+ * sine/triangle voices only — no harsh saw/square — with gentle attacks, notes
+ * that overlap into a legato line, a mellow low-pass and a light delay for air.
+ * Meant to feel like quiet background music, not a synth test tone. It is an
+ * original composition, NOT any copyrighted recording. Drop a legally-provided
+ * track at assets/music/<vibe>.mp3 to use a real song instead.
  */
 function makeMelody(id, ctx) {
   if (!ctx) return { stop() {} };
@@ -118,58 +132,54 @@ function makeMelody(id, ctx) {
   const master = ctx.createGain();
   master.gain.value = 0.0001;
   master.connect(ctx.destination);
-  const peak = id === "rock" ? 0.36 : 0.32;
-  master.gain.exponentialRampToValueAtTime(peak, now + 0.5);
+  const peak = id === "rock" ? 0.5 : 0.42; // gentle overall level
+  master.gain.exponentialRampToValueAtTime(peak, now + 1.2);
 
-  // A soft feedback delay — warmth and space.
-  const delay = ctx.createDelay(1.0);
-  delay.delayTime.value = id === "emotion" ? 0.36 : 0.26;
-  const fb = ctx.createGain(); fb.gain.value = 0.3;
-  const wet = ctx.createGain(); wet.gain.value = 0.34;
-  delay.connect(fb).connect(delay);
-  delay.connect(wet).connect(master);
-
-  // Warm lead through a lowpass; also feeds the delay.
+  // Mellow low-pass so nothing is bright or harsh.
   const lp = ctx.createBiquadFilter();
-  lp.type = "lowpass"; lp.frequency.value = id === "rock" ? 2800 : 2100;
-  lp.connect(master); lp.connect(delay);
+  lp.type = "lowpass";
+  lp.frequency.value = id === "rock" ? 1900 : 1500;
+  lp.Q.value = 0.3;
+  lp.connect(master);
 
-  // Looping melodic phrases (Hz). Pentatonic / raga-flavoured, in order.
+  // A light, low-feedback delay for air (not a wash).
+  const delay = ctx.createDelay(1.0);
+  delay.delayTime.value = 0.3;
+  const fb = ctx.createGain(); fb.gain.value = 0.16;
+  const wet = ctx.createGain(); wet.gain.value = 0.16;
+  lp.connect(delay); delay.connect(fb).connect(delay); delay.connect(wet).connect(master);
+
+  // Smooth, mostly-stepwise pentatonic phrases — easy on the ear.
   const SEQ = {
-    melody:  [523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25, 659.25, 783.99, 880.0, 783.99, 659.25],
-    emotion: [440.0, 523.25, 587.33, 523.25, 493.88, 440.0, 392.0, 440.0, 523.25, 493.88, 440.0, 392.0],
-    rock:    [329.63, 392.0, 440.0, 523.25, 440.0, 392.0, 329.63, 440.0, 523.25, 587.33, 523.25, 440.0],
+    melody:  [523.25, 587.33, 659.25, 783.99, 880.0, 783.99, 659.25, 587.33],
+    emotion: [440.0, 523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25],
+    rock:    [329.63, 392.0, 440.0, 493.88, 587.33, 493.88, 440.0, 392.0],
   };
   const seq = SEQ[id] || SEQ.melody;
-  const step = id === "emotion" ? 0.5 : id === "rock" ? 0.3 : 0.38; // seconds/note
-  const leadType = id === "rock" ? "sawtooth" : "triangle";
+  const step = id === "emotion" ? 0.72 : id === "rock" ? 0.44 : 0.6; // seconds/note
 
-  // A low sustained pad for body.
-  const padNotes = id === "emotion" ? [220.0, 329.63] : id === "rock" ? [130.81, 196.0] : [261.63, 392.0];
+  // Soft low pad (root + fifth) for warmth.
+  const padNotes = id === "emotion" ? [220.0, 329.63] : id === "rock" ? [196.0, 293.66] : [261.63, 392.0];
   const drones = [];
   padNotes.forEach((f) => {
     const o = ctx.createOscillator(); const g = ctx.createGain();
-    o.type = "sine"; o.frequency.value = f; g.gain.value = 0.09;
-    o.connect(g).connect(master); o.start(); drones.push(o);
+    o.type = "sine"; o.frequency.value = f; g.gain.value = 0.05;
+    o.connect(g).connect(lp); o.start(); drones.push(o);
   });
-  if (id === "rock") { // steady low pulse
-    const p = ctx.createOscillator(); const pg = ctx.createGain();
-    p.type = "square"; p.frequency.value = 2; pg.gain.value = 0.04;
-    p.connect(pg).connect(master.gain); p.start(); drones.push(p);
-  }
 
   let i = 0, stopped = false, timer = null;
   const playNote = () => {
     if (stopped) return;
     const f = seq[i % seq.length];
     const t = ctx.currentTime;
+    const ring = step * 1.8; // notes overlap → a connected, legato line
     const o = ctx.createOscillator(); const g = ctx.createGain();
-    o.type = leadType; o.frequency.setValueAtTime(f, t);
+    o.type = "triangle"; o.frequency.setValueAtTime(f, t);
     g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.24, t + 0.02);   // pluck attack
-    g.gain.exponentialRampToValueAtTime(0.0001, t + step * 0.95); // decay
+    g.gain.exponentialRampToValueAtTime(0.14, t + 0.09); // soft, rounded attack
+    g.gain.exponentialRampToValueAtTime(0.0001, t + ring); // long gentle decay
     o.connect(g).connect(lp);
-    o.start(t); o.stop(t + step);
+    o.start(t); o.stop(t + ring + 0.05);
     i += 1;
     timer = setTimeout(playNote, step * 1000);
   };
@@ -183,9 +193,9 @@ function makeMelody(id, ctx) {
       try {
         master.gain.cancelScheduledValues(t);
         master.gain.setValueAtTime(master.gain.value, t);
-        master.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+        master.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
       } catch {}
-      setTimeout(() => drones.forEach((n) => { try { n.stop(); } catch {} }), 460);
+      setTimeout(() => drones.forEach((n) => { try { n.stop(); } catch {} }), 560);
     },
   };
 }
