@@ -24,7 +24,7 @@ export function initTeam() {
   const nodes = [...nodesEl.querySelectorAll(".eco-node")];
   const n = nodes.length;
   const cx = 50, cy = 50, R = 36; // matches the ring radius in the markup
-  const dotR = 7, gap = 12;       // px clearance from a dot to its label
+  const dotR = 16, gap = 10;      // px clearance from the face to its label
   const NS = "http://www.w3.org/2000/svg";
 
   // Deterministic "apart" offsets for the disconnected state.
@@ -57,11 +57,21 @@ export function initTeam() {
     }
   }
 
+  // A little face per discipline: a frown while apart, a smile once together.
+  const FACE =
+    '<svg class="eco-face" viewBox="0 0 28 28" aria-hidden="true">' +
+    '<circle cx="10" cy="12" r="1.7"/><circle cx="18" cy="12" r="1.7"/>' +
+    '<path class="mouth mouth--sad" d="M9 19 Q14 15 19 19"/>' +
+    '<path class="mouth mouth--happy" d="M9 16 Q14 21 19 16"/>' +
+    "</svg>";
+
   // Position nodes; spokes (centre product → each discipline) on top of the mesh.
   geom.forEach((g, i) => {
     const node = nodes[i];
     node.style.left = `${g.x}%`;
     node.style.top = `${g.y}%`;
+    const dot = node.querySelector(".eco-node__dot");
+    if (dot) dot.innerHTML = FACE;
     const s = scatter[i % scatter.length];
     node.style.setProperty("--scatter", `translate(${s.dx}%, ${s.dy}%)`);
     mkLine(cx, cy, g.x, g.y, "eco-spoke", i);
