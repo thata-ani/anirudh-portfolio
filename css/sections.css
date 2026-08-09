@@ -444,19 +444,19 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   opacity: 0; transition: opacity var(--dur-mid) var(--ease-out) calc(var(--i, 0) * 70ms);
 }
 .ecosystem[data-connected="true"] .eco-spoke { opacity: 0.5; }
-/* the full web between every discipline — faint so it reads as connection,
-   not a scribble; every pair links when brought together */
+/* the full web between every discipline — every pair links when brought
+   together, so all six perspectives are visibly connected to one another */
 .eco-link {
   stroke: var(--c-light); stroke-width: 1; vector-effect: non-scaling-stroke;
-  opacity: 0; transition: opacity var(--dur-mid) var(--ease-out) calc(var(--i, 0) * 45ms);
+  opacity: 0; transition: opacity var(--dur-mid) var(--ease-out) calc(var(--i, 0) * 40ms);
 }
-.ecosystem[data-connected="true"] .eco-link { opacity: 0.22; }
+.ecosystem[data-connected="true"] .eco-link { opacity: 0.32; }
+/* a clean, solid ecosystem ring that fades in (no dash-draw artefacts) */
 .eco-ring {
   fill: none; stroke: var(--c-light); stroke-width: 1.4; vector-effect: non-scaling-stroke;
-  stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0;
-  transition: stroke-dashoffset 1.1s var(--ease-out) 0.45s, opacity var(--dur-mid) var(--ease-out) 0.45s;
+  opacity: 0; transition: opacity var(--dur-slow) var(--ease-out) 0.5s;
 }
-.ecosystem[data-connected="true"] .eco-ring { stroke-dashoffset: 0; opacity: 0.5; }
+.ecosystem[data-connected="true"] .eco-ring { opacity: 0.4; }
 
 .ecosystem__nodes { position: absolute; inset: 0; z-index: 2; list-style: none; }
 .eco-node {
