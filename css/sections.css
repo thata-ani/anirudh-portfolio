@@ -659,54 +659,57 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* The trajectory — full-bleed, tall: the compositional spine of the section. */
+/* The trajectory — full-bleed: a single STRAIGHT career line with names
+   travelling toward one central focal point. No curve; a clean axis. */
 .trajectory {
-  position: relative; height: clamp(340px, 46vh, 520px);
+  position: relative; height: clamp(200px, 26vh, 320px);
   margin-inline: calc(-1 * max(var(--gutter), (100% - var(--container)) / 2));
   -webkit-mask-image: linear-gradient(to right, transparent, #000 11%, #000 89%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 11%, #000 89%, transparent);
 }
-.trajectory__path { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.traj-line { fill: none; stroke: var(--c-line-strong); stroke-width: 1.4; opacity: 0.5; }
-.traj-lit  { fill: none; stroke: var(--c-light); stroke-width: 2.2; stroke-linecap: round; opacity: 0.85; }
-
-/* Focal axis + arrival ring at the path's centre crossing. */
+/* The line. Left (past) is solid = experience accumulated up to "now";
+   right (ahead) is faint = still to come. */
+.trajectory__line {
+  position: absolute; left: 0; right: 0; top: 72%; height: 1px;
+  background: var(--c-line-strong); opacity: 0.4;
+}
+.trajectory__line-lit {
+  position: absolute; left: 0; width: 50%; top: 72%; height: 2px; margin-top: -0.5px;
+  background: var(--c-light); opacity: 0.9;
+}
+/* Vertical focal marker + the "now" node where it meets the line. */
 .trajectory__focal {
-  position: absolute; left: 50%; top: 10%; bottom: 10%; width: 1px; translate: -50% 0; z-index: 2;
-  background: linear-gradient(to bottom, transparent, var(--c-line-strong) 22%, var(--c-line-strong) 78%, transparent);
+  position: absolute; left: 50%; top: 14%; bottom: 6%; width: 1px; translate: -50% 0; z-index: 2;
+  background: linear-gradient(to bottom, transparent, var(--c-line-strong) 16%, var(--c-line-strong) 84%, transparent);
 }
 .trajectory__focal::before {
-  content: ""; position: absolute; left: 50%; top: 50%; width: 58px; height: 58px; translate: -50% -50%;
-  border-radius: 50%; border: 1px solid var(--c-line-strong); opacity: 0.7;
+  content: ""; position: absolute; left: 50%; top: 72%; width: 12px; height: 12px; translate: -50% -50%;
+  border-radius: 50%; background: var(--c-light);
+  box-shadow: 0 0 0 5px var(--c-ink-800), 0 0 0 6px var(--c-line-strong);
 }
 
 .trajectory__track {
-  position: absolute; top: 0; bottom: 0; left: 0; z-index: 3;
-  display: flex; align-items: center; gap: clamp(2.5rem, 6vw, 5.5rem);
-  width: max-content; animation: marquee 44s linear infinite;
+  position: absolute; left: 0; top: 0; height: 72%; z-index: 3;
+  display: flex; align-items: flex-end; gap: clamp(3.25rem, 7vw, 6.5rem);
+  width: max-content; padding-bottom: clamp(0.6rem, 1.6vh, 1.4rem);
+  animation: marquee 46s linear infinite;
 }
 .trajectory:hover .trajectory__track { animation-play-state: paused; }
 .traj-item {
   white-space: nowrap; font-size: clamp(1.3rem, 1rem + 1.3vw, 2.15rem); font-weight: 600;
   letter-spacing: -0.01em; color: var(--c-warm-400);
-  display: inline-flex; align-items: center; gap: 0.7rem;
-  transform-origin: center; will-change: transform, opacity;
+  transform-origin: bottom center; will-change: transform, opacity;
   transition: color var(--dur-fast) var(--ease-out);
-}
-.traj-item__dot {
-  width: 9px; height: 9px; border-radius: 50%; background: var(--c-line-strong); flex: none;
-  transition: background var(--dur-fast) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
 }
 .traj-item.is-near { color: var(--c-warm-200); }
 .traj-item.is-focal { color: var(--c-warm-100); }
-.traj-item.is-focal .traj-item__dot {
-  background: var(--c-light); transform: scale(1.15);
-  box-shadow: 0 0 0 6px var(--c-light-haze), 0 0 0 1px var(--c-light);
-}
 @media (prefers-reduced-motion: reduce) {
-  .trajectory { height: auto; }
-  .trajectory__track { position: static; animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
-  .trajectory__path, .trajectory__focal { display: none; }
+  .trajectory { height: auto; padding-block: var(--space-lg); }
+  .trajectory__track {
+    position: static; animation: none; flex-wrap: wrap; justify-content: center;
+    width: auto; height: auto; align-items: center; padding: 0;
+  }
+  .trajectory__line, .trajectory__line-lit, .trajectory__focal { display: none; }
 }
 
 /* 05 · My Process ----------------------------------------------------------- */
