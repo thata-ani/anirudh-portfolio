@@ -131,45 +131,43 @@ function makeMelody(id, ctx) {
   const master = ctx.createGain();
   master.gain.value = 0.0001;
   master.connect(ctx.destination);
-  master.gain.exponentialRampToValueAtTime(0.5, now + 1.4); // slow, gentle fade-in
+  master.gain.exponentialRampToValueAtTime(0.3, now + 2.0); // soft background level
 
-  // Mellow low-pass with slow movement so the pad breathes.
+  // A fixed, mellow low-pass — no movement, nothing to sound like wobble/noise.
   const lp = ctx.createBiquadFilter();
   lp.type = "lowpass";
-  lp.frequency.value = 1300;
-  lp.Q.value = 0.2;
+  lp.frequency.value = 2200;
+  lp.Q.value = 0.0001;
   lp.connect(master);
-  const lfo = ctx.createOscillator();
-  const lfoGain = ctx.createGain();
-  lfo.frequency.value = 0.05; lfoGain.gain.value = 300;
-  lfo.connect(lfoGain).connect(lp.frequency); lfo.start();
 
-  // Soft chord progressions (Hz). Warm 7th chords that resolve gently.
+  // Mid-register 7th chords voiced with SHARED tones between neighbours, so the
+  // crossfades stay consonant (no clashing = no "noise"). Nothing below ~175 Hz
+  // so it never turns to mud on laptop/phone speakers.
   const PROG = {
-    // Cmaj7 · Fmaj7 · Am7 · G  — calm, bright
+    // Cmaj7 · Am7 · Fmaj7 · G  — calm, resolves smoothly
     melody: [
-      [130.81, 164.81, 196.0, 246.94],
-      [174.61, 220.0, 261.63, 329.63],
+      [261.63, 329.63, 392.0, 493.88],
       [220.0, 261.63, 329.63, 392.0],
+      [174.61, 220.0, 261.63, 329.63],
       [196.0, 246.94, 293.66, 392.0],
     ],
     // Am7 · Fmaj7 · Cmaj7 · G  — wistful (vi–IV–I–V)
     emotion: [
       [220.0, 261.63, 329.63, 392.0],
       [174.61, 220.0, 261.63, 329.63],
-      [130.81, 164.81, 196.0, 246.94],
+      [261.63, 329.63, 392.0, 493.88],
       [196.0, 246.94, 293.66, 392.0],
     ],
-    // Em7 · Cmaj7 · G · D  — a touch more movement
+    // Em7 · Cmaj7 · G · Am7  — a touch more movement, still gentle
     rock: [
-      [164.81, 196.0, 246.94, 293.66],
-      [130.81, 164.81, 196.0, 246.94],
+      [246.94, 293.66, 349.23, 440.0],
+      [261.63, 329.63, 392.0, 493.88],
       [196.0, 246.94, 293.66, 392.0],
-      [146.83, 185.0, 220.0, 293.66],
+      [220.0, 261.63, 329.63, 392.0],
     ],
   };
   const prog = PROG[id] || PROG.melody;
-  const chordDur = id === "rock" ? 2.8 : 3.8; // seconds per chord
+  const chordDur = id === "rock" ? 4.0 : 5.0; // slow, spacious
 
   let idx = 0, stopped = false, timer = null, live = [];
 
@@ -177,8 +175,8 @@ function makeMelody(id, ctx) {
     try {
       voice.g.gain.cancelScheduledValues(t);
       voice.g.gain.setValueAtTime(voice.g.gain.value, t);
-      voice.g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
-      voice.o.stop(t + 1.8);
+      voice.g.gain.exponentialRampToValueAtTime(0.0001, t + 0.9); // short, clean crossfade
+      voice.o.stop(t + 1.1);
     } catch {}
   };
 
@@ -186,16 +184,15 @@ function makeMelody(id, ctx) {
     if (stopped) return;
     const freqs = prog[idx % prog.length];
     const t = ctx.currentTime;
-    live.forEach((v) => release(v, t)); // crossfade out the previous chord
+    live.forEach((v) => release(v, t));
     live = [];
-    freqs.forEach((f, k) => {
+    freqs.forEach((f) => {
       const o = ctx.createOscillator();
       const g = ctx.createGain();
-      o.type = "sine";
+      o.type = "sine"; // pure tone — no harmonics to sound harsh
       o.frequency.value = f;
-      o.detune.value = k === 0 ? 0 : 3; // a hair of width, not chorus-y
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(0.06, t + 1.0); // slow attack
+      g.gain.exponentialRampToValueAtTime(0.05, t + 0.9); // gentle attack
       o.connect(g).connect(lp);
       o.start(t);
       live.push({ o, g });
@@ -217,7 +214,6 @@ function makeMelody(id, ctx) {
       } catch {}
       window.setTimeout(() => {
         live.forEach((v) => { try { v.o.stop(); } catch {} });
-        try { lfo.stop(); } catch {}
       }, 700);
     },
   };
