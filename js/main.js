@@ -6,7 +6,7 @@
  *
  *   Hero          → Accessibility  (pull the light on)
  *   Selected Work → Information Architecture  (Organize)
- *   Principles    → Clarity  (Think Simple)
+ *   Rules         → Meaningful interaction  (click to earn, then click less)
  *   Testimonials  → Collaboration  (Connect)
  *   Contact       → Connection  (arrival tone + haptic)
  */
@@ -21,6 +21,7 @@ import { initContact } from "./modules/contact.js";
 import { initExplore } from "./modules/explore.js";
 import { initHeroGraphic } from "./modules/herographic.js";
 import { initMusic } from "./modules/music.js";
+import { initRules } from "./modules/rules.js";
 import { createStateToggle } from "./modules/state-toggle.js";
 
 const boot = () => {
@@ -35,6 +36,7 @@ const boot = () => {
   initExplore();
   initHeroGraphic();
   initMusic();
+  initRules();
 
   // Selected Work — Information Architecture: scattered → organized.
   createStateToggle({
@@ -42,14 +44,6 @@ const boot = () => {
     target: document.getElementById("work"),
     offState: "scattered",
     onState: "organized",
-  });
-
-  // The Principles Behind My Work — Clarity: complex → clear.
-  createStateToggle({
-    button: document.getElementById("principles-simplify"),
-    target: document.getElementById("principles"),
-    offState: "complex",
-    onState: "clear",
   });
 };
 

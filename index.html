@@ -75,7 +75,7 @@
       <ul class="site-nav__links">
         <li><a href="#work">Work</a></li>
         <li><a href="#process">Process</a></li>
-        <li><a href="#principles">Principles</a></li>
+        <li><a href="#rules">Rules</a></li>
         <li><a href="#experience">Experience</a></li>
       </ul>
       <a class="site-nav__cta" href="#contact">Let's Connect</a>
@@ -257,58 +257,52 @@
     </section>
 
     <!-- ===============================================================
-         06 · THE PRINCIPLES BEHIND MY WORK — Clarity
+         06 · RULES — meaningful interaction (Relevant to click less)
+         The rules are earned by repeated clicking; the effort itself
+         demonstrates rule 01. Content is the approved rules only.
          =============================================================== -->
-    <section id="principles" class="section principles" data-lx="50%" data-lsize="56vmax" aria-labelledby="principles-title" data-state="complex">
-      <div class="section__head work__head">
-        <div>
-          <p class="section__label" id="principles-title">The Principles Behind My Work</p>
-          <p class="section__principle">
-            <span class="section__principle-name">Clarity.</span>
-            Complex ideas should be easy to understand.
-          </p>
-          <p class="work__intro">These principles guide every product decision I make.</p>
-          <p class="section__invite">They're written like most product docs. <span>Make them simpler.</span></p>
-        </div>
-        <button type="button" class="action-btn" id="principles-simplify" aria-pressed="false">
-          <span class="action-btn__icon" aria-hidden="true"></span>
-          <span class="action-btn__label">
-            <span class="action-btn__label-idle">Make it simpler</span>
-            <span class="action-btn__label-done">Simpler</span>
-          </span>
-        </button>
+    <section id="rules" class="section rules" data-lx="50%" data-lsize="56vmax" aria-labelledby="rules-title" data-clicks="0" data-revealed="false">
+      <div class="section__head section__head--stacked">
+        <p class="section__label" id="rules-title">Rules</p>
+        <p class="section__principle">The rules I hold every product decision to.</p>
+        <p class="section__invite">Most products make you work for the payoff. <span>So does this — for now.</span></p>
       </div>
 
-      <ol class="principles__list">
-        <li class="principle" data-anim="rise">
-          <span class="principle__num" aria-hidden="true">01</span>
-          <p class="principle__text">
-            <span class="principle__complex" aria-hidden="true">Refrain from initiating high-fidelity interface production prior to attaining sufficient problem-space clarity.</span>
-            <span class="principle__simple">Don't open Figma until you know what you're solving.</span>
-          </p>
+      <div class="rules__loader">
+        <button type="button" class="rules__click" id="rules-click" aria-describedby="rules-title" aria-live="off">
+          <span class="rules__click-label" id="rules-click-label">Click to load the rules</span>
+        </button>
+        <div class="rules__meter" aria-hidden="true"><span class="rules__meter-fill" id="rules-meter"></span></div>
+        <p class="rules__status">
+          <span class="rules__count" id="rules-count" aria-hidden="true">0%</span>
+          <span class="rules__nudge" id="rules-nudge" aria-live="polite"></span>
+        </p>
+      </div>
+
+      <ol class="rules__list" id="rules-list">
+        <li class="rule rule--key" style="--i:0">
+          <span class="rule__num" aria-hidden="true">01</span>
+          <p class="rule__text">Relevant to click less — every interaction should have meaning.</p>
         </li>
-        <li class="principle" data-anim="rise">
-          <span class="principle__num" aria-hidden="true">02</span>
-          <p class="principle__text">
-            <span class="principle__complex" aria-hidden="true">Effective design surfaces and renders explicit the non-trivial trade-offs inherent to the solution space.</span>
-            <span class="principle__simple">Good design makes hard decisions visible.</span>
-          </p>
+        <li class="rule" style="--i:1">
+          <span class="rule__num" aria-hidden="true">02</span>
+          <p class="rule__text">Don't open Figma until you know what you're solving.</p>
         </li>
-        <li class="principle" data-anim="rise">
-          <span class="principle__num" aria-hidden="true">03</span>
-          <p class="principle__text">
-            <span class="principle__complex" aria-hidden="true">Any proposed capability lacking demonstrable user or commercial value shall not proceed to release.</span>
-            <span class="principle__simple">If it doesn't help the user or the business, it doesn't ship.</span>
-          </p>
+        <li class="rule" style="--i:2">
+          <span class="rule__num" aria-hidden="true">03</span>
+          <p class="rule__text">Good design makes hard decisions visible.</p>
         </li>
-        <li class="principle" data-anim="rise">
-          <span class="principle__num" aria-hidden="true">04</span>
-          <p class="principle__text">
-            <span class="principle__complex" aria-hidden="true">The artifact persists in a state of perpetual iteration; finality pertains solely to the subsequent decision instance.</span>
-            <span class="principle__simple">A product is never finished. Only the next decision is.</span>
-          </p>
+        <li class="rule" style="--i:3">
+          <span class="rule__num" aria-hidden="true">04</span>
+          <p class="rule__text">If it doesn't help the user or the business, it doesn't ship.</p>
+        </li>
+        <li class="rule" style="--i:4">
+          <span class="rule__num" aria-hidden="true">05</span>
+          <p class="rule__text">A product is never finished. Only the next decision is.</p>
         </li>
       </ol>
+
+      <p class="rules__aha" id="rules-aha" aria-live="polite"></p>
     </section>
 
     <!-- ===============================================================

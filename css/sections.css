@@ -794,23 +794,67 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .process__num { font-family: var(--font-mono); font-size: 0.8rem; color: var(--c-light); }
 .process__word { font-size: clamp(1.4rem, 1rem + 2vw, 2.6rem); font-weight: 600; letter-spacing: var(--tracking-tight); }
 
-/* 06 · Principles — complex → clear ---------------------------------------- */
-.principles__list { display: grid; gap: var(--space-md); }
-.principle { display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 3vw, 2.5rem); align-items: start; padding: var(--space-lg) 0; border-top: 1px solid var(--c-line); }
-.principle__num { font-family: var(--font-mono); font-size: 1rem; color: var(--c-warm-400); padding-top: 0.5em; transition: color var(--dur-mid) var(--ease-out); }
-.principle__text {
-  font-size: clamp(1.4rem, 1rem + 2.4vw, 3rem); line-height: 1.1; letter-spacing: var(--tracking-tight); font-weight: 600;
-  transition: filter var(--dur-slow) var(--ease-out), letter-spacing var(--dur-slow) var(--ease-out),
-    color var(--dur-slow) var(--ease-out), opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+/* 06 · Rules — earned by clicking; the effort demonstrates rule 01 --------- */
+.rules__loader {
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-sm);
+  text-align: center; margin: var(--space-2xl) 0;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out),
+    max-height var(--dur-slow) var(--ease-out);
+  max-height: 260px; overflow: hidden;
 }
-.principles[data-state="complex"] .principle__text { filter: blur(5px); letter-spacing: -0.06em; color: var(--c-warm-400); opacity: 0.55; transform: skewX(-2deg); }
-.principles[data-state="complex"] .principle__num { opacity: 0.4; }
-.principles[data-state="clear"] .principle__text { filter: none; letter-spacing: var(--tracking-tight); color: var(--c-warm-100); opacity: 1; transform: none; }
-.principles[data-state="clear"] .principle:nth-child(1) .principle__text { transition-delay: 0ms; }
-.principles[data-state="clear"] .principle:nth-child(2) .principle__text { transition-delay: 90ms; }
-.principles[data-state="clear"] .principle:nth-child(3) .principle__text { transition-delay: 180ms; }
-.principles[data-state="clear"] .principle:nth-child(4) .principle__text { transition-delay: 270ms; }
-.principles[data-state="clear"] .principle__num { color: var(--c-light); }
+.rules[data-revealed="true"] .rules__loader {
+  opacity: 0; transform: translateY(-8px); max-height: 0; margin-block: 0; pointer-events: none;
+}
+.rules__click {
+  font: inherit; font-weight: 600; font-size: 1.02rem; letter-spacing: -0.01em;
+  color: var(--c-warm-100); background: var(--c-ink-800);
+  border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
+  padding: 0.85rem 1.6rem; cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+}
+.rules__click:hover { border-color: var(--c-light); transform: translateY(-1px); }
+.rules__click:active { transform: translateY(0) scale(0.98); }
+.rules__click:focus-visible { outline: 2px solid var(--c-light); outline-offset: 3px; }
+.rules__meter {
+  width: min(440px, 74vw); height: 6px; border-radius: var(--radius-pill);
+  background:
+    repeating-linear-gradient(to right, transparent, transparent calc(25% - 1px), var(--c-ink-800) calc(25% - 1px), var(--c-ink-800) 25%),
+    var(--c-ink-600);
+  overflow: hidden;
+}
+.rules__meter-fill { display: block; height: 100%; width: 0; background: var(--c-light); transition: width var(--dur-mid) var(--ease-out); }
+.rules__status { display: flex; align-items: baseline; gap: 0.9rem; justify-content: center; min-height: 1.3em; }
+.rules__count { font-family: var(--font-mono); font-size: 0.82rem; color: var(--c-warm-300); font-variant-numeric: tabular-nums; }
+.rules__nudge { font-size: 0.95rem; color: var(--c-warm-400); }
+
+/* The rules stay hidden until earned, then cascade in. */
+.rules__list { display: grid; gap: 0; list-style: none; }
+.rule {
+  display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: start; padding: var(--space-lg) 0; border-top: 1px solid var(--c-line);
+  opacity: 0; transform: translateY(16px); visibility: hidden;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
+}
+.rules[data-revealed="true"] .rule {
+  opacity: 1; transform: none; visibility: visible;
+  transition-delay: calc(var(--i, 0) * 110ms);
+}
+.rule__num { font-family: var(--font-mono); font-size: 1rem; color: var(--c-warm-400); padding-top: 0.5em; }
+.rule__text {
+  font-size: clamp(1.4rem, 1rem + 2.4vw, 3rem); line-height: 1.1;
+  letter-spacing: var(--tracking-tight); font-weight: 600; color: var(--c-warm-100);
+}
+.rule--key .rule__num { color: var(--c-light); }
+.rules[data-revealed="true"] .rule--key { border-top-color: var(--c-line-strong); }
+.rules__aha {
+  margin-top: var(--space-xl); max-width: 52ch; color: var(--c-warm-300);
+  font-size: 1.05rem; opacity: 0; transition: opacity var(--dur-slow) var(--ease-out) 0.5s;
+}
+.rules[data-revealed="true"] .rules__aha { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .rule { transition-duration: 1ms; }
+  .rules[data-revealed="true"] .rule { transition-delay: 0ms; }
+}
 
 /* 08 · Experience — roadmap ------------------------------------------------- */
 .roadmap { display: grid; gap: 0; }
@@ -945,23 +989,6 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); border-color: var(--c-line-strong); }
   50% { box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04); border-color: var(--c-light); }
 }
-
-/* ===========================================================================
-   CLARITY — the words themselves transform (complex jargon → plain principle)
-   =========================================================================== */
-.principle__text { display: grid; }
-.principle__complex, .principle__simple {
-  grid-area: 1 / 1;
-  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
-}
-/* Complex state: dense, dim, verbose jargon — technically readable, but work. */
-.principles[data-state="complex"] .principle__text { filter: none; opacity: 1; transform: none; letter-spacing: var(--tracking-tight); }
-.principles[data-state="complex"] .principle__complex { opacity: 1; color: var(--c-warm-400); font-size: 0.62em; line-height: 1.35; letter-spacing: 0; font-weight: 500; transform: none; }
-.principles[data-state="complex"] .principle__simple { opacity: 0; transform: translateY(8px); pointer-events: none; }
-/* Clear state: the plain principle takes over. */
-.principles[data-state="clear"] .principle__complex { opacity: 0; transform: translateY(-8px); pointer-events: none; }
-.principles[data-state="clear"] .principle__simple { opacity: 1; color: var(--c-warm-100); transform: none; }
-.principles[data-state="clear"] .principle__num { color: var(--c-light); }
 
 /* Continuity thread — a quiet scroll progress line tying the journey together.
    Hidden until the lights are on, so it never competes with the dark opening. */
