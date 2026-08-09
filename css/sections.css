@@ -555,7 +555,16 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   transition: fill var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out); transform-origin: center;
 }
 .appreciate__done { display: none; }
-.contact[data-state="appreciated"] .appreciate__btn { border-color: var(--c-light); animation: appreciate-pop 520ms var(--ease-out); }
+.contact[data-state="appreciated"] .appreciate:not(.appreciate--minimal) .appreciate__btn { border-color: var(--c-light); animation: appreciate-pop 520ms var(--ease-out); }
+/* Minimal appreciation — a small, quiet 'like', never competing with the CTA. */
+.appreciate--minimal { margin-top: var(--space-xl); gap: 0.2rem; }
+.appreciate--minimal .appreciate__btn {
+  border: none; background: transparent; padding: 0.3rem; gap: 0.45rem;
+  color: var(--c-warm-400); font-weight: 500; font-size: 0.9rem;
+}
+.appreciate--minimal .appreciate__btn:hover { color: var(--c-warm-100); transform: none; }
+.appreciate--minimal .appreciate__mark svg { width: 15px; height: 15px; }
+.contact[data-state="appreciated"] .appreciate--minimal .appreciate__btn { color: var(--c-warm-200); }
 .contact[data-state="appreciated"] .appreciate__mark path { fill: var(--c-light); stroke: var(--c-light); }
 .contact[data-state="appreciated"] .appreciate__idle { display: none; }
 .contact[data-state="appreciated"] .appreciate__done { display: inline; }
@@ -1084,13 +1093,6 @@ html:not(.js) .sketch__pad { display: none; }
   font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--c-warm-400); margin-bottom: var(--space-lg);
 }
-.contact__actions { position: relative; }
-.contact__links {
-  opacity: 0; visibility: hidden; transform: translateY(8px);
-  transition: opacity var(--dur-slow) var(--ease-out),
-    transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow);
-}
-.contact[data-state="pinged"] .contact__links { opacity: 1; visibility: visible; transform: none; }
 
 /* ===========================================================================
    IA SYSTEM — structure emerging from complexity (Selected Work)
