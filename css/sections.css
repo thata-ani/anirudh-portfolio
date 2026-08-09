@@ -531,24 +531,53 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 /* ===========================================================================
    11 · LET'S BUILD WHAT'S NEXT — Connection
    =========================================================================== */
-.contact { text-align: center; overflow: hidden; isolation: isolate; padding-bottom: var(--space-xl); }
-.contact__inner { max-width: 46ch; margin-inline: auto; display: flex; flex-direction: column; align-items: center; }
-.contact__principle { max-width: 44ch; text-align: center; }
-.contact__title { margin-top: var(--space-md); font-size: var(--fs-mega); line-height: 0.98; letter-spacing: var(--tracking-display); font-weight: 600; max-width: 14ch; text-wrap: balance; }
-.contact__lede { margin-top: var(--space-lg); font-size: var(--fs-lede); color: var(--c-warm-300); }
-.contact__interests { margin-top: var(--space-xl); }
-.contact__interests-label { font-size: var(--fs-eyebrow); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--c-warm-400); }
-.contact__roles { margin-top: var(--space-sm); display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
-.contact__roles li { padding: 0.5rem 1.1rem; border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill); color: var(--c-warm-200); font-size: 0.95rem; }
-.contact__actions { margin-top: var(--space-xl); display: flex; flex-direction: column; align-items: center; gap: var(--space-md); }
+.contact { text-align: center; overflow: hidden; isolation: isolate; padding-bottom: var(--space-2xl); }
+.contact__inner { max-width: 52ch; margin-inline: auto; display: flex; flex-direction: column; align-items: center; }
+.contact__reflection { color: var(--c-warm-300); font-size: var(--fs-lede); max-width: 40ch; }
+.contact__title { margin-top: var(--space-sm); font-size: var(--fs-display); line-height: 1; letter-spacing: var(--tracking-display); font-weight: 600; max-width: 16ch; text-wrap: balance; }
+.contact__lede { margin-top: var(--space-md); font-size: var(--fs-lede); color: var(--c-warm-400); max-width: 42ch; }
+
+/* Appreciation — lightweight, meaningful, real (see analytics.js). */
+.appreciate { margin-top: var(--space-2xl); display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); }
+.appreciate__btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.7rem 1.3rem; border-radius: var(--radius-pill);
+  border: 1px solid var(--c-line-strong); background: var(--c-ink-800);
+  font: inherit; font-weight: 600; font-size: 0.98rem; color: var(--c-warm-100); cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.appreciate__btn:hover { border-color: var(--c-light); transform: translateY(-1px); }
+.appreciate__btn:focus-visible { outline: 2px solid var(--c-light); outline-offset: 3px; }
+.appreciate__mark { display: inline-flex; }
+.appreciate__mark svg { width: 20px; height: 20px; overflow: visible; }
+.appreciate__mark path {
+  fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round;
+  transition: fill var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out); transform-origin: center;
+}
+.appreciate__done { display: none; }
+.contact[data-state="appreciated"] .appreciate__btn { border-color: var(--c-light); animation: appreciate-pop 520ms var(--ease-out); }
+.contact[data-state="appreciated"] .appreciate__mark path { fill: var(--c-light); stroke: var(--c-light); }
+.contact[data-state="appreciated"] .appreciate__idle { display: none; }
+.contact[data-state="appreciated"] .appreciate__done { display: inline; }
+@keyframes appreciate-pop { 0% { box-shadow: 0 0 0 0 var(--c-light-haze); } 100% { box-shadow: 0 0 0 20px transparent; } }
+.appreciate__note { color: var(--c-warm-400); font-size: 0.9rem; }
+.contact[data-state="appreciated"] .appreciate__note { color: var(--c-warm-200); }
+.appreciate__stats { margin-top: 0.3rem; font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.04em; color: var(--c-warm-400); }
+.appreciate__stats[hidden] { display: none; }
+
+/* Connection — the earned final action (a real conversation). */
+.contact__connect { margin-top: var(--space-2xl); display: flex; flex-direction: column; align-items: center; gap: var(--space-md); }
+.contact__connect-lead {
+  font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem); font-weight: 600; line-height: 1.05;
+  letter-spacing: var(--tracking-tight); color: var(--c-warm-100); max-width: 18ch; text-wrap: balance;
+  transition: color var(--dur-slow) var(--ease-out);
+}
+.contact[data-state="appreciated"] .contact__connect-lead { color: var(--c-light); }
 .contact__links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-md); }
 .contact__links a { color: var(--c-warm-300); font-size: 1rem; letter-spacing: 0.02em; border-bottom: 1px solid transparent; transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
 .contact__links a:hover { color: var(--c-light-soft); border-color: var(--c-light); }
-.contact__ping { margin-top: var(--space-md); min-height: 1.4em; color: var(--c-light); font-size: 0.95rem; opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); }
-.contact[data-state="pinged"] .contact__ping { opacity: 1; }
-.contact[data-state="pinged"] #contact-cta { animation: contact-ring var(--dur-slow) var(--ease-out); }
-@keyframes contact-ring { 0% { box-shadow: 0 0 0 0 var(--c-light-glow); } 100% { box-shadow: 0 0 0 26px rgba(255, 182, 115, 0); } }
-.contact__final { margin-top: var(--space-2xl); max-width: 54ch; color: var(--c-warm-400); font-size: 1.05rem; line-height: 1.6; }
+.contact__ping { min-height: 1.2em; color: var(--c-light); font-size: 0.95rem; opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); }
+.contact__ping:not(:empty) { opacity: 1; }
 
 /* ===========================================================================
    PREMIUM META LAYER — mono texture for labels, meta, and numerals
