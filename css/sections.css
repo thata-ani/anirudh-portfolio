@@ -897,9 +897,12 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .process__word { font-size: clamp(1.4rem, 1rem + 2vw, 2.6rem); font-weight: 600; letter-spacing: var(--tracking-tight); }
 
 /* 06 · Rules — earned by clicking; the effort demonstrates rule 01 --------- */
+/* Tighten the rules chapter so there is no empty band before the rules: the
+   header sits close to the loader, and the (locked) rules begin right below. */
+.rules .section__head--stacked { margin-bottom: var(--space-lg); }
 .rules__loader {
   display: flex; flex-direction: column; align-items: center; gap: var(--space-sm);
-  text-align: center; margin: var(--space-md) 0 var(--space-lg);
+  text-align: center; margin: 0 0 var(--space-md);
   transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out),
     max-height var(--dur-slow) var(--ease-out);
   max-height: 260px; overflow: hidden;
@@ -933,7 +936,7 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
    rows — you can see there are five, numbered, waiting. The text is obscured,
    not hidden, so the section never reads as empty. Each click brings them a
    step into focus; the fourth resolves them fully. */
-.rules__list { display: grid; gap: 0; list-style: none; margin-top: var(--space-md); }
+.rules__list { display: grid; gap: 0; list-style: none; margin-top: 0; }
 .rule {
   display: grid; grid-template-columns: auto 1fr auto; gap: clamp(1rem, 3vw, 2.5rem);
   align-items: center; padding: clamp(1.1rem, 2.4vw, 1.9rem) 0; border-top: 1px solid var(--c-line);

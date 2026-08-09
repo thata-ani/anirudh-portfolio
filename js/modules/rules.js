@@ -40,7 +40,7 @@ export function initRules() {
     if (aha) {
       aha.textContent =
         `That took ${clicks} clicks to reveal what one could have. ` +
-        `That is rule 01 — relevant to click less.`;
+        `That is rule 01 — click less.`;
     }
   };
 
