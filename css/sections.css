@@ -431,25 +431,83 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 /* ===========================================================================
    10 · RECOMMENDATIONS — Collaboration
    =========================================================================== */
-.team { position: relative; height: clamp(240px, 40vw, 380px); margin-bottom: var(--space-2xl); }
-.team__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.team__wire { stroke: var(--c-light); stroke-width: 1.4; fill: none; stroke-dasharray: var(--len, 400); stroke-dashoffset: var(--len, 400); opacity: 0.55; transition: stroke-dashoffset var(--dur-slow) var(--ease-out); }
-.team[data-connected="true"] .team__wire { stroke-dashoffset: 0; }
-.team__nodes { position: absolute; inset: 0; }
-.team-node { position: absolute; translate: -50% -50%; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; transition: transform var(--dur-slow) var(--ease-out); will-change: transform; }
-.team-node__dot { width: 16px; height: 16px; border-radius: 50%; background: var(--c-ink-500); border: 1px solid var(--c-line-strong); transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out); }
-.team-node__label { font-size: 0.85rem; letter-spacing: 0.04em; color: var(--c-warm-300); transition: color var(--dur-mid) var(--ease-out); }
-.team[data-connected="true"] .team-node__dot { background: var(--c-light); border-color: var(--c-light); box-shadow: 0 0 18px 2px var(--c-light-glow); transform: scale(1.1); }
-.team[data-connected="true"] .team-node__label { color: var(--c-warm-100); }
+/* A circular product ecosystem. Disciplines rest apart on a circle; the
+   central action brings them together — spokes + ring draw alive, and labels
+   live OUTSIDE the ring so the network never crosses the type. */
+.ecosystem {
+  position: relative; width: min(100%, clamp(320px, 60vmin, 540px));
+  aspect-ratio: 1; margin: var(--space-2xl) auto var(--space-3xl); overflow: visible;
+}
+.ecosystem__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 1; }
+.eco-spoke {
+  stroke: var(--c-light); stroke-width: 1.2; vector-effect: non-scaling-stroke;
+  opacity: 0; transition: opacity var(--dur-mid) var(--ease-out) calc(var(--i, 0) * 70ms);
+}
+.ecosystem[data-connected="true"] .eco-spoke { opacity: 0.5; }
+.eco-ring {
+  fill: none; stroke: var(--c-light); stroke-width: 1.4; vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0;
+  transition: stroke-dashoffset 1.1s var(--ease-out) 0.45s, opacity var(--dur-mid) var(--ease-out) 0.45s;
+}
+.ecosystem[data-connected="true"] .eco-ring { stroke-dashoffset: 0; opacity: 0.5; }
+
+.ecosystem__nodes { position: absolute; inset: 0; z-index: 2; list-style: none; }
+.eco-node {
+  position: absolute; translate: -50% -50%;
+  transition: transform var(--dur-slow) var(--ease-out); will-change: transform;
+}
+.eco-node__dot {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--c-ink-500); border: 1px solid var(--c-line-strong);
+  transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
+}
+.eco-node__label {
+  position: absolute; white-space: nowrap; font-size: 0.9rem; letter-spacing: 0.02em;
+  color: var(--c-warm-400); transition: color var(--dur-mid) var(--ease-out);
+}
+.ecosystem[data-connected="true"] .eco-node__dot {
+  background: var(--c-light); border-color: var(--c-light);
+  box-shadow: 0 0 0 5px var(--c-light-haze); transform: scale(1.08);
+}
+.ecosystem[data-connected="true"] .eco-node__label { color: var(--c-warm-100); }
+
+/* The central action = the shared product forming at the centre. */
+.ecosystem__core {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 3;
+  width: clamp(98px, 21%, 132px); aspect-ratio: 1; border-radius: 50%;
+  display: grid; place-items: center; text-align: center; padding: 0.5rem;
+  border: 1px solid var(--c-line-strong); background: var(--c-ink-800);
+  color: var(--c-warm-200); font-weight: 600; font-size: 0.82rem; line-height: 1.15;
+  letter-spacing: 0.01em; cursor: pointer;
+  transition: background var(--dur-mid) var(--ease-out), color var(--dur-mid) var(--ease-out),
+    border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+  animation: core-invite 2.8s var(--ease-in-out) infinite;
+}
+.ecosystem__core:hover { transform: scale(1.05); }
+.ecosystem__core:focus-visible { outline: 2px solid var(--c-light); outline-offset: 4px; }
+.ecosystem__core-done { display: none; }
+@keyframes core-invite {
+  0%, 100% { box-shadow: 0 0 0 0 var(--c-light-haze); }
+  55% { box-shadow: 0 0 0 14px transparent; }
+}
+.ecosystem[data-connected="true"] .ecosystem__core {
+  background: var(--c-light); color: #fff; border-color: var(--c-light); animation: none;
+  box-shadow: 0 0 0 8px var(--c-light-haze);
+}
+.ecosystem[data-connected="true"] .ecosystem__core-idle { display: none; }
+.ecosystem[data-connected="true"] .ecosystem__core-done { display: block; }
+@media (prefers-reduced-motion: reduce) { .ecosystem__core { animation: none; } }
 .quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); opacity: 0; transform: translateY(24px); visibility: hidden; transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow); }
-.recommendations[data-state="connected"] .quotes { opacity: 1; transform: none; visibility: visible; }
+.testimonials[data-state="connected"] .quotes { opacity: 1; transform: none; visibility: visible; }
 .quote { border-left: 1px solid var(--c-line-strong); padding-left: var(--space-md); }
 .quote__text { font-size: 1.25rem; line-height: 1.4; color: var(--c-warm-100); letter-spacing: var(--tracking-tight); }
 .quote__by { margin-top: var(--space-md); display: flex; flex-direction: column; gap: 0.1rem; }
 .quote__name { font-weight: 600; color: var(--c-warm-100); }
 .quote__co { font-size: 0.9rem; color: var(--c-warm-400); }
 .team__note { margin-top: var(--space-lg); color: var(--c-warm-400); font-size: 0.98rem; }
-.recommendations[data-state="connected"] .team__note { display: none; }
+.testimonials[data-state="connected"] .team__note { display: none; }
 
 @media (max-width: 720px) { .quotes { grid-template-columns: 1fr; } }
 
@@ -799,21 +857,6 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .process__q { margin-top: 0.4rem; color: var(--c-warm-400); font-size: 1.05rem; }
 .process__stage:hover .process__word { color: var(--c-warm-100); }
 
-/* 07 · Collaboration — product at the centre of a living system ----------- */
-.team-node--center .team-node__dot { width: 22px; height: 22px; }
-.team-node--center .team-node__label { color: var(--c-warm-100); font-weight: 600; }
-.team[data-connected="true"] .team-node--center .team-node__dot {
-  background: var(--c-light); border-color: var(--c-light);
-  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.06), 0 0 22px 3px var(--c-light-glow);
-  animation: team-pulse 2.6s var(--ease-in-out) infinite;
-}
-@keyframes team-pulse {
-  0%, 100% { box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.06), 0 0 18px 2px var(--c-light-glow); }
-  50% { box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.02), 0 0 30px 6px var(--c-light-glow); }
-}
-.team__wire--spoke { opacity: 0.5; }
-.team__wire--ring { opacity: 0.22; }
-
 /* 08 · Experience — roadmap spine + growing emphasis ---------------------- */
 .roadmap { position: relative; padding-left: clamp(1.5rem, 4vw, 3rem); }
 .roadmap::before {
@@ -915,18 +958,6 @@ html[data-reveal="on"] #progress { opacity: 0.85; }
 @media (prefers-reduced-motion: reduce) { #progress { display: none; } }
 
 /* Audit fixes ------------------------------------------------------------- */
-/* Uniform strokes despite the stretched viewBox; the dash-draw distorts under
-   preserveAspectRatio="none", so the network forms via a clean opacity fade —
-   spokes read stronger than the neighbour ring (product at the core). */
-.team__wire {
-  vector-effect: non-scaling-stroke;
-  stroke-dasharray: none; stroke-dashoffset: 0;
-  opacity: 0; transition: opacity var(--dur-slow) var(--ease-out);
-}
-.team__wire--spoke { stroke-width: 2; }
-.team__wire--ring { stroke-width: 1.3; }
-.team[data-connected="true"] .team__wire--spoke { opacity: 0.6; }
-.team[data-connected="true"] .team__wire--ring { opacity: 0.34; transition-delay: 0.15s; }
 .ia-link { vector-effect: non-scaling-stroke; }
 .ia-link--scattered { stroke-width: 1.4; }
 .ia-link--organized { stroke-width: 1.6; }
