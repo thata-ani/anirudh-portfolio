@@ -822,18 +822,35 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 
 /* 04 · Companies — a career trajectory running through the page ------------- */
 /* Not an isolated colour block: a soft tonal state that fades into the page. */
-.companies { background: transparent; position: relative; overflow: hidden; }
+/* This chapter is the page's one dark block — a deliberate contrast against the
+   white so the accumulated career reads as a distinct, quieter room. */
+.companies { position: relative; overflow: hidden; }
+.section.companies { background: #0b0b0c; } /* beats the even-chapter tint */
 .companies::before {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(150% 68% at 50% 50%, var(--c-chapter) 0%, rgba(245, 245, 243, 0.5) 42%, transparent 74%);
+  background: radial-gradient(140% 70% at 50% 46%, #191a1d 0%, #101012 46%, #0b0b0c 78%);
 }
 .companies > * { position: relative; z-index: 1; }
+/* Invert type + trajectory to light on the dark ground. */
+.companies .section__label { color: #f4f4f2; }
+.companies .section__label::before { background: #f4f4f2; box-shadow: 0 0 12px 1px rgba(255, 255, 255, 0.25); }
 .companies__title { text-align: center; margin-bottom: var(--space-2xs); }
 .companies__lead {
   text-align: center; margin-bottom: var(--space-lg);
   font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--c-warm-400);
+  text-transform: uppercase; color: rgba(244, 244, 242, 0.5);
 }
+.companies .trajectory__line { background: rgba(255, 255, 255, 0.22); opacity: 1; }
+.companies .trajectory__line-lit { background: #ffffff; opacity: 0.95; }
+.companies .trajectory__focal {
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.32) 16%, rgba(255, 255, 255, 0.32) 84%, transparent);
+}
+.companies .trajectory__focal::before {
+  background: #ffffff; box-shadow: 0 0 0 5px #0b0b0c, 0 0 0 6px rgba(255, 255, 255, 0.34);
+}
+.companies .traj-item { color: rgba(255, 255, 255, 0.4); }
+.companies .traj-item.is-near { color: rgba(255, 255, 255, 0.72); }
+.companies .traj-item.is-focal { color: #ffffff; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* The trajectory — full-bleed: a single STRAIGHT career line with names
