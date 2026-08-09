@@ -217,12 +217,19 @@
     </section>
 
     <!-- ===============================================================
-         04 · COMPANIES I'VE BUILT WITH — marquee
+         04 · COMPANIES I'VE BUILT WITH — a career trajectory
+         Different organizations → accumulated experience → one designer.
          =============================================================== -->
     <section id="companies" class="section companies" data-lx="50%" data-lsize="70vmax" aria-labelledby="companies-title">
       <p class="section__label companies__title" id="companies-title">Companies I've Built With</p>
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track" id="marquee-track"></div>
+      <p class="companies__lead">Different organizations · one accumulating practice</p>
+      <div class="trajectory" aria-hidden="true">
+        <svg class="trajectory__path" id="trajectory-path" preserveAspectRatio="none">
+          <path class="traj-line" id="traj-line" />
+          <path class="traj-lit" id="traj-lit" />
+        </svg>
+        <div class="trajectory__focal"></div>
+        <div class="trajectory__track" id="marquee-track"></div>
       </div>
       <p class="sr-only">Anirudh has built with Syngenta, PwC, Deloitte, Innovapptive, Xtream IT Solutions, and UI Solutions.</p>
     </section>

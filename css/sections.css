@@ -643,20 +643,71 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   .work-item__screen { grid-area: screen; max-width: 360px; }
 }
 
-/* 04 · Companies — marquee -------------------------------------------------- */
-.companies__title { text-align: center; margin-bottom: var(--space-xl); }
-.marquee {
-  position: relative; overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+/* 04 · Companies — a career trajectory running through the page ------------- */
+/* Not an isolated colour block: a soft tonal state that fades into the page. */
+.companies { background: transparent; position: relative; overflow: hidden; }
+.companies::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(150% 68% at 50% 50%, var(--c-chapter) 0%, rgba(245, 245, 243, 0.5) 42%, transparent 74%);
 }
-.marquee__track { display: flex; align-items: center; gap: clamp(2.5rem, 6vw, 5rem); width: max-content; animation: marquee 36s linear infinite; }
-.marquee:hover .marquee__track { animation-play-state: paused; }
+.companies > * { position: relative; z-index: 1; }
+.companies__title { text-align: center; margin-bottom: var(--space-2xs); }
+.companies__lead {
+  text-align: center; margin-bottom: var(--space-lg);
+  font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--c-warm-400);
+}
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee__item { font-size: clamp(1.2rem, 1rem + 1.1vw, 1.9rem); font-weight: 600; letter-spacing: -0.01em; color: var(--c-warm-400); white-space: nowrap; display: inline-flex; align-items: center; gap: 0.7rem; transition: color var(--dur-fast) var(--ease-out); }
-.marquee__item:hover { color: var(--c-warm-100); }
-.marquee__item::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c-line-strong); flex: none; }
-@media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; } }
+
+/* The trajectory — full-bleed, tall: the compositional spine of the section. */
+.trajectory {
+  position: relative; height: clamp(340px, 46vh, 520px);
+  margin-inline: calc(-1 * max(var(--gutter), (100% - var(--container)) / 2));
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 11%, #000 89%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 11%, #000 89%, transparent);
+}
+.trajectory__path { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.traj-line { fill: none; stroke: var(--c-line-strong); stroke-width: 1.4; opacity: 0.5; }
+.traj-lit  { fill: none; stroke: var(--c-light); stroke-width: 2.2; stroke-linecap: round; opacity: 0.85; }
+
+/* Focal axis + arrival ring at the path's centre crossing. */
+.trajectory__focal {
+  position: absolute; left: 50%; top: 10%; bottom: 10%; width: 1px; translate: -50% 0; z-index: 2;
+  background: linear-gradient(to bottom, transparent, var(--c-line-strong) 22%, var(--c-line-strong) 78%, transparent);
+}
+.trajectory__focal::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 58px; height: 58px; translate: -50% -50%;
+  border-radius: 50%; border: 1px solid var(--c-line-strong); opacity: 0.7;
+}
+
+.trajectory__track {
+  position: absolute; top: 0; bottom: 0; left: 0; z-index: 3;
+  display: flex; align-items: center; gap: clamp(2.5rem, 6vw, 5.5rem);
+  width: max-content; animation: marquee 44s linear infinite;
+}
+.trajectory:hover .trajectory__track { animation-play-state: paused; }
+.traj-item {
+  white-space: nowrap; font-size: clamp(1.3rem, 1rem + 1.3vw, 2.15rem); font-weight: 600;
+  letter-spacing: -0.01em; color: var(--c-warm-400);
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  transform-origin: center; will-change: transform, opacity;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.traj-item__dot {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--c-line-strong); flex: none;
+  transition: background var(--dur-fast) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
+}
+.traj-item.is-near { color: var(--c-warm-200); }
+.traj-item.is-focal { color: var(--c-warm-100); }
+.traj-item.is-focal .traj-item__dot {
+  background: var(--c-light); transform: scale(1.15);
+  box-shadow: 0 0 0 6px var(--c-light-haze), 0 0 0 1px var(--c-light);
+}
+@media (prefers-reduced-motion: reduce) {
+  .trajectory { height: auto; }
+  .trajectory__track { position: static; animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
+  .trajectory__path, .trajectory__focal { display: none; }
+}
 
 /* 05 · My Process ----------------------------------------------------------- */
 .process__flow { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(0.75rem, 2vw, 1.75rem); }
@@ -744,20 +795,6 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 }
 .process__q { margin-top: 0.4rem; color: var(--c-warm-400); font-size: 1.05rem; }
 .process__stage:hover .process__word { color: var(--c-warm-100); }
-
-/* 04 · Companies — a focal trajectory ------------------------------------- */
-.companies { position: relative; }
-.marquee { position: relative; }
-.marquee::before { /* focal point marker at centre */
-  content: ""; position: absolute; left: 50%; top: -14px; bottom: -14px; width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--c-line-strong), transparent);
-  z-index: 2;
-}
-.marquee::after { /* a soft focus pool at centre */
-  content: ""; position: absolute; left: 50%; top: 50%; width: 220px; height: 220px;
-  translate: -50% -50%; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.04), transparent 70%);
-}
 
 /* 07 · Collaboration — product at the centre of a living system ----------- */
 .team-node--center .team-node__dot { width: 22px; height: 22px; }
@@ -862,10 +899,6 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .principles[data-state="clear"] .principle__complex { opacity: 0; transform: translateY(-8px); pointer-events: none; }
 .principles[data-state="clear"] .principle__simple { opacity: 1; color: var(--c-warm-100); transform: none; }
 .principles[data-state="clear"] .principle__num { color: var(--c-light); }
-
-/* Companies focal items (scale/opacity set per-frame in companies.js) */
-.marquee__item { transform-origin: center; will-change: transform, opacity; }
-.marquee__item.is-focal { color: var(--c-warm-100); }
 
 /* Continuity thread — a quiet scroll progress line tying the journey together.
    Hidden until the lights are on, so it never competes with the dark opening. */
