@@ -18,7 +18,7 @@ export function initHero() {
 
   const setLit = (lit) => {
     root.setAttribute("data-reveal", lit ? "on" : "off");
-    switchBtn.setAttribute("aria-checked", String(lit));
+    switchBtn.setAttribute("aria-pressed", String(lit));
   };
 
   const reveal = () => {
