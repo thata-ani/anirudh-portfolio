@@ -66,17 +66,19 @@ export function initMusic() {
 
     const ctx = unlock(); // already resumed within the gesture
 
-    let fellBack = false;
-    const fallback = () => { if (!fellBack && current === id) { fellBack = true; synth = makeAmbient(id, ctx); } };
+    // Start audible music IMMEDIATELY, inside the gesture — this guarantees
+    // sound even under strict autoplay policies. If a real, legally-provided
+    // track exists at assets/music/<vibe>.mp3 it upgrades to that and the synth
+    // steps aside; otherwise the melodic synth keeps playing.
+    synth = makeMelody(id, ctx);
 
-    // Prefer a real track; fall back to the ambient bed if it can't load/play.
     const el = new Audio(TRACKS[id]);
     el.loop = true; el.volume = 0; el.preload = "auto";
-    el.addEventListener("error", fallback, { once: true });
     el.play().then(() => {
       if (current !== id) { el.pause(); return; }
+      if (synth) { synth.stop(); synth = null; } // real track wins
       audioEl = el; fadeTo(el, VOL, 600);
-    }).catch(fallback);
+    }).catch(() => {}); // no track → keep the synth melody
   };
 
   toggle.addEventListener("click", () => {
@@ -101,11 +103,14 @@ function fadeTo(el, target, ms) {
 }
 
 /**
- * A restrained ambient bed per vibe (fallback). Sustained detuned pads with a
- * slow amplitude drift; "rock" adds a soft low pulse. Uses the already-unlocked
- * context so it is audible immediately.
+ * A clearly-audible, looping ORIGINAL melody per vibe (the built-in fallback).
+ * A plucked lead plays a pentatonic/raga-flavoured phrase over a soft pad, with
+ * a warm delay for space — melodic and recognizable, not a drone. This is an
+ * original composition inspired by that style; it is NOT any copyrighted
+ * recording. Drop a legally-provided track at assets/music/<vibe>.mp3 to use a
+ * real song instead. Uses the already-unlocked context so it plays at once.
  */
-function makeAmbient(id, ctx) {
+function makeMelody(id, ctx) {
   if (!ctx) return { stop() {} };
   if (ctx.state === "suspended") { try { ctx.resume(); } catch {} }
   const now = ctx.currentTime;
@@ -113,61 +118,74 @@ function makeAmbient(id, ctx) {
   const master = ctx.createGain();
   master.gain.value = 0.0001;
   master.connect(ctx.destination);
-  master.gain.exponentialRampToValueAtTime(0.2, now + 0.8);
+  const peak = id === "rock" ? 0.36 : 0.32;
+  master.gain.exponentialRampToValueAtTime(peak, now + 0.5);
 
-  const chords = {
-    melody: [261.63, 329.63, 392.0],  // C major
-    emotion: [220.0, 261.63, 329.63], // A minor
-    rock: [130.81, 196.0, 261.63],    // C power-ish
-  };
-  const type = id === "rock" ? "sawtooth" : "sine";
-  const nodes = [];
+  // A soft feedback delay — warmth and space.
+  const delay = ctx.createDelay(1.0);
+  delay.delayTime.value = id === "emotion" ? 0.36 : 0.26;
+  const fb = ctx.createGain(); fb.gain.value = 0.3;
+  const wet = ctx.createGain(); wet.gain.value = 0.34;
+  delay.connect(fb).connect(delay);
+  delay.connect(wet).connect(master);
 
+  // Warm lead through a lowpass; also feeds the delay.
   const lp = ctx.createBiquadFilter();
-  lp.type = "lowpass";
-  lp.frequency.value = id === "rock" ? 700 : 1600;
-  lp.connect(master);
+  lp.type = "lowpass"; lp.frequency.value = id === "rock" ? 2800 : 2100;
+  lp.connect(master); lp.connect(delay);
 
-  (chords[id] || chords.melody).forEach((f, i) => {
-    [f, f * 1.005].forEach((freq) => {
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = type;
-      o.frequency.value = freq;
-      g.gain.value = 0.2 / (i + 1);
-      o.connect(g).connect(lp);
-      o.start();
-      nodes.push(o);
-      const lfo = ctx.createOscillator();
-      const lg = ctx.createGain();
-      lfo.frequency.value = 0.06 + i * 0.02;
-      lg.gain.value = 0.06;
-      lfo.connect(lg).connect(g.gain);
-      lfo.start();
-      nodes.push(lfo);
-    });
+  // Looping melodic phrases (Hz). Pentatonic / raga-flavoured, in order.
+  const SEQ = {
+    melody:  [523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25, 659.25, 783.99, 880.0, 783.99, 659.25],
+    emotion: [440.0, 523.25, 587.33, 523.25, 493.88, 440.0, 392.0, 440.0, 523.25, 493.88, 440.0, 392.0],
+    rock:    [329.63, 392.0, 440.0, 523.25, 440.0, 392.0, 329.63, 440.0, 523.25, 587.33, 523.25, 440.0],
+  };
+  const seq = SEQ[id] || SEQ.melody;
+  const step = id === "emotion" ? 0.5 : id === "rock" ? 0.3 : 0.38; // seconds/note
+  const leadType = id === "rock" ? "sawtooth" : "triangle";
+
+  // A low sustained pad for body.
+  const padNotes = id === "emotion" ? [220.0, 329.63] : id === "rock" ? [130.81, 196.0] : [261.63, 392.0];
+  const drones = [];
+  padNotes.forEach((f) => {
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.type = "sine"; o.frequency.value = f; g.gain.value = 0.09;
+    o.connect(g).connect(master); o.start(); drones.push(o);
   });
-
-  if (id === "rock") {
-    const pulse = ctx.createOscillator();
-    const pg = ctx.createGain();
-    pulse.type = "square";
-    pulse.frequency.value = 1.6;
-    pg.gain.value = 0.05;
-    pulse.connect(pg).connect(master.gain);
-    pulse.start();
-    nodes.push(pulse);
+  if (id === "rock") { // steady low pulse
+    const p = ctx.createOscillator(); const pg = ctx.createGain();
+    p.type = "square"; p.frequency.value = 2; pg.gain.value = 0.04;
+    p.connect(pg).connect(master.gain); p.start(); drones.push(p);
   }
+
+  let i = 0, stopped = false, timer = null;
+  const playNote = () => {
+    if (stopped) return;
+    const f = seq[i % seq.length];
+    const t = ctx.currentTime;
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.type = leadType; o.frequency.setValueAtTime(f, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.24, t + 0.02);   // pluck attack
+    g.gain.exponentialRampToValueAtTime(0.0001, t + step * 0.95); // decay
+    o.connect(g).connect(lp);
+    o.start(t); o.stop(t + step);
+    i += 1;
+    timer = setTimeout(playNote, step * 1000);
+  };
+  playNote();
 
   return {
     stop() {
+      stopped = true;
+      if (timer) clearTimeout(timer);
       const t = ctx.currentTime;
       try {
         master.gain.cancelScheduledValues(t);
         master.gain.setValueAtTime(master.gain.value, t);
         master.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
       } catch {}
-      setTimeout(() => nodes.forEach((n) => { try { n.stop(); } catch {} }), 460);
+      setTimeout(() => drones.forEach((n) => { try { n.stop(); } catch {} }), 460);
     },
   };
 }
