@@ -1,37 +1,25 @@
 /**
- * RULES — Principle: meaningful interaction ("Click less").
+ * RULES — Principle: meaningful interaction / simple language ("Click less").
  *
- * The rules are not shown. Each row is filled with ENCODED, difficult-to-read
- * text — scrambled glyphs, not the rules. The visitor has to click, and click,
- * and click again; each click "decodes" a little, a meter creeps up 25% at a
- * time. Only on the fourth click does the gibberish resolve into the actual
- * rules. You literally worked to read what one clear line could have said —
- * which is exactly rule 01: click less, every interaction should have meaning.
+ * The rules first appear as ONE dense, over-qualified paragraph — perfectly
+ * legible, but written the way most products are: hard to act on. The visitor
+ * has to click, and click, and click again to "simplify" it; a meter creeps up
+ * 25% at a time. On the fourth click the paragraph gives way to the five plain
+ * rules it was always trying to say.
  *
- * A demonstration of interaction cost → user effort → meaningful action, not a
- * gimmick. Content is the approved rules only; the scramble is presentational.
+ * Complex language makes people work; simple language makes the product grow.
+ * The interaction is the lesson — which is rule 01: click less, say it simply,
+ * make every word (and every click) count. Content is the approved rules only.
  */
 import { haptic } from "./sound.js";
 
 const TARGET = 4;
 const NUDGES = [
-  "Decoding…",
-  "Still decoding. Click again.",
-  "Really — more clicks?",
-  "All that just to read it. That's the point.",
+  "Simplifying…",
+  "Still simplifying. Click again.",
+  "Almost plain.",
+  "Four clicks to make it simple. That's the point.",
 ];
-const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-const rand = (n) => Math.floor(Math.random() * n);
-
-/** Same-length gibberish; spaces/newlines preserved so it reads as "text". */
-function scramble(real) {
-  let out = "";
-  for (let i = 0; i < real.length; i++) {
-    const ch = real[i];
-    out += ch === " " || ch === "\n" ? ch : GLYPHS[rand(GLYPHS.length)];
-  }
-  return out;
-}
 
 export function initRules() {
   const section = document.getElementById("rules");
@@ -42,70 +30,38 @@ export function initRules() {
   const count = document.getElementById("rules-count");
   const nudge = document.getElementById("rules-nudge");
   const aha = document.getElementById("rules-aha");
-  const texts = Array.from(section.querySelectorAll(".rule__text"));
+  const cipher = document.getElementById("rules-cipher");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Encode every rule: stash the real text, render scrambled glyphs in its place.
-  texts.forEach((el) => {
-    el.dataset.real = el.textContent;
-    el.textContent = scramble(el.dataset.real);
-  });
+  // Progressive enhancement: only with JS do we hide the plain rules behind the
+  // dense paragraph. Without JS the real rules are shown directly.
+  section.setAttribute("data-mode", "locked");
 
   let clicks = 0;
   let revealed = false;
 
-  // A brief "decoding" churn on each pre-reveal click — the glyphs flicker, then
-  // settle back to (still unreadable) gibberish. Feedback without giving it away.
-  const churn = (ms = 420) => {
-    if (reduce) {
-      texts.forEach((el) => { el.textContent = scramble(el.dataset.real); });
-      return;
-    }
-    const end = performance.now() + ms;
-    const tick = (now) => {
-      texts.forEach((el) => { el.textContent = scramble(el.dataset.real); });
-      if (now < end) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+  const finish = () => {
+    section.setAttribute("data-mode", "revealed");
+    section.setAttribute("data-revealed", "true");
   };
 
-  // The payoff: the gibberish resolves left-to-right into the real rules,
-  // staggered row by row.
-  const resolve = () => {
+  const reveal = () => {
     revealed = true;
-    section.setAttribute("data-revealed", "true");
     btn.setAttribute("aria-disabled", "true");
-    if (label) label.textContent = "Decoded";
+    if (label) label.textContent = "Simplified";
     if (nudge) nudge.textContent = "";
 
-    if (reduce) {
-      texts.forEach((el) => { el.textContent = el.dataset.real; });
+    if (reduce || !cipher) {
+      finish();
     } else {
-      texts.forEach((el, idx) => {
-        const real = el.dataset.real;
-        const total = real.length;
-        const frames = 26;
-        let f = 0;
-        const step = () => {
-          f += 1;
-          const shown = Math.floor((f / frames) * total);
-          let out = "";
-          for (let i = 0; i < total; i++) {
-            const ch = real[i];
-            out += i < shown || ch === " " || ch === "\n" ? ch : GLYPHS[rand(GLYPHS.length)];
-          }
-          el.textContent = out;
-          if (f < frames) requestAnimationFrame(step);
-          else el.textContent = real;
-        };
-        setTimeout(step, idx * 130);
-      });
+      cipher.classList.add("is-out"); // dense paragraph fades away…
+      setTimeout(finish, 420); // …then the plain rules arrive
     }
 
     if (aha) {
       aha.textContent =
-        `That took ${clicks} clicks to decode what one clear line could have said. ` +
-        `That is rule 01 — click less.`;
+        `That paragraph and these five lines mean the same thing — but one made ` +
+        `you work to read it. Simpler language, better product. That is rule 01.`;
     }
   };
 
@@ -119,7 +75,8 @@ export function initRules() {
     section.setAttribute("data-clicks", String(clicks));
     if (nudge) nudge.textContent = NUDGES[Math.min(clicks, NUDGES.length) - 1] || "";
     if (label && clicks < TARGET) label.textContent = "Click again";
-    if (clicks >= TARGET) resolve();
-    else churn();
+    // Each click visibly thins the dense prose — feedback that it's simplifying.
+    if (cipher && !reduce) cipher.style.opacity = String(Math.max(0.3, 1 - clicks * 0.14));
+    if (clicks >= TARGET) reveal();
   });
 }
