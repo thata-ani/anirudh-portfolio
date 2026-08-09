@@ -897,19 +897,15 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .process__word { font-size: clamp(1.4rem, 1rem + 2vw, 2.6rem); font-weight: 600; letter-spacing: var(--tracking-tight); }
 
 /* 06 · Rules — earned by clicking; the effort demonstrates rule 01 --------- */
-/* Tighten the rules chapter so there is no empty band before the rules: the
-   header sits close to the loader, and the (locked) rules begin right below. */
 .rules .section__head--stacked { margin-bottom: var(--space-lg); }
-.rules__loader {
-  display: flex; flex-direction: column; align-items: center; gap: var(--space-sm);
-  text-align: center; margin: 0 0 var(--space-md);
-  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out),
-    max-height var(--dur-slow) var(--ease-out);
-  max-height: 260px; overflow: hidden;
+/* Action row (prompt + button + silent meter) sits under the dense paragraph
+   and invites the visitor to simplify it. It is shown only while locked. */
+.rules__action {
+  display: none; flex-direction: column; align-items: center; gap: var(--space-sm);
+  text-align: center; margin: var(--space-lg) 0 0;
 }
-.rules[data-revealed="true"] .rules__loader {
-  opacity: 0; transform: translateY(-8px); max-height: 0; margin-block: 0; pointer-events: none;
-}
+.rules[data-mode="locked"] .rules__action { display: flex; }
+.rules__prompt { color: var(--c-warm-300); font-size: 1rem; }
 .rules__click {
   font: inherit; font-weight: 600; font-size: 1.02rem; letter-spacing: -0.01em;
   color: var(--c-warm-100); background: var(--c-ink-800);
@@ -928,9 +924,6 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   overflow: hidden;
 }
 .rules__meter-fill { display: block; height: 100%; width: 0; background: var(--c-light); transition: width var(--dur-mid) var(--ease-out); }
-.rules__status { display: flex; align-items: baseline; gap: 0.9rem; justify-content: center; min-height: 1.3em; }
-.rules__count { font-family: var(--font-mono); font-size: 0.82rem; color: var(--c-warm-300); font-variant-numeric: tabular-nums; }
-.rules__nudge { font-size: 0.95rem; color: var(--c-warm-400); }
 
 /* Before the effort, the rules exist only as one dense, over-qualified
    paragraph — legible, but hard to act on (the way most products are written).

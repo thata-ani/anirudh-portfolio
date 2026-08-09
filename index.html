@@ -289,21 +289,11 @@
         <p class="section__invite">Most products make you work for the payoff. <span>So does this — for now.</span></p>
       </div>
 
-      <div class="rules__loader">
-        <button type="button" class="rules__click" id="rules-click" aria-describedby="rules-title" aria-live="off">
-          <span class="rules__click-label" id="rules-click-label">Click to simplify</span>
-        </button>
-        <div class="rules__meter" aria-hidden="true"><span class="rules__meter-fill" id="rules-meter"></span></div>
-        <p class="rules__status">
-          <span class="rules__count" id="rules-count" aria-hidden="true">0%</span>
-          <span class="rules__nudge" id="rules-nudge" aria-live="polite"></span>
-        </p>
-      </div>
-
       <!-- The rules, written the way most products are: dense, over-qualified,
-           hard to act on. Clicking "simplifies" it; on the fourth click this one
-           paragraph resolves into the five plain rules it was always trying to
-           say. Simpler language, better product — the section proves rule 01. -->
+           hard to act on. A quiet bar fills 25% per click; on the fourth click
+           this one paragraph gives way to the five plain rules it was always
+           trying to say. Simpler language, better product — the section is
+           rule 01. Progressive enhancement: with no JS, the plain rules show. -->
       <p class="rules__cipher" id="rules-cipher">
         Insofar as the interactive surface of any artefact ought to be
         parsimoniously rationed, each engagement the user is compelled to
@@ -318,6 +308,14 @@
         terminal completion, there subsisting only the subsequent decision that
         awaits its maker.
       </p>
+
+      <div class="rules__action">
+        <p class="rules__prompt">Hard to read, isn't it? Good products keep it simple.</p>
+        <button type="button" class="rules__click" id="rules-click" aria-describedby="rules-title" aria-live="off">
+          <span class="rules__click-label">Simplify</span>
+        </button>
+        <div class="rules__meter" aria-hidden="true"><span class="rules__meter-fill" id="rules-meter"></span></div>
+      </div>
 
       <ol class="rules__list" id="rules-list">
         <li class="rule rule--key" style="--i:0">
