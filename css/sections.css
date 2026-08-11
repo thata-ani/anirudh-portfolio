@@ -736,6 +736,19 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 }
 .work-item__title { font-size: var(--fs-h3); line-height: 1.1; letter-spacing: var(--tracking-tight); font-weight: 600; }
 .work-item__desc { margin-top: 0.4rem; color: var(--c-warm-300); line-height: 1.5; max-width: 46ch; }
+/* Entry point to the DesignBesti case study — appears once the work is
+   organized, so the link reads as part of the ordered result. */
+.work-item__open {
+  display: inline-flex; align-items: center; margin-top: 0.85rem;
+  font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--c-light);
+  border-bottom: 1px solid var(--c-line-strong); padding-bottom: 2px;
+  opacity: 0; transform: translateY(4px); pointer-events: none;
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.work[data-state="organized"] .work-item__open { opacity: 1; transform: none; pointer-events: auto; }
+.work-item__open:hover { border-color: var(--c-light); }
+.work-item__open:focus-visible { outline: 2px solid var(--c-light); outline-offset: 3px; }
 
 .work-item__screen {
   aspect-ratio: 16 / 10; width: 100%; border-radius: var(--radius-md);
