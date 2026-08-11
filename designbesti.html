@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" data-db>
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.classList.add("js");</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>DesignBesti — a Product Designer's case study · Anirudh Thata</title>
+  <meta name="description" content="How I saw a real problem in design feedback, framed it, explored what AI could contribute, made product trade-offs, and built DesignBesti — a design partner that challenges the work before it ships." />
+  <link rel="preload" href="assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/case.css" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+</head>
+
+<body class="db">
+  <a class="db-skip" href="#db-main">Skip to the story</a>
+  <div class="db-progress" id="db-progress" aria-hidden="true"><span></span></div>
+
+  <!-- Minimal top bar — clearly a chapter of the same portfolio, not a new site. -->
+  <header class="db-top">
+    <a class="db-top__back" href="index.html"><span aria-hidden="true">←</span> Anirudh&nbsp;Thata</a>
+    <span class="db-top__here">DesignBesti · Case Study</span>
+    <a class="db-top__cta" href="index.html#contact">Let's connect</a>
+  </header>
+
+  <main id="db-main">
+
+    <!-- ============================================================
+         OPENING — experience → observation → problem → question → product
+         ============================================================ -->
+    <section class="db-hero">
+      <p class="db-eyebrow db-in">A design partner, built by a designer</p>
+      <p class="db-hero__obs db-in">
+        I've spent years watching design critiques turn into discussions about
+        whether something <em>“looks good.”</em>
+      </p>
+      <p class="db-hero__problem db-in">
+        The problem wasn't a lack of feedback. It was the lack of a
+        <strong>structured way to challenge a design.</strong>
+      </p>
+      <p class="db-hero__q db-in">
+        What if designers had another way to challenge their thinking — before
+        waiting for the next review?
+      </p>
+      <div class="db-hero__reveal db-in">
+        <span class="db-hero__mark" aria-hidden="true">DesignBesti</span>
+        <p class="db-hero__lede">A design partner I built to challenge the work before it ships.</p>
+      </div>
+      <p class="db-hero__scroll db-in" aria-hidden="true">Scroll — this is how I thought about it</p>
+    </section>
+
+    <!-- ============================================================
+         CORE PRINCIPLE — strengthen judgment, don't replace it
+         ============================================================ -->
+    <section class="db-principle db-dark">
+      <p class="db-principle__text db-in">
+        DesignBesti is <span class="db-strike">not built to replace</span> design
+        judgment. It's built to <span class="db-underline">strengthen</span> it.
+      </p>
+      <ol class="db-loop db-in" aria-label="The intended loop">
+        <li><span>AI</span> challenges</li>
+        <li><span>Designer</span> thinks</li>
+        <li><span>Designer</span> decides</li>
+        <li><span>Designer</span> improves</li>
+      </ol>
+      <p class="db-principle__note db-in">
+        The immediate value is feedback. The longer-term value is a sharper sense
+        of which feedback matters — and the confidence to accept, challenge, or
+        ignore it.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         NOT AN AI THAT DESIGNS FOR YOU — the questions it provokes
+         ============================================================ -->
+    <section class="db-block db-intent">
+      <p class="db-kicker db-in">The intent</p>
+      <h2 class="db-h2 db-in">I wasn't trying to build an AI that designs for you.</h2>
+      <p class="db-lede db-in">
+        Not another system that says “this is good” or “change this.” I wanted
+        another <em>perspective</em> — one that makes you stop and ask:
+      </p>
+      <ul class="db-questions db-in">
+        <li>Why?</li>
+        <li>Who could struggle with this?</li>
+        <li>What happens outside the happy path?</li>
+        <li>Is this actually a usability problem?</li>
+        <li>How would I explain this decision to a stakeholder?</li>
+      </ul>
+      <p class="db-intent__own db-in">The designer still owns the decision.</p>
+    </section>
+
+    <!-- ============================================================
+         OPPORTUNITY — how existing approaches handled feedback
+         ============================================================ -->
+    <section class="db-block db-approaches">
+      <p class="db-kicker db-in">The opportunity</p>
+      <h2 class="db-h2 db-in">I looked at how existing tools approached the feedback problem.</h2>
+      <ul class="db-approach-list">
+        <li class="db-approach db-in">
+          <h3>Human design critique</h3>
+          <p class="db-approach__good">Strong context, judgment and experience.</p>
+          <p class="db-approach__lim">Not always available when you need it.</p>
+        </li>
+        <li class="db-approach db-in">
+          <h3>User testing</h3>
+          <p class="db-approach__good">Real user behaviour.</p>
+          <p class="db-approach__lim">Requires users and a testing setup.</p>
+        </li>
+        <li class="db-approach db-in">
+          <h3>Figma-based tools</h3>
+          <p class="db-approach__good">Useful design/component checks.</p>
+          <p class="db-approach__lim">Often tied closely to the artifact.</p>
+        </li>
+        <li class="db-approach db-in">
+          <h3>Attention analysis</h3>
+          <p class="db-approach__good">Predicts visual attention.</p>
+          <p class="db-approach__lim">Answers a narrower question.</p>
+        </li>
+        <li class="db-approach db-approach--mine db-in">
+          <h3>DesignBesti</h3>
+          <p class="db-approach__good">Structured AI challenge — another perspective, available during the design process.</p>
+          <p class="db-approach__lim">Earlier, and more often.</p>
+        </li>
+      </ul>
+      <p class="db-approaches__msg db-in">
+        I wasn't trying to replace these. I saw an opportunity <em>between</em>
+        them — what happens if structured critique becomes available earlier, and
+        more often?
+      </p>
+    </section>
+
+    <!-- ============================================================
+         THE KEY PRODUCT QUESTION — the pivot
+         ============================================================ -->
+    <section class="db-pivot db-dark">
+      <p class="db-kicker db-kicker--light db-in">The turning point</p>
+      <p class="db-pivot__wrong db-in">Not “what AI features should I add?”</p>
+      <h2 class="db-pivot__q db-in">What kinds of questions should a designer be asking?</h2>
+      <p class="db-pivot__after db-in">That question — not a feature list — became the product.</p>
+    </section>
+
+    <!-- ============================================================
+         PRODUCT DECISION 1 — Stress Test (one design, many perspectives)
+         ============================================================ -->
+    <section class="db-block db-decision" id="stress-test">
+      <div class="db-oqd db-in">
+        <p><span class="db-oqd__k">Observation</span>A designer can become too close to their own work.</p>
+        <p><span class="db-oqd__k">Question</span>What changes when I stop looking at the screen only through my own eyes?</p>
+        <p><span class="db-oqd__k">Decision</span>Let one design be seen through many users at once.</p>
+        <p><span class="db-oqd__k">Experience</span>Stress Test.</p>
+      </div>
+
+      <h2 class="db-h2 db-in">One design. Different perspectives.</h2>
+      <p class="db-lede db-in">Pick who's looking. The critique changes — because the person does.</p>
+
+      <!-- Interactive: choose a perspective, the reading of the same screen changes. -->
+      <div class="db-stress db-frame db-in" id="stress">
+        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>Stress Test — checkout screen</span></div>
+        <div class="db-stress__body">
+          <div class="db-stress__canvas" aria-hidden="true">
+            <div class="db-mock db-mock--checkout">
+              <div class="db-mock__row db-mock__row--title"></div>
+              <div class="db-mock__row"></div>
+              <div class="db-mock__row db-mock__row--short"></div>
+              <div class="db-mock__field"></div>
+              <div class="db-mock__field"></div>
+              <div class="db-mock__cta"></div>
+              <div class="db-stress__lens" id="stress-lens"></div>
+            </div>
+          </div>
+          <div class="db-stress__panel">
+            <div class="db-stress__persp" role="tablist" aria-label="Perspective">
+              <button class="db-chip is-active" data-persp="first" role="tab" aria-selected="true">First-time</button>
+              <button class="db-chip" data-persp="power" role="tab" aria-selected="false">Power user</button>
+              <button class="db-chip" data-persp="a11y" role="tab" aria-selected="false">Accessibility</button>
+              <button class="db-chip" data-persp="older" role="tab" aria-selected="false">Older</button>
+              <button class="db-chip" data-persp="distracted" role="tab" aria-selected="false">Distracted</button>
+              <button class="db-chip" data-persp="mobile" role="tab" aria-selected="false">Mobile</button>
+              <button class="db-chip" data-persp="nonnative" role="tab" aria-selected="false">Non-native</button>
+            </div>
+            <p class="db-stress__who" id="stress-who">First-time user</p>
+            <p class="db-stress__note" id="stress-note" aria-live="polite">
+              I don't know what this does yet — the primary action doesn't stand
+              out, and nothing tells me where to start.
+            </p>
+          </div>
+        </div>
+      </div>
+      <p class="db-aside db-in">The point isn't more AI output. It's learning to change perspective.</p>
+    </section>
+
+    <!-- ============================================================
+         PRODUCT DECISION 2 — Analysis (see the problem, don't just read it)
+         ============================================================ -->
+    <section class="db-block db-decision" id="analysis">
+      <div class="db-oqd db-in">
+        <p><span class="db-oqd__k">Observation</span>“Something's off here” is easy to say and hard to act on.</p>
+        <p><span class="db-oqd__k">Question</span>What am I missing — and where exactly is it?</p>
+        <p><span class="db-oqd__k">Decision</span>Tie every issue to a place on the screen.</p>
+        <p><span class="db-oqd__k">Experience</span>Zone-based Analysis.</p>
+      </div>
+
+      <h2 class="db-h2 db-in">Don't just tell me something is wrong. Help me see it.</h2>
+      <p class="db-lede db-in">Select an issue — the design shows you where it lives.</p>
+
+      <!-- Interactive: selecting an issue highlights its zone on the design. -->
+      <div class="db-zones db-frame db-in" id="zones">
+        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>Analysis — dashboard</span></div>
+        <div class="db-zones__body">
+          <div class="db-zones__canvas" aria-hidden="true">
+            <div class="db-mock db-mock--dash">
+              <div class="db-zone" data-zone="nav"><span class="db-zone__tag">Nav</span></div>
+              <div class="db-zone" data-zone="header"><span class="db-zone__tag">Header</span></div>
+              <div class="db-zone" data-zone="content"><span class="db-zone__tag">Content</span></div>
+              <div class="db-zone" data-zone="cta"><span class="db-zone__tag">Action</span></div>
+            </div>
+          </div>
+          <ul class="db-zones__issues" id="zones-issues">
+            <li class="db-issue" data-target="header" tabindex="0">
+              <span class="db-issue__meta"><span class="db-sev db-sev--high">High</span><span class="db-cat">Hierarchy</span></span>
+              Two elements compete for first attention — the primary action doesn't win.
+            </li>
+            <li class="db-issue" data-target="content" tabindex="0">
+              <span class="db-issue__meta"><span class="db-sev db-sev--med">Medium</span><span class="db-cat">Cognitive load</span></span>
+              Six fields appear at once with no grouping; the eye has nowhere to rest.
+            </li>
+            <li class="db-issue" data-target="cta" tabindex="0">
+              <span class="db-issue__meta"><span class="db-sev db-sev--high">High</span><span class="db-cat">Usability</span></span>
+              The primary button looks the same as the secondary — nothing signals the main path.
+            </li>
+            <li class="db-issue" data-target="nav" tabindex="0">
+              <span class="db-issue__meta"><span class="db-sev db-sev--med">Medium</span><span class="db-cat">Accessibility</span></span>
+              Icon-only navigation has no text labels or accessible names.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="db-aside db-in">See the problem → locate it → understand it → decide what to do.</p>
+    </section>
+
+    <!-- ============================================================
+         THE CORE INSIGHT — a feedback loop, not an answer machine
+         ============================================================ -->
+    <section class="db-insight db-dark" id="insight">
+      <p class="db-kicker db-kicker--light db-in">What it became</p>
+      <h2 class="db-insight__title db-in">The product became a feedback loop.</h2>
+      <div class="db-models">
+        <div class="db-model db-model--right db-in">
+          <p class="db-model__label">DesignBesti</p>
+          <ol class="db-model__flow">
+            <li>Design</li><li>Challenge</li><li>Think</li><li>Decide</li><li>Improve</li>
+          </ol>
+          <p class="db-model__cap">Part of the thinking.</p>
+        </div>
+        <div class="db-model db-model--wrong db-in">
+          <p class="db-model__label">Not this</p>
+          <ol class="db-model__flow db-model__flow--wrong">
+            <li>Design</li><li>AI</li><li>Answer</li>
+          </ol>
+          <p class="db-model__cap">The decision maker.</p>
+        </div>
+      </div>
+      <p class="db-insight__close db-in">
+        The immediate value is feedback. The longer-term value is better design
+        judgment.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         WHAT I BUILT — current product as evidence
+         ============================================================ -->
+    <section class="db-block db-built">
+      <p class="db-kicker db-in">What exists today</p>
+      <h2 class="db-h2 db-in">A working product, not a prototype deck.</h2>
+      <ul class="db-built-list">
+        <li class="db-in"><h3>Analysis</h3><p>Zone-based feedback across usability, accessibility, hierarchy, visual design and cognitive load — with issues, wins and priority fixes.</p></li>
+        <li class="db-in"><h3>Stress Test</h3><p>The same screen read through seven different users.</p></li>
+        <li class="db-in"><h3>Stakeholder Translator</h3><p>Turns a UX observation into an executive summary, business risks, a priority matrix and sprint-ready actions.</p></li>
+        <li class="db-in"><h3>Brief Mode</h3><p>Thinking help <em>before</em> the screen exists — messy requirements become screens, states, edge cases and questions.</p></li>
+        <li class="db-in"><h3>Roast Mode</h3><p>Playful on the surface; the critique underneath is real.</p></li>
+        <li class="db-in"><h3>Team checklist</h3><p>A downloadable checklist so a critique can travel to the rest of the team.</p></li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         WHERE IT'S GOING — deepen the loop (labelled Exploring/Planned)
+         ============================================================ -->
+    <section class="db-block db-roadmap">
+      <p class="db-kicker db-in">Where it's going</p>
+      <h2 class="db-h2 db-in">How I want to deepen the feedback loop.</h2>
+      <ol class="db-road">
+        <li class="db-road__stop db-in">
+          <span class="db-road__when">Today</span>
+          <div><h3>Challenge the design.</h3><p>Structured critique on the work in front of you.</p></div>
+        </li>
+        <li class="db-road__stop db-in">
+          <span class="db-road__when">Next <em>· Exploring</em></span>
+          <div>
+            <h3>Challenge first impressions and competing perspectives.</h3>
+            <p>Deepen <em>why</em> feedback matters — help designers understand the reasoning, not just the note.</p>
+          </div>
+        </li>
+        <li class="db-road__stop db-in">
+          <span class="db-road__when">Later <em>· Planned</em></span>
+          <div>
+            <h3>From individual critique to team workflow.</h3>
+            <p>Share results, collaborate, and connect into the tools teams already use.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="db-road__arc db-in">
+        Individual critique → broader perspective → deeper reasoning →
+        collaboration → product workflow.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         REFLECTION
+         ============================================================ -->
+    <section class="db-block db-reflect">
+      <p class="db-kicker db-in">What I learned</p>
+      <p class="db-reflect__lead db-in">
+        The biggest lesson wasn't about AI. <strong>It was about feedback.</strong>
+      </p>
+      <p class="db-reflect__body db-in">
+        Good feedback isn't a person or an AI telling you whether something is
+        good or bad. Good feedback hands you a better question to think about.
+      </p>
+      <ul class="db-reflect__qs db-in">
+        <li>What feedback matters?</li>
+        <li>When should I accept it?</li>
+        <li>When should I challenge it?</li>
+        <li>When should I ignore it?</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         FINAL POSITIONING
+         ============================================================ -->
+    <section class="db-final db-dark">
+      <p class="db-final__text db-in">
+        DesignBesti is an experiment in how AI can <em>strengthen</em> a
+        designer's thinking without taking the thinking away.
+      </p>
+      <p class="db-final__sub db-in">
+        The AI provides another perspective. The designer decides. The designer
+        keeps improving.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         INVITATION TO THE DEEP DIVE
+         ============================================================ -->
+    <section class="db-invite" id="invite">
+      <p class="db-invite__lead db-in">The short version ends here.</p>
+      <button type="button" class="db-invite__btn" id="db-deepdive-btn" aria-expanded="false" aria-controls="db-deep">
+        Want to see how I got there?<span aria-hidden="true">&nbsp;↓</span>
+      </button>
+      <p class="db-invite__hint db-in">The working process — decisions, trade-offs, and the parts I'm still figuring out.</p>
+    </section>
+
+    <!-- ============================================================
+         LEVEL 2 — DEEP DIVE (revealed on request)
+         ============================================================ -->
+    <div class="db-deep" id="db-deep" hidden>
+
+      <section class="db-block db-deep__intro">
+        <p class="db-kicker db-in">Inside the process</p>
+        <h2 class="db-h2 db-in">The decisions behind each mode.</h2>
+        <p class="db-lede db-in">Same pattern every time: an observation, a question, a decision, and the experience it became.</p>
+      </section>
+
+      <!-- Analysis (deep) -->
+      <section class="db-block db-deep-mode db-in">
+        <div class="db-oqd">
+          <p><span class="db-oqd__k">Observation</span>Feedback that isn't located is easy to nod at and hard to fix.</p>
+          <p><span class="db-oqd__k">Question</span>What am I missing, and exactly where?</p>
+          <p><span class="db-oqd__k">Decision</span>Score the design across usability, accessibility, visual design, hierarchy and cognitive load — then pin each issue to a zone.</p>
+          <p><span class="db-oqd__k">Experience</span>Analysis — issues, wins and priority fixes, each tied to a place on the screen.</p>
+        </div>
+      </section>
+
+      <!-- Stress Test (deep) -->
+      <section class="db-block db-deep-mode db-in">
+        <div class="db-oqd">
+          <p><span class="db-oqd__k">Observation</span>We test our own designs with our own habits.</p>
+          <p><span class="db-oqd__k">Question</span>Who breaks this — and why?</p>
+          <p><span class="db-oqd__k">Decision</span>Read one screen through many users: first-time, power, accessibility, older, distracted, mobile, non-native.</p>
+          <p><span class="db-oqd__k">Experience</span>Stress Test — a discipline of changing perspective, not a longer report.</p>
+        </div>
+      </section>
+
+      <!-- Stakeholder Translator (deep) -->
+      <section class="db-block db-deep-mode db-in">
+        <div class="db-oqd">
+          <p><span class="db-oqd__k">Observation</span>A good UX point dies if it can't enter the product conversation.</p>
+          <p><span class="db-oqd__k">Question</span>How do I connect a UX observation to the business?</p>
+          <p><span class="db-oqd__k">Decision</span>Speak the room's language: summary, risk, priority, next steps.</p>
+          <p><span class="db-oqd__k">Experience</span>Stakeholder Translator — executive summary, business risks, a priority matrix, and sprint-ready actions.</p>
+        </div>
+        <div class="db-frame db-translator" aria-hidden="true">
+          <div class="db-frame__bar"><i></i><i></i><i></i><span>Stakeholder Translator</span></div>
+          <div class="db-translator__grid">
+            <div class="db-tr-card"><p class="db-tr-card__h">Executive summary</p><span class="db-line"></span><span class="db-line db-line--w"></span></div>
+            <div class="db-tr-card"><p class="db-tr-card__h">Business risks</p><span class="db-line db-line--w"></span><span class="db-line"></span></div>
+            <div class="db-tr-card"><p class="db-tr-card__h">Priority matrix</p><div class="db-matrix"><i></i><i class="hot"></i><i></i><i></i></div></div>
+            <div class="db-tr-card"><p class="db-tr-card__h">Sprint-ready actions</p><span class="db-check"></span><span class="db-check"></span><span class="db-check"></span></div>
+          </div>
+        </div>
+        <p class="db-aside">Help designers <em>communicate</em> decisions — not just defend interfaces.</p>
+      </section>
+
+      <!-- Brief Mode (deep) -->
+      <section class="db-block db-deep-mode db-in">
+        <div class="db-oqd">
+          <p><span class="db-oqd__k">Observation</span>The most expensive problems are decided before anyone opens a design tool.</p>
+          <p><span class="db-oqd__k">Question</span>What if the feedback problem starts before the screen exists?</p>
+          <p><span class="db-oqd__k">Decision</span>Turn messy requirements into thinking material.</p>
+          <p><span class="db-oqd__k">Experience</span>Brief Mode.</p>
+        </div>
+        <div class="db-frame db-brief" aria-hidden="true">
+          <div class="db-frame__bar"><i></i><i></i><i></i><span>Brief Mode</span></div>
+          <div class="db-brief__body">
+            <div class="db-brief__in"><p class="db-brief__label">Messy input</p><span class="db-line db-line--w"></span><span class="db-line"></span><span class="db-line db-line--w"></span></div>
+            <div class="db-brief__arrow" aria-hidden="true">→</div>
+            <div class="db-brief__out">
+              <span class="db-tag">Screens</span><span class="db-tag">States</span><span class="db-tag">Edge cases</span>
+              <span class="db-tag">Questions</span><span class="db-tag">Conflicts</span><span class="db-tag">Checklist</span>
+            </div>
+          </div>
+        </div>
+        <p class="db-aside">The shift: from <em>“review my design”</em> to <em>“help me think before I design.”</em></p>
+      </section>
+
+      <!-- Roast Mode (deep) -->
+      <section class="db-block db-deep-mode db-in">
+        <div class="db-oqd">
+          <p><span class="db-oqd__k">Observation</span>The critique people remember is the one that made them feel something.</p>
+          <p><span class="db-oqd__k">Question</span>Can critique be memorable without losing substance?</p>
+          <p><span class="db-oqd__k">Decision</span>Keep the tone playful; keep the UX reasoning real.</p>
+          <p><span class="db-oqd__k">Experience</span>Roast Mode — sharp on the surface, useful underneath.</p>
+        </div>
+        <div class="db-frame db-roast" aria-hidden="true">
+          <div class="db-frame__bar"><i></i><i></i><i></i><span>Roast Mode</span></div>
+          <div class="db-roast__body">
+            <p class="db-roast__quip">“Three buttons, all shouting. Pick who's in charge.”</p>
+            <p class="db-roast__real">Reasoning: competing primary actions raise decision cost and blur the main path.</p>
+          </div>
+        </div>
+        <p class="db-aside">Playful tone. Real critique. Not a gimmick.</p>
+      </section>
+
+      <!-- AI voice as a design problem -->
+      <section class="db-block db-deep-voice db-in">
+        <p class="db-kicker">The AI was a design problem too</p>
+        <h2 class="db-h2">A senior designer talking to a designer — not a rulebook.</h2>
+        <p class="db-lede">Sharp, direct, research-backed, useful. Never preachy.</p>
+        <div class="db-voice">
+          <div class="db-voice__col db-voice__col--bad">
+            <p class="db-voice__tag">Rulebook voice</p>
+            <p class="db-voice__quote">“Violates WCAG 1.4.3: contrast ratio below 4.5:1.”</p>
+          </div>
+          <div class="db-voice__col db-voice__col--good">
+            <p class="db-voice__tag">DesignBesti voice</p>
+            <p class="db-voice__quote">“A user reading this in sunlight will lose the secondary text. Push the contrast so it survives a bright screen.”</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ownership -->
+      <section class="db-block db-deep-role db-in">
+        <p class="db-role__statement">This wasn't a UI exercise for me.</p>
+        <p class="db-lede">To make it real, I had to think about the whole product:</p>
+        <ul class="db-role__list">
+          <li>Product strategy</li><li>Problem framing</li><li>Product direction</li>
+          <li>UX</li><li>AI experience design</li><li>Prompt design</li>
+          <li>Product decisions</li><li>Frontend &amp; backend</li><li>Infrastructure</li><li>Launch direction</li>
+        </ul>
+        <p class="db-aside">The point isn't “I did everything.” It's that the product forced whole-product thinking.</p>
+      </section>
+
+      <!-- Technical as product judgment -->
+      <section class="db-block db-deep-tech db-in">
+        <p class="db-kicker">A technical choice that was really a product choice</p>
+        <h2 class="db-h2">Model selection, decided by the experience.</h2>
+        <ul class="db-tech__reasons">
+          <li>Image analysis was required.</li>
+          <li>Structured output was required.</li>
+          <li>Response time mattered.</li>
+          <li>Deployment constraints mattered.</li>
+        </ul>
+        <p class="db-tech__lesson">
+          The best technical choice isn't necessarily the most powerful one — it's
+          the one that supports the experience you're trying to create.
+        </p>
+      </section>
+
+      <!-- Fuller roadmap -->
+      <section class="db-block db-deep-road db-in">
+        <p class="db-kicker">Directions I'm exploring</p>
+        <h2 class="db-h2">Deepening the loop, step by step.</h2>
+        <ul class="db-explore">
+          <li><span class="db-tag db-tag--exp">Exploring</span> First 5 Seconds Test</li>
+          <li><span class="db-tag db-tag--exp">Exploring</span> Debate Mode</li>
+          <li><span class="db-tag db-tag--exp">Exploring</span> Dark Pattern Detector</li>
+          <li><span class="db-tag db-tag--exp">Exploring</span> Research Library</li>
+          <li><span class="db-tag db-tag--exp">Exploring</span> AI chatbot inside Brief results</li>
+          <li><span class="db-tag db-tag--plan">Planned</span> PDF / export</li>
+          <li><span class="db-tag db-tag--plan">Planned</span> Share results</li>
+          <li><span class="db-tag db-tag--plan">Planned</span> Team collaboration</li>
+          <li><span class="db-tag db-tag--plan">Planned</span> Figma plugin</li>
+          <li><span class="db-tag db-tag--plan">Planned</span> Jira / Notion integration</li>
+        </ul>
+        <p class="db-aside">Nothing here is shipped yet — these are honest directions, labelled as such.</p>
+      </section>
+
+      <section class="db-block db-deep-end db-in">
+        <p class="db-deep-end__text">That's the working process. The decision was always mine — DesignBesti just made sure I'd asked the right questions first.</p>
+        <a class="db-invite__btn db-invite__btn--solid" href="index.html#contact">Let's build products together<span aria-hidden="true">&nbsp;→</span></a>
+      </section>
+    </div>
+
+  </main>
+
+  <footer class="db-foot">
+    <a href="index.html"><span aria-hidden="true">←</span> Back to the portfolio</a>
+    <span class="db-foot__name">Anirudh Thata · Product Designer</span>
+  </footer>
+
+  <script type="module" src="js/case.js"></script>
+</body>
+</html>
