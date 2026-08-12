@@ -96,7 +96,44 @@ function initZones() {
   if (issues[0]) select(issues[0]); // start with the first issue located
 }
 
-/* ---- 5 · deep dive ------------------------------------------------------- */
+/* ---- 5 · Try It — perspective shift --------------------------------------- */
+const TRY_DATA = {
+  hierarchy: { dim: "Hierarchy",      insight: "Two elements compete for attention. The primary action doesn’t win." },
+  cognitive: { dim: "Cognitive load",  insight: "Six fields at once, no grouping. The eye has nowhere to rest." },
+  usability: { dim: "Usability",       insight: "Primary and secondary buttons look identical. Nothing signals the main path." },
+  a11y:      { dim: "Accessibility",   insight: "Icon-only navigation, no text labels. A screen-reader won’t find its way." },
+};
+function initTry() {
+  const root = document.getElementById("db-try");
+  if (!root) return;
+  const ask = document.getElementById("try-ask");
+  const reveal = document.getElementById("try-reveal");
+  const findings = document.getElementById("try-findings");
+  const picks = [...root.querySelectorAll("[data-focus]")];
+  let fired = false;
+  picks.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      if (fired) return;
+      fired = true;
+      haptic(9);
+      const key = btn.dataset.focus;
+      btn.classList.add("is-active");
+      const order = [key, ...Object.keys(TRY_DATA).filter((k) => k !== key)];
+      order.forEach((k, i) => {
+        const d = TRY_DATA[k];
+        const li = document.createElement("li");
+        li.className = "db-try__finding" + (k === key ? " db-try__finding--yours" : "");
+        li.style.setProperty("--delay", `${i * 150}ms`);
+        li.innerHTML = `<p class="db-try__dim">${d.dim}</p><p class="db-try__insight">${d.insight}</p>`;
+        findings.appendChild(li);
+      });
+      ask.hidden = true;
+      reveal.hidden = false;
+    })
+  );
+}
+
+/* ---- 6 · deep dive ------------------------------------------------------- */
 function initDeepDive() {
   const btn = document.getElementById("db-deepdive-btn");
   const deep = document.getElementById("db-deep");
@@ -115,6 +152,6 @@ function initDeepDive() {
   });
 }
 
-const boot = () => { initReveal(); initProgress(); initStress(); initZones(); initDeepDive(); };
+const boot = () => { initReveal(); initProgress(); initStress(); initZones(); initTry(); initDeepDive(); };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
 else boot();

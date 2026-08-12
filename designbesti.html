@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/case.css?v=5" />
+  <link rel="stylesheet" href="css/case.css?v=6" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 </head>
 
@@ -154,6 +154,48 @@
       <p class="db-pivot__wrong db-in">Not “what AI features should I add?”</p>
       <h2 class="db-pivot__q db-in">What kinds of questions should a designer be asking?</h2>
       <p class="db-pivot__after db-in">That question — not a feature list — became the product.</p>
+    </section>
+
+    <!-- ============================================================
+         EXPERIENCE — perspective shift (try DesignBesti's lens)
+         ============================================================ -->
+    <section class="db-block db-try-section">
+      <p class="db-kicker db-in">Try it yourself</p>
+      <h2 class="db-h2 db-in">Look at this screen. What catches your eye first?</h2>
+      <p class="db-lede db-in">Pick one thing — the way you would in a real review.</p>
+
+      <div class="db-try db-frame db-in" id="db-try">
+        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>DesignBesti</span></div>
+        <div class="db-try__body">
+          <div class="db-try__canvas" aria-hidden="true">
+            <div class="db-mock db-mock--checkout">
+              <div class="db-mock__row db-mock__row--title"></div>
+              <div class="db-mock__row"></div>
+              <div class="db-mock__row db-mock__row--short"></div>
+              <div class="db-mock__field"></div>
+              <div class="db-mock__field"></div>
+              <div class="db-mock__cta"></div>
+            </div>
+          </div>
+          <div class="db-try__panel">
+            <div class="db-try__ask" id="try-ask">
+              <p class="db-try__q">What would you focus on?</p>
+              <div class="db-try__picks" role="group" aria-label="Pick your focus">
+                <button class="db-chip" data-focus="hierarchy">The layout</button>
+                <button class="db-chip" data-focus="cognitive">The density</button>
+                <button class="db-chip" data-focus="usability">The buttons</button>
+                <button class="db-chip" data-focus="a11y">The labels</button>
+              </div>
+            </div>
+            <div class="db-try__reveal" id="try-reveal" hidden aria-live="polite">
+              <p class="db-try__lead">Here's how DesignBesti reads the same screen:</p>
+              <ul class="db-try__findings" id="try-findings"></ul>
+              <p class="db-try__shift">Same screen. More questions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="db-aside db-in">That's the shift. Not more answers — better questions.</p>
     </section>
 
     <!-- ============================================================
