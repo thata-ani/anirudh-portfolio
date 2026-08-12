@@ -34,11 +34,16 @@
          ============================================================ -->
     <section class="db-hero">
       <p class="db-eyebrow db-in">A design partner, built by a designer</p>
-      <p class="db-hero__obs db-in">
+      <p class=”db-hero__obs db-in”>
         I've spent years watching design critiques turn into discussions about
-        whether something <em>“looks good.”</em>
+        whether something <em>”looks good.”</em>
       </p>
-      <p class="db-hero__problem db-in">
+      <div class=”db-vague db-in” aria-hidden=”true”>
+        <p class=”db-vague__msg”>Looks good to me!</p>
+        <p class=”db-vague__msg”>Can we make it pop more?</p>
+        <p class=”db-vague__msg”>Something feels off here</p>
+      </div>
+      <p class=”db-hero__problem db-in”>
         The problem wasn't a lack of feedback. It was the lack of a
         <strong>structured way to challenge a design.</strong>
       </p>
@@ -61,12 +66,16 @@
         DesignBesti is <span class="db-strike">not built to replace</span> design
         judgment. It's built to <span class="db-underline">strengthen</span> it.
       </p>
-      <ol class="db-loop db-in" aria-label="The intended loop">
-        <li><span>AI</span> challenges</li>
-        <li><span>Designer</span> thinks</li>
-        <li><span>Designer</span> decides</li>
-        <li><span>Designer</span> improves</li>
-      </ol>
+      <div class="db-cycle db-in" role="img" aria-label="Design loop: AI challenges, Designer thinks, Designer decides, Designer improves, repeat">
+        <div class="db-cycle__node" style="--i:0"><span>AI</span> challenges</div>
+        <div class="db-cycle__edge" aria-hidden="true"></div>
+        <div class="db-cycle__node" style="--i:1"><span>Designer</span> thinks</div>
+        <div class="db-cycle__edge" aria-hidden="true"></div>
+        <div class="db-cycle__node" style="--i:2"><span>Designer</span> decides</div>
+        <div class="db-cycle__edge" aria-hidden="true"></div>
+        <div class="db-cycle__node" style="--i:3"><span>Designer</span> improves</div>
+        <div class="db-cycle__return" aria-hidden="true"></div>
+      </div>
       <p class="db-principle__note db-in">
         The immediate value is feedback. The longer-term value is a sharper sense
         of which feedback matters — and the confidence to accept, challenge, or
@@ -84,13 +93,16 @@
         Not another system that says “this is good” or “change this.” I wanted
         another <em>perspective</em> — one that makes you stop and ask:
       </p>
-      <ul class="db-questions db-in">
-        <li>Why?</li>
-        <li>Who could struggle with this?</li>
-        <li>What happens outside the happy path?</li>
-        <li>Is this actually a usability problem?</li>
-        <li>How would I explain this decision to a stakeholder?</li>
-      </ul>
+      <div class="db-prompt db-frame db-in">
+        <div class="db-frame__bar"><i></i><i></i><i></i><span>DesignBesti</span></div>
+        <div class="db-prompt__body">
+          <p class="db-prompt__q" style="--i:0">Why?</p>
+          <p class="db-prompt__q" style="--i:1">Who could struggle with this?</p>
+          <p class="db-prompt__q" style="--i:2">What happens outside the happy path?</p>
+          <p class="db-prompt__q" style="--i:3">Is this actually a usability problem?</p>
+          <p class="db-prompt__q" style="--i:4">How would I explain this decision to a stakeholder?</p>
+        </div>
+      </div>
       <p class="db-intent__own db-in">The designer still owns the decision.</p>
     </section>
 
@@ -278,12 +290,30 @@
       <p class="db-kicker db-in">What exists today</p>
       <h2 class="db-h2 db-in">A working product, not a prototype deck.</h2>
       <ul class="db-built-list">
-        <li class="db-in"><h3>Analysis</h3><p>Zone-based feedback across usability, accessibility, hierarchy, visual design and cognitive load — with issues, wins and priority fixes.</p></li>
-        <li class="db-in"><h3>Stress Test</h3><p>The same screen read through seven different users.</p></li>
-        <li class="db-in"><h3>Stakeholder Translator</h3><p>Turns a UX observation into an executive summary, business risks, a priority matrix and sprint-ready actions.</p></li>
-        <li class="db-in"><h3>Brief Analysis</h3><p>Thinking help <em>before</em> the screen exists — messy requirements become screens, states, edge cases and questions.</p></li>
-        <li class="db-in"><h3>Roast Mode</h3><p>Playful on the surface; the critique underneath is real.</p></li>
-        <li class="db-in"><h3>Zone-Based Feedback</h3><p>Every issue is tied to a specific area on the screen — see the problem, not just read about it.</p></li>
+        <li class="db-in">
+          <div class="db-bv db-bv--analysis" aria-hidden="true"><span></span><span class="on"></span><span></span><span class="on"></span></div>
+          <h3>Analysis</h3><p>Zone-based feedback across usability, accessibility, hierarchy, visual design and cognitive load — with issues, wins and priority fixes.</p>
+        </li>
+        <li class="db-in">
+          <div class="db-bv db-bv--stress" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+          <h3>Stress Test</h3><p>The same screen read through seven different users.</p>
+        </li>
+        <li class="db-in">
+          <div class="db-bv db-bv--trans" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <h3>Stakeholder Translator</h3><p>Turns a UX observation into an executive summary, business risks, a priority matrix and sprint-ready actions.</p>
+        </li>
+        <li class="db-in">
+          <div class="db-bv db-bv--brief" aria-hidden="true"><span class="in"></span><span class="to">→</span><span class="out"></span></div>
+          <h3>Brief Analysis</h3><p>Thinking help <em>before</em> the screen exists — messy requirements become screens, states, edge cases and questions.</p>
+        </li>
+        <li class="db-in">
+          <div class="db-bv db-bv--roast" aria-hidden="true"><span>"</span></div>
+          <h3>Roast Mode</h3><p>Playful on the surface; the critique underneath is real.</p>
+        </li>
+        <li class="db-in">
+          <div class="db-bv db-bv--zones" aria-hidden="true"><span class="rect"></span><span class="pin"></span></div>
+          <h3>Zone-Based Feedback</h3><p>Every issue is tied to a specific area on the screen — see the problem, not just read about it.</p>
+        </li>
       </ul>
     </section>
 
