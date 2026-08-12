@@ -74,24 +74,36 @@ em { font-style: italic; }
 .db-hero__reveal .db-hero__lede { margin-top: 0.4rem; font-size: var(--fs-lede); color: var(--c-warm-300); max-width: 40ch; }
 .db-hero__scroll { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-warm-400); }
 
+/* Vague feedback — visual representation of the problem */
+.db-vague { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: -0.2rem; }
+.db-vague__msg { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.01em; color: var(--c-warm-400); padding: 0.45rem 0.85rem; border: 1px solid var(--c-line); border-radius: var(--radius-pill); opacity: 0.7; }
+
 /* ---------- CORE PRINCIPLE ---------- */
 .db-principle { padding-block: clamp(5rem, 4rem + 8vw, 10rem); }
 .db-principle__text { font-size: clamp(1.7rem, 1rem + 3vw, 3.4rem); font-weight: 600; line-height: 1.12; letter-spacing: -0.02em; max-width: 22ch; }
 .db-strike { text-decoration: line-through; text-decoration-thickness: 2px; color: rgba(255, 255, 255, 0.45); }
 .db-underline { border-bottom: 3px solid #fff; }
-.db-loop { list-style: none; margin: clamp(2rem, 5vw, 3.5rem) 0 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.4rem; }
-.db-loop li { position: relative; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.3rem); color: rgba(255, 255, 255, 0.7); }
-.db-loop li span { color: #fff; font-weight: 600; }
-.db-loop li:not(:last-child)::after { content: "→"; position: absolute; right: -1.15rem; color: rgba(255, 255, 255, 0.4); }
+/* Animated cycle */
+.db-cycle { margin: clamp(2rem, 5vw, 3.5rem) 0 0; display: flex; flex-wrap: wrap; align-items: center; position: relative; padding-bottom: 1.4rem; }
+.db-cycle__node { padding: 0.7rem 1.2rem; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-pill); font-size: clamp(0.85rem, 0.75rem + 0.5vw, 1.05rem); color: rgba(255,255,255,0.5); white-space: nowrap; }
+.db-cycle__node span { font-weight: 600; }
+.db-cycle.is-in .db-cycle__node { animation: node-glow 8s ease-in-out infinite; animation-delay: calc(var(--i) * 2s); }
+.db-cycle__edge { width: clamp(0.8rem, 2vw, 2rem); border-top: 1px solid rgba(255,255,255,0.15); flex-shrink: 0; }
+.db-cycle__return { position: absolute; bottom: 0; left: 5%; right: 5%; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+@keyframes node-glow {
+  0%, 8% { border-color: rgba(255,255,255,0.8); color: #fff; background: rgba(255,255,255,0.05); }
+  20%, 100% { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); background: transparent; }
+}
+@media (prefers-reduced-motion: reduce) { .db-cycle.is-in .db-cycle__node { animation: none; border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.7); } }
 .db-principle__note { margin-top: clamp(2rem, 5vw, 3.2rem); color: rgba(255, 255, 255, 0.62); max-width: 50ch; line-height: 1.55; font-size: 1.05rem; }
 
-/* ---------- INTENT / QUESTIONS ---------- */
-.db-questions { list-style: none; margin: 1.8rem 0 0; padding: 0; display: grid; gap: 0.7rem; max-width: 40ch; }
-.db-questions li {
-  font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem); font-weight: 600; letter-spacing: -0.01em;
-  padding-left: 1.4rem; position: relative; color: var(--c-warm-100);
-}
-.db-questions li::before { content: "?"; position: absolute; left: 0; color: var(--c-warm-400); font-family: var(--font-mono); }
+/* ---------- INTENT / PRODUCT PROMPT ---------- */
+.db-prompt { margin-top: 1.8rem; max-width: 38rem; }
+.db-prompt__body { padding: clamp(1.2rem, 3vw, 1.8rem); display: grid; gap: 0.55rem; }
+.db-prompt__q { font-size: clamp(1.05rem, 0.92rem + 0.6vw, 1.3rem); font-weight: 600; letter-spacing: -0.01em; color: var(--c-warm-100); padding-left: 1rem; border-left: 2px solid var(--c-line-strong); opacity: 0; transform: translateY(4px); }
+.db-prompt.is-in .db-prompt__q { animation: q-in 0.5s ease forwards; animation-delay: calc(0.4s + var(--i) * 0.25s); }
+@keyframes q-in { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .db-prompt__q { opacity: 1; transform: none; } .db-prompt.is-in .db-prompt__q { animation: none; } }
 .db-intent__own { margin-top: 2rem; font-size: 1.15rem; font-weight: 600; }
 
 /* ---------- APPROACHES ---------- */
@@ -196,6 +208,26 @@ em { font-style: italic; }
 .db-built-list li { padding: clamp(1.1rem, 2.2vw, 1.7rem) clamp(1rem, 2vw, 2rem) clamp(1.1rem, 2.2vw, 1.7rem) 0; border-top: 1px solid var(--c-line); }
 .db-built-list h3 { font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.3rem; }
 .db-built-list p { color: var(--c-warm-300); line-height: 1.45; max-width: 40ch; }
+
+/* Built mini-visuals — abstract marks per capability */
+.db-bv { height: 36px; margin-bottom: 0.7rem; }
+.db-bv--analysis { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; width: 36px; }
+.db-bv--analysis span { border-radius: 3px; background: var(--c-ink-500); }
+.db-bv--analysis span.on { background: var(--c-warm-300); }
+.db-bv--stress { display: flex; align-items: center; gap: 4px; }
+.db-bv--stress i { width: 7px; height: 7px; border-radius: 50%; background: var(--c-ink-500); }
+.db-bv--stress i.on { background: var(--c-warm-300); }
+.db-bv--trans { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; width: 36px; }
+.db-bv--trans span { border-radius: 3px; background: var(--c-ink-500); }
+.db-bv--brief { display: flex; align-items: center; gap: 5px; }
+.db-bv--brief .in { width: 16px; height: 16px; border: 1px dashed var(--c-line-strong); border-radius: 3px; }
+.db-bv--brief .to { color: var(--c-warm-400); font-size: 0.75rem; line-height: 1; }
+.db-bv--brief .out { width: 16px; height: 16px; border: 1px solid var(--c-warm-300); border-radius: 3px; }
+.db-bv--roast { display: flex; align-items: center; }
+.db-bv--roast span { font-size: 1.8rem; line-height: 1; color: var(--c-warm-400); }
+.db-bv--zones { display: flex; align-items: flex-start; position: relative; }
+.db-bv--zones .rect { width: 32px; height: 24px; border: 1px solid var(--c-line-strong); border-radius: 3px; display: block; }
+.db-bv--zones .pin { position: absolute; top: 2px; left: 18px; width: 7px; height: 7px; border-radius: 50%; background: var(--c-warm-300); }
 
 /* ---------- ROADMAP ---------- */
 .db-road { list-style: none; margin: clamp(2rem, 4vw, 3rem) 0 0; padding: 0; display: grid; gap: 0; }
@@ -308,4 +340,7 @@ em { font-style: italic; }
   .db-brief__arrow { transform: rotate(90deg); justify-self: start; }
   .db-oqd p { grid-template-columns: 1fr; gap: 0.15rem; }
   .db-road__stop { grid-template-columns: 1fr; gap: 0.5rem; }
+  .db-cycle__edge { display: none; }
+  .db-cycle { gap: 0.5rem; }
+  .db-cycle__return { display: none; }
 }
