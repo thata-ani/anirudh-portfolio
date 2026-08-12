@@ -10,18 +10,10 @@ export function initHero() {
     switchBtn.setAttribute("aria-pressed", String(lit));
   };
 
-  const hash = location.hash ? location.hash.slice(1) : "";
-
-  if (hash) {
-    setLit(true);
-    const el = document.getElementById(hash);
-    if (el) requestAnimationFrame(() => el.scrollIntoView());
-  } else {
-    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-    window.scrollTo(0, 0);
-    document.body.style.overflow = "hidden";
-    setLit(false);
-  }
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.scrollTo(0, 0);
+  document.body.style.overflow = "hidden";
+  setLit(false);
 
   const reveal = () => {
     if (root.getAttribute("data-reveal") === "on") return;
