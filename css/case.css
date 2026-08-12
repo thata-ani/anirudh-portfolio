@@ -294,18 +294,18 @@ em { font-style: italic; }
 .db-roast__quip { font-size: clamp(1.2rem, 1rem + 1vw, 1.8rem); font-weight: 600; letter-spacing: -0.01em; }
 .db-roast__real { color: var(--c-warm-300); line-height: 1.45; max-width: 52ch; }
 
-/* deep — voice contrast (before → after) */
-.db-voice-contrast { margin-top: clamp(1.6rem, 3vw, 2.4rem); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.8rem, 2vw, 1.2rem); }
-.db-voice-contrast__scene { padding: clamp(1.2rem, 2.5vw, 1.8rem); border: 1px solid var(--c-line-strong); border-radius: var(--radius-lg); }
-.db-voice-contrast__scene--before { opacity: 0.55; }
-.db-voice-contrast__scene--after { border-color: var(--c-warm-100); }
-.db-voice-contrast__label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-warm-400); margin-bottom: 0.8rem; }
-.db-voice-contrast__rule { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--c-warm-400); margin-bottom: 0.4rem; }
-.db-voice-contrast__quote { font-size: 1.1rem; line-height: 1.45; }
-.db-voice-contrast__scene--before .db-voice-contrast__quote { color: var(--c-warm-400); }
-.db-voice-contrast__effect { margin-top: 0.8rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--c-warm-400); }
-.db-voice-contrast__effect em { font-style: italic; color: var(--c-warm-200); }
-.db-voice-contrast__scene--after .db-voice-contrast__effect em { color: var(--c-warm-100); }
+/* deep — voice */
+.db-voice { margin-top: clamp(1.6rem, 3vw, 2.4rem); display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.db-voice__col { padding: clamp(1.1rem, 2.5vw, 1.8rem); border: 1px solid var(--c-line-strong); border-radius: var(--radius-md); }
+.db-voice__col--good { border-color: var(--c-warm-100); }
+.db-voice__col--bad { opacity: 0.55; }
+.db-voice__tag { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-warm-400); margin-bottom: 0.7rem; }
+.db-voice__rule { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--c-warm-400); margin-bottom: 0.4rem; }
+.db-voice__quote { font-size: 1.1rem; line-height: 1.45; }
+.db-voice__col--bad .db-voice__quote { color: var(--c-warm-400); }
+.db-voice__effect { margin-top: 0.8rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--c-warm-400); }
+.db-voice__effect em { font-style: italic; color: var(--c-warm-200); }
+.db-voice__col--good .db-voice__effect em { color: var(--c-warm-100); }
 
 /* deep — role */
 .db-role__statement { font-size: clamp(1.7rem, 1.1rem + 2.6vw, 3rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; max-width: 18ch; }
@@ -353,5 +353,5 @@ em { font-style: italic; }
   .db-cycle__edge { display: none; }
   .db-cycle { gap: 0.5rem; }
   .db-cycle__return { display: none; }
-  .db-voice-contrast { grid-template-columns: 1fr; }
+  .db-voice { grid-template-columns: 1fr; }
 }
