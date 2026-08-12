@@ -11,27 +11,46 @@
  */
 import { playCue, haptic } from "./sound.js";
 
+const LIT_KEY = "at_lit";
+
 export function initHero() {
   const root = document.documentElement;
   const switchBtn = document.getElementById("hero-switch");
   if (!switchBtn) return;
-
-  // Don't let the browser restore a previous scroll position behind the intro
-  // overlay — the experience must always begin at the hero, not wherever the
-  // page was last left (which looked like it "landed on the last section").
-  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  window.scrollTo(0, 0);
-  // Lock scrolling while the intro is up so the page can't drift off the hero.
-  document.body.style.overflow = "hidden";
 
   const setLit = (lit) => {
     root.setAttribute("data-reveal", lit ? "on" : "off");
     switchBtn.setAttribute("aria-pressed", String(lit));
   };
 
+  // Has the light already been turned on this session? (Set on first reveal.)
+  let alreadyLit = false;
+  try { alreadyLit = sessionStorage.getItem(LIT_KEY) === "1"; } catch {}
+
+  if (alreadyLit) {
+    // Returning within the session — e.g. Back from the DesignBesti case study.
+    // Skip the intro, land directly in the lit interface, and honour any
+    // #section hash so we return to where the visitor was (e.g. Selected Work).
+    setLit(true);
+    const id = location.hash ? location.hash.slice(1) : "";
+    if (id) {
+      const el = document.getElementById(id);
+      if (el) requestAnimationFrame(() => el.scrollIntoView());
+    }
+  } else {
+    // First visit this session: the intro plays. Don't let the browser restore a
+    // previous scroll position behind the intro overlay, and lock scroll so the
+    // page can't drift off the hero.
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
+    setLit(false);
+  }
+
   const reveal = () => {
     if (root.getAttribute("data-reveal") === "on") return;
     setLit(true);
+    try { sessionStorage.setItem(LIT_KEY, "1"); } catch {}
 
     // Begin at the hero and release the scroll lock.
     document.body.style.overflow = "";
@@ -55,7 +74,4 @@ export function initHero() {
     const isOn = root.getAttribute("data-reveal") === "on";
     isOn ? setLit(false) : reveal();
   });
-
-  // Ensure the deterministic starting state regardless of any cached attribute.
-  setLit(false);
 }
