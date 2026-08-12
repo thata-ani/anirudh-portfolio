@@ -133,7 +133,26 @@ function initTry() {
   );
 }
 
-/* ---- 6 · deep dive ------------------------------------------------------- */
+/* ---- 6 · roast click-to-reveal ------------------------------------------- */
+function initRoast() {
+  const root = document.getElementById("db-roast");
+  if (!root) return;
+  const entries = [...root.querySelectorAll(".db-roast__entry")];
+  const toggle = (entry) => {
+    const real = entry.querySelector(".db-roast__real");
+    if (!real) return;
+    const opening = real.hidden;
+    real.hidden = !opening;
+    entry.classList.toggle("is-open", opening);
+    haptic(9);
+  };
+  entries.forEach((entry) => {
+    entry.addEventListener("click", () => toggle(entry));
+    entry.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(entry); } });
+  });
+}
+
+/* ---- 7 · deep dive ------------------------------------------------------- */
 function initDeepDive() {
   const btn = document.getElementById("db-deepdive-btn");
   const deep = document.getElementById("db-deep");
@@ -152,6 +171,6 @@ function initDeepDive() {
   });
 }
 
-const boot = () => { initReveal(); initProgress(); initStress(); initZones(); initTry(); initDeepDive(); };
+const boot = () => { initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
 else boot();
