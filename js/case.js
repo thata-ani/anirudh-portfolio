@@ -98,10 +98,10 @@ function initZones() {
 
 /* ---- 5 · Try It — perspective shift --------------------------------------- */
 const TRY_DATA = {
-  hierarchy: { dim: "Hierarchy",      insight: "Two elements compete for attention. The primary action doesn’t win." },
-  cognitive: { dim: "Cognitive load",  insight: "Six fields at once, no grouping. The eye has nowhere to rest." },
-  usability: { dim: "Usability",       insight: "Primary and secondary buttons look identical. Nothing signals the main path." },
-  a11y:      { dim: "Accessibility",   insight: "Icon-only navigation, no text labels. A screen-reader won’t find its way." },
+  hierarchy: { dim: "Hierarchy",      insight: "The title and the action button carry the same visual weight. One should lead." },
+  cognitive: { dim: "Cognitive load",  insight: "All fields visible at once — nothing tells the user which ones matter most." },
+  usability: { dim: "Usability",       insight: "The main action sits at the bottom. A quick-scanning user might never reach it." },
+  a11y:      { dim: "Accessibility",   insight: "No visible focus indicators on the form fields. A keyboard user won’t know where they are." },
 };
 function initTry() {
   const root = document.getElementById("db-try");
