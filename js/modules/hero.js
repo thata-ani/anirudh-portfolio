@@ -10,9 +10,6 @@ export function initHero() {
     switchBtn.setAttribute("aria-pressed", String(lit));
   };
 
-  document.body.style.overflow = "hidden";
-  setLit(false);
-
   const reveal = () => {
     if (root.getAttribute("data-reveal") === "on") return;
     setLit(true);
@@ -20,6 +17,8 @@ export function initHero() {
     if ("scrollRestoration" in history) history.scrollRestoration = "auto";
     document.body.style.overflow = "";
     window.scrollTo(0, 0);
+
+    sessionStorage.setItem("intro_done", "1");
 
     playCue("on");
     haptic(14);
@@ -30,6 +29,16 @@ export function initHero() {
       window.setTimeout(() => { window.scrollTo(0, 0); title.focus({ preventScroll: true }); }, 420);
     }
   };
+
+  if (sessionStorage.getItem("intro_done")) {
+    setLit(true);
+    document.body.style.overflow = "";
+    const intro = document.getElementById("intro");
+    if (intro) intro.hidden = true;
+  } else {
+    document.body.style.overflow = "hidden";
+    setLit(false);
+  }
 
   switchBtn.addEventListener("click", () => {
     const isOn = root.getAttribute("data-reveal") === "on";
