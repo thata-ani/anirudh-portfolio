@@ -10,6 +10,7 @@ export function initHero() {
     switchBtn.setAttribute("aria-pressed", String(lit));
   };
 
+  if (location.hash) history.replaceState(null, "", location.pathname);
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   window.scrollTo(0, 0);
   document.body.style.overflow = "hidden";
