@@ -253,7 +253,9 @@ function initToTop() {
     // Ride up ahead of the footer rather than sitting on top of its text.
     if (foot) {
       const lift = Math.max(0, window.innerHeight - foot.getBoundingClientRect().top);
-      btn.style.setProperty("--lift", `${lift}px`);
+      // Shared: the prototype trigger docks against the same edge and has to
+      // ride up with the footer too.
+      document.documentElement.style.setProperty("--dock-lift", `${lift}px`);
     }
     ticking = false;
   };
@@ -263,6 +265,111 @@ function initToTop() {
   update();
 }
 
-const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); initBackNav(); initToTop(); initPin(window.gsap, window.ScrollTrigger); };
+/* ---- 10 · interactive prototype ------------------------------------------ */
+/* Reads the <div id="proto"> declaration and mounts a trigger that is
+ * reachable from any point in the story. The iframe is built on open and
+ * destroyed on close: Figma is a heavy third party and must never load with
+ * the page, nor keep running behind a closed overlay. */
+function initPrototype() {
+  const cfg = document.getElementById("proto");
+  if (!cfg || !cfg.dataset.embed) return;
+
+  const [w, h] = (cfg.dataset.device || "375x812").split("x").map(Number);
+  const label = cfg.dataset.label || "Interactive prototype";
+
+  const fab = document.createElement("button");
+  fab.type = "button";
+  fab.className = "proto-fab";
+  fab.innerHTML = '<span class="proto-fab__dot" aria-hidden="true"></span>Try the prototype';
+  fab.setAttribute("aria-haspopup", "dialog");
+
+  const modal = document.createElement("div");
+  modal.className = "proto-modal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-label", label);
+  modal.innerHTML =
+    '<div class="proto-bar">' +
+      '<span class="proto-bar__t">' + label + "</span>" +
+      '<span class="proto-bar__acts">' +
+        '<a class="proto-btn" target="_blank" rel="noopener" href="' + cfg.dataset.open + '">Open in Figma</a>' +
+        '<button type="button" class="proto-btn proto-btn--solid" data-close>Close</button>' +
+      "</span>" +
+    "</div>" +
+    '<div class="proto-stage">' +
+      '<div class="proto-fit">' +
+      '<div class="proto-device" style="--screen-w:' + w + "px;--screen-h:" + h + 'px">' +
+        '<div class="proto-screen">' +
+          '<span class="proto-notch" aria-hidden="true"></span>' +
+          '<p class="proto-loading">Loading prototype…</p>' +
+        "</div>" +
+      "</div>" +
+      "</div>" +
+    "</div>" +
+    '<p class="proto-foot">iPhone 13 mini · ' + w + " × " + h + "pt</p>";
+
+  document.body.append(fab, modal);
+
+  const device = modal.querySelector(".proto-device");
+  const screen = modal.querySelector(".proto-screen");
+  const closeBtn = modal.querySelector("[data-close]");
+
+  // The device is a fixed 375×812; scale it to whatever room the viewport has
+  // rather than letting it overflow or forcing the page to scroll.
+  const fitBox = modal.querySelector(".proto-fit");
+  const fit = () => {
+    const availH = window.innerHeight - 150;
+    const availW = window.innerWidth - 32;
+    const sc = Math.min(1, availH / (h + 24), availW / (w + 24));
+    device.style.setProperty("--proto-scale", sc.toFixed(3));
+    // A transform shrinks what you see, not the space it occupies — without
+    // sizing the wrapper too, the layout box stays full height and pushes the
+    // caption off the bottom of the overlay.
+    fitBox.style.width = Math.round((w + 24) * sc) + "px";
+    fitBox.style.height = Math.round((h + 24) * sc) + "px";
+  };
+
+  let last = null;
+  const open = () => {
+    last = document.activeElement;
+    if (!screen.querySelector("iframe")) {
+      const f = document.createElement("iframe");
+      f.title = label;
+      f.allow = "fullscreen";
+      f.loading = "lazy";
+      f.src = cfg.dataset.embed;
+      f.addEventListener("load", () => {
+        const p = screen.querySelector(".proto-loading");
+        if (p) p.remove();
+      });
+      screen.appendChild(f);
+    }
+    modal.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    fit();
+    closeBtn.focus();
+  };
+  const close = () => {
+    modal.classList.remove("is-open");
+    document.body.style.overflow = "";
+    const f = screen.querySelector("iframe");
+    if (f) f.remove();                          // stop it running once hidden
+    const p = screen.querySelector(".proto-loading");
+    if (!p) screen.insertAdjacentHTML("beforeend", '<p class="proto-loading">Loading prototype…</p>');
+    if (last) last.focus();
+  };
+
+  fab.addEventListener("click", () => { haptic(12); open(); });
+  closeBtn.addEventListener("click", close);
+  modal.addEventListener("mousedown", (e) => { if (e.target === modal) close(); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+  });
+  window.addEventListener("resize", () => {
+    if (modal.classList.contains("is-open")) fit();
+  }, { passive: true });
+}
+
+const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); initBackNav(); initToTop(); initPin(window.gsap, window.ScrollTrigger); initPrototype(); };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
 else boot();
