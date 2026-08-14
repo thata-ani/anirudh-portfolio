@@ -18,8 +18,6 @@ export function initHero() {
     document.body.style.overflow = "";
     window.scrollTo(0, 0);
 
-    sessionStorage.setItem("intro_done", "1");
-
     playCue("on");
     haptic(14);
 
@@ -30,15 +28,9 @@ export function initHero() {
     }
   };
 
-  if (sessionStorage.getItem("intro_done")) {
-    setLit(true);
-    document.body.style.overflow = "";
-    const intro = document.getElementById("intro");
-    if (intro) intro.hidden = true;
-  } else {
-    document.body.style.overflow = "hidden";
-    setLit(false);
-  }
+  // The intro is the front door — every visit starts with the light off.
+  document.body.style.overflow = "hidden";
+  setLit(false);
 
   switchBtn.addEventListener("click", () => {
     const isOn = root.getAttribute("data-reveal") === "on";
