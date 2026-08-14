@@ -190,6 +190,78 @@ function initBackNav() {
   });
 }
 
-const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); initBackNav(); };
+/* ---- 9 · back to top ------------------------------------------------------ */
+/* These pages are long, so returning to the top shouldn't mean a long scroll.
+ * Injected rather than authored into each page: it is a pure enhancement, and
+ * this way all three case studies stay in sync. */
+function initToTop() {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "db-totop";
+  btn.setAttribute("aria-label", "Back to top");
+  btn.innerHTML =
+    '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" ' +
+    'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>';
+  document.body.appendChild(btn);
+
+  const foot = document.querySelector(".db-foot");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Native smooth scrolling paces itself by distance, so on a case study this
+  // long it crawls for several seconds. Drive it instead with a duration capped
+  // near the page's own slow transition, and let any real scroll input cancel it.
+  let raf = null;
+  const cancel = () => { if (raf) { cancelAnimationFrame(raf); raf = null; } };
+  window.addEventListener("wheel", cancel, { passive: true });
+  window.addEventListener("touchstart", cancel, { passive: true });
+
+  const toTop = () => {
+    const start = window.scrollY;
+    if (start <= 0) return;
+    if (reduce) { window.scrollTo(0, 0); return; }
+    cancel();
+    const dur = Math.min(700, 260 + start * 0.06);
+    const t0 = performance.now();
+    const ease = (t) => 1 - Math.pow(1 - t, 3); // power3.out — the page's own curve
+    const step = (now) => {
+      const t = Math.min(1, (now - t0) / dur);
+      // "instant" matters: the site sets scroll-behavior:smooth globally, which
+      // would animate every frame of this animation and fight the easing.
+      window.scrollTo({ top: Math.round(start * (1 - ease(t))), behavior: "instant" });
+      raf = t < 1 ? requestAnimationFrame(step) : null;
+    };
+    raf = requestAnimationFrame(step);
+  };
+
+  btn.addEventListener("click", (e) => {
+    haptic(9);
+    toTop();
+    // Keyboard activation reports detail 0 — then the focus should travel too,
+    // otherwise a keyboard user is returned to the top but left tabbing from
+    // the bottom of the document.
+    if (e.detail === 0) {
+      const back = document.querySelector(".db-top__back");
+      if (back) back.focus({ preventScroll: true });
+    }
+  });
+
+  let ticking = false;
+  const update = () => {
+    btn.classList.toggle("is-on", window.scrollY > window.innerHeight * 0.75);
+    // Ride up ahead of the footer rather than sitting on top of its text.
+    if (foot) {
+      const lift = Math.max(0, window.innerHeight - foot.getBoundingClientRect().top);
+      btn.style.setProperty("--lift", `${lift}px`);
+    }
+    ticking = false;
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  update();
+}
+
+const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); initBackNav(); initToTop(); };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
 else boot();
