@@ -550,3 +550,168 @@ em { font-style: italic; }
 @media (max-width: 520px) {
   .cw-markets { grid-template-columns: 1fr; }
 }
+
+/* ===========================================================================
+   INTENT-FIRST INTERACTION — an exploration that started with voice (2023)
+   Page-scoped components. Structure, rhythm and dark/light blocks come from
+   the shared .db- system; only the pieces unique to this story live here.
+   ========================================================================= */
+
+/* ---------- Hero ---------- */
+.if-hero__title {
+  font-size: clamp(2.6rem, 1.6rem + 5vw, 6rem); font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.02; margin-top: clamp(1rem, 2vw, 1.6rem); text-wrap: balance;
+}
+.if-hero__sub {
+  margin-top: clamp(1.1rem, 2.4vw, 1.8rem); font-size: var(--fs-lede);
+  color: var(--c-warm-200); line-height: 1.45; max-width: 44ch;
+}
+.if-meta {
+  margin-top: clamp(2.4rem, 5vw, 4rem); display: grid; gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  border-top: 1px solid var(--c-line);
+}
+.if-meta__item { padding: clamp(1rem, 2vw, 1.4rem) 0; border-bottom: 1px solid var(--c-line); padding-right: 1.5rem; }
+.if-meta__item dt {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--c-warm-400); margin-bottom: 0.45rem;
+}
+.if-meta__item dd { margin: 0; color: var(--c-warm-200); line-height: 1.45; font-size: 0.98rem; }
+
+/* ---------- The two questions a product can open with ---------- */
+.if-ask {
+  margin-top: clamp(2.4rem, 5vw, 3.6rem); display: grid; gap: 0;
+  border-top: 1px solid var(--c-line);
+}
+.if-ask__row {
+  display: grid; grid-template-columns: minmax(140px, 0.5fr) 1fr;
+  gap: 0.4rem clamp(1rem, 3vw, 2.4rem); align-items: baseline;
+  padding: clamp(1.3rem, 3vw, 2rem) 0; border-bottom: 1px solid var(--c-line);
+}
+.if-ask__k {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--c-warm-400);
+}
+.if-ask__q {
+  font-size: clamp(1.4rem, 1rem + 2vw, 2.6rem); font-weight: 600;
+  letter-spacing: -0.02em; line-height: 1.12; color: var(--c-warm-100);
+}
+/* The question the product used to ask — present, but visibly the old way. */
+.if-ask__q--old { color: var(--c-warm-400); }
+
+/* ---------- Shared editorial beats ---------- */
+.if-note {
+  margin-top: clamp(1.8rem, 4vw, 2.6rem); color: var(--c-warm-300);
+  line-height: 1.55; max-width: 52ch; font-size: 1.02rem;
+}
+.if-punch {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.25rem, 1rem + 1.4vw, 2rem); font-weight: 600;
+  letter-spacing: -0.015em; line-height: 1.25; max-width: 26ch; text-wrap: balance;
+}
+.if-dark-lede {
+  margin-top: clamp(1.2rem, 2.4vw, 1.8rem); font-size: var(--fs-lede);
+  color: rgba(255, 255, 255, 0.72); line-height: 1.5; max-width: 54ch;
+}
+
+/* ---------- Exchanges: what was said, what the product did ---------- */
+.if-ex { list-style: none; margin: 0; padding: 0; }
+.if-ex__item {
+  display: grid; gap: 0.9rem;
+  padding: clamp(1.3rem, 3vw, 1.9rem) clamp(1.2rem, 3vw, 1.8rem);
+}
+.if-ex__item:not(:last-child) { border-bottom: 1px solid var(--c-line); }
+.if-ex__said {
+  font-size: clamp(1.1rem, 0.95rem + 0.8vw, 1.45rem); font-weight: 600;
+  letter-spacing: -0.01em; color: var(--c-warm-100); line-height: 1.3;
+}
+.if-ex__who {
+  display: block; margin-bottom: 0.5rem;
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-warm-400);
+}
+.if-ex__does { list-style: none; margin: 0; padding-left: clamp(0.8rem, 2vw, 1.2rem); display: grid; gap: 0.45rem; }
+.if-ex__does li {
+  position: relative; padding-left: 1.5rem; color: var(--c-warm-300);
+  font-size: 0.98rem; line-height: 1.45;
+}
+.if-ex__does li::before {
+  content: "→"; position: absolute; left: 0; color: var(--c-warm-400);
+}
+
+/* ---------- "Voice was the interface. Intent was the idea." ---------- */
+.if-line {
+  margin-top: clamp(2.4rem, 5vw, 3.6rem);
+  font-size: clamp(1.3rem, 1rem + 1.6vw, 2.2rem); font-weight: 600;
+  letter-spacing: -0.02em; line-height: 1.2; color: #fff; max-width: 24ch;
+}
+
+/* ---------- The pull quote ---------- */
+.if-quote {
+  margin: clamp(2.4rem, 5vw, 3.6rem) 0 0; padding-left: clamp(1.2rem, 3vw, 2rem);
+  border-left: 2px solid rgba(255, 255, 255, 0.5);
+  font-size: clamp(1.4rem, 1rem + 2.2vw, 2.8rem); font-weight: 600;
+  letter-spacing: -0.02em; line-height: 1.15; color: #fff;
+  max-width: 24ch; text-wrap: balance;
+}
+
+/* ---------- Traditional vs intent-first ---------- */
+.if-two {
+  margin-top: clamp(2.6rem, 5vw, 4rem); display: grid;
+  grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem);
+}
+.if-two__col { padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.18); opacity: 0.55; }
+.if-two__col--mine { border-top-color: #fff; opacity: 1; }
+.if-two__k {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255, 255, 255, 0.55); margin-bottom: 0.9rem;
+}
+.if-two__q {
+  font-size: clamp(1.15rem, 0.95rem + 1vw, 1.7rem); font-weight: 600;
+  letter-spacing: -0.015em; color: #fff; margin-bottom: 1rem;
+}
+.if-two__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; counter-reset: s; }
+.if-two__steps li {
+  position: relative; padding-left: 1.6rem; color: rgba(255, 255, 255, 0.7);
+  line-height: 1.45; font-size: 0.98rem;
+}
+.if-two__steps li::before {
+  content: "↓"; position: absolute; left: 0; color: rgba(255, 255, 255, 0.4);
+}
+
+/* ---------- How the idea travelled across media ---------- */
+.if-evo {
+  list-style: none; margin: clamp(2.4rem, 5vw, 3.4rem) 0 0; padding: 0;
+  display: grid; gap: 0; border-top: 1px solid var(--c-line);
+}
+.if-evo__step {
+  display: grid; grid-template-columns: minmax(90px, 0.3fr) 1fr;
+  gap: 0.3rem clamp(1rem, 3vw, 2.2rem); align-items: baseline;
+  padding: clamp(1.1rem, 2.4vw, 1.6rem) 0; border-bottom: 1px solid var(--c-line);
+}
+.if-evo__year {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--c-warm-400);
+}
+.if-evo__what {
+  font-size: clamp(1.05rem, 0.92rem + 0.7vw, 1.45rem); font-weight: 600;
+  letter-spacing: -0.01em; color: var(--c-warm-300);
+}
+/* Where the idea stands now — the only step at full strength. */
+.if-evo__step--now .if-evo__year { color: var(--c-warm-100); }
+.if-evo__step--now .if-evo__what { color: var(--c-warm-100); }
+
+/* ---------- The principle that survived every interface ---------- */
+.if-principle {
+  margin-top: clamp(2.4rem, 5vw, 3.4rem);
+  font-size: clamp(1.9rem, 1.2rem + 3.4vw, 4rem); font-weight: 600;
+  letter-spacing: -0.03em; line-height: 1.05; color: var(--c-warm-100);
+}
+
+@media (max-width: 720px) {
+  .if-ask__row,
+  .if-evo__step { grid-template-columns: 1fr; }
+  .if-two { grid-template-columns: 1fr; gap: 2rem; }
+  .if-meta__item { padding-right: 0; }
+}

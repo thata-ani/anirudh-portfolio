@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.classList.add("js");if("scrollRestoration"in history)history.scrollRestoration="manual";window.scrollTo(0,0);</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Intent-First Interaction — an exploration · Anirudh Thata</title>
+  <meta name="description" content="An interaction model I explored in 2023: instead of asking people to learn a product's navigation, let the product start by asking what they need. Voice was the interface. Intent was the idea." />
+  <link rel="preload" href="assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/case.css?v=8" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+</head>
+
+<body class="db intent">
+  <a class="db-skip" href="#db-main">Skip to the story</a>
+  <div class="db-progress" id="db-progress" aria-hidden="true"><span></span></div>
+
+  <header class="db-top">
+    <a class="db-top__back" href="index.html"><span aria-hidden="true">←</span> Anirudh&nbsp;Thata</a>
+    <span class="db-top__here">Intent-First Interaction · Exploration</span>
+    <a class="db-top__cta" href="index.html">Let's connect</a>
+  </header>
+
+  <main id="db-main">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="db-hero if-hero">
+      <p class="db-eyebrow db-in">Interaction model · Self-initiated exploration · 2023</p>
+      <h1 class="if-hero__title db-in">Intent-First Interaction</h1>
+      <p class="if-hero__sub db-in">
+        An exploration that started with voice — and turned into a question
+        about how people should enter a product at all.
+      </p>
+      <dl class="if-meta db-in">
+        <div class="if-meta__item">
+          <dt>Role</dt>
+          <dd>Product Designer — self-initiated exploration</dd>
+        </div>
+        <div class="if-meta__item">
+          <dt>Year</dt>
+          <dd>2023</dd>
+        </div>
+        <div class="if-meta__item">
+          <dt>Where I explored it</dt>
+          <dd>Inside Cropwise Grower, the product I was designing at the time</dd>
+        </div>
+        <div class="if-meta__item">
+          <dt>Scope</dt>
+          <dd>Interaction model, entry-point concept, flow exploration</dd>
+        </div>
+      </dl>
+      <p class="db-hero__scroll db-in" aria-hidden="true">Scroll — this is how I thought about it</p>
+    </section>
+
+    <!-- ============================================================
+         01 · THE QUESTION
+         ============================================================ -->
+    <section class="db-block if-question">
+      <p class="db-kicker db-in">01 — The question</p>
+      <h2 class="db-h2 db-in">Every product asks you to learn it first.</h2>
+      <p class="db-lede db-in">
+        Menus, tabs, sections, hierarchies — a map of where things live. As
+        designers we spend our time making that map clearer: better labels,
+        tighter grouping, fewer levels. What we rarely question is the map
+        itself.
+      </p>
+      <p class="db-lede db-in">
+        Navigation quietly assumes the person already knows two things — what
+        they are looking for, and where someone else decided to file it. Most
+        people arrive with neither. They arrive with a need, not an address.
+      </p>
+
+      <div class="if-ask db-in">
+        <div class="if-ask__row">
+          <p class="if-ask__k">Instead of the product asking</p>
+          <p class="if-ask__q if-ask__q--old">“Where should I go?”</p>
+        </div>
+        <div class="if-ask__row">
+          <p class="if-ask__k">It could start with</p>
+          <p class="if-ask__q">“What do you need?”</p>
+        </div>
+      </div>
+
+      <p class="if-note db-in">
+        One of those puts the work on the person. The other puts it on the
+        product. That is the whole idea — everything after this is me trying
+        to see what it would look like.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         02 · THE PIVOT
+         ============================================================ -->
+    <section class="db-pivot db-dark">
+      <p class="db-pivot__wrong db-in">Where should I go?</p>
+      <p class="db-pivot__q db-in">What if the user could just ask?</p>
+      <p class="db-pivot__after db-in">
+        Not a new feature. A different front door to the one that already
+        exists.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         03 · THE EXPLORATION
+         ============================================================ -->
+    <section class="db-block if-explore">
+      <p class="db-kicker db-in">02 — The exploration · 2023</p>
+      <h2 class="db-h2 db-in">I explored a voice-first entry point.</h2>
+      <p class="db-lede db-in">
+        Not another product. Not another service. A different way to
+        <em>enter</em> the one that already existed — so that the first thing
+        a person met wasn't a screen full of options, but a prompt that simply
+        asked what they needed.
+      </p>
+      <p class="db-lede db-in">
+        I was designing Cropwise Grower at the time, so that is where I tested
+        the thought. But the idea was never about that product, or that
+        industry. It was about the doorway — and every product has one.
+      </p>
+
+      <div class="db-techflow db-in">
+        <div class="db-techflow__chain">
+          <div class="db-techflow__step">
+            <span class="db-techflow__icon">You</span>
+            <p>User</p>
+          </div>
+          <span class="db-techflow__arrow" aria-hidden="true"></span>
+          <div class="db-techflow__step db-techflow__step--key">
+            <span class="db-techflow__icon">Say</span>
+            <p>Voice</p>
+          </div>
+          <span class="db-techflow__arrow" aria-hidden="true"></span>
+          <div class="db-techflow__step db-techflow__step--key">
+            <span class="db-techflow__icon">Mean</span>
+            <p>Intent</p>
+          </div>
+          <span class="db-techflow__arrow" aria-hidden="true"></span>
+          <div class="db-techflow__step">
+            <span class="db-techflow__icon">Go</span>
+            <p>Relevant experience</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="if-note db-in">
+        Voice was simply the most direct way to make the point. Speaking is
+        what people already do when they don't know where to look.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         04 · SEE IT IN ACTION
+         ============================================================ -->
+    <section class="db-block if-action">
+      <p class="db-kicker db-in">03 — See it in action</p>
+      <h2 class="db-h2 db-in">The person says what they want. The product finds the way.</h2>
+      <p class="db-lede db-in">
+        Three ordinary requests. In each one, notice what the user never has
+        to know.
+      </p>
+
+      <div class="db-frame if-frame db-in">
+        <div class="db-frame__bar"><i></i><i></i><i></i><span>Voice entry · concept, 2023</span></div>
+        <ul class="if-ex">
+          <li class="if-ex__item">
+            <p class="if-ex__said">
+              <span class="if-ex__who">User</span>
+              “I want to know what I should do today.”
+            </p>
+            <ul class="if-ex__does">
+              <li>Understands the intent</li>
+              <li>Connects the relevant experience</li>
+            </ul>
+          </li>
+          <li class="if-ex__item">
+            <p class="if-ex__said">
+              <span class="if-ex__who">User</span>
+              “Something is wrong with my crop.”
+            </p>
+            <ul class="if-ex__does">
+              <li>Understands the intent</li>
+              <li>Opens the relevant experience</li>
+            </ul>
+          </li>
+          <li class="if-ex__item">
+            <p class="if-ex__said">
+              <span class="if-ex__who">User</span>
+              “Show me my rewards.”
+            </p>
+            <ul class="if-ex__does">
+              <li>Understands the intent</li>
+              <li>Takes the user there</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <p class="if-punch db-in">
+        The user doesn't need to know where the answer lives.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         05 · THE SHIFT
+         ============================================================ -->
+    <section class="db-block db-dark if-shift">
+      <p class="db-kicker db-kicker--light db-in">04 — The shift</p>
+      <h2 class="db-h2 db-in">From navigation to intent.</h2>
+
+      <div class="db-models db-in">
+        <div class="db-model db-model--wrong">
+          <p class="db-model__label">Before</p>
+          <ul class="db-model__flow db-model__flow--wrong">
+            <li>User</li><li>Navigation</li><li>Feature</li><li>Task</li>
+          </ul>
+          <p class="db-model__cap">
+            The person carries the burden of translation — turning what they
+            want into where it might be.
+          </p>
+        </div>
+        <div class="db-model db-model--right">
+          <p class="db-model__label">Exploring</p>
+          <ul class="db-model__flow">
+            <li>User</li><li>Intent</li><li>Understanding</li><li>Relevant experience</li>
+          </ul>
+          <p class="db-model__cap">
+            The product carries it instead — and the person just says what
+            they came for.
+          </p>
+        </div>
+      </div>
+
+      <p class="if-line db-in">Voice was the interface. Intent was the idea.</p>
+      <p class="db-insight__close db-in">
+        That distinction mattered more than I understood at the time. Had I
+        filed this away as “a voice feature”, it would have expired the moment
+        voice fell out of fashion. Because I held on to it as an entry model,
+        it outlived the medium.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         06 · THEN THE WORLD CAUGHT UP
+         ============================================================ -->
+    <section class="db-block if-caught">
+      <p class="db-kicker db-in">05 — Then the world caught up</p>
+      <h2 class="db-h2 db-in">Two years later, the interaction model went mainstream.</h2>
+
+      <div class="db-journey db-in">
+        <ol class="db-journey__phases">
+          <li class="db-journey__phase">
+            <span class="db-journey__dot" aria-hidden="true"></span>
+            <div>
+              <p class="db-journey__label">2023</p>
+              <h3>Voice-first exploration</h3>
+              <p>“Tell the product what you need.”</p>
+            </div>
+          </li>
+          <li class="db-journey__phase is-now">
+            <span class="db-journey__dot" aria-hidden="true"></span>
+            <div>
+              <p class="db-journey__label"><em>2025</em></p>
+              <h3>Conversational AI</h3>
+              <p>“Tell the system what you want.”</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <p class="db-lede db-in">
+        Conversational interaction became familiar to a far wider audience —
+        not because the idea was new to designers, but because the technology
+        finally became good enough to trust with it.
+      </p>
+      <p class="if-punch db-in">
+        The interesting part wasn't the technology. It was the interaction
+        model.
+      </p>
+      <p class="if-note db-in">
+        People stopped being asked to learn a structure, and started being
+        asked what they wanted.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         07 · THE CONNECTION
+         ============================================================ -->
+    <section class="db-block db-dark if-connect">
+      <p class="db-kicker db-kicker--light db-in">06 — The connection</p>
+      <h2 class="db-h2 db-in">I wasn't trying to predict anything.</h2>
+      <p class="if-dark-lede db-in">
+        I want to be precise here, because this is the easy place to overclaim.
+        I was not forecasting conversational AI. In 2023 nothing available to
+        me could interpret intent reliably enough to build on — which is
+        exactly why this stayed an exploration rather than a roadmap item.
+      </p>
+      <p class="if-dark-lede db-in">
+        I was questioning something much simpler:
+      </p>
+
+      <blockquote class="if-quote db-in">
+        Why should users have to understand the product before the product can
+        understand them?
+      </blockquote>
+
+      <div class="if-two db-in">
+        <div class="if-two__col">
+          <p class="if-two__k">Traditional</p>
+          <p class="if-two__q">Where do I go?</p>
+          <ol class="if-two__steps">
+            <li>Find the feature</li>
+            <li>Use it</li>
+          </ol>
+        </div>
+        <div class="if-two__col if-two__col--mine">
+          <p class="if-two__k">Intent-first</p>
+          <p class="if-two__q">What do I want?</p>
+          <ol class="if-two__steps">
+            <li>Tell the product</li>
+            <li>Let it determine the path</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         08 · THE IDEA EVOLVED
+         ============================================================ -->
+    <section class="db-block if-evolved">
+      <p class="db-kicker db-in">07 — The idea evolved</p>
+      <h2 class="db-h2 db-in">The interface keeps changing. The principle doesn't.</h2>
+
+      <ol class="if-evo db-in">
+        <li class="if-evo__step">
+          <span class="if-evo__year">2023</span>
+          <span class="if-evo__what">Voice</span>
+        </li>
+        <li class="if-evo__step">
+          <span class="if-evo__year">2025+</span>
+          <span class="if-evo__what">Conversational AI</span>
+        </li>
+        <li class="if-evo__step if-evo__step--now">
+          <span class="if-evo__year">Today</span>
+          <span class="if-evo__what">Voice · Text · Vision · Multimodal</span>
+        </li>
+      </ol>
+
+      <p class="db-lede db-in">
+        Voice was never the point. It was the medium available to me when I had
+        the thought. The same idea now arrives as text, as vision, as
+        multimodal input — and it will arrive as something else next.
+      </p>
+      <p class="if-principle db-in">Start with intent.</p>
+      <p class="if-note db-in">
+        What stays constant is the direction of the effort: the product works
+        to understand the person, rather than the person working to understand
+        the product.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         09 · WHAT I TOOK FROM IT
+         ============================================================ -->
+    <section class="db-block if-took">
+      <p class="db-kicker db-in">08 — What I took from it</p>
+      <h2 class="db-h2 db-in">A good idea doesn't always begin with a roadmap.</h2>
+      <p class="db-lede db-in">
+        Sometimes it begins with questioning something everyone has accepted as
+        normal. For me, that was navigation — the one thing every product has,
+        and almost nobody argues about.
+      </p>
+      <p class="db-lede db-in">
+        This exploration never shipped, and that's alright; not every idea needs
+        to. What it left me with was a habit. When a product feels hard to use,
+        I now check two things — whether the labelling is wrong, and whether the
+        person should have been doing the finding at all.
+      </p>
+      <ul class="db-reflect__qs db-in">
+        <li>Don't make the user find where the answer lives.</li>
+        <li>Start with what they want to accomplish.</li>
+        <li>The medium will change. The direction of the effort shouldn't.</li>
+      </ul>
+      <p class="db-road__arc db-in">
+        Accepted normal → Question it → Model the alternative → Keep the principle → Apply it to whatever comes next.
+      </p>
+    </section>
+
+    <!-- ============================================================
+         FINAL FRAME
+         ============================================================ -->
+    <section class="db-final db-dark">
+      <p class="db-final__text db-in">
+        From navigation-first to <em>intent-first</em>.
+      </p>
+      <p class="db-final__sub db-in">
+        An interaction idea I explored in 2023. The technology keeps changing.
+        The question is still relevant.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="db-foot">
+    <a href="index.html"><span aria-hidden="true">←</span> Back to the portfolio</a>
+    <span class="db-foot__name">Anirudh Thata · Product Designer</span>
+  </footer>
+
+  <script defer src="js/vendor/gsap.min.js"></script>
+  <script defer src="js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="js/vendor/SplitText.min.js"></script>
+  <script type="module" src="js/case.js"></script>
+</body>
+</html>
