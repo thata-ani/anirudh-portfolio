@@ -10,6 +10,7 @@
  * Everything degrades gracefully without JS.
  */
 import { haptic } from "./modules/sound.js";
+import { initCaseMotion } from "./modules/motion.js";
 
 /* ---- 1 · scroll reveal --------------------------------------------------- */
 function initReveal() {
@@ -171,6 +172,6 @@ function initDeepDive() {
   });
 }
 
-const boot = () => { initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); };
+const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
 else boot();

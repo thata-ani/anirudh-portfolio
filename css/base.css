@@ -285,6 +285,12 @@ html.js [data-anim="draw"].is-visible::before {
   transform: scaleX(1);
 }
 
+/* When GSAP owns entrance motion, the CSS transition layer stands down. */
+html.gsap [data-anim],
+html.gsap .db-in {
+  transition: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
