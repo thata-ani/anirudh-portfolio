@@ -478,7 +478,38 @@ em { font-style: italic; }
 .cw-services-intro.db-block { padding-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
 .cw-service.db-block { padding-block: clamp(2.5rem, 2rem + 3vw, 4.5rem); border-top: 1px solid var(--c-line); }
 .cw-service__num { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-warm-400); margin-bottom: 0.5rem; }
-.cw-service__name { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.4rem); font-weight: 600; letter-spacing: -0.02em; margin-bottom: clamp(1.4rem, 3vw, 2.2rem); }
+.cw-service__name { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.4rem); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+/* One line naming what the service is for, before the reasoning starts. */
+.cw-service__sub { font-size: var(--fs-lede); color: var(--c-warm-300); line-height: 1.4; max-width: 46ch; margin-bottom: clamp(1.4rem, 3vw, 2.2rem); }
+/* The decision the reasoning led to — set apart from the analysis above it. */
+.cw-dir {
+  margin-top: clamp(1.6rem, 3vw, 2.2rem); padding-left: clamp(0.9rem, 2vw, 1.2rem);
+  border-left: 2px solid var(--c-warm-100); line-height: 1.45;
+  font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.35rem); font-weight: 600;
+  letter-spacing: -0.01em; color: var(--c-warm-100); max-width: 52ch;
+}
+.cw-dir span {
+  display: block; margin-bottom: 0.4rem; font-family: var(--font-mono);
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--c-warm-400);
+}
+.cw-dir em { font-style: italic; }
+.cw-dir--decision { margin-top: clamp(1.8rem, 3.5vw, 2.6rem); }
+/* The break in the journey Nearby Retailers was built to close. */
+.cw-gap {
+  margin-top: clamp(1.6rem, 3vw, 2.2rem); display: flex; flex-wrap: wrap;
+  align-items: center; gap: 0.5rem 0.75rem;
+}
+.cw-gap__step {
+  font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em;
+  color: var(--c-warm-300); border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-pill); padding: 0.45rem 0.9rem;
+}
+.cw-gap__arrow { width: 18px; height: 1px; background: var(--c-line-strong); flex-shrink: 0; }
+.cw-gap__step--broken {
+  color: var(--c-warm-400); border-style: dashed;
+  text-decoration: line-through; text-decoration-thickness: 1px;
+}
 
 /* experience flow (inside a .db-frame) */
 .cw-flow__body { padding: clamp(1rem, 2.5vw, 1.6rem); display: flex; flex-wrap: wrap; align-items: center; }
