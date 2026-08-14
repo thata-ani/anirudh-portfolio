@@ -54,9 +54,13 @@
        bulb hangs from the top; a clear button turns on the light and reveals
        the interface. (Accessibility: a product needs visibility before value.) -->
   <div class="intro" id="intro">
+    <span class="intro__pool" aria-hidden="true"></span>
     <div class="intro__lamp" aria-hidden="true">
       <span class="intro__wire"></span>
-      <span class="intro__bulb"><span class="intro__glow"></span></span>
+      <span class="intro__bulb">
+        <span class="intro__filament"></span>
+        <span class="intro__glow"></span>
+      </span>
     </div>
     <div class="intro__content">
       <h1 class="intro__title" id="intro-title">

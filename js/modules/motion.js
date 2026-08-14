@@ -128,6 +128,63 @@ function refreshOnInteraction() {
   });
 }
 
+/* ---- Intro — the lamp arrives, then the room settles ---------------------- */
+/* Always safe to call: without GSAP (or with reduced motion) it simply marks
+   the intro ready and everything stays visible. GSAP only ever adds the
+   arrival, then clears its inline styles so CSS owns the turn-on and exit. */
+export function initIntroMotion() {
+  const intro = document.getElementById("intro");
+  if (!intro) return false;
+  const ready = () => intro.classList.add("is-ready");
+
+  const gsap = setup();
+  const lamp = intro.querySelector(".intro__lamp");
+  const wire = intro.querySelector(".intro__wire");
+  const bulb = intro.querySelector(".intro__bulb");
+  const title = intro.querySelector(".intro__title");
+  const sub = intro.querySelector(".intro__sub");
+  const btn = intro.querySelector(".intro__btn");
+  if (!gsap || !lamp || !wire || !bulb) {
+    ready();
+    return false;
+  }
+
+  // Start state is set synchronously, so the arrival never flashes unstyled.
+  gsap.set(wire, { transformOrigin: "50% 0%", scaleY: 0 });
+  gsap.set(bulb, { autoAlpha: 0, scale: 0.82, transformOrigin: "50% 0%" });
+  gsap.set([title, sub].filter(Boolean), { autoAlpha: 0, y: 16 });
+  // Opacity (not autoAlpha) on the button — it stays hittable while arriving.
+  if (btn) gsap.set(btn, { opacity: 0, y: 12 });
+
+  const tl = gsap.timeline({
+    onComplete: () => {
+      // The lamp must be cleared too — a leftover inline `translate: none`
+      // would cancel the CSS centring the moment the sway keyframes take over.
+      gsap.set([lamp, wire, bulb, title, sub, btn].filter(Boolean), { clearProps: "all" });
+      ready();
+    },
+  });
+
+  tl.to(wire, { scaleY: 1, duration: 0.72, ease: EASE })
+    .to(bulb, { autoAlpha: 1, scale: 1, duration: 0.6, ease: EASE }, 0.34)
+    // A short damped swing — the lamp comes to rest, no bounce.
+    .fromTo(lamp, { rotate: -2.6 }, { rotate: 0.9, duration: 0.62, ease: "power2.inOut" }, 0.42)
+    .to(lamp, { rotate: 0, duration: 0.9, ease: "power2.inOut" }, 1.04)
+    .to(title, { autoAlpha: 1, y: 0, duration: 0.9, ease: EASE_DISPLAY }, 0.62)
+    .to(sub, { autoAlpha: 1, y: 0, duration: 0.8, ease: EASE }, 0.86)
+    .to(btn, { opacity: 1, y: 0, duration: 0.7, ease: EASE }, 1.04);
+
+  // Turning the light on mid-arrival must never strand a half-played state.
+  new MutationObserver((_, obs) => {
+    if (document.documentElement.getAttribute("data-reveal") === "on") {
+      tl.progress(1);
+      obs.disconnect();
+    }
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-reveal"] });
+
+  return true;
+}
+
 /* ---- Homepage ------------------------------------------------------------ */
 export function initMotion() {
   const gsap = setup();

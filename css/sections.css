@@ -76,12 +76,29 @@ html:not(.js) .intro { display: none; } /* no JS: no cover, page is just visible
   text-align: center; padding: 0 clamp(1.25rem, 5vw, 3rem);
   transition: opacity var(--dur-slow) var(--ease-out);
 }
-/* Warm flash — a fast amber pulse that coincides with the bulb igniting. */
+/* Ambient — the room reads as lit from above even before the bulb fires,
+   so every shadow in the composition falls away from the lamp. */
+.intro::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 120% 66% at 50% -12%, rgba(255, 255, 255, 0.07) 0%, transparent 62%),
+    radial-gradient(ellipse 96% 60% at 50% 116%, rgba(0, 0, 0, 0.55) 0%, transparent 64%);
+}
+/* Flash — a fast white pulse that coincides with the bulb igniting. */
 .intro::after {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(ellipse at 50% 22%, rgba(255, 210, 140, 0.25) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 50% 20%, rgba(255, 255, 255, 0.22) 0%, transparent 60%);
   opacity: 0;
 }
+/* The pool the lamp throws down over the content once it is lit. */
+.intro__pool {
+  position: absolute; left: 50%; top: 0; translate: -50% 0; z-index: -1;
+  width: min(1240px, 132vw); height: min(940px, 96vh); pointer-events: none; opacity: 0;
+  background: radial-gradient(ellipse 46% 58% at 50% 6%,
+    rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.07) 38%, transparent 72%);
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+html[data-reveal="on"] .intro__pool { opacity: 1; }
 html[data-reveal="on"] .intro::after { animation: intro-flash 0.8s var(--ease-exit) 1; }
 @keyframes intro-flash { 0% { opacity: 0; } 12% { opacity: 1; } 100% { opacity: 0; } }
 /* Lights on → the opening dissolves, the interface behind it appears. */
@@ -90,6 +107,9 @@ html[data-reveal="on"] .intro { opacity: 0; pointer-events: none; transition-del
 /* Hanging bulb — cord drops from the very top; a warm, mono glow. */
 .intro__lamp {
   position: absolute; top: 0; left: 50%; translate: -50% 0;
+  /* Pivot at the ceiling anchor — a hanging lamp swings from the cord, not
+     from its own middle. Keeps `translate` free for centring. */
+  transform-origin: 50% 0;
   display: flex; flex-direction: column; align-items: center;
 }
 .intro__wire {
@@ -97,27 +117,45 @@ html[data-reveal="on"] .intro { opacity: 0; pointer-events: none; transition-del
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.5));
 }
 .intro__bulb {
-  position: relative; width: 42px; height: 54px;
+  position: relative; width: 44px; height: 56px;
   border-radius: 50% 50% 46% 46% / 56% 56% 44% 44%;
-  background: radial-gradient(circle at 50% 38%, rgba(52, 52, 54, 0.95), rgba(14, 14, 15, 0.96));
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.5);
+  /* Dark glass: a faint sheen up top where the ambient catches it, heavy at the base. */
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 46%, transparent 72%),
+    linear-gradient(180deg, rgba(44, 44, 47, 0.92) 0%, rgba(15, 15, 17, 0.96) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  box-shadow: inset 0 -8px 12px rgba(0, 0, 0, 0.55), inset 0 2px 6px rgba(255, 255, 255, 0.06);
   transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out);
 }
+/* Metal cap. */
 .intro__bulb::before {
-  content: ""; position: absolute; top: -6px; left: 50%; translate: -50% 0;
-  width: 14px; height: 8px; border-radius: 2px; background: rgba(52, 52, 54, 0.95);
+  content: ""; position: absolute; top: -7px; left: 50%; translate: -50% 0;
+  width: 15px; height: 9px; border-radius: 2px 2px 1px 1px;
+  background: linear-gradient(180deg, rgba(88, 88, 92, 0.95), rgba(38, 38, 41, 0.95));
 }
+/* The filament — the actual light source. Dim when cold, blazing when lit. */
+.intro__filament {
+  position: absolute; left: 50%; top: 42%; translate: -50% -50%; scale: 1;
+  width: 13px; height: 13px; border-radius: 50%; pointer-events: none; opacity: 0.16;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.28) 52%, transparent 76%);
+  transition: opacity var(--dur-fast) var(--ease-out), scale var(--dur-mid) var(--ease-out);
+}
+/* The halo the filament throws. Centred on the filament, not the glass, so the
+   light and the shadows it implies share one origin. */
 .intro__glow {
-  position: absolute; left: 50%; top: 46%; width: 340px; height: 340px; translate: -50% -50%;
-  border-radius: 50%; pointer-events: none; opacity: 0.18;
-  background: radial-gradient(circle, rgba(255, 246, 224, 0.5) 0%, rgba(255, 244, 220, 0.12) 34%, transparent 64%);
-  transition: opacity var(--dur-mid) var(--ease-out);
+  position: absolute; left: 50%; top: 42%; width: 420px; height: 420px;
+  translate: -50% -50%; scale: 0.5;
+  border-radius: 50%; pointer-events: none; opacity: 0.06;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 30%, rgba(255, 255, 255, 0.04) 52%, transparent 70%);
+  transition: opacity var(--dur-mid) var(--ease-out), scale var(--dur-slow) var(--ease-out);
 }
-/* A soft idle sway so the lamp feels alive before you turn it on. */
-.intro:not([data-hidden]) .intro__lamp { animation: lamp-sway 6s var(--ease-in-out) infinite; }
-@keyframes lamp-sway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(0.8deg); } }
-.intro:not([data-hidden]) .intro__glow { animation: intro-breathe 4.5s var(--ease-in-out) infinite; }
+/* Idle life begins only once the lamp has finished arriving. */
+.intro.is-ready .intro__lamp { animation: lamp-sway 6s var(--ease-in-out) infinite; }
+@keyframes lamp-sway { 0%, 100% { transform: rotate(-0.5deg); } 50% { transform: rotate(0.5deg); } }
+.intro.is-ready .intro__glow { animation: intro-breathe 4.5s var(--ease-in-out) infinite; }
+/* GSAP owns the arrival; its inline transform must not fight the CSS sway. */
+html.gsap .intro__lamp { animation: none; }
+html.gsap .intro.is-ready .intro__lamp { animation: lamp-sway 6s var(--ease-in-out) infinite; }
 
 /* Staggered intro exit — elements leave in sequence (button first, title last). */
 html[data-reveal="on"] .intro__btn { transition-delay: 0s; opacity: 0; transform: translateY(8px); }
@@ -129,6 +167,7 @@ html[data-reveal="on"] .intro__title { transition-delay: 0.16s; opacity: 0; tran
 
 /* Content — headline, sub, button. Vertically centred; the bulb hangs above. */
 .intro__content {
+  position: relative; z-index: 1;
   margin-top: clamp(3rem, 14vh, 8rem);
   display: flex; flex-direction: column; align-items: center;
   gap: clamp(1.1rem, 2.6vh, 1.9rem); max-width: min(880px, 92vw);
@@ -161,18 +200,20 @@ html[data-reveal="on"] .intro__title { transition-delay: 0.16s; opacity: 0; tran
 .intro__btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
 .intro__btn-dot {
   width: 8px; height: 8px; border-radius: 50%; background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); animation: intro-pulse 2.4s var(--ease-in-out) 3;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
+.intro.is-ready .intro__btn-dot { animation: intro-pulse 2.4s var(--ease-in-out) 3; }
 
-/* Turn-on: the bulb flares warm-white the instant the light comes on. */
+/* Turn-on: the filament fires, the glass floods, the halo opens. */
 html[data-reveal="on"] .intro__bulb {
-  background: radial-gradient(circle at 50% 40%, #ffffff 0%, #fff 45%, #dcd7cc 100%);
+  background: radial-gradient(circle at 50% 40%, #ffffff 0%, #ffffff 46%, #e6e6e9 100%);
   border-color: #ffffff;
-  box-shadow: 0 0 60px 12px rgba(255, 248, 232, 0.55), 0 0 170px 56px rgba(255, 246, 226, 0.3);
+  box-shadow: 0 0 54px 10px rgba(255, 255, 255, 0.5), 0 0 160px 50px rgba(255, 255, 255, 0.22);
 }
-html[data-reveal="on"] .intro__glow { opacity: 1; animation: bulb-ignite 0.62s var(--ease-out) 1; }
+html[data-reveal="on"] .intro__filament { opacity: 1; scale: 1.4; }
+html[data-reveal="on"] .intro__glow { opacity: 1; scale: 1; animation: bulb-ignite 0.62s var(--ease-out) 1; }
 
-@keyframes intro-breathe { 0%, 100% { opacity: 0.14; } 50% { opacity: 0.26; } }
+@keyframes intro-breathe { 0%, 100% { opacity: 0.05; } 50% { opacity: 0.1; } }
 @keyframes intro-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 @keyframes bulb-ignite {
   0% { opacity: 0.15; } 6% { opacity: 1; } 10% { opacity: 0.3; }

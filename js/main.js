@@ -13,7 +13,7 @@
 import { initHero } from "./modules/hero.js";
 import { initNav } from "./modules/nav.js";
 import { initReveal } from "./modules/reveal.js";
-import { initMotion } from "./modules/motion.js";
+import { initMotion, initIntroMotion } from "./modules/motion.js";
 import { initLightField } from "./modules/lightfield.js";
 import { initCompanies } from "./modules/companies.js";
 import { initTeam } from "./modules/team.js";
@@ -32,6 +32,7 @@ const boot = () => {
   initHero();
   initNav();
   if (!initMotion()) initReveal();
+  initIntroMotion();
   initCompanies();
   initTeam();
   initContact();
