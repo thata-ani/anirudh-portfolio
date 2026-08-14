@@ -14,6 +14,7 @@ import { initHero } from "./modules/hero.js";
 import { initNav } from "./modules/nav.js";
 import { initReveal } from "./modules/reveal.js";
 import { initMotion, initIntroMotion } from "./modules/motion.js";
+import { initPin } from "./modules/pin.js";
 import { initLightField } from "./modules/lightfield.js";
 import { initCompanies } from "./modules/companies.js";
 import { initTeam } from "./modules/team.js";
@@ -33,6 +34,7 @@ const boot = () => {
   initNav();
   if (!initMotion()) initReveal();
   initIntroMotion();
+  initPin(window.gsap, window.ScrollTrigger);
   initCompanies();
   initTeam();
   initContact();

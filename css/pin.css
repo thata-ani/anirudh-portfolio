@@ -1,0 +1,112 @@
+/* ---------------------------------------------------------------------------
+   PINNED SEQUENCES — experimental, only active under ?pin=1
+   Everything here is scoped to html[data-pin="on"], so the shipped site is
+   untouched unless the flag asks for it.
+   ------------------------------------------------------------------------- */
+
+/* The steps share one slot. Height is measured from the tallest step before
+   they collapse, so the pinned section never resizes as it advances. */
+html[data-pin="on"] .pin-stage {
+  position: relative;
+  min-height: var(--pin-h, 8rem);
+  display: block;
+}
+html[data-pin="on"] .pin-stage > .pin-step {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+}
+/* !important is doing real work here, not papering over a specificity slip:
+   these same elements carry the site's GSAP rise animation, which writes
+   opacity and transform as inline styles. Inline beats every selector, so
+   without this the held step stays at whatever opacity the rise tween last
+   set — which is 0 for any step that has not entered yet. */
+html[data-pin="on"] .pin-stage > .pin-step:not(.is-lit) {
+  opacity: 0 !important;
+  transform: translateY(16px) !important;
+  pointer-events: none;
+}
+html[data-pin="on"] .pin-stage > .pin-step.is-lit {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  pointer-events: auto;
+}
+
+/* Held sections centre what they are holding, so the step sits in the middle
+   of the screen rather than riding the top edge. */
+html[data-pin="on"] .pin-seq {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* A horizontal chain reads as a row, not a stack — give those stages their
+   own row rhythm instead of the absolute slot. */
+html[data-pin="on"] .db-techflow .pin-stage,
+html[data-pin="on"] .cw-flow .pin-stage {
+  display: flex;
+  align-items: center;
+  min-height: 0;
+}
+html[data-pin="on"] .db-techflow .pin-stage > .pin-step,
+html[data-pin="on"] .cw-flow .pin-stage > .pin-step {
+  position: static;
+  width: auto;
+  transform: none;
+}
+html[data-pin="on"] .db-techflow .pin-stage > .pin-step:not(.is-lit),
+html[data-pin="on"] .cw-flow .pin-stage > .pin-step:not(.is-lit) {
+  opacity: 0.2 !important;
+  transform: none !important;
+  pointer-events: auto;
+}
+html[data-pin="on"] .db-techflow .pin-stage > .pin-step.is-lit,
+html[data-pin="on"] .cw-flow .pin-stage > .pin-step.is-lit {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+/* ---- the compare flag ---------------------------------------------------- */
+.pin-flag {
+  position: fixed;
+  left: clamp(0.75rem, 2vw, 1.5rem);
+  bottom: clamp(0.75rem, 2vw, 1.5rem);
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.7rem 0.6rem 0.9rem;
+  background: #ffffff;
+  color: #0b0b0c;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  border-radius: 999px;
+  box-shadow: 0 16px 40px -20px rgba(0, 0, 0, 0.45);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pin-flag b { font-weight: 700; }
+.pin-flag__dot { width: 7px; height: 7px; border-radius: 50%; background: #0b0b0c; }
+.pin-flag button {
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: #0b0b0c;
+  color: #ffffff;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+}
+.pin-flag button:focus-visible { outline: 2px solid #0b0b0c; outline-offset: 2px; }
+
+@media (max-width: 560px) {
+  .pin-flag { font-size: 0.6rem; padding: 0.5rem 0.5rem 0.5rem 0.75rem; }
+}

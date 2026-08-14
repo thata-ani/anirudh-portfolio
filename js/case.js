@@ -11,6 +11,7 @@
  */
 import { haptic } from "./modules/sound.js";
 import { initCaseMotion } from "./modules/motion.js";
+import { initPin } from "./modules/pin.js";
 
 /* ---- 1 · scroll reveal --------------------------------------------------- */
 function initReveal() {
@@ -262,6 +263,6 @@ function initToTop() {
   update();
 }
 
-const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); initBackNav(); initToTop(); };
+const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); initBackNav(); initToTop(); initPin(window.gsap, window.ScrollTrigger); };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
 else boot();
