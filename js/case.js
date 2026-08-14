@@ -172,6 +172,24 @@ function initDeepDive() {
   });
 }
 
-const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); };
+/* ---- 8 · going back to the portfolio ------------------------------------- */
+/* Returning to the portfolio is in-site navigation, so it should land on the
+ * page itself rather than replaying the intro. We leave a one-shot flag the
+ * homepage consumes on arrival; because it is consumed, a later reload of the
+ * homepage still opens with the light off, as a fresh visit should.
+ * Only plain left-clicks count — a modifier click opens a separate tab and
+ * must not spend the flag on this one's behalf. */
+function initBackNav() {
+  document.addEventListener("click", (e) => {
+    if (e.defaultPrevented || e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const link = e.target.closest('a[href^="index.html"]');
+    if (!link) return;
+    if (link.target && link.target !== "_self") return;
+    try { sessionStorage.setItem("intro_skip", "1"); } catch (err) { /* private mode */ }
+  });
+}
+
+const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); initBackNav(); };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
 else boot();

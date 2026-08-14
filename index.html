@@ -2,7 +2,11 @@
 <html lang="en" data-reveal="off">
 <head>
   <meta charset="UTF-8" />
-  <script>document.documentElement.classList.add("js");if(location.hash)history.replaceState(null,"",location.pathname);if("scrollRestoration"in history)history.scrollRestoration="manual";window.scrollTo(0,0);sessionStorage.removeItem("intro_done");</script>
+  <!-- The intro is the front door, so a reload always replays it. Coming back
+       from a case study is in-site navigation, not an arrival: those links leave
+       a one-shot flag, consumed here so it can never survive into a reload. -->
+  <script>document.documentElement.classList.add("js");var s=null;try{sessionStorage.removeItem("intro_done");s=sessionStorage.getItem("intro_skip");if(s)sessionStorage.removeItem("intro_skip");}catch(e){}if(s){document.documentElement.setAttribute("data-reveal","on");document.documentElement.classList.add("skip-intro");}else{if(location.hash)history.replaceState(null,"",location.pathname);if("scrollRestoration"in history)history.scrollRestoration="manual";window.scrollTo(0,0);}</script>
+  <style>.skip-intro .intro,.skip-intro #lightfield{display:none!important}</style>
   <!-- Optional real engagement stats (visitors · appreciations). Deploy the
        tiny counter in docs/analytics.md and paste its URL below to show REAL
        totals. Left empty by default — nothing is shown and nothing is faked. -->

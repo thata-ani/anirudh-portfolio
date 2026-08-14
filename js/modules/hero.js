@@ -28,9 +28,16 @@ export function initHero() {
     }
   };
 
-  // The intro is the front door — every visit starts with the light off.
-  document.body.style.overflow = "hidden";
-  setLit(false);
+  // Arriving back from a case study: the head script already opened the light,
+  // so step straight into the portfolio. Every other visit starts in the dark.
+  if (root.classList.contains("skip-intro")) {
+    setLit(true);
+    const intro = document.getElementById("intro");
+    if (intro) intro.hidden = true;
+  } else {
+    document.body.style.overflow = "hidden";
+    setLit(false);
+  }
 
   switchBtn.addEventListener("click", () => {
     const isOn = root.getAttribute("data-reveal") === "on";

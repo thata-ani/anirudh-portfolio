@@ -135,6 +135,8 @@ function refreshOnInteraction() {
 export function initIntroMotion() {
   const intro = document.getElementById("intro");
   if (!intro) return false;
+  // The intro was skipped for this visit — there is no arrival to choreograph.
+  if (document.documentElement.classList.contains("skip-intro")) return false;
   const ready = () => intro.classList.add("is-ready");
 
   const gsap = setup();
