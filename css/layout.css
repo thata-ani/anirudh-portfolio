@@ -156,7 +156,7 @@ main > section:nth-of-type(even) { background: var(--c-chapter); }
 }
 .site-nav__mark-name {
   font-family: var(--font-mono);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.98rem;
   letter-spacing: 0.06em;
   color: var(--c-warm-100);
@@ -175,12 +175,15 @@ main > section:nth-of-type(even) { background: var(--c-chapter); }
   transition: color var(--dur-fast) var(--ease-out), background-size var(--dur-mid) var(--ease-draw);
 }
 .site-nav__links a:hover { color: var(--c-warm-100); background-size: 100% 1px; }
+/* Bold, but settled: the weight carries the emphasis, so the frame steps back
+   to a quiet hairline rather than competing with it. */
 .site-nav__cta {
   padding: 0.55rem 1.15rem;
-  border: 1px solid var(--c-line-strong);
+  border: 1px solid var(--c-line);
   border-radius: var(--radius-pill);
   font-size: 0.92rem;
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
 .site-nav__cta:hover { border-color: var(--c-light); color: var(--c-light-soft); }
