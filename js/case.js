@@ -299,8 +299,13 @@ function initPrototype() {
     '<div class="proto-stage">' +
       '<div class="proto-fit">' +
       '<div class="proto-device" style="--screen-w:' + w + "px;--screen-h:" + h + 'px">' +
+        '<span class="proto-key proto-key--silence" aria-hidden="true"></span>' +
+        '<span class="proto-key proto-key--volup" aria-hidden="true"></span>' +
+        '<span class="proto-key proto-key--voldown" aria-hidden="true"></span>' +
+        '<span class="proto-key proto-key--power" aria-hidden="true"></span>' +
         '<div class="proto-screen">' +
           '<span class="proto-notch" aria-hidden="true"></span>' +
+          '<span class="proto-home" aria-hidden="true"></span>' +
           '<p class="proto-loading">Loading prototype…</p>' +
         "</div>" +
       "</div>" +
