@@ -64,22 +64,47 @@ export function initHeroGraphic() {
     }
   };
 
+  let ringProgress = -1;
+  const RING_DUR = 1.4;
+  let ringStartTime = 0;
+  const ringCx = () => w * 0.5;
+  const ringCy = () => h * 0.28;
+
+  const drawRing = () => {
+    if (ringProgress < 0 || ringProgress > 1) return;
+    const maxR = Math.hypot(w, h) * 0.6;
+    const r = ringProgress * maxR;
+    const alpha = (1 - ringProgress) * 0.18;
+    const lineW = 1.5 + (1 - ringProgress) * 2;
+    ctx.beginPath();
+    ctx.arc(ringCx(), ringCy(), r, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(${INK}, ${alpha.toFixed(3)})`;
+    ctx.lineWidth = lineW;
+    ctx.stroke();
+  };
+
   let t = 0, raf = 0;
   const tick = () => {
-    t += 0.004; // slow drift
+    t += 0.004;
     if (!pointerActive) {
       tx = w * (0.62 + Math.cos(t) * 0.18);
       ty = h * (0.55 + Math.sin(t * 0.9) * 0.22);
     }
-    fx += (tx - fx) * 0.04; // eases gently, never snappy
+    fx += (tx - fx) * 0.04;
     fy += (ty - fy) * 0.04;
     draw();
+    if (ringProgress >= 0 && ringProgress <= 1) {
+      ringProgress = Math.min(1, (performance.now() - ringStartTime) / (RING_DUR * 1000));
+      drawRing();
+    }
     raf = requestAnimationFrame(tick);
   };
 
   const start = () => {
     if (raf) return;
     if (reduce) { draw(); return; }
+    ringProgress = 0;
+    ringStartTime = performance.now() + 300;
     raf = requestAnimationFrame(tick);
   };
 

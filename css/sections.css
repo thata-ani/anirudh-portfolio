@@ -76,6 +76,14 @@ html:not(.js) .intro { display: none; } /* no JS: no cover, page is just visible
   text-align: center; padding: 0 clamp(1.25rem, 5vw, 3rem);
   transition: opacity var(--dur-slow) var(--ease-out);
 }
+/* Warm flash — a fast amber pulse that coincides with the bulb igniting. */
+.intro::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 22%, rgba(255, 210, 140, 0.25) 0%, transparent 60%);
+  opacity: 0;
+}
+html[data-reveal="on"] .intro::after { animation: intro-flash 0.8s var(--ease-exit) 1; }
+@keyframes intro-flash { 0% { opacity: 0; } 12% { opacity: 1; } 100% { opacity: 0; } }
 /* Lights on → the opening dissolves, the interface behind it appears. */
 html[data-reveal="on"] .intro { opacity: 0; pointer-events: none; transition-delay: 0.45s; }
 
@@ -106,8 +114,18 @@ html[data-reveal="on"] .intro { opacity: 0; pointer-events: none; transition-del
   background: radial-gradient(circle, rgba(255, 246, 224, 0.5) 0%, rgba(255, 244, 220, 0.12) 34%, transparent 64%);
   transition: opacity var(--dur-mid) var(--ease-out);
 }
-/* A soft idle breathing so the dark room feels alive before you turn it on. */
+/* A soft idle sway so the lamp feels alive before you turn it on. */
+.intro:not([data-hidden]) .intro__lamp { animation: lamp-sway 6s var(--ease-in-out) infinite; }
+@keyframes lamp-sway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(0.8deg); } }
 .intro:not([data-hidden]) .intro__glow { animation: intro-breathe 4.5s var(--ease-in-out) infinite; }
+
+/* Staggered intro exit — elements leave in sequence (button first, title last). */
+html[data-reveal="on"] .intro__btn { transition-delay: 0s; opacity: 0; transform: translateY(8px); }
+html[data-reveal="on"] .intro__sub { transition-delay: 0.08s; opacity: 0; transform: translateY(8px); }
+html[data-reveal="on"] .intro__title { transition-delay: 0.16s; opacity: 0; transform: translateY(8px); }
+.intro__btn, .intro__sub, .intro__title {
+  transition: opacity var(--dur-fast) var(--ease-exit), transform var(--dur-fast) var(--ease-exit);
+}
 
 /* Content — headline, sub, button. Vertically centred; the bulb hangs above. */
 .intro__content {
@@ -143,7 +161,7 @@ html[data-reveal="on"] .intro { opacity: 0; pointer-events: none; transition-del
 .intro__btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
 .intro__btn-dot {
   width: 8px; height: 8px; border-radius: 50%; background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); animation: intro-pulse 2.4s var(--ease-in-out) infinite;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); animation: intro-pulse 2.4s var(--ease-in-out) 3;
 }
 
 /* Turn-on: the bulb flares warm-white the instant the light comes on. */
@@ -157,8 +175,9 @@ html[data-reveal="on"] .intro__glow { opacity: 1; animation: bulb-ignite 0.62s v
 @keyframes intro-breathe { 0%, 100% { opacity: 0.14; } 50% { opacity: 0.26; } }
 @keyframes intro-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 @keyframes bulb-ignite {
-  0% { opacity: 0.2; } 8% { opacity: 1; } 14% { opacity: 0.35; }
-  22% { opacity: 1; } 32% { opacity: 0.55; } 44% { opacity: 1; } 100% { opacity: 1; }
+  0% { opacity: 0.15; } 6% { opacity: 1; } 10% { opacity: 0.3; }
+  16% { opacity: 1; } 22% { opacity: 0.45; } 30% { opacity: 1; }
+  38% { opacity: 0.7; } 44% { opacity: 1; } 100% { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .intro__glow, .intro__btn-dot { animation: none !important; }
@@ -499,7 +518,7 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   transition: background var(--dur-mid) var(--ease-out), color var(--dur-mid) var(--ease-out),
     border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out),
     transform var(--dur-fast) var(--ease-out);
-  animation: core-invite 2.8s var(--ease-in-out) infinite;
+  animation: core-invite 2.8s var(--ease-in-out) 3;
 }
 .ecosystem__core:hover { transform: scale(1.05); }
 .ecosystem__core:focus-visible { outline: 2px solid var(--c-light); outline-offset: 4px; }
@@ -582,8 +601,13 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 }
 .contact[data-state="appreciated"] .contact__connect-lead { color: var(--c-light); }
 .contact__links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-md); }
-.contact__links a { color: var(--c-warm-300); font-size: 1rem; letter-spacing: 0.02em; border-bottom: 1px solid transparent; transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
-.contact__links a:hover { color: var(--c-light-soft); border-color: var(--c-light); }
+.contact__links a {
+  color: var(--c-warm-300); font-size: 1rem; letter-spacing: 0.02em;
+  background-image: linear-gradient(var(--c-light), var(--c-light));
+  background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat;
+  transition: color var(--dur-fast) var(--ease-out), background-size var(--dur-mid) var(--ease-draw);
+}
+.contact__links a:hover { color: var(--c-light-soft); background-size: 100% 1px; }
 .contact__ping { min-height: 1.2em; color: var(--c-light); font-size: 0.95rem; opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); }
 .contact__ping:not(:empty) { opacity: 1; }
 
@@ -800,7 +824,7 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 }
 .ia-cta:hover { border-color: var(--c-light); transform: translateY(-1px); box-shadow: var(--shadow-card); }
 .ia-cta:focus-visible { outline: 2px solid var(--c-light); outline-offset: 3px; }
-.work[data-state="scattered"] .ia-cta { animation: cta-breathe 3.2s var(--ease-in-out) infinite; }
+.work[data-state="scattered"] .ia-cta { animation: cta-breathe 3.2s var(--ease-in-out) 3; }
 @keyframes cta-breathe { 0%, 100% { box-shadow: 0 0 0 0 var(--c-light-haze); } 55% { box-shadow: 0 0 0 10px transparent; } }
 .work[data-state="organized"] .ia-cta {
   background: var(--c-light); color: #fff; border-color: var(--c-light); animation: none;
@@ -1170,7 +1194,7 @@ html:not(.js) .sketch__pad { display: none; }
 }
 
 /* Primary section controls breathe until first used, so they read as controls. */
-.action-btn[aria-pressed="false"] { animation: ctrl-breathe 3s var(--ease-in-out) infinite; }
+.action-btn[aria-pressed="false"] { animation: ctrl-breathe 3s var(--ease-in-out) 3; }
 @keyframes ctrl-breathe {
   0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); border-color: var(--c-line-strong); }
   50% { box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04); border-color: var(--c-light); }

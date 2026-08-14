@@ -7,20 +7,27 @@
    sits over the whole page until the visitor pulls the cord (Accessibility).
    Switching on floods it away — black → white — revealing the interface.
    ------------------------------------------------------------------------- */
+@property --mask-hole {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
 #lightfield {
   position: fixed;
   inset: 0;
   z-index: 40;
   pointer-events: none;
   background: #0b0b0c;
-  opacity: 1;
-  transition: opacity var(--dur-reveal) var(--ease-out);
+  --mask-hole: 0%;
+  -webkit-mask-image: radial-gradient(circle at 50% 28%, transparent var(--mask-hole), #000 calc(var(--mask-hole) + 2%));
+  mask-image: radial-gradient(circle at 50% 28%, transparent var(--mask-hole), #000 calc(var(--mask-hole) + 2%));
+  transition: --mask-hole 1.6s var(--ease-out);
 }
 html[data-reveal="on"] #lightfield {
-  opacity: 0;
+  --mask-hole: 160%;
 }
 html:not(.js) #lightfield {
-  display: none; /* no JS: no dark cover, page is simply visible */
+  display: none;
 }
 
 /* ---------------------------------------------------------------------------
@@ -158,8 +165,14 @@ main > section:nth-of-type(even) { background: var(--c-chapter); }
   font-size: 0.95rem;
   color: var(--c-warm-300);
 }
-.site-nav__links a { transition: color var(--dur-fast) var(--ease-out); }
-.site-nav__links a:hover { color: var(--c-warm-100); }
+.site-nav__links a {
+  background-image: linear-gradient(var(--c-light), var(--c-light));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: color var(--dur-fast) var(--ease-out), background-size var(--dur-mid) var(--ease-draw);
+}
+.site-nav__links a:hover { color: var(--c-warm-100); background-size: 100% 1px; }
 .site-nav__cta {
   padding: 0.55rem 1.15rem;
   border: 1px solid var(--c-line-strong);
@@ -169,6 +182,7 @@ main > section:nth-of-type(even) { background: var(--c-chapter); }
   transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
 .site-nav__cta:hover { border-color: var(--c-light); color: var(--c-light-soft); }
+.site-nav__cta:active { transform: scale(0.98); }
 
 @media (max-width: 768px) {
   .site-nav__links { display: none; }
@@ -220,36 +234,33 @@ main > section:nth-of-type(even) { background: var(--c-chapter); }
    ========================================================================== */
 html.js [data-reveal-item] {
   opacity: 0;
-  transform: translateY(14px);
-  filter: blur(6px);
+  transform: translateY(12px);
   transition:
-    opacity var(--dur-slow) var(--ease-out),
-    transform var(--dur-slow) var(--ease-out),
-    filter var(--dur-slow) var(--ease-out);
+    opacity var(--dur-mid) var(--ease-out),
+    transform var(--dur-mid) var(--ease-out);
   pointer-events: none;
 }
 html[data-reveal="on"] [data-reveal-item] {
   opacity: 1;
   transform: none;
-  filter: none;
   pointer-events: auto;
 }
 html[data-reveal="on"] [data-reveal-item="nav"]     { transition-delay: 120ms; }
-html[data-reveal="on"] [data-reveal-item="eyebrow"] { transition-delay: 260ms; }
-html[data-reveal="on"] [data-reveal-item="kicker"]  { transition-delay: 380ms; }
-html[data-reveal="on"] [data-reveal-item="title"]   { transition-delay: 520ms; }
-html[data-reveal="on"] [data-reveal-item="lede"]    { transition-delay: 760ms; }
-html[data-reveal="on"] [data-reveal-item="actions"] { transition-delay: 920ms; }
-html[data-reveal="on"] [data-reveal-item="note"]    { transition-delay: 1080ms; }
-html[data-reveal="on"] [data-reveal-item="scroll"]  { transition-delay: 1240ms; }
+html[data-reveal="on"] [data-reveal-item="eyebrow"] { transition-delay: 220ms; }
+html[data-reveal="on"] [data-reveal-item="kicker"]  { transition-delay: 340ms; }
+html[data-reveal="on"] [data-reveal-item="title"]   { transition-delay: 480ms; }
+html[data-reveal="on"] [data-reveal-item="lede"]    { transition-delay: 640ms; }
+html[data-reveal="on"] [data-reveal-item="actions"] { transition-delay: 800ms; }
+html[data-reveal="on"] [data-reveal-item="note"]    { transition-delay: 960ms; }
+html[data-reveal="on"] [data-reveal-item="scroll"]  { transition-delay: 1120ms; }
 
 html.js[data-reveal="off"] [data-reveal-item] { visibility: hidden; }
 html[data-reveal="on"] [data-reveal-item] { visibility: visible; }
 
 @media (prefers-reduced-motion: reduce) {
-  #lightfield { transition: none; }
+  #lightfield { transition: none; --mask-hole: 160% !important; }
   html { scroll-behavior: auto; }
-  [data-reveal-item] { filter: none; transform: none; }
+  [data-reveal-item] { transform: none; }
 }
 
 /* ---------------------------------------------------------------------------

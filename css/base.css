@@ -147,7 +147,7 @@ em {
 }
 
 .btn:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.98);
 }
 
 /* --- Action button (the "principle" triggers) ----------------------------- */
@@ -237,19 +237,52 @@ em {
 }
 
 /* ============================================================================
-   Scroll-reveal primitive  —  used by editorial sections (no interaction)
-   Elements start slightly lowered + dimmed, settle when in view.
+   Scroll-reveal primitives  —  three entrance verbs
+   Elements start hidden when JS is present; settle when in view.
    ========================================================================== */
-/* Only hide when JS is present (html.js). Without JS, content stays visible. */
+
+/* RISE — content lifts into place */
 html.js [data-anim="rise"] {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity var(--dur-slow) var(--ease-out),
-    transform var(--dur-slow) var(--ease-out);
+  transform: translateY(12px);
+  transition: opacity var(--dur-mid) var(--ease-out),
+    transform var(--dur-mid) var(--ease-out);
 }
 html.js [data-anim="rise"].is-visible {
   opacity: 1;
   transform: none;
+}
+
+/* UNVEIL — content wipes in from below via clip-path */
+html.js [data-anim="unveil"] {
+  opacity: 0;
+  clip-path: inset(100% 0 0 0);
+  transition: opacity var(--dur-mid) var(--ease-out),
+    clip-path var(--dur-slow) var(--ease-draw);
+}
+html.js [data-anim="unveil"].is-visible {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+/* DRAW — a hairline scales in, then content settles */
+html.js [data-anim="draw"] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--dur-mid) var(--ease-out) 0.18s,
+    transform var(--dur-mid) var(--ease-out) 0.18s;
+}
+html.js [data-anim="draw"]::before {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-draw);
+}
+html.js [data-anim="draw"].is-visible {
+  opacity: 1;
+  transform: none;
+}
+html.js [data-anim="draw"].is-visible::before {
+  transform: scaleX(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -264,8 +297,11 @@ html.js [data-anim="rise"].is-visible {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  [data-anim="rise"] {
+  [data-anim="rise"],
+  [data-anim="unveil"],
+  [data-anim="draw"] {
     opacity: 1;
     transform: none;
+    clip-path: none;
   }
 }

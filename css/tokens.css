@@ -89,10 +89,14 @@
   /* Calm, intentional. No bounce, no overshoot. */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-exit: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-draw: cubic-bezier(0.4, 0, 0, 1);
+  --dur-instant: 120ms;
   --dur-fast: 220ms;
   --dur-mid: 480ms;
   --dur-slow: 900ms;
   --dur-reveal: 1400ms;
+  --stagger: 70ms;
 
   /* --- Elevation --------------------------------------------------------- */
   --shadow-card: 0 18px 44px -28px rgba(0, 0, 0, 0.28);
