@@ -1,0 +1,18 @@
+/* ---------------------------------------------------------------------------
+   SMOOTH SCROLL — experimental. Everything here is scoped to
+   html[data-smooth="on"], set by js/modules/smooth-scroll.js only once Lenis
+   has actually started (never under reduced motion, never if the vendor
+   script failed to load) — so this file is inert without it.
+   ------------------------------------------------------------------------- */
+
+/* Lenis's own base rules (MIT-licensed, from its published dist/lenis.css),
+   trimmed to the two that matter for a default window-scroll setup like this
+   one — the rest concern custom scroll containers this site doesn't use. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Lenis owns the scroll now — the browser's own smoothing would double up
+   against it, which is exactly what forced the "instant" workaround in the
+   back-to-top control (js/case.js) and would fight lenis.scrollTo() the same
+   way anywhere else it's called. */
+html[data-smooth="on"] { scroll-behavior: auto; }

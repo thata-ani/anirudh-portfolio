@@ -177,16 +177,41 @@ main > section:nth-of-type(even) { background: var(--c-chapter); }
 .site-nav__links a:hover { color: var(--c-warm-100); background-size: 100% 1px; }
 /* Bold, but settled: the weight carries the emphasis, so the frame steps back
    to a quiet hairline rather than competing with it. */
+/* The one button that exists on every page and never changes label — the
+   site's real primary action. A full-spectrum gradient marks it out from
+   every other (monochrome) control on purpose, rather than blending in. */
 .site-nav__cta {
   padding: 0.55rem 1.15rem;
-  border: 1px solid var(--c-line);
+  border: 1px solid transparent;
   border-radius: var(--radius-pill);
   font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  color: #fff;
+  /* The full spectrum, always in motion — a doubled stop list on a 300%-wide
+     background, panned smoothly back and forth, so every colour (blue and
+     green included) gets its moment in view rather than sitting static. */
+  background: linear-gradient(135deg, #ff3c5f, #ff8a3c, #ffd23c, #3cd97a, #2ec4e0, #3c7cff, #a63cff, #ff3c5f, #ff8a3c, #ffd23c, #3cd97a, #2ec4e0, #3c7cff, #a63cff);
+  background-size: 300% 100%;
+  animation: cta-gradient-flow 7s ease-in-out infinite alternate;
+  box-shadow: 0 6px 18px -10px rgba(0, 0, 0, 0.35);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out),
+    filter var(--dur-mid) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
 }
-.site-nav__cta:hover { border-color: var(--c-light); color: var(--c-light-soft); }
+/* The bottom Contact CTA is on screen — don't show this same button a second
+   time in the same view. */
+.site-nav[data-hide-cta="true"] .site-nav__cta {
+  opacity: 0; pointer-events: none; transform: translateY(-6px);
+}
+@keyframes cta-gradient-flow {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+.site-nav__cta:hover { filter: saturate(1.2) brightness(1.06); transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.4); animation-duration: 2.5s; }
+@media (prefers-reduced-motion: reduce) {
+  .site-nav__cta { animation: none; background-position: 30% 50%; }
+  .site-nav__cta:hover { animation-duration: unset; }
+}
 .site-nav__cta:active { transform: scale(0.98); }
 
 @media (max-width: 768px) {

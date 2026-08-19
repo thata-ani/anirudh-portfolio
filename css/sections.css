@@ -104,21 +104,26 @@ html[data-reveal="on"] .intro::after { animation: intro-flash 0.8s var(--ease-ex
 /* Lights on → the opening dissolves, the interface behind it appears. */
 html[data-reveal="on"] .intro { opacity: 0; pointer-events: none; transition-delay: 0.45s; }
 
-/* Hanging bulb — cord drops from the very top; a warm, mono glow. */
+/* Hanging bulb — stacked directly above the headline in the same centred
+   flex column (not pinned to the literal viewport top), so the lamp always
+   sits close to the text it's introducing instead of stranded above it on
+   tall viewports. */
 .intro__lamp {
-  position: absolute; top: 0; left: 50%; translate: -50% 0;
-  /* Pivot at the ceiling anchor — a hanging lamp swings from the cord, not
-     from its own middle. Keeps `translate` free for centring. */
-  transform-origin: 50% 0;
+  /* A normal flex child now — .intro's own `align-items: center` centres it,
+     no manual left/translate needed. */
+  transform-origin: 50% 0; /* pivot at the ceiling anchor, not its own middle */
   display: flex; flex-direction: column; align-items: center;
 }
 .intro__wire {
-  width: 1.5px; height: clamp(84px, 16vh, 176px);
+  width: 1.5px; height: clamp(56px, 10vh, 120px);
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.5));
 }
+/* A round globe, not an elongated capsule — reads unambiguously as a bulb.
+   The classic silhouette: wide circular glass, tapered down to a narrow neck,
+   metal cap above that connects to the cord. */
 .intro__bulb {
-  position: relative; width: 44px; height: 56px;
-  border-radius: 50% 50% 46% 46% / 56% 56% 44% 44%;
+  position: relative; width: 50px; height: 50px; margin-top: 6px;
+  border-radius: 50%;
   /* Dark glass: a faint sheen up top where the ambient catches it, heavy at the base. */
   background:
     radial-gradient(circle at 50% 32%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 46%, transparent 72%),
@@ -127,10 +132,16 @@ html[data-reveal="on"] .intro { opacity: 0; pointer-events: none; transition-del
   box-shadow: inset 0 -8px 12px rgba(0, 0, 0, 0.55), inset 0 2px 6px rgba(255, 255, 255, 0.06);
   transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out);
 }
+/* Neck — the short taper between the round glass and the metal cap. */
+.intro__bulb::after {
+  content: ""; position: absolute; top: -6px; left: 50%; translate: -50% 0;
+  width: 20px; height: 8px; border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, rgba(60, 60, 64, 0.9), rgba(30, 30, 33, 0.94));
+}
 /* Metal cap. */
 .intro__bulb::before {
-  content: ""; position: absolute; top: -7px; left: 50%; translate: -50% 0;
-  width: 15px; height: 9px; border-radius: 2px 2px 1px 1px;
+  content: ""; position: absolute; top: -12px; left: 50%; translate: -50% 0; z-index: 1;
+  width: 14px; height: 8px; border-radius: 2px 2px 1px 1px;
   background: linear-gradient(180deg, rgba(88, 88, 92, 0.95), rgba(38, 38, 41, 0.95));
 }
 /* The filament — the actual light source. Dim when cold, blazing when lit. */
@@ -165,10 +176,12 @@ html[data-reveal="on"] .intro__title { transition-delay: 0.16s; opacity: 0; tran
   transition: opacity var(--dur-fast) var(--ease-exit), transform var(--dur-fast) var(--ease-exit);
 }
 
-/* Content — headline, sub, button. Vertically centred; the bulb hangs above. */
+/* Content — headline, sub, button. Now stacked in-flow directly under the
+   lamp (both centred together as one group), so this is a short, fixed gap
+   rather than a viewport-height-dependent one. */
 .intro__content {
   position: relative; z-index: 1;
-  margin-top: clamp(3rem, 14vh, 8rem);
+  margin-top: clamp(1rem, 2.4vh, 1.75rem);
   display: flex; flex-direction: column; align-items: center;
   gap: clamp(1.1rem, 2.6vh, 1.9rem); max-width: min(880px, 92vw);
 }
@@ -258,13 +271,19 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   content: ""; width: 26px; height: 1px; background: var(--c-light);
 }
 .hero__title {
-  font-size: var(--fs-display); line-height: var(--lh-tight);
-  letter-spacing: var(--tracking-display); font-weight: 600; max-width: 20ch;
+  font-size: clamp(2.5rem, 1.8rem + 3.4vw, 4.7rem); line-height: var(--lh-tight);
+  letter-spacing: -0.01em; text-transform: uppercase; font-weight: 800; max-width: 22ch;
   text-wrap: balance;
 }
-.hero__title-line { display: block; color: var(--c-warm-300); font-weight: 500; margin-top: 0.1em; }
+.hero__title-line { display: block; color: var(--c-warm-300); font-weight: 600; margin-top: 0.1em; }
 .hero__lede { margin-top: var(--space-md); max-width: 44ch; font-size: var(--fs-lede); color: var(--c-warm-200); }
-.hero__actions { margin-top: var(--space-lg); display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+/* Sized to sit comfortably under the now-bigger, bolder headline — the
+   default .btn size was tuned for the old, smaller title and read as
+   undersized next to this one. */
+.hero__actions {
+  margin-top: var(--space-lg); display: flex; gap: var(--space-sm); flex-wrap: wrap;
+}
+.hero__actions .btn { padding: 1.05rem 2rem; font-size: 1.08rem; }
 .hero__stats {
   margin-top: var(--space-lg); display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 4vw, 3.5rem);
 }
@@ -493,90 +512,137 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 /* A circular product ecosystem. Disciplines rest apart on a circle; the
    central action brings them together — spokes + ring draw alive, and labels
    live OUTSIDE the ring so the network never crosses the type. */
+/* "Testimonials" is where the section lands, but "Collaboration." is the
+   principle it's actually demonstrating — so that's the big text (the
+   .section__label treatment), and this becomes the small kicker above it,
+   the same small-label-over-big-heading move the hero itself uses. */
+.testimonials__kicker {
+  font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--c-warm-400); margin-bottom: var(--space-sm);
+  /* flex, not inline-flex — .section__label right after it is itself
+     inline-flex, and two inline-level boxes in a row would sit side by side
+     instead of stacking. */
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.testimonials__kicker::before { content: ""; width: 26px; height: 1px; background: var(--c-light); }
+/* Centered above the quotes themselves, not the collaboration diagram above
+   it — same mark, just introducing the part of the section it actually
+   labels. */
+.testimonials__kicker--center {
+  justify-content: center; margin: 0 0 var(--space-md);
+  /* Paired with the quotes it labels — no heading with nothing under it
+     while they're still hidden. */
+  display: none;
+}
+.testimonials[data-state="connected"] .testimonials__kicker--center { display: flex; }
+/* Two full illustrations, cross-fading in place — "Bring them together"
+   swaps which one is on top rather than animating a hand-built diagram.
+   Each image already carries its own heading and caption, so nothing else
+   needs to label this diagram. */
 .ecosystem {
-  position: relative; width: min(100%, clamp(320px, 60vmin, 540px));
-  aspect-ratio: 1; margin: var(--space-2xl) auto var(--space-3xl); overflow: visible;
+  position: relative; width: 100%;
+  aspect-ratio: 1536 / 1024; margin: var(--space-lg) auto var(--space-xl);
+  border-radius: var(--radius-md, 12px); overflow: hidden;
+  border: 1px solid var(--c-line);
 }
-.ecosystem__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 1; }
-.eco-spoke {
-  stroke: var(--c-light); stroke-width: 1.2; vector-effect: non-scaling-stroke;
-  opacity: 0; transition: opacity var(--dur-mid) var(--ease-out) calc(var(--i, 0) * 70ms);
+.ecosystem__frame {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  opacity: 0; transition: opacity var(--dur-slow) var(--ease-out);
 }
-.ecosystem[data-connected="true"] .eco-spoke { opacity: 0.5; }
-/* the full web between every discipline — every pair links when brought
-   together, so all six perspectives are visibly connected to one another */
-.eco-link {
-  stroke: var(--c-light); stroke-width: 1; vector-effect: non-scaling-stroke;
-  opacity: 0; transition: opacity var(--dur-mid) var(--ease-out) calc(var(--i, 0) * 40ms);
-}
-.ecosystem[data-connected="true"] .eco-link { opacity: 0.32; }
-/* a clean, solid ecosystem ring that fades in (no dash-draw artefacts) */
-.eco-ring {
-  fill: none; stroke: var(--c-light); stroke-width: 1.4; vector-effect: non-scaling-stroke;
-  opacity: 0; transition: opacity var(--dur-slow) var(--ease-out) 0.5s;
-}
-.ecosystem[data-connected="true"] .eco-ring { opacity: 0.4; }
+.ecosystem__frame--open { opacity: 1; }
+.ecosystem[data-connected="true"] .ecosystem__frame--open { opacity: 0; }
+.ecosystem[data-connected="true"] .ecosystem__frame--connected { opacity: 1; }
 
-.ecosystem__nodes { position: absolute; inset: 0; z-index: 2; list-style: none; }
-.eco-node {
-  position: absolute; translate: -50% -50%;
-  transition: transform var(--dur-slow) var(--ease-out); will-change: transform;
+/* The four-step recap — built as real type, not a fifth image, so it reads
+   as part of the page rather than another embedded picture. */
+.ecosystem__summary {
+  list-style: none; display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg); margin: var(--space-2xl) auto 0; max-width: var(--container);
 }
-/* Each discipline is a little face: apart it frowns (muted), together it
-   smiles (present) — the emotional payoff of collaboration. */
-.eco-node__dot {
-  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--c-ink-700); border: 1px solid var(--c-line-strong);
-  color: var(--c-warm-400); display: grid; place-items: center;
-  transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-out), color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
+.ecosystem__summary-step {
+  position: relative; padding-inline-start: var(--space-md);
+  border-inline-start: 1px solid var(--c-line);
 }
-.eco-face { width: 22px; height: 22px; display: block; }
-.eco-face circle { fill: currentColor; transition: transform var(--dur-mid) var(--ease-out); transform-origin: center; }
-.eco-face path { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
-.eco-face .mouth--happy { opacity: 0; transition: opacity var(--dur-mid) var(--ease-out); }
-.eco-face .mouth--sad { opacity: 1; transition: opacity var(--dur-mid) var(--ease-out); }
-.eco-node__label {
-  position: absolute; white-space: nowrap; font-size: 0.9rem; letter-spacing: 0.02em;
-  color: var(--c-warm-400); transition: color var(--dur-mid) var(--ease-out);
+.ecosystem__summary-step:first-child { border-inline-start: none; padding-inline-start: 0; }
+.ecosystem__summary-icon {
+  display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: var(--space-sm);
 }
-.ecosystem[data-connected="true"] .eco-node__dot {
-  background: var(--c-light); border-color: var(--c-light); color: #fff;
-  box-shadow: 0 0 0 5px var(--c-light-haze); transform: scale(1.1);
+.ecosystem__summary-icon svg {
+  width: 100%; height: 100%; fill: none;
+  stroke: var(--c-warm-100); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
 }
-.ecosystem[data-connected="true"] .eco-face .mouth--happy { opacity: 1; }
-.ecosystem[data-connected="true"] .eco-face .mouth--sad { opacity: 0; }
-.ecosystem[data-connected="true"] .eco-node__label { color: var(--c-warm-100); }
+.ecosystem__summary-label {
+  display: block; font-weight: 700; font-size: 0.92rem; letter-spacing: 0.01em;
+  color: var(--c-warm-100); margin-bottom: 0.35rem;
+}
+.ecosystem__summary-copy { display: block; font-size: 0.85rem; line-height: 1.5; color: var(--c-warm-300); }
+@media (max-width: 760px) {
+  .ecosystem__summary { grid-template-columns: repeat(2, 1fr); gap: var(--space-lg) var(--space-md); }
+  .ecosystem__summary-step:nth-child(2) { border-inline-start: none; padding-inline-start: 0; }
+}
 
-/* The central action = the shared product forming at the centre. */
+/* The central action — now a plain button below the span, the way the site's
+   other primary actions read, rather than a shape wedged into the middle of
+   a circle. It is no longer nested inside .ecosystem (a bridge has nowhere
+   sensible to put a floating disc mid-span), so its connected state is keyed
+   off its own aria-pressed rather than an ancestor selector. */
 .ecosystem__core {
-  position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 3;
-  width: clamp(98px, 21%, 132px); aspect-ratio: 1; border-radius: 50%;
-  display: grid; place-items: center; text-align: center; padding: 0.5rem;
+  display: block; margin: var(--space-lg) auto 0; padding: 0.85rem 1.8rem;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--c-line-strong); background: var(--c-ink-800);
-  color: var(--c-warm-200); font-weight: 600; font-size: 0.82rem; line-height: 1.15;
+  color: var(--c-warm-200); font-weight: 600; font-size: 0.95rem;
   letter-spacing: 0.01em; cursor: pointer;
   transition: background var(--dur-mid) var(--ease-out), color var(--dur-mid) var(--ease-out),
     border-color var(--dur-mid) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out),
     transform var(--dur-fast) var(--ease-out);
   animation: core-invite 2.8s var(--ease-in-out) 3;
 }
-.ecosystem__core:hover { transform: scale(1.05); }
+/* Always on, unlike .ecosystem__aha — this is the one-line read of what's
+   happening right now, visible from the very first (open, stopped) frame,
+   not just as a reward after connecting. */
+.ecosystem__status {
+  text-align: center; margin-top: var(--space-sm);
+  font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.04em;
+  color: var(--c-warm-400);
+}
+.ecosystem__status-done { display: none; }
+.ecosystem[data-connected="true"] ~ .ecosystem__status .ecosystem__status-idle { display: none; }
+.ecosystem[data-connected="true"] ~ .ecosystem__status .ecosystem__status-done { display: inline; }
+.ecosystem__core:hover { transform: translateY(-2px); }
 .ecosystem__core:focus-visible { outline: 2px solid var(--c-light); outline-offset: 4px; }
 .ecosystem__core-done { display: none; }
+/* The payoff line — what crossing the bridge actually got you, not just a
+   state label. Empty and invisible until connected, same pattern as
+   .rules__aha: never reserves layout space or shows a stale sentence. */
+.ecosystem__aha {
+  display: block; margin: var(--space-md) auto 0; max-width: 46ch; text-align: center;
+  color: var(--c-warm-300); font-size: 1rem;
+  opacity: 0; transition: opacity var(--dur-slow) var(--ease-out) 1.4s;
+}
 @keyframes core-invite {
   0%, 100% { box-shadow: 0 0 0 0 var(--c-light-haze); }
-  55% { box-shadow: 0 0 0 14px transparent; }
+  55% { box-shadow: 0 0 0 10px transparent; }
 }
-.ecosystem[data-connected="true"] .ecosystem__core {
+.ecosystem__core[aria-pressed="true"] {
   background: var(--c-light); color: #fff; border-color: var(--c-light); animation: none;
-  box-shadow: 0 0 0 8px var(--c-light-haze);
+  box-shadow: 0 0 0 6px var(--c-light-haze);
 }
-.ecosystem[data-connected="true"] .ecosystem__core-idle { display: none; }
-.ecosystem[data-connected="true"] .ecosystem__core-done { display: block; }
+.ecosystem__core[aria-pressed="true"] .ecosystem__core-idle { display: none; }
+.ecosystem__core[aria-pressed="true"] .ecosystem__core-done { display: block; }
+.ecosystem__core[aria-pressed="true"] + .ecosystem__aha { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .ecosystem__core { animation: none; } }
-.quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); opacity: 0; transform: translateY(24px); visibility: hidden; transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), visibility var(--dur-slow); }
-.testimonials[data-state="connected"] .quotes { opacity: 1; transform: none; visibility: visible; }
+/* display:none until connected — unlike opacity/visibility alone, this
+   reserves no layout space, so the section isn't left with a slab of empty
+   white where the (still-earned) quotes will eventually sit. */
+.quotes {
+  display: none; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem);
+  margin-top: var(--space-2xl);
+  opacity: 0; transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+}
+.testimonials[data-state="connected"] .quotes { display: grid; }
+.testimonials[data-state="connected"] .quotes.is-in { opacity: 1; transform: none; }
 .quote { border-left: 1px solid var(--c-line-strong); padding-left: var(--space-md); }
 .quote__text { font-size: 1.25rem; line-height: 1.4; color: var(--c-warm-100); letter-spacing: var(--tracking-tight); }
 .quote__by { margin-top: var(--space-md); display: flex; flex-direction: column; gap: 0.1rem; }
@@ -919,12 +985,6 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 }
 .companies .trajectory__line { background: rgba(255, 255, 255, 0.22); opacity: 1; }
 .companies .trajectory__line-lit { background: #ffffff; opacity: 0.95; }
-.companies .trajectory__focal {
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.32) 16%, rgba(255, 255, 255, 0.32) 84%, transparent);
-}
-.companies .trajectory__focal::before {
-  background: #ffffff; box-shadow: 0 0 0 5px #0b0b0c, 0 0 0 6px rgba(255, 255, 255, 0.34);
-}
 .companies .traj-item { color: rgba(255, 255, 255, 0.4); }
 .companies .traj-item.is-near { color: rgba(255, 255, 255, 0.72); }
 .companies .traj-item.is-focal { color: #ffffff; }
@@ -948,39 +1008,30 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   position: absolute; left: 0; width: 50%; top: 72%; height: 2px; margin-top: -0.5px;
   background: var(--c-light); opacity: 0.9;
 }
-/* Vertical focal marker + the "now" node where it meets the line. */
-.trajectory__focal {
-  position: absolute; left: 50%; top: 14%; bottom: 6%; width: 1px; translate: -50% 0; z-index: 2;
-  background: linear-gradient(to bottom, transparent, var(--c-line-strong) 16%, var(--c-line-strong) 84%, transparent);
-}
-.trajectory__focal::before {
-  content: ""; position: absolute; left: 50%; top: 72%; width: 12px; height: 12px; translate: -50% -50%;
-  border-radius: 50%; background: var(--c-light);
-  box-shadow: 0 0 0 5px var(--c-ink-800), 0 0 0 6px var(--c-line-strong);
-}
-
 .trajectory__track {
   position: absolute; left: 0; top: 0; height: 72%; z-index: 3;
-  display: flex; align-items: flex-end; gap: clamp(3.25rem, 7vw, 6.5rem);
+  display: flex; align-items: flex-end; gap: clamp(4.5rem, 9vw, 8.5rem);
   width: max-content; padding-bottom: clamp(0.6rem, 1.6vh, 1.4rem);
   animation: marquee 46s linear infinite;
 }
 .trajectory:hover .trajectory__track { animation-play-state: paused; }
+/* Every name stays the same size — proximity to the centre reads through
+   colour/weight only, never a size change, so the line never feels like it's
+   lurching as names pass through. */
 .traj-item {
-  white-space: nowrap; font-size: clamp(1.3rem, 1rem + 1.3vw, 2.15rem); font-weight: 600;
+  white-space: nowrap; font-size: clamp(1.7rem, 1.2rem + 2vw, 3.1rem); font-weight: 600;
   letter-spacing: -0.01em; color: var(--c-warm-400);
-  transform-origin: bottom center; will-change: transform, opacity;
   transition: color var(--dur-fast) var(--ease-out);
 }
 .traj-item.is-near { color: var(--c-warm-200); }
-.traj-item.is-focal { color: var(--c-warm-100); }
+.traj-item.is-focal { color: var(--c-warm-100); font-weight: 700; }
 @media (prefers-reduced-motion: reduce) {
   .trajectory { height: auto; padding-block: var(--space-lg); }
   .trajectory__track {
     position: static; animation: none; flex-wrap: wrap; justify-content: center;
     width: auto; height: auto; align-items: center; padding: 0;
   }
-  .trajectory__line, .trajectory__line-lit, .trajectory__focal { display: none; }
+  .trajectory__line, .trajectory__line-lit { display: none; }
 }
 
 /* 05 · My Process ----------------------------------------------------------- */
@@ -996,7 +1047,7 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
    and invites the visitor to simplify it. It is shown only while locked. */
 .rules__action {
   display: none; flex-direction: column; align-items: center; gap: var(--space-sm);
-  text-align: center; margin: var(--space-lg) 0 0;
+  text-align: center; margin: var(--space-md) 0 0;
 }
 .rules[data-mode="locked"] .rules__action { display: flex; }
 .rules__prompt { color: var(--c-warm-300); font-size: 1rem; }
@@ -1030,8 +1081,14 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.35rem); line-height: 1.75;
   color: var(--c-warm-200); text-align: justify; hyphens: auto;
   transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out), filter var(--dur-slow) var(--ease-out);
+  /* Three lines, not the full paragraph — long enough to read as dense and
+     over-qualified, short enough that the action row below is never scrolled
+     past unnoticed. The clip itself ends in "…", so the truncation reads as
+     intentional rather than cut off mid-thought. */
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden; text-align: left;
 }
-.rules[data-mode="locked"] .rules__cipher { display: block; }
+.rules[data-mode="locked"] .rules__cipher { display: -webkit-box; }
 .rules[data-mode="locked"] .rules__list { display: none; }
 .rules__cipher.is-out { opacity: 0; transform: translateY(-6px); filter: blur(2px); }
 
@@ -1066,17 +1123,65 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
   .rules[data-mode="revealed"] .rule { animation: none; }
 }
 
-/* 08 · Experience — roadmap ------------------------------------------------- */
-.roadmap { display: grid; gap: 0; }
-.roadmap__stop { display: grid; grid-template-columns: minmax(90px, 0.18fr) 1fr; gap: clamp(1.5rem, 5vw, 5rem); padding-block: var(--space-lg); border-top: 1px solid var(--c-line); align-items: baseline; position: relative; }
-.roadmap__stop:last-of-type { border-bottom: 1px solid var(--c-line); }
-.roadmap__year { font-family: var(--font-mono); font-size: 1rem; color: var(--c-light); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+/* 08 · Experience — pinned horizontal scroll through the roadmap ----------
+   The section head (above) and the evolution line (below) stay in normal
+   vertical flow; only .roadmap__viewport is pinned by JS while the track
+   translates horizontally — scroll down to move across, then the pin
+   releases and the page continues down as usual. See horizontal-roadmap.js.
+   No-JS / reduced-motion / narrow screens: a plain horizontally-scrollable,
+   snap-scrolling strip — never a pin, so the content is always reachable. */
+/* Full viewport height, track centred inside it — while pinned, the cards
+   sit in the middle of the screen with room above and below, rather than
+   stuck under the nav with a slab of empty page beneath them. The kicker
+   stays visible the whole time the section is pinned, so which section
+   this is never gets lost once the "Experience" heading has scrolled past. */
+.roadmap__viewport {
+  position: relative; overflow: hidden;
+  min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+}
+.roadmap__viewport-label {
+  position: absolute; top: clamp(6rem, 15vh, 7.5rem); left: 0;
+  font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--c-warm-400);
+}
+.roadmap {
+  display: flex; gap: clamp(1.25rem, 3vw, 2.5rem);
+  width: max-content; padding-block: var(--space-lg);
+}
+.roadmap__stop {
+  position: relative; flex: 0 0 clamp(260px, 30vw, 380px);
+  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  border: 1px solid var(--c-line); border-radius: var(--radius-md);
+  transition: border-color var(--dur-mid) var(--ease-out);
+}
+.roadmap__stop:hover, .roadmap__stop.is-active { border-color: var(--c-light); }
+.roadmap__stop--next { border-color: var(--c-light); background: var(--c-light-haze); }
+/* The year carries the card — big and bold on every stop, not only the one
+   currently in focus, so it reads at a glance as you scroll across. */
+.roadmap__year {
+  display: block; font-family: var(--font-mono); font-weight: 700;
+  font-size: clamp(2.4rem, 1.8rem + 2vw, 3.6rem); line-height: 1;
+  color: var(--c-light); font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+  margin-bottom: var(--space-md);
+}
+.roadmap__body { margin-top: 0; }
 .roadmap__cap { font-size: var(--fs-h3); font-weight: 600; letter-spacing: var(--tracking-tight); }
 .roadmap__org { color: var(--c-warm-400); margin-top: 0.2rem; }
-.roadmap__stop--next .roadmap__year, .roadmap__stop--next .roadmap__cap { color: var(--c-light); }
+.roadmap__resp {
+  margin-top: 0.6rem; font-family: var(--font-mono); font-size: 0.8rem;
+  letter-spacing: 0.03em; color: var(--c-warm-300);
+}
+.roadmap__stop--next .roadmap__cap { color: var(--c-light); }
+.roadmap__stop:focus-visible { outline: 2px solid var(--c-light); outline-offset: 4px; border-radius: 4px; }
 .experience .evolution__line { margin-top: var(--space-xl); font-size: clamp(1.05rem, 0.85rem + 1.2vw, 1.7rem); font-weight: 600; letter-spacing: var(--tracking-tight); line-height: 1.35; text-wrap: balance; }
 .experience .evolution__line span { color: var(--c-light); padding: 0 0.2em; }
-@media (max-width: 560px) { .roadmap__stop { grid-template-columns: 1fr; gap: 0.3rem; } }
+@media (max-width: 720px) {
+  /* Never pinned at this width — a plain strip, natural height, no need to
+     reserve a full screen's worth of space for it. */
+  .roadmap__viewport { min-height: 0; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
+  .roadmap__viewport-label { position: static; display: block; margin-bottom: var(--space-sm); }
+  .roadmap__stop { flex-basis: 82vw; scroll-snap-align: start; }
+}
 
 /* 09 · Contact — availability ---------------------------------------------- */
 .contact__available { margin-top: var(--space-xl); }
@@ -1085,6 +1190,26 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 /* Contact — one subtle movement on arrival (Connection) */
 @keyframes contact-nudge { 0% { transform: translateY(7px); opacity: 0.85; } 100% { transform: none; opacity: 1; } }
 #contact-cta.is-arrived { animation: contact-nudge 0.6s var(--ease-out) 1; }
+
+/* Same full-spectrum treatment as the nav's Let's Connect — the two bookend
+   the page, so both mark themselves out from the site's monochrome palette
+   the same way, overriding .btn--primary's plain fill for this one button.
+   The last thing on the page, so it also gets real size — bigger than any
+   other button on the site, matching how much weight this action carries. */
+#contact-cta {
+  color: #fff;
+  background: linear-gradient(135deg, #ff3c5f, #ff8a3c, #ffd23c, #3cd97a, #2ec4e0, #3c7cff, #a63cff, #ff3c5f, #ff8a3c, #ffd23c, #3cd97a, #2ec4e0, #3c7cff, #a63cff);
+  background-size: 300% 100%;
+  animation: cta-gradient-flow 7s ease-in-out infinite alternate;
+  padding: 1.4rem 2.9rem;
+  font-size: 1.2rem;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out), filter var(--dur-mid) var(--ease-out);
+}
+#contact-cta:hover { filter: saturate(1.2) brightness(1.06); animation-duration: 2.5s; }
+@media (prefers-reduced-motion: reduce) {
+  #contact-cta { animation: none; background-position: 30% 50%; }
+  #contact-cta:hover { animation-duration: unset; }
+}
 
 /* ===========================================================================
    EXPERIENCE REVISION — connected, product-like interactions
@@ -1176,25 +1301,6 @@ html:not(.js) .sketch__bar { display: none; }
 html:not(.js) .sketch__pad { display: none; }
 @media (prefers-reduced-motion: reduce) { .sketch__ink { transition: none; } }
 
-/* 08 · Experience — roadmap spine + growing emphasis ---------------------- */
-.roadmap { position: relative; padding-left: clamp(1.5rem, 4vw, 3rem); }
-.roadmap::before {
-  content: ""; position: absolute; left: 6px; top: 1em; bottom: 1em; width: 2px;
-  background: linear-gradient(to bottom, var(--c-line-strong), var(--c-light));
-}
-.roadmap__stop { position: relative; border-top: 0; padding-block: var(--space-lg); }
-.roadmap__stop + .roadmap__stop { border-top: 1px solid var(--c-line); }
-.roadmap__stop:last-of-type { border-bottom: 0; }
-.roadmap__stop::before {
-  content: ""; position: absolute; left: calc(-1 * clamp(1.5rem, 4vw, 3rem) + 1px);
-  top: 1.7em; width: 11px; height: 11px; border-radius: 50%;
-  background: var(--c-ink-800); border: 2px solid var(--c-line-strong);
-  transform: translateX(-1px); transition: border-color var(--dur-mid) var(--ease-out);
-}
-.roadmap__stop:hover::before { border-color: var(--c-light); }
-.roadmap__stop--next::before { background: var(--c-light); border-color: var(--c-light); }
-.roadmap__cap { transition: transform var(--dur-mid) var(--ease-out); }
-.roadmap__stop:hover .roadmap__cap { transform: translateX(4px); }
 
 /* 09 · Contact — reflection + gated reveal -------------------------------- */
 .contact__reflection {
@@ -1299,19 +1405,10 @@ html[data-reveal="on"] #progress { opacity: 0.85; }
 .process__stage:hover::before,
 .process__stage.is-active::before { background: var(--c-light); }
 
-/* CAREER — explorable stops reveal growing responsibility */
+/* Career stops: cards now show their full detail plainly (see the consolidated
+   .roadmap__stop rules above) — cursor stays a pointer since clicking still
+   toggles .is-active via explore.js, for the border highlight. */
 .roadmap__stop { cursor: pointer; }
-.roadmap__stop:focus-visible { outline: 2px solid var(--c-light); outline-offset: 6px; border-radius: 6px; }
-.roadmap__resp {
-  margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.8rem;
-  letter-spacing: 0.03em; color: var(--c-warm-300);
-  max-height: 0; opacity: 0; overflow: hidden;
-  transition: max-height var(--dur-mid) var(--ease-out), opacity var(--dur-mid) var(--ease-out);
-}
-.roadmap__stop:hover .roadmap__resp,
-.roadmap__stop.is-active .roadmap__resp { max-height: 3em; opacity: 1; }
-.roadmap__stop:hover::before,
-.roadmap__stop.is-active::before { background: var(--c-light); border-color: var(--c-light); }
 
 /* ===========================================================================
    MUSIC / VIBE control
@@ -1319,22 +1416,28 @@ html[data-reveal="on"] #progress { opacity: 0.85; }
 html:not(.js) .vibe { display: none; }
 .vibe {
   position: fixed; right: var(--gutter); bottom: var(--space-md); z-index: 70;
-  display: flex; align-items: center; justify-content: flex-end;
-  flex-direction: row-reverse; gap: var(--space-sm); flex-wrap: wrap-reverse;
-  max-width: calc(100vw - 2 * var(--gutter));
   opacity: 0; transform: translateY(8px); pointer-events: none;
   transition: opacity var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out);
 }
 html[data-reveal="on"] .vibe { opacity: 1; transform: none; pointer-events: auto; }
+/* Icon-only — the wave itself is the whole affordance. A text label next to
+   it was redundant with the aria-label already announcing its purpose. */
 .vibe__toggle {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  padding: 0.6rem 1.05rem; border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; padding: 0; border: 1px solid var(--c-line-strong); border-radius: 50%;
   background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(8px);
   box-shadow: var(--shadow-card);
-  font-size: 0.86rem; font-weight: 500; color: var(--c-warm-100); cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  color: var(--c-warm-100); cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
-.vibe__toggle:hover { border-color: var(--c-light); transform: translateY(-1px); }
+/* Full colour inversion on hover, not just a border tint — the same
+   black-fill treatment the vibe chips already use when selected, so the
+   whole control reads as one live, responsive object. */
+.vibe__toggle:hover {
+  background: var(--c-light); border-color: var(--c-light);
+  color: #fff; transform: translateY(-1px);
+}
 /* A brief, one-time attention pulse after the lights come on, so the sound
    control is discovered — then it settles and never nags. */
 html[data-reveal="on"] .vibe__toggle { animation: vibe-attn 2.6s var(--ease-out) 1.3s 3; }
@@ -1342,38 +1445,61 @@ html[data-reveal="on"] .vibe__toggle { animation: vibe-attn 2.6s var(--ease-out)
   0%, 100% { box-shadow: var(--shadow-card), 0 0 0 0 var(--c-light-haze); }
   30% { box-shadow: var(--shadow-card), 0 0 0 8px var(--c-light-haze); }
 }
-.vibe__eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 13px; }
-.vibe__eq i {
-  width: 2px; height: 4px; background: var(--c-light); border-radius: 1px;
-  animation: eq-idle 2.2s var(--ease-in-out) infinite;
+/* One continuous stroke that actually travels, not a shape pulsing in
+   place. The path is drawn several periods wider than the visible 26x16
+   viewBox (the SVG clips to its own viewBox automatically) and slides left
+   by exactly one period — since the pattern repeats every 26 units, the
+   loop point is invisible and the motion reads as an endless wave passing
+   through, the way a real waveform does. A wider period than before means
+   two clear waves sit in view, not three — plainer, easier to read at a
+   glance. Amplitude (the "d") and travel speed (the "animation") are two
+   independent properties, not one keyframe doing both, so a state change
+   never fights the loop already in progress. */
+.vibe__wave { display: inline-flex; align-items: center; }
+.vibe__wave path {
+  d: path("M-11 8 Q-4.5 6.5 2 8 T15 8 T28 8 T41 8");
+  transition: d var(--dur-mid) var(--ease-out);
+  animation: wave-flow 2.6s linear infinite;
 }
-.vibe__eq i:nth-child(2) { animation-delay: 0.2s; }
-.vibe__eq i:nth-child(3) { animation-delay: 0.4s; }
-.vibe__eq i:nth-child(4) { animation-delay: 0.6s; }
-/* Idle: a slow, quiet shimmer that reads as "sound". Playing: livelier. */
-@keyframes eq-idle { 0%, 100% { height: 4px; opacity: 0.55; } 50% { height: 8px; opacity: 0.9; } }
-.vibe[data-playing="true"] .vibe__eq i { animation: eq 0.9s var(--ease-in-out) infinite; }
-@keyframes eq { 0%, 100% { height: 4px; opacity: 0.7; } 50% { height: 13px; opacity: 1; } }
+@keyframes wave-flow { from { transform: translateX(0); } to { transform: translateX(-26px); } }
+/* Playing: bigger amplitude and a faster current — the difference from idle
+   should be obvious without reading the label next to it. */
+.vibe[data-playing="true"] .vibe__wave path {
+  d: path("M-11 8 Q-4.5 1.5 2 8 T15 8 T28 8 T41 8");
+  animation: wave-flow 1s linear infinite;
+}
 @media (prefers-reduced-motion: reduce) {
   .vibe__toggle { animation: none; }
-  .vibe__eq i { animation: none; height: 7px; }
+  .vibe__wave path {
+    animation: none;
+    d: path("M-11 8 Q-4.5 4 2 8 T15 8 T28 8 T41 8");
+  }
 }
+/* Absolutely positioned above the toggle rather than a flex sibling beside
+   it — opening the panel, or the toggle's own label changing width once a
+   vibe is picked, can never nudge the toggle's position. It is anchored
+   purely by .vibe's fixed right/bottom, full stop. */
 .vibe__panel {
-  display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; overflow: hidden;
-  max-width: 0; opacity: 0;
-  transition: max-width var(--dur-mid) var(--ease-out), opacity var(--dur-mid) var(--ease-out);
+  position: absolute; right: 0; bottom: calc(100% + var(--space-sm));
+  display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; justify-content: flex-end;
+  width: max-content; max-width: min(420px, calc(100vw - 2 * var(--gutter)));
+  max-height: 0; opacity: 0; overflow: hidden; pointer-events: none;
+  transition: max-height var(--dur-mid) var(--ease-out), opacity var(--dur-mid) var(--ease-out);
 }
-.vibe[data-open="true"] .vibe__panel { max-width: 560px; opacity: 1; }
+.vibe[data-open="true"] .vibe__panel { max-height: 220px; opacity: 1; pointer-events: auto; }
+/* Same vertical rhythm as .vibe__toggle (44px) — this cluster reads as one
+   control, so every pill in it has to land on the same height, not just a
+   similar one. */
 .vibe__chip {
-  padding: 0.5rem 0.9rem; border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
+  padding: 0.65rem 1.05rem; border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(8px);
   font-size: 0.85rem; color: var(--c-warm-300); cursor: pointer; white-space: nowrap;
   transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out),
     border-color var(--dur-fast) var(--ease-out);
 }
-.vibe__chip:hover { border-color: var(--c-light); color: var(--c-warm-100); }
+/* Same full inversion as the toggle on hover — every button in this cluster
+   answers a hover the same way, so the affordance reads as one system
+   instead of the toggle being the only one that visibly responds. */
+.vibe__chip:hover { background: var(--c-light); border-color: var(--c-light); color: #fff; }
 .vibe__chip[aria-pressed="true"] { background: var(--c-light); color: #fff; border-color: var(--c-light); }
 .vibe__chip--off { color: var(--c-warm-400); }
-@media (prefers-reduced-motion: reduce) {
-  .vibe[data-playing="true"] .vibe__eq i { animation: none; height: 8px; }
-}

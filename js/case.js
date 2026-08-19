@@ -12,6 +12,9 @@
 import { haptic } from "./modules/sound.js";
 import { initCaseMotion } from "./modules/motion.js";
 import { initPin } from "./modules/pin.js";
+import { initSmoothScroll, getLenis } from "./modules/smooth-scroll.js";
+import { initMagnetic } from "./modules/magnetic.js";
+import { initExplain } from "./modules/explain.js";
 
 /* ---- 1 · scroll reveal --------------------------------------------------- */
 function initReveal() {
@@ -168,7 +171,11 @@ function initDeepDive() {
     // Let layout settle, then bring the deep dive into view.
     requestAnimationFrame(() => {
       const intro = deep.querySelector(".db-deep__intro") || deep;
-      intro.scrollIntoView({ behavior: "smooth", block: "start" });
+      const lenis = getLenis();
+      // A native smooth scrollIntoView would run as a second, independent
+      // scroll animation racing Lenis's own — route through it when present.
+      if (lenis) lenis.scrollTo(intro, { offset: 0 });
+      else intro.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
 }
@@ -221,6 +228,15 @@ function initToTop() {
     const start = window.scrollY;
     if (start <= 0) return;
     if (reduce) { window.scrollTo(0, 0); return; }
+    const lenis = getLenis();
+    if (lenis) {
+      // Lenis owns scroll input now — the hand-rolled loop below exists only
+      // to fight the native scroll-behavior Lenis has already replaced, and
+      // running both at once would just have two writers fighting the same
+      // frame.
+      lenis.scrollTo(0, { duration: Math.min(1.1, 0.5 + start * 0.00012) });
+      return;
+    }
     cancel();
     const dur = Math.min(700, 260 + start * 0.06);
     const t0 = performance.now();
@@ -282,6 +298,7 @@ function initPrototype() {
   fab.className = "proto-fab";
   fab.innerHTML = '<span class="proto-fab__dot" aria-hidden="true"></span>Try the prototype';
   fab.setAttribute("aria-haspopup", "dialog");
+  fab.dataset.explain = "Opens a live, click-through version of this screen";
 
   const modal = document.createElement("div");
   modal.className = "proto-modal";
@@ -375,6 +392,13 @@ function initPrototype() {
   }, { passive: true });
 }
 
-const boot = () => { if (!initCaseMotion()) initReveal(); initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive(); initBackNav(); initToTop(); initPin(window.gsap, window.ScrollTrigger); initPrototype(); };
+const boot = () => {
+  initSmoothScroll(window.gsap, window.ScrollTrigger);
+  if (!initCaseMotion()) initReveal();
+  initProgress(); initStress(); initZones(); initTry(); initRoast(); initDeepDive();
+  initBackNav(); initToTop(); initPin(window.gsap, window.ScrollTrigger); initPrototype();
+  initMagnetic();
+  initExplain();
+};
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
 else boot();

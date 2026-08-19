@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/sections.css" />
   <link rel="stylesheet" href="css/pin.css?v=3" />
+  <link rel="stylesheet" href="css/smooth.css?v=1" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 </head>
 
@@ -44,8 +45,11 @@
   <!-- Music / vibe — the visitor personalises the experience. -->
   <div class="vibe" id="vibe" data-open="false" data-playing="false">
     <button class="vibe__toggle" id="vibe-toggle" aria-expanded="false" aria-label="Choose your vibe — background music">
-      <span class="vibe__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-      <span class="vibe__toggle-label" id="vibe-toggle-label">What's your vibe?</span>
+      <span class="vibe__wave" aria-hidden="true">
+        <svg viewBox="0 0 26 16" width="26" height="16" fill="none">
+          <path d="M-11 8 Q-8 6.5 -5 8 T1 8 T7 8 T13 8 T19 8 T25 8 T31 8 T37 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        </svg>
+      </span>
     </button>
     <div class="vibe__panel" role="group" aria-label="Music vibe">
       <button class="vibe__chip" data-vibe="melody" aria-pressed="false">Melody</button>
@@ -98,7 +102,7 @@
         <li><a href="#rules">Rules</a></li>
         <li><a href="#experience">Experience</a></li>
       </ul>
-      <a class="site-nav__cta" href="#contact">Let's Connect</a>
+      <a class="site-nav__cta" href="#contact" data-explain="Jumps down to the contact section">Let's Connect</a>
     </nav>
   </header>
 
@@ -129,8 +133,8 @@
           Experience product design, don't just read about it.
         </p>
         <div class="hero__actions" data-reveal-item="actions">
-          <a class="btn btn--primary" href="#work">View Selected Work</a>
-          <a class="btn btn--ghost" href="#contact">Let's Connect</a>
+          <a class="btn btn--primary" href="#work" data-explain="Scrolls to the case studies below">View Selected Work</a>
+          <a class="btn btn--ghost" href="#contact" data-explain="Jumps down to the contact section">Let's Connect</a>
         </div>
       </div>
 
@@ -178,7 +182,7 @@
             <span class="ia-prompt__before">Four projects, scattered — hard to read as a whole.</span>
             <span class="ia-prompt__after">Reorganized into one clear structure. That's information architecture.</span>
           </p>
-          <button type="button" class="ia-cta" id="work-organize" aria-pressed="false" aria-describedby="work-title">
+          <button type="button" class="ia-cta" id="work-organize" aria-pressed="false" aria-describedby="work-title" data-explain="Organizes the scattered case studies into one clear structure">
             <span class="ia-cta__glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
             <span class="ia-cta__label">
               <span class="ia-cta__idle">Put it in order</span>
@@ -243,7 +247,6 @@
       <div class="trajectory" aria-hidden="true">
         <div class="trajectory__line"></div>
         <div class="trajectory__line-lit"></div>
-        <div class="trajectory__focal"></div>
         <div class="trajectory__track" id="marquee-track"></div>
       </div>
       <p class="sr-only">Anirudh has built with Syngenta, PwC, Deloitte, Innovapptive, Xtream IT Solutions, and UI Solutions.</p>
@@ -330,7 +333,7 @@
 
       <div class="rules__action">
         <p class="rules__prompt">Hard to read, isn't it? Good products keep it simple.</p>
-        <button type="button" class="rules__click" id="rules-click" aria-describedby="rules-title" aria-live="off">
+        <button type="button" class="rules__click" id="rules-click" aria-describedby="rules-title" aria-live="off" data-explain="Reveals the readable version of this text">
           <span class="rules__click-label">Simplify</span>
         </button>
         <div class="rules__meter" aria-hidden="true"><span class="rules__meter-fill" id="rules-meter"></span></div>
@@ -367,33 +370,49 @@
          =============================================================== -->
     <section id="testimonials" class="section testimonials" data-lx="50%" data-lsize="60vmax" aria-labelledby="testimonials-title" data-state="disconnected">
       <div class="section__head section__head--stacked">
-        <p class="section__label" id="testimonials-title">Testimonials</p>
+        <p class="section__label" id="testimonials-title">Collaboration.</p>
         <p class="section__principle">
-          <span class="section__principle-name">Collaboration.</span>
           A better product happens when design, product, engineering, research and business build it together.
         </p>
         <p class="section__invite">Six perspectives, apart. <span>Bring them together.</span></p>
       </div>
 
       <div class="ecosystem" id="team" data-connected="false">
-        <svg class="ecosystem__wires" id="team-wires" viewBox="0 0 100 100" aria-hidden="true">
-          <circle class="eco-ring" id="eco-ring" cx="50" cy="50" r="36" pathLength="1" />
-        </svg>
-        <ul class="ecosystem__nodes" id="team-nodes">
-          <li class="eco-node" data-role="Design"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Design</span></li>
-          <li class="eco-node" data-role="Product"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Product</span></li>
-          <li class="eco-node" data-role="Engineering"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Engineering</span></li>
-          <li class="eco-node" data-role="Research"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Research</span></li>
-          <li class="eco-node" data-role="Business"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Business</span></li>
-          <li class="eco-node" data-role="Domain"><span class="eco-node__dot" aria-hidden="true"></span><span class="eco-node__label">Domain experts</span></li>
-        </ul>
-        <button type="button" class="ecosystem__core" id="testimonials-connect" aria-pressed="false">
-          <span class="ecosystem__core-idle" aria-hidden="true">Bring them<br>together</span>
-          <span class="ecosystem__core-done" aria-hidden="true">Aligned</span>
-          <span class="sr-only">Bring the disciplines together into one aligned product</span>
-        </button>
+        <img class="ecosystem__frame ecosystem__frame--open" src="assets/collab-bridge-open.webp" alt="Bridge open: Research, Business and Domain Experts queue on one bank, Design, Product and Engineering on the other. Neither side can cross the gap — disconnected teams, broken communication, progress stops." width="1536" height="1024" />
+        <img class="ecosystem__frame ecosystem__frame--connected" src="assets/collab-bridge-connected.webp" alt="Bridge connected: all six disciplines cross together in one continuous line, with communication flowing back and forth across the span — aligned teams, open communication, progress flows." width="1536" height="1024" />
       </div>
+      <button type="button" class="ecosystem__core" id="testimonials-connect" aria-pressed="false" data-explain="Closes the bridge so all six disciplines can cross">
+        <span class="ecosystem__core-idle" aria-hidden="true">Bring them together</span>
+        <span class="ecosystem__core-done" aria-hidden="true">Team aligned</span>
+        <span class="sr-only">Bring the disciplines together so the product can cross</span>
+      </button>
 
+      <ul class="ecosystem__summary" aria-hidden="true">
+        <li class="ecosystem__summary-step">
+          <span class="ecosystem__summary-icon"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="10" stroke-dasharray="2.5 3.2" /><line x1="10" y1="10" x2="18" y2="18" /><line x1="18" y1="10" x2="10" y2="18" /></svg></span>
+          <span class="ecosystem__summary-label">Disconnected</span>
+          <span class="ecosystem__summary-copy">Work happens in silos. Progress is slow. Product success stops.</span>
+        </li>
+        <li class="ecosystem__summary-step">
+          <span class="ecosystem__summary-icon"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="10" /><path d="M9 12 L13 8 M13 8 L13 15" /><path d="M19 12 L15 8 M15 8 L15 15" /><path d="M6 18 Q14 15 22 18" /></svg></span>
+          <span class="ecosystem__summary-label">Bridge open</span>
+          <span class="ecosystem__summary-copy">Attempts are made, but the gap holds everything back.</span>
+        </li>
+        <li class="ecosystem__summary-step">
+          <span class="ecosystem__summary-icon"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="10" /><path d="M8 13 L11 9 L17 9 L20 13" /><line x1="8" y1="13" x2="20" y2="13" /><path d="M6 18 Q14 15 22 18" /></svg></span>
+          <span class="ecosystem__summary-label">Bridge connected</span>
+          <span class="ecosystem__summary-copy">Disciplines align. Communication flows. Progress becomes possible.</span>
+        </li>
+        <li class="ecosystem__summary-step">
+          <span class="ecosystem__summary-icon"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="10" /><line x1="8" y1="14" x2="19" y2="14" /><path d="M14 9 L19 14 L14 19" /></svg></span>
+          <span class="ecosystem__summary-label">Product success</span>
+          <span class="ecosystem__summary-copy">Smooth flow. Better outcomes. Stronger impact.</span>
+        </li>
+      </ul>
+      <p class="ecosystem__aha" id="team-aha" aria-live="polite"></p>
+      <p class="team__note" data-state-note>Six disciplines, one product — bring them together to reveal what collaborators say.</p>
+
+      <p class="testimonials__kicker testimonials__kicker--center">Testimonials</p>
       <ul class="quotes" id="quotes">
         <li class="quote">
           <blockquote class="quote__text">Anirudh's ability to quickly understand expectations and translate them into exceptional design solutions consistently impressed me.</blockquote>
@@ -404,7 +423,6 @@
           <p class="quote__by"><span class="quote__name">Grace Wolford</span><span class="quote__co">UX Researcher, Deloitte</span></p>
         </li>
       </ul>
-      <p class="team__note" data-state-note>Six disciplines, one product — bring them together to reveal what collaborators say.</p>
     </section>
 
     <!-- ===============================================================
@@ -417,15 +435,18 @@
         <p class="section__invite" data-anim="rise">Trace the evolution — <span>see how the responsibility grows.</span></p>
       </div>
 
-      <ol class="roadmap" data-explore>
-        <li class="roadmap__stop" data-explore-item data-anim="rise"><span class="roadmap__year">2014</span><div class="roadmap__body"><h3 class="roadmap__cap">Craft foundations</h3><p class="roadmap__org">UI Solutions — UI Designer</p><p class="roadmap__resp">Responsibility: the pixels.</p></div></li>
-        <li class="roadmap__stop" data-explore-item data-anim="rise"><span class="roadmap__year">2018</span><div class="roadmap__body"><h3 class="roadmap__cap">Enterprise systems</h3><p class="roadmap__org">Innovapptive — UI/UX Designer (SAP)</p><p class="roadmap__resp">Responsibility: the screens.</p></div></li>
-        <li class="roadmap__stop" data-explore-item data-anim="rise"><span class="roadmap__year">2019</span><div class="roadmap__body"><h3 class="roadmap__cap">Designing at scale</h3><p class="roadmap__org">Deloitte — UX Designer</p><p class="roadmap__resp">Responsibility: the flows.</p></div></li>
-        <li class="roadmap__stop" data-explore-item data-anim="rise"><span class="roadmap__year">2021</span><div class="roadmap__body"><h3 class="roadmap__cap">Emerging technology</h3><p class="roadmap__org">PwC — UX Designer</p><p class="roadmap__resp">Responsibility: the workflows.</p></div></li>
-        <li class="roadmap__stop" data-explore-item data-anim="rise"><span class="roadmap__year">2022</span><div class="roadmap__body"><h3 class="roadmap__cap">Product ownership</h3><p class="roadmap__org">Syngenta — Senior UX Designer / UX Owner</p><p class="roadmap__resp">Responsibility: the product's UX, end to end.</p></div></li>
-        <li class="roadmap__stop" data-explore-item data-anim="rise"><span class="roadmap__year">2026</span><div class="roadmap__body"><h3 class="roadmap__cap">AI product building</h3><p class="roadmap__org">DesignBesti — Founder</p><p class="roadmap__resp">Responsibility: the whole product.</p></div></li>
-        <li class="roadmap__stop roadmap__stop--next" data-explore-item data-anim="rise"><span class="roadmap__year">Next</span><div class="roadmap__body"><h3 class="roadmap__cap">Product design leadership</h3><p class="roadmap__org">Lead · Principal · AI Product Design</p><p class="roadmap__resp">Responsibility: product direction.</p></div></li>
-      </ol>
+      <div class="roadmap__viewport">
+        <p class="roadmap__viewport-label">Experience — Career</p>
+        <ol class="roadmap" data-explore>
+          <li class="roadmap__stop" data-explore-item><span class="roadmap__year">2014</span><div class="roadmap__body"><h3 class="roadmap__cap">Craft foundations</h3><p class="roadmap__org">UI Solutions — UI Designer</p><p class="roadmap__resp">Responsibility: the pixels.</p></div></li>
+          <li class="roadmap__stop" data-explore-item><span class="roadmap__year">2018</span><div class="roadmap__body"><h3 class="roadmap__cap">Enterprise systems</h3><p class="roadmap__org">Innovapptive — UI/UX Designer (SAP)</p><p class="roadmap__resp">Responsibility: the screens.</p></div></li>
+          <li class="roadmap__stop" data-explore-item><span class="roadmap__year">2019</span><div class="roadmap__body"><h3 class="roadmap__cap">Designing at scale</h3><p class="roadmap__org">Deloitte — UX Designer</p><p class="roadmap__resp">Responsibility: the flows.</p></div></li>
+          <li class="roadmap__stop" data-explore-item><span class="roadmap__year">2021</span><div class="roadmap__body"><h3 class="roadmap__cap">Emerging technology</h3><p class="roadmap__org">PwC — UX Designer</p><p class="roadmap__resp">Responsibility: the workflows.</p></div></li>
+          <li class="roadmap__stop" data-explore-item><span class="roadmap__year">2022</span><div class="roadmap__body"><h3 class="roadmap__cap">Product ownership</h3><p class="roadmap__org">Syngenta — Senior UX Designer / UX Owner</p><p class="roadmap__resp">Responsibility: the product's UX, end to end.</p></div></li>
+          <li class="roadmap__stop" data-explore-item><span class="roadmap__year">2026</span><div class="roadmap__body"><h3 class="roadmap__cap">AI product building</h3><p class="roadmap__org">DesignBesti — Founder</p><p class="roadmap__resp">Responsibility: the whole product.</p></div></li>
+          <li class="roadmap__stop roadmap__stop--next" data-explore-item><span class="roadmap__year">Next</span><div class="roadmap__body"><h3 class="roadmap__cap">Product design leadership</h3><p class="roadmap__org">Lead · Principal · AI Product Design</p><p class="roadmap__resp">Responsibility: product direction.</p></div></li>
+        </ol>
+      </div>
 
       <p class="evolution__line" data-anim="rise">
         UI Designer <span aria-hidden="true">→</span> UX Designer <span aria-hidden="true">→</span> UX Owner <span aria-hidden="true">→</span> Product Thinker <span aria-hidden="true">→</span> AI Product Builder
@@ -443,7 +464,7 @@
 
         <!-- The action — a real conversation. -->
         <div class="contact__connect" data-anim="rise">
-          <a class="btn btn--primary btn--lg" id="contact-cta" href="mailto:anirudh.thata@gmail.com?subject=Let's%20connect">Let's Connect</a>
+          <a class="btn btn--primary btn--lg" id="contact-cta" href="mailto:anirudh.thata@gmail.com?subject=Let's%20connect" data-explain="Opens your email client to start the conversation">Let's Connect</a>
           <div class="contact__links">
             <a href="mailto:anirudh.thata@gmail.com">Email</a>
             <a href="https://linkedin.com/in/anirudh-thata-a611a57b" target="_blank" rel="noopener">LinkedIn</a>
@@ -454,7 +475,7 @@
 
         <!-- Minimal appreciation — a small, real "like". -->
         <div class="appreciate appreciate--minimal" data-anim="rise">
-          <button type="button" class="appreciate__btn" id="appreciate-btn" aria-pressed="false">
+          <button type="button" class="appreciate__btn" id="appreciate-btn" aria-pressed="false" data-explain="A small, honest reaction — no login needed">
             <span class="appreciate__mark" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 21C12 21 3.5 15.5 3.5 9.4C3.5 6.6 5.7 4.8 8.1 4.8C9.8 4.8 11.2 5.8 12 7.2C12.8 5.8 14.2 4.8 15.9 4.8C18.3 4.8 20.5 6.6 20.5 9.4C20.5 15.5 12 21 12 21Z"/></svg>
             </span>
@@ -481,6 +502,7 @@
 
   <script defer src="js/vendor/gsap.min.js"></script>
   <script defer src="js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="js/vendor/lenis.min.js"></script>
   <script defer src="js/vendor/SplitText.min.js"></script>
   <script type="module" src="js/main.js"></script>
 </body>

@@ -2,14 +2,13 @@
  * COMPANIES I'VE BUILT WITH — a career trajectory running through the page.
  *
  * A single straight line runs the full width of the section. Company names
- * travel along it toward one central focal point. As each name approaches,
- * arrives at, and passes the focal axis it grows, highlights, then recedes and
- * continues — approach → arrival → highlight → continuation. The line is solid
- * up to the focal "now" and faint ahead of it: many organizations accumulating
- * into one evolving designer.
+ * travel along it toward one central point, at a uniform size throughout —
+ * only colour/weight mark which one is passing through "now", never a size
+ * change. The line is solid up to that point and faint ahead of it: many
+ * organizations accumulating into one evolving designer.
  *
  * Horizontal travel is CSS (a seamless loop); this module only reads each
- * name's distance from the focal axis each frame and shapes its emphasis.
+ * name's distance from the centre each frame and shapes its emphasis.
  */
 import { prefersReducedMotion } from "./env.js";
 
@@ -43,12 +42,9 @@ export function initCompanies() {
     for (const it of items) {
       const b = it.getBoundingClientRect();
       const ic = b.left + b.width / 2;
-      let k = 1 - Math.abs(ic - cx) / half; // 1 at focal → 0 at edges
+      let k = 1 - Math.abs(ic - cx) / half; // 1 at centre → 0 at edges
       if (k < 0) k = 0;
       const ek = k * k * (3 - 2 * k); // smoothstep → a settled "arrival"
-      const focus = Math.pow(ek, 1.7); // sharpen: only the truly-centred name grows
-      const scale = 0.9 + focus * 0.52;
-      it.style.transform = `scale(${scale.toFixed(3)})`;
       it.style.opacity = (0.26 + ek * 0.74).toFixed(3);
       it.classList.toggle("is-focal", k > 0.9);
       it.classList.toggle("is-near", k > 0.72);

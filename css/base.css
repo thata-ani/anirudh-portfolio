@@ -311,3 +311,43 @@ html.gsap .db-in {
     clip-path: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Explain-on-hover — a short note above any [data-explain] control, telling
+   you what it does before you click it (see modules/explain.js). One shared
+   element, repositioned per target rather than one tooltip per control.
+   ------------------------------------------------------------------------- */
+.explain-tip {
+  position: fixed;
+  z-index: 250;
+  transform: translate(-50%, -100%);
+  max-width: 220px;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--c-warm-100);
+  color: var(--c-ink-800);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  text-align: center;
+  text-wrap: balance;
+  pointer-events: none;
+  opacity: 0;
+  translate: 0 4px;
+  transition: opacity 0.18s ease, translate 0.18s ease;
+}
+.explain-tip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--c-warm-100);
+}
+.explain-tip.is-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+@media (hover: none) {
+  .explain-tip { display: none; }
+}

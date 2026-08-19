@@ -1,9 +1,19 @@
 import { playCue, haptic } from "./sound.js";
+import { getLenis } from "./smooth-scroll.js";
 
 export function initHero() {
   const root = document.documentElement;
   const switchBtn = document.getElementById("hero-switch");
   if (!switchBtn) return;
+
+  // A raw window.scrollTo while Lenis is running gets contested a frame
+  // later, once Lenis's own loop resumes from whatever it last thought the
+  // target was — go through it directly when it's active.
+  const jumpTop = () => {
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(0, { immediate: true });
+    else window.scrollTo(0, 0);
+  };
 
   const setLit = (lit) => {
     root.setAttribute("data-reveal", lit ? "on" : "off");
@@ -16,7 +26,7 @@ export function initHero() {
 
     if ("scrollRestoration" in history) history.scrollRestoration = "auto";
     document.body.style.overflow = "";
-    window.scrollTo(0, 0);
+    jumpTop();
 
     playCue("on");
     haptic(14);
@@ -24,7 +34,7 @@ export function initHero() {
     const title = document.getElementById("hero-title");
     if (title) {
       title.setAttribute("tabindex", "-1");
-      window.setTimeout(() => { window.scrollTo(0, 0); title.focus({ preventScroll: true }); }, 420);
+      window.setTimeout(() => { jumpTop(); title.focus({ preventScroll: true }); }, 420);
     }
   };
 

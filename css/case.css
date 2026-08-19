@@ -27,8 +27,26 @@
 }
 .db-top__back, .db-top__cta { font-weight: 600; font-size: 0.92rem; letter-spacing: -0.01em; }
 .db-top__here { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-warm-400); }
-.db-top__cta { border: 1px solid var(--c-line-strong); border-radius: var(--radius-pill); padding: 0.45rem 1rem; }
-.db-top__cta:hover { border-color: var(--c-light); }
+/* Same full-spectrum, always-moving mark as the homepage nav's Let's Connect —
+   this is the same button, it should never look like a lesser one just
+   because the visitor is on a case study. */
+.db-top__cta {
+  border: 1px solid transparent; border-radius: var(--radius-pill); padding: 0.45rem 1.05rem;
+  color: #fff;
+  background: linear-gradient(135deg, #ff3c5f, #ff8a3c, #ffd23c, #3cd97a, #2ec4e0, #3c7cff, #a63cff, #ff3c5f, #ff8a3c, #ffd23c, #3cd97a, #2ec4e0, #3c7cff, #a63cff);
+  background-size: 300% 100%;
+  animation: cta-gradient-flow 7s ease-in-out infinite alternate;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-mid) var(--ease-out), filter var(--dur-mid) var(--ease-out);
+}
+.db-top__cta:hover { filter: saturate(1.2) brightness(1.06); animation-duration: 2.5s; }
+@media (prefers-reduced-motion: reduce) {
+  .db-top__cta { animation: none; background-position: 30% 50%; }
+  .db-top__cta:hover { animation-duration: unset; }
+}
+@keyframes cta-gradient-flow {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
 @media (max-width: 640px) { .db-top__here { display: none; } }
 
 /* Shared horizontal rhythm (content centred to the container). */

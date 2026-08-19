@@ -43,10 +43,11 @@ function mountToggle(on) {
    #work (scattered-to-organized) and #rules (click to earn readability) each
    already carry a designed interaction, and holding them still fights it:
    #rules in particular starts deliberately unreadable, so a pinned #rules is
-   a pinned blank panel. */
+   a pinned blank panel. #experience is excluded too now — it has its own,
+   permanent pinned *horizontal* scroll (horizontal-roadmap.js), and running
+   this crossfade version on top of that would pin the section twice. */
 const TARGETS = [
   { host: "#process", items: ".process__stage" },
-  { host: "#experience", items: ".roadmap__stop" },
   { host: ".db-journey", items: ".db-journey__phase" },
   { host: ".db-techflow", items: ".db-techflow__step" },
   { host: ".ar-ctx", items: ".ar-ctx__row" },

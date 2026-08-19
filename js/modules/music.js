@@ -23,7 +23,6 @@ export function initMusic() {
   const root = document.getElementById("vibe");
   if (!root) return;
   const toggle = document.getElementById("vibe-toggle");
-  const label = document.getElementById("vibe-toggle-label");
   const chips = [...root.querySelectorAll("[data-vibe]")];
 
   let current = null;   // active vibe id or null
@@ -55,14 +54,12 @@ export function initMusic() {
     chips.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.vibe === id)));
     if (id === "off" || id == null) {
       stopAll(); current = null; setPlaying(false);
-      if (label) label.textContent = "What's your vibe?";
       return;
     }
     if (id === current) return;
     stopAll();
     current = id;
     setPlaying(true);
-    if (label) label.textContent = id[0].toUpperCase() + id.slice(1);
 
     const ctx = unlock(); // already resumed within the gesture
 
@@ -86,7 +83,12 @@ export function initMusic() {
     setOpen(root.getAttribute("data-open") !== "true");
   });
   chips.forEach((chip) =>
-    chip.addEventListener("click", () => { unlock(); haptic(10); select(chip.dataset.vibe); })
+    chip.addEventListener("click", () => {
+      unlock(); haptic(10); select(chip.dataset.vibe);
+      // A choice was made — close the panel instead of waiting for an
+      // outside click the visitor has no reason to know is needed.
+      setOpen(false);
+    })
   );
   document.addEventListener("click", (e) => { if (!root.contains(e.target)) setOpen(false); });
 
@@ -100,7 +102,7 @@ export function initMusic() {
     heroSwitch.addEventListener("click", () => {
       if (autostarted || current) return;
       autostarted = true;
-      select("melody");
+      select("rock");
     });
   }
 }
