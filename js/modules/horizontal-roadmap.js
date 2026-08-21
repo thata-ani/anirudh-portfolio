@@ -7,17 +7,19 @@
  * arrives, the pin releases and the page continues down as normal, into the
  * evolution line beneath it.
  *
- * Below the width a pinned strip reads well at, and under reduced motion,
- * this never runs — css/sections.css already gives .roadmap__viewport a
- * plain, native, snap-scrolling horizontal strip for that case, so the
- * content stays reachable either way.
+ * Runs at every width now, mobile included, so the story reads the same way
+ * everywhere: pin, carry the roadmap sideways with the scroll gesture
+ * (touch included — ScrollTrigger's own scrub handles touch natively),
+ * release once the last stop arrives. Under reduced motion this never runs
+ * — css/sections.css already gives .roadmap__viewport a plain, native,
+ * snap-scrolling horizontal strip for that case, so the content stays
+ * reachable either way.
  */
 export function initHorizontalRoadmap(gsap, ScrollTrigger) {
   const viewport = document.querySelector(".roadmap__viewport");
   const track = viewport?.querySelector(".roadmap");
   if (!viewport || !track || !gsap || !ScrollTrigger) return false;
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  if (matchMedia("(max-width: 720px)").matches) return false;
 
   const distance = () => track.scrollWidth - viewport.clientWidth;
   // Nothing to pin for — every card already fits without scrolling sideways.

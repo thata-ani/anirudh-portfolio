@@ -62,6 +62,7 @@ const boot = () => {
     target: document.getElementById("work"),
     offState: "scattered",
     onState: "organized",
+    persistKey: "work_organized",
   });
   // Hovering the CTA previews the transformation, so its effect is obvious
   // before the click (and the preview clears once actually organized).

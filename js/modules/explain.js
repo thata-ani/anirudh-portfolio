@@ -6,11 +6,19 @@
  * floating note above it on hover — and on keyboard focus too, so the
  * explanation isn't a mouse-only affordance. A brief delay on hover (not on
  * focus) keeps it from flashing at everyone just passing through.
+ *
+ * Mouse/trackpad only — gated on (hover: hover) and (pointer: fine), same as
+ * the other pointer-only modules on this site. This isn't just "no tooltip
+ * on touch": a pointerenter listener left attached on a touch device makes
+ * iOS Safari treat the first tap on that element as entering :hover rather
+ * than as a click, so the control silently needs a second tap to fire —
+ * exactly the target this is meant to explain.
  */
 
 const HOVER_DELAY = 380;
 
 export function initExplain() {
+  if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return null;
   const els = [...document.querySelectorAll("[data-explain]")];
   if (!els.length) return null;
 

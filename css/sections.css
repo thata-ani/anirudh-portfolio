@@ -1175,12 +1175,16 @@ html[data-reveal="on"] .hero__canvas { opacity: 1; }
 .roadmap__stop:focus-visible { outline: 2px solid var(--c-light); outline-offset: 4px; border-radius: 4px; }
 .experience .evolution__line { margin-top: var(--space-xl); font-size: clamp(1.05rem, 0.85rem + 1.2vw, 1.7rem); font-weight: 600; letter-spacing: var(--tracking-tight); line-height: 1.35; text-wrap: balance; }
 .experience .evolution__line span { color: var(--c-light); padding: 0 0.2em; }
-@media (max-width: 720px) {
-  /* Never pinned at this width — a plain strip, natural height, no need to
-     reserve a full screen's worth of space for it. */
+/* Reduced motion only: the JS pin never runs (see horizontal-roadmap.js), so
+   this needs to be a plain, naturally-reachable horizontal strip instead of
+   a full-height stage with nothing driving it across. */
+@media (prefers-reduced-motion: reduce) {
   .roadmap__viewport { min-height: 0; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
   .roadmap__viewport-label { position: static; display: block; margin-bottom: var(--space-sm); }
   .roadmap__stop { flex-basis: 82vw; scroll-snap-align: start; }
+}
+@media (max-width: 720px) {
+  .roadmap__stop { flex-basis: 82vw; }
 }
 
 /* 09 · Contact — availability ---------------------------------------------- */
