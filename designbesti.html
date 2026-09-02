@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/case.css?v=15" />
+  <link rel="stylesheet" href="css/case.css?v=16" />
   <link rel="stylesheet" href="css/pin.css?v=3" />
   <link rel="stylesheet" href="css/smooth.css?v=1" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -383,6 +383,15 @@
         </div>
       </div>
       <p class="db-aside db-in">Six lenses, one product. The design stays the same — the perspective changes.</p>
+      <!-- The product is live, so the case study should hand the reader the
+           real thing. Carries the dock declaration too: the dock offers what
+           the page already offers rather than a URL hardcoded in script. -->
+      <p class="db-built__go db-in">
+        <a class="db-visit" href="https://designbesti.com/" target="_blank" rel="noopener"
+           data-dock-action="Open DesignBesti|DesignBesti">
+          Open DesignBesti<span aria-hidden="true">&nbsp;↗</span>
+        </a>
+      </p>
     </section>
 
     <!-- ============================================================
@@ -489,8 +498,7 @@
          ============================================================ -->
     <section class="db-invite" id="invite">
       <p class="db-invite__lead db-in">The short version ends here.</p>
-      <button type="button" class="db-invite__btn" id="db-deepdive-btn" aria-expanded="false" aria-controls="db-deep"
-              data-dock-action="Inside the process|Process">
+      <button type="button" class="db-invite__btn" id="db-deepdive-btn" aria-expanded="false" aria-controls="db-deep">
         Want to see how I got there?<span aria-hidden="true">&nbsp;↓</span>
       </button>
       <p class="db-invite__hint db-in">The working process — decisions, trade-offs, and the parts I'm still figuring out.</p>
@@ -755,7 +763,7 @@
   <script defer src="js/vendor/ScrollTrigger.min.js"></script>
   <script defer src="js/vendor/lenis.min.js"></script>
   <script defer src="js/vendor/SplitText.min.js"></script>
-  <script type="module" src="js/case.js?v=2"></script>
+  <script type="module" src="js/case.js?v=3"></script>
 
   <script>
     /* The reveal system holds .db-in at opacity 0 until it runs. If it never

@@ -282,6 +282,21 @@ em { font-style: italic; }
 .db-invite__hint { margin-top: 1.4rem; color: var(--c-warm-400); font-size: 0.95rem; }
 [data-deep-open] .db-invite__btn { opacity: 0.5; pointer-events: none; }
 
+/* The live product, offered from the section that describes it. Solid rather
+   than outlined — on a page whose other controls are quiet outlines, the one
+   link that leaves the site should be the thing you can't miss. */
+.db-built__go { margin-top: clamp(2rem, 4vw, 3rem); }
+.db-visit {
+  display: inline-flex; align-items: center; font-weight: 600;
+  font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.35rem); letter-spacing: -0.01em;
+  color: var(--c-ink-800); background: var(--c-warm-100);
+  border: 1px solid var(--c-warm-100); border-radius: var(--radius-pill);
+  padding: 0.85rem 1.7rem; text-decoration: none;
+  transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+}
+.db-visit:hover { transform: translateY(-1px); opacity: 0.86; }
+.db-visit:focus-visible { outline: 2px solid var(--c-warm-100); outline-offset: 3px; }
+
 .db-deep { border-top: 1px solid var(--c-line); }
 .db-deep[hidden] { display: none; }
 .db-deep__intro { padding-block: clamp(4rem, 3rem + 6vw, 7rem) clamp(2rem, 2rem + 3vw, 3rem); }
