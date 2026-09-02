@@ -66,6 +66,10 @@ const boot = () => {
   });
   // Hovering the CTA previews the transformation, so its effect is obvious
   // before the click (and the preview clears once actually organized).
+  // Mouse/trackpad only (pointerenter/pointerleave, not focus/blur/click
+  // below): a pointerenter listener left attached on a touch device makes
+  // iOS Safari treat the first tap as entering :hover rather than as a
+  // click, so the button would silently need a second tap to fire.
   const workBtn = document.getElementById("work-organize");
   const workSec = document.getElementById("work");
   if (workBtn && workSec) {
@@ -73,8 +77,10 @@ const boot = () => {
       if (on && workSec.getAttribute("data-state") === "scattered") workSec.classList.add("is-previewing");
       else workSec.classList.remove("is-previewing");
     };
-    workBtn.addEventListener("pointerenter", () => preview(true));
-    workBtn.addEventListener("pointerleave", () => preview(false));
+    if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      workBtn.addEventListener("pointerenter", () => preview(true));
+      workBtn.addEventListener("pointerleave", () => preview(false));
+    }
     workBtn.addEventListener("focus", () => preview(true));
     workBtn.addEventListener("blur", () => preview(false));
     workBtn.addEventListener("click", () => preview(false));

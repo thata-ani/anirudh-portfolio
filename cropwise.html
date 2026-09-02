@@ -6,19 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#ffffff" />
   <title>Cropwise Grower — a Product Designer's case study · Anirudh Thata</title>
-  <meta name="description" content="How I designed Cropwise Grower for Syngenta — a digital ecosystem that helps farmers make better decisions while turning genuine help into demand generation across AMEA markets." />
+  <meta name="description" content="Four years of UX and product decisions on Cropwise Grower at Syngenta — framing business objectives as product questions, working across Product, Engineering, Agronomy and Regional teams, and designing for AMEA markets and real field conditions." />
   <link rel="preload" href="assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/case.css?v=14" />
+  <link rel="stylesheet" href="css/cropwise.css?v=1" />
   <link rel="stylesheet" href="css/pin.css?v=3" />
   <link rel="stylesheet" href="css/smooth.css?v=1" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 </head>
 
-<body class="db cw">
+<body class="db cw cw2">
   <a class="db-skip" href="#db-main">Skip to the story</a>
   <div class="db-progress" id="db-progress" aria-hidden="true"><span></span></div>
 
@@ -43,701 +44,612 @@
   <main id="db-main">
 
     <!-- ============================================================
-         HERO — title, subtitle, role/team/scope
+         HERO
          ============================================================ -->
     <section class="db-hero cw-hero">
-      <p class="db-eyebrow db-in">Syngenta · Digital Agriculture · AMEA</p>
+      <p class="db-eyebrow db-in">Senior UX Designer · UX Owner<br />Syngenta · 2022&ndash;Present · ~4 years</p>
       <h1 class="cw-hero__title db-in">Cropwise Grower</h1>
-      <p class="cw-hero__sub db-in">
-        Enabling better farming decisions while creating a digital
-        demand-generation ecosystem for Syngenta.
-      </p>
-      <dl class="cw-meta db-in">
-        <div class="cw-meta__item">
-          <dt>Role</dt>
-          <dd>Senior UX Designer</dd>
-        </div>
-        <div class="cw-meta__item">
-          <dt>Team</dt>
-          <dd>Product Managers, Agronomy Experts, Researchers, Engineering Teams, Business Stakeholders, Regional Teams</dd>
-        </div>
-        <div class="cw-meta__item">
+      <dl class="cw2-hero__meta db-in">
+        <div>
           <dt>Scope</dt>
-          <dd>User Experience Design, Journey Mapping, Information Architecture, Feature Design, Design Validation, Cross-functional Collaboration</dd>
+          <dd>UX across Cropwise Grower — mobile experience, product areas, cross-market experience and continuous product improvement across AMEA.</dd>
+        </div>
+        <div>
+          <dt>Worked with</dt>
+          <dd>Product · Engineering · Agronomy · Business · Regional teams</dd>
         </div>
       </dl>
       <p class="db-hero__scroll db-in" aria-hidden="true">Scroll — this is how I thought about it</p>
     </section>
 
     <!-- ============================================================
-         CONTEXT — decision-driven agriculture, a dual need
+         01 — THE PRODUCT WAS ALWAYS MOVING
+         One composition: headline → explanation → tension → question.
          ============================================================ -->
-    <section class="db-block db-dark cw-context">
-      <p class="db-kicker db-kicker--light db-in">The context</p>
-      <h2 class="db-h2 db-in">Agriculture is decision-driven.</h2>
-      <p class="cw-dark__lede db-in">
-        What to plant. When to act. Which product to trust. A farmer's season
-        is a chain of decisions — but the information behind those decisions is
-        fragmented, spread across sources that don't connect.
-      </p>
-      <p class="cw-dark__lede db-in">
-        At the same time, Syngenta wanted to strengthen its relationship with
-        growers beyond the point of purchase. That created a dual need:
-      </p>
-      <div class="cw-dual db-in">
-        <div class="cw-dual__cell">
-          <p class="cw-dual__k">For the farmer</p>
-          <p class="cw-dual__text">Help farmers make better everyday farming decisions.</p>
+    <section id="cw-story-start" class="cw2-sec cw2-sec--tight cw2-dark" data-chapter="Problem">
+      <div class="cw2-grid">
+        <div class="cw2-c1_6">
+          <p class="cw2-num db-in">01 — The product was always moving</p>
+          <h2 class="cw2-h db-in">The product was always moving</h2>
+          <p class="cw2-sub db-in">Four years on one product meant the problem kept changing.</p>
         </div>
-        <span class="cw-dual__plus" aria-hidden="true">+</span>
-        <div class="cw-dual__cell">
-          <p class="cw-dual__k">For Syngenta</p>
-          <p class="cw-dual__text">Create a digital ecosystem that builds grower relationships beyond purchases.</p>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">
+            Cropwise grew across markets, services and product priorities during
+            the time I worked on it. A requirement could start with a business
+            objective. A market could need something different. A feature could
+            expose another problem once it was live.
+          </p>
+          <p class="cw2-body db-in">
+            The difficult part wasn't producing the interface. It was figuring
+            out <strong>what the product should do about the problem</strong> —
+            while balancing what growers needed, what the business was trying to
+            achieve, what the technology allowed, and what could scale across
+            markets.
+          </p>
         </div>
       </div>
-      <p class="cw-dark__note db-in">
-        Neither need could be an afterthought of the other. The product had to
-        serve both — at the same time.
-      </p>
-    </section>
 
-    <!-- ============================================================
-         THE CHALLENGE — two objectives that can't compromise each other
-         ============================================================ -->
-    <section class="db-block cw-challenge">
-      <p class="db-kicker db-in">The challenge</p>
-      <h2 class="db-h2 db-in">Two objectives that couldn't compromise each other.</h2>
-      <p class="db-lede db-in">
-        If the product only served the farmer, it wouldn't sustain the business.
-        If it only served the business, farmers wouldn't use it.
-      </p>
-      <div class="cw-cols db-in">
-        <div class="cw-col">
-          <p class="cw-col__h">What farmers needed</p>
-          <ul class="cw-list">
-            <li>Reduce information fragmentation</li>
-            <li>Improve decision-making</li>
-            <li>Timely recommendations</li>
-            <li>Access to expertise</li>
-            <li>Simplify farm management</li>
-          </ul>
-        </div>
-        <div class="cw-col">
-          <p class="cw-col__h">What the business needed</p>
-          <ul class="cw-list">
+      <div class="cw2-sides db-in">
+        <div>
+          <p class="cw2-label">Syngenta</p>
+          <ul>
             <li>Engagement</li>
-            <li>Awareness</li>
             <li>Loyalty</li>
-            <li>Demand generation</li>
-            <li>A scalable ecosystem</li>
+            <li>Product &amp; service awareness</li>
+            <li>Digital relationships</li>
+            <li>Growth across AMEA</li>
+          </ul>
+        </div>
+        <span class="cw2-sides__rule" aria-hidden="true"></span>
+        <div class="cw2-sides--right">
+          <p class="cw2-label">Grower</p>
+          <ul>
+            <li>Understand what is happening</li>
+            <li>Get useful guidance</li>
+            <li>Take the next action</li>
+            <li>Get help at the right moment</li>
           </ul>
         </div>
       </div>
-      <p class="db-kicker cw-question__k db-in">The larger question</p>
-      <p class="cw-question db-in">
-        How do we help farmers solve daily farming problems while creating
-        long-term engagement opportunities?
-      </p>
+
+      <div class="cw2-qwrap">
+        <p class="cw2-label db-in">The question I kept coming back to</p>
+        <p class="cw2-q db-in" style="margin-top:0.8rem;color:#fff">
+          What are we actually solving — and what should that mean for the
+          experience?
+        </p>
+      </div>
     </section>
 
     <!-- ============================================================
-         WHAT I WAS REALLY SOLVING — one ecosystem, many markets
+         02 — TURNING A BRIEF INTO A PRODUCT QUESTION
          ============================================================ -->
-    <section class="db-block cw-solving">
-      <p class="db-kicker db-in">What I was really solving</p>
-      <h2 class="db-h2 db-in">One product couldn't be one fixed experience.</h2>
-      <p class="db-lede db-in">
-        Cropwise Grower serves markets across AMEA — and those markets have
-        different crops, different practices, and different needs. I couldn't
-        design one fixed experience and ship it everywhere. Every design
-        decision had to answer three connected questions:
-      </p>
-      <div class="db-prompt db-frame db-in">
-        <div class="db-frame__bar"><i></i><i></i><i></i><span>Cropwise Grower</span></div>
-        <div class="db-prompt__body">
-          <p class="db-prompt__q" style="--i:0">What does the farmer need?</p>
-          <p class="db-prompt__q" style="--i:1">What does this market need?</p>
-          <p class="db-prompt__q" style="--i:2">How can the product connect the two?</p>
+    <section class="cw2-sec">
+      <div class="cw2-grid">
+        <div class="cw2-c1_6">
+          <p class="cw2-num db-in">02 — Turning a brief into a product question</p>
+          <h2 class="cw2-h db-in">A business objective isn't a design brief.</h2>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">“Improve engagement” is an outcome the business wants.</p>
+          <p class="cw2-body db-in">It doesn't tell me what a grower should see, do or understand.</p>
+          <p class="cw2-body db-in">
+            So before designing, I tried to translate the objective into a
+            product question.
+          </p>
         </div>
       </div>
-      <p class="db-aside db-in">The answers changed by market. The questions never did.</p>
-    </section>
 
-    <!-- ============================================================
-         THE INSIGHT — farmers search for answers, not features
-         ============================================================ -->
-    <section class="db-block db-dark cw-insight">
-      <p class="db-kicker db-kicker--light db-in">The insight</p>
-      <p class="cw-insight__text db-in">
-        Farmers don't search for <span class="db-strike">features</span>.
-        Farmers search for <span class="db-underline">answers</span>.
-      </p>
-      <div class="cw-asks db-in">
-        <div class="cw-ask">
-          <p class="cw-ask__not">"I need Crop Doctor"</p>
-          <p class="cw-ask__real">"Why are my leaves turning yellow?"</p>
-        </div>
-        <div class="cw-ask">
-          <p class="cw-ask__not">"I need a weather service"</p>
-          <p class="cw-ask__real">"Is today the right day to spray?"</p>
-        </div>
-        <div class="cw-ask">
-          <p class="cw-ask__not">"I need a seed catalogue"</p>
-          <p class="cw-ask__real">"What should I plant this season?"</p>
-        </div>
-      </div>
-      <p class="cw-dark__note db-in">
-        That reframing changed the approach — from designing a list of features
-        to designing connected services around the questions farmers actually ask.
-      </p>
-    </section>
-
-    <!-- ============================================================
-         FROM SERVICES TO AN ECOSYSTEM — the service chain
-         ============================================================ -->
-    <section class="db-block cw-ecosystem">
-      <p class="db-kicker db-in">From services to an ecosystem</p>
-      <h2 class="db-h2 db-in">Each service solves a different problem.</h2>
-      <p class="db-lede db-in">
-        The value increases when they work together — one service's answer
-        becomes the next service's starting point.
-      </p>
-      <div class="cw-chain db-in" role="img" aria-label="Service chain: Crop Calendar, Crop Doctor, Crop Protection, Retailers, Seeds, Loyalty — connected in sequence">
-        <span class="cw-chain__node" style="--i:0">Crop Calendar</span>
-        <span class="cw-chain__edge" aria-hidden="true"></span>
-        <span class="cw-chain__node" style="--i:1">Crop Doctor</span>
-        <span class="cw-chain__edge" aria-hidden="true"></span>
-        <span class="cw-chain__node" style="--i:2">Crop Protection</span>
-        <span class="cw-chain__edge" aria-hidden="true"></span>
-        <span class="cw-chain__node" style="--i:3">Retailers</span>
-        <span class="cw-chain__edge" aria-hidden="true"></span>
-        <span class="cw-chain__node" style="--i:4">Seeds</span>
-        <span class="cw-chain__edge" aria-hidden="true"></span>
-        <span class="cw-chain__node" style="--i:5">Loyalty</span>
-      </div>
-      <p class="db-aside db-in">Not six features on a menu — one connected ecosystem.</p>
-    </section>
-
-    <!-- ============================================================
-         INDIVIDUAL SERVICES — problem → idea → flow → value
-         ============================================================ -->
-    <section class="db-block cw-services-intro">
-      <p class="db-kicker db-in">The product work</p>
-      <h2 class="db-h2 db-in">Six business needs. Six ways to create farmer value.</h2>
-      <p class="db-lede db-in">
-        Cropwise carried a different business objective in each of its services.
-        My role was to look past the requirement itself — because a requirement
-        answered literally becomes a screen, and a requirement understood
-        becomes an experience.
-      </p>
-      <div class="db-prompt db-frame db-in">
-        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>The four questions I asked of every service</span></div>
-        <div class="db-prompt__body">
-          <p class="db-prompt__q" style="--i:0">What does the business need?</p>
-          <p class="db-prompt__q" style="--i:1">Why would the farmer care?</p>
-          <p class="db-prompt__q" style="--i:2">What experience can make that valuable?</p>
-          <p class="db-prompt__q" style="--i:3">How can that experience support the wider ecosystem?</p>
-        </div>
-      </div>
-      <p class="db-aside db-in">
-        Every service below follows that same path — business need, what I saw,
-        the product direction it led to, and where farmer value meets business value.
-      </p>
-    </section>
-
-    <!-- 01 · Enroll Crop + Crop Calendar -->
-    <section class="db-block cw-service">
-      <p class="cw-service__num db-in">01</p>
-      <h3 class="cw-service__name db-in">Enroll Crop + Crop Calendar</h3>
-      <p class="cw-service__sub db-in">The advisory foundation, and a personalised crop journey.</p>
-      <div class="db-oqd db-in">
-        <p><span class="db-oqd__k">Business need</span>Cropwise had to stay relevant across the whole crop lifecycle — not only in the moments when something went wrong. It also needed enough crop context to make its advisory genuinely personal.</p>
-        <p><span class="db-oqd__k">What I saw</span>Generic information is noise. But if the product knows the crop, the variety, the sowing date and the location, it knows where that farmer stands in their season — and that context is what everything else can personalise against.</p>
-      </div>
-      <p class="cw-dir db-in"><span>Product direction</span> Enroll once. Stay relevant for the whole season.</p>
-      <div class="cw-flow db-frame db-in">
-        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>Experience flow — Crop Calendar</span></div>
-        <div class="cw-flow__body" role="img" aria-label="Flow: Crop context, Current stage, What's coming, What to do">
-          <span class="cw-flow__step">Crop context</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Current stage</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">What's coming</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">What to do</span>
-        </div>
-      </div>
-      <div class="cw-value db-in">
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Farmer value</p>
-          <p class="cw-value__text">No more searching through generic advice. The product can answer the only question that matters: "what applies to my crop, at this point in my season?"</p>
-        </div>
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Demand-generation connection</p>
-          <p class="cw-value__text">The business gets something more valuable than another content surface — a reason to stay relevant all season. Crop context → personalised guidance → recurring engagement → relevant solution.</p>
-        </div>
-      </div>
-      <p class="db-aside db-in">This made personalisation the ecosystem's foundation rather than an isolated advisory feature.</p>
-    </section>
-
-    <!-- 02 · Crop Doctor -->
-    <section class="db-block cw-service">
-      <p class="cw-service__num db-in">02</p>
-      <h3 class="cw-service__name db-in">Crop Doctor</h3>
-      <p class="cw-service__sub db-in">A digital entry point built around the problem, not the portfolio.</p>
-      <div class="db-oqd db-in">
-        <p><span class="db-oqd__k">Business need</span>Create a meaningful digital entry point around crop problems, and connect farmers with relevant crop-protection solutions.</p>
-        <p><span class="db-oqd__k">What I saw</span>No farmer ever opens an app thinking "show me crop-protection products." They open it thinking "something is wrong with my crop." That one reframing changes what the product opportunity actually is.</p>
-      </div>
-      <p class="cw-dir db-in"><span>Product direction</span> Start with the farmer's problem, and carry them to action without a second search.</p>
-      <div class="cw-flow db-frame db-in">
-        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>Experience flow — Crop Doctor</span></div>
-        <div class="cw-flow__body" role="img" aria-label="Flow: Symptom, Diagnosis, Recommendation, Relevant solution">
-          <span class="cw-flow__step">Symptom</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Diagnosis</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Recommendation</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Relevant solution</span>
-        </div>
-      </div>
-      <div class="cw-value db-in">
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Farmer value</p>
-          <p class="cw-value__text">A faster path from "what's wrong?" to "what should I do?" — moving from uncertainty to action in one flow.</p>
-        </div>
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Demand-generation connection</p>
-          <p class="cw-value__text">Once the farmer understands the problem, a relevant solution has a legitimate place in the journey. Not product → promotion, but problem → help → understanding → relevant solution.</p>
-        </div>
-      </div>
-      <p class="db-aside db-in">The business objective is achieved by solving the farmer's problem, not by interrupting it.</p>
-    </section>
-
-    <!-- 03 · Crop Protection -->
-    <section class="db-block cw-service">
-      <p class="cw-service__num db-in">03</p>
-      <h3 class="cw-service__name db-in">Crop Protection</h3>
-      <p class="cw-service__sub db-in">Discovery moved out of the catalogue and into the decision.</p>
-      <div class="db-oqd db-in">
-        <p><span class="db-oqd__k">Business need</span>Improve awareness and adoption of crop-protection solutions.</p>
-        <p><span class="db-oqd__k">What I saw</span>A catalogue doesn't help anybody decide. The farmer's question is contextual — "what is right for my crop, in my situation?" — and a list of products structurally cannot answer it.</p>
-      </div>
-      <p class="cw-dir db-in"><span>Product direction</span> A recommendation should make sense because of <em>why</em> it is being shown, not merely because it exists.</p>
-      <div class="cw-flow db-frame db-in">
-        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>Experience flow — Crop Protection</span></div>
-        <div class="cw-flow__body" role="img" aria-label="Flow: Farmer context, Relevant recommendation, Product understanding, Confident choice">
-          <span class="cw-flow__step">Farmer context</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Relevant recommendation</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Product understanding</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Confident choice</span>
-        </div>
-      </div>
-      <div class="cw-value db-in">
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Farmer value</p>
-          <p class="cw-value__text">Help understanding the one solution that applies, instead of decoding a long product list alone.</p>
-        </div>
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Demand-generation connection</p>
-          <p class="cw-value__text">The product becomes discoverable at the moment the farmer has a genuine reason to consider it: need → recommendation → understanding → adoption.</p>
-        </div>
-      </div>
-      <p class="db-aside db-in">The commercial objective becomes part of the experience rather than something layered on top of it.</p>
-    </section>
-
-    <!-- 04 · Seed Recommendations -->
-    <section class="db-block cw-service">
-      <p class="cw-service__num db-in">04</p>
-      <h3 class="cw-service__name db-in">Seed Recommendations</h3>
-      <p class="cw-service__sub db-in">Entering the journey before the season begins.</p>
-      <div class="db-oqd db-in">
-        <p><span class="db-oqd__k">Business need</span>Engage growers earlier in the crop journey, and create opportunities around seed consideration.</p>
-        <p><span class="db-oqd__k">What I saw</span>Seed decisions are made long before crop-management problems appear. If the product only becomes useful once something has gone wrong, the relationship has already started too late.</p>
-      </div>
-      <p class="cw-dir db-in"><span>Product direction</span> Meet the farmer while they are still planning — helping them decide, not presenting a portfolio.</p>
-      <div class="cw-flow db-frame db-in">
-        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>Experience flow — Seed Recommendations</span></div>
-        <div class="cw-flow__body" role="img" aria-label="Flow: Season planning, Options, Comparison, Decision">
-          <span class="cw-flow__step">Season planning</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Options</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Comparison</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Decision</span>
-        </div>
-      </div>
-      <div class="cw-value db-in">
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Farmer value</p>
-          <p class="cw-value__text">Confidence at a decision that shapes the entire season: "what should I consider planting this year?"</p>
-        </div>
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Demand-generation connection</p>
-          <p class="cw-value__text">Rather than building awareness in isolation, Cropwise creates the context in which the relevant portfolio naturally enters consideration: planning → consideration → decision.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 05 · Loyalty -->
-    <section class="db-block cw-service">
-      <p class="cw-service__num db-in">05</p>
-      <h3 class="cw-service__name db-in">Loyalty</h3>
-      <p class="cw-service__sub db-in">Making the purchase another way in, not the way out.</p>
-      <div class="db-oqd db-in">
-        <p><span class="db-oqd__k">Business need</span>Extend the relationship beyond the purchase, and encourage continued engagement.</p>
-        <p><span class="db-oqd__k">What I saw</span>A traditional relationship ends at purchase → leave. But a purchase is also the one moment we know a farmer has acted — which makes it the strongest possible entry point back into the ecosystem.</p>
-      </div>
-      <p class="cw-dir db-in"><span>Product direction</span> Turn the transaction into an ongoing relationship — the reward is a reason to stay connected, not just an incentive.</p>
-      <div class="cw-flow db-frame db-in">
-        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>Experience flow — Loyalty</span></div>
-        <div class="cw-flow__body" role="img" aria-label="Flow: Purchase, Rewards, Return, Engage">
-          <span class="cw-flow__step">Purchase</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Rewards</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Return</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Engage</span>
-        </div>
-      </div>
-      <div class="cw-value db-in">
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Farmer value</p>
-          <p class="cw-value__text">Recognition, and tangible value returned for participation they were already giving.</p>
-        </div>
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Demand-generation connection</p>
-          <p class="cw-value__text">A mechanism for retention → repeat engagement → loyalty. The relationship stops resetting itself after every purchase.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 06 · Nearby Retailers -->
-    <section class="db-block cw-service">
-      <p class="cw-service__num db-in">06</p>
-      <h3 class="cw-service__name db-in">Nearby Retailers</h3>
-      <p class="cw-service__sub db-in">Closing the gap between recommendation and action.</p>
-      <div class="db-oqd db-in">
-        <p><span class="db-oqd__k">Business need</span>A digital recommendation alone creates no business impact. A farmer can identify the problem, receive guidance and understand the right solution — and the journey still breaks if they don't know where to buy it, which retailer is nearby, or whether they can get it quickly.</p>
-        <p><span class="db-oqd__k">What I saw</span>The journey doesn't end when the product names a solution. The real question is "now that I know what I need, how do I get it?" Between recommendation and purchase sat an access gap that nothing in the product addressed.</p>
-      </div>
-      <div class="cw-gap db-in" role="img" aria-label="The broken journey: problem identification, recommendation, then a purchase access gap">
-        <span class="cw-gap__step">Problem identification</span>
-        <span class="cw-gap__arrow" aria-hidden="true"></span>
-        <span class="cw-gap__step">Recommendation</span>
-        <span class="cw-gap__arrow" aria-hidden="true"></span>
-        <span class="cw-gap__step cw-gap__step--broken">Purchase access gap</span>
-      </div>
-      <p class="cw-dir db-in"><span>Product direction</span> Connect the digital experience to the physical retailer network, so the farmer can reach action without leaving the ecosystem.</p>
-      <div class="cw-flow db-frame db-in">
-        <div class="db-frame__bar" aria-hidden="true"><i></i><i></i><i></i><span>Experience flow — Nearby Retailers</span></div>
-        <div class="cw-flow__body" role="img" aria-label="Flow: Need, Relevant solution, Nearby retailer, Purchase">
-          <span class="cw-flow__step">Need</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Relevant solution</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Nearby retailer</span>
-          <span class="cw-flow__arrow" aria-hidden="true"></span>
-          <span class="cw-flow__step">Purchase</span>
-        </div>
-      </div>
-      <div class="cw-value db-in">
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Farmer value</p>
-          <p class="cw-value__text">Faster action, far less time spent hunting for an agri store or relying on word of mouth — and the confidence of buying genuine product through an authorised channel.</p>
-        </div>
-        <div class="cw-value__cell">
-          <p class="cw-value__k">Demand-generation connection</p>
-          <p class="cw-value__text">Most digital products stop at awareness → recommendation. Here the chain continues through retailer discovery to purchase — and the opportunity exists only because the farmer was helped first.</p>
-        </div>
-      </div>
-      <p class="cw-dir cw-dir--decision db-in"><span>The product decision</span> Don't stop at telling farmers what they need. Help them reach the next step.</p>
-    </section>
-
-    <!-- ============================================================
-         DESIGNING FOR DIFFERENT MARKETS
-         ============================================================ -->
-    <section class="db-block cw-markets-section">
-      <p class="db-kicker db-in">Designing for different markets</p>
-      <h2 class="db-h2 db-in">Not different products. Adaptable emphasis.</h2>
-      <p class="db-lede db-in">
-        Across AMEA, the same ecosystem leads with different services — because
-        each market's farmers lead with different questions.
-      </p>
-      <div class="cw-markets db-in">
-        <div class="cw-market">
-          <p class="cw-market__name">Market A</p>
-          <p class="cw-market__mode">Advisory-led</p>
-          <ol class="cw-market__list">
-            <li>Crop Calendar</li>
-            <li>Crop Doctor</li>
-            <li>Crop Protection</li>
-          </ol>
-        </div>
-        <div class="cw-market">
-          <p class="cw-market__name">Market B</p>
-          <p class="cw-market__mode">Protection-led</p>
-          <ol class="cw-market__list">
-            <li>Crop Protection</li>
-            <li>Nearby Retailers</li>
-            <li>Loyalty</li>
-          </ol>
-        </div>
-        <div class="cw-market">
-          <p class="cw-market__name">Market C</p>
-          <p class="cw-market__mode">Seed-led</p>
-          <ol class="cw-market__list">
-            <li>Seed Recommendations</li>
-            <li>Crop Calendar</li>
-            <li>Crop Protection</li>
-          </ol>
-        </div>
-        <div class="cw-market">
-          <p class="cw-market__name">Market D</p>
-          <p class="cw-market__mode">Loyalty-led</p>
-          <ol class="cw-market__list">
-            <li>Loyalty</li>
-            <li>Nearby Retailers</li>
-            <li>Crop Protection</li>
-          </ol>
-        </div>
-      </div>
-      <p class="db-aside db-in">Same services. Same ecosystem. Different emphasis per market.</p>
-    </section>
-
-    <!-- ============================================================
-         CONNECTING FARMER VALUE WITH BUSINESS VALUE
-         ============================================================ -->
-    <section class="db-block db-dark cw-bridge">
-      <p class="db-kicker db-kicker--light db-in">Connecting farmer value with business value</p>
-      <h2 class="db-h2 db-in">Help first. Demand follows.</h2>
-      <p class="cw-dark__lede db-in">
-        The business objective was never really "how do we promote more
-        products?" The more useful design question was "what would make the
-        farmer genuinely value this interaction?" — and only then do the two
-        objectives meet.
-      </p>
-      <ol class="db-model__flow cw-bridge__flow db-in">
-        <li>Business need</li>
-        <li>Farmer problem</li>
-        <li>Product decision</li>
-        <li>Useful experience</li>
-        <li>Farmer value</li>
-        <li>Engagement and trust</li>
-        <li>Relevant business opportunity</li>
-      </ol>
-      <p class="cw-dark__note db-in">
-        That is the pattern behind all six services. I wasn't designing business
-        requirements into screens — I was translating business objectives into
-        experiences farmers had a reason to use. When that value is genuine,
-        demand generation becomes a consequence of the experience rather than an
-        interruption to it.
-      </p>
-    </section>
-
-    <!-- ============================================================
-         THE LARGER ECOSYSTEM — the full crop lifecycle
-         ============================================================ -->
-    <section class="db-block cw-lifecycle">
-      <p class="db-kicker db-in">The larger ecosystem</p>
-      <h2 class="db-h2 db-in">One journey across the whole crop lifecycle.</h2>
-      <p class="db-lede db-in">
-        Seen end to end, the services stop being a menu and become a
-        companion — there's a relevant answer at every stage of the season.
-      </p>
-      <div class="db-journey db-in" role="img" aria-label="Crop lifecycle journey: before planting, during crop management, when something goes wrong, when action is required, when confidence is needed, after purchase">
-        <div class="db-journey__path" aria-hidden="true"></div>
-        <ol class="db-journey__phases">
-          <li class="db-journey__phase">
-            <span class="db-journey__dot"></span>
-            <div>
-              <p class="db-journey__label">Stage 1</p>
-              <h3>Before planting</h3>
-              <p>Seed Recommendations help plan the season.</p>
+      <!-- The ladder is the evidence here, so the four questions sit beside it
+           rather than under it: one band, no dead half-page next to either. -->
+      <div class="cw2-grid" style="margin-top:clamp(2rem,4vw,3rem)">
+        <div class="cw2-c1_7">
+          <div class="cw2-ladder db-in">
+            <div class="cw2-ladder__step">
+              <p class="cw2-label">Business objective</p>
+              <p class="cw2-ladder__v">Increase engagement</p>
             </div>
-          </li>
-          <li class="db-journey__phase">
-            <span class="db-journey__dot"></span>
-            <div>
-              <p class="db-journey__label">Stage 2</p>
-              <h3>Through the season</h3>
-              <p>Enroll Crop and the Crop Calendar keep the guidance personal.</p>
+            <div class="cw2-ladder__step">
+              <p class="cw2-label">Product question</p>
+              <p class="cw2-ladder__v">What would give a grower a useful reason to return?</p>
             </div>
-          </li>
-          <li class="db-journey__phase">
-            <span class="db-journey__dot"></span>
-            <div>
-              <p class="db-journey__label">Stage 3</p>
-              <h3>When something goes wrong</h3>
-              <p>Crop Doctor diagnoses the problem.</p>
+            <div class="cw2-ladder__step cw2-ladder__step--last">
+              <p class="cw2-label">Experience question</p>
+              <p class="cw2-ladder__v">What can Cropwise help with before, during or after a farming decision?</p>
             </div>
-          </li>
-          <li class="db-journey__phase">
-            <span class="db-journey__dot"></span>
-            <div>
-              <p class="db-journey__label">Stage 4</p>
-              <h3>When action is required</h3>
-              <p>Crop Protection recommends the response.</p>
-            </div>
-          </li>
-          <li class="db-journey__phase">
-            <span class="db-journey__dot"></span>
-            <div>
-              <p class="db-journey__label">Stage 5</p>
-              <h3>When it is time to act</h3>
-              <p>Nearby Retailers close the gap to purchase.</p>
-            </div>
-          </li>
-          <li class="db-journey__phase">
-            <span class="db-journey__dot"></span>
-            <div>
-              <p class="db-journey__label">Stage 6</p>
-              <h3>After purchase</h3>
-              <p>Loyalty keeps the relationship going.</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         THE DEMAND-GENERATION MODEL
-         ============================================================ -->
-    <section class="db-block cw-model">
-      <p class="db-kicker db-in">The demand-generation model</p>
-      <h2 class="db-h2 db-in">From pushing products to earning demand.</h2>
-      <div class="cw-compare db-in">
-        <div class="cw-compare__col cw-compare__col--old">
-          <p class="cw-compare__label">Traditional</p>
-          <ol class="cw-compare__flow">
-            <li>Campaign</li><li>Dealer</li><li>Purchase</li>
+          </div>
+        </div>
+        <div class="cw2-c8_5">
+          <p class="cw2-label db-in">I kept coming back to four questions</p>
+          <ol class="cw2-qs db-in" style="margin-top:0.9rem">
+            <li>What is the user trying to do?</li>
+            <li>What does the business need to achieve?</li>
+            <li>What can the product realistically help with?</li>
+            <li>What does this decision change elsewhere in the experience?</li>
           </ol>
-          <p class="cw-compare__cap">Push. The relationship ends at the sale.</p>
-        </div>
-        <div class="cw-compare__col cw-compare__col--new">
-          <p class="cw-compare__label">Cropwise</p>
-          <ol class="cw-compare__flow">
-            <li>Problem</li><li>Guidance</li><li>Trust</li><li>Recommendation</li><li>Adoption</li>
-          </ol>
-          <p class="cw-compare__cap">Pull. Genuine help creates the demand.</p>
-        </div>
-      </div>
-      <div class="cw-tablewrap db-in">
-        <table class="cw-table">
-          <caption class="cw-table__caption">How each service turns a farmer need into a demand opportunity</caption>
-          <thead>
-            <tr>
-              <th scope="col">Service</th>
-              <th scope="col">Farmer need</th>
-              <th scope="col">Demand opportunity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Enroll Crop + Crop Calendar</th>
-              <td>What applies to my crop, right now?</td>
-              <td>Season-long relevance — the personalisation foundation</td>
-            </tr>
-            <tr>
-              <th scope="row">Crop Doctor</th>
-              <td>What's wrong with my crop?</td>
-              <td>Relevant crop protection discovery</td>
-            </tr>
-            <tr>
-              <th scope="row">Crop Protection</th>
-              <td>The right response to a problem</td>
-              <td>Product adoption in context</td>
-            </tr>
-            <tr>
-              <th scope="row">Seed Recommendations</th>
-              <td>Planning the season</td>
-              <td>Seed portfolio consideration at the right moment</td>
-            </tr>
-            <tr>
-              <th scope="row">Nearby Retailers</th>
-              <td>Where do I actually get it?</td>
-              <td>Recommendation converted into purchase access</td>
-            </tr>
-            <tr>
-              <th scope="row">Loyalty</th>
-              <td>Recognition for purchases</td>
-              <td>Retention and advocacy</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         OUTCOMES
-         ============================================================ -->
-    <section class="db-block cw-outcomes">
-      <p class="db-kicker db-in">Outcomes</p>
-      <h2 class="db-h2 db-in">Both objectives, served by the same design.</h2>
-      <div class="cw-cols db-in">
-        <div class="cw-col">
-          <p class="cw-col__h">For farmers</p>
-          <ul class="cw-list">
-            <li>Less fragmented information — one place to look</li>
-            <li>More confident everyday decisions</li>
-            <li>Timely, contextual recommendations</li>
-            <li>Access to real agronomy expertise</li>
-            <li>Simpler farm management across the season</li>
-          </ul>
-        </div>
-        <div class="cw-col">
-          <p class="cw-col__h">For Syngenta</p>
-          <ul class="cw-list">
-            <li>A recurring digital touchpoint with growers</li>
-            <li>Engagement that extends beyond the purchase</li>
-            <li>Demand generation built into the product experience</li>
-            <li>A scalable ecosystem, adaptable across AMEA markets</li>
-            <li>Stronger grower relationships and loyalty</li>
-          </ul>
+          <p class="cw2-body db-in" style="margin-top:1.4rem">
+            Once the product was live, another question became important: what
+            did we learn — and what should change because of it?
+          </p>
+          <p class="cw2-body db-in" style="margin-top:1.1rem">
+            That same thinking applied when the request was about products,
+            loyalty, diagnosis or other services. I wasn't trying to create a
+            different design method for every feature.
+          </p>
         </div>
       </div>
     </section>
 
     <!-- ============================================================
-         WHAT I LEARNED
+         03 — DECISION 01 — HOME
+         Inputs → product question → decision → evidence. The comparison
+         carries the argument; there are no annotations on it, because the
+         point is the prioritisation call, not a tour of the UI.
          ============================================================ -->
-    <section class="db-block db-reflect">
-      <p class="db-kicker db-in">What I learned</p>
-      <p class="db-reflect__lead db-in">
-        The biggest lesson wasn't about features. <strong>It was about ecosystem thinking.</strong>
-      </p>
-      <p class="db-reflect__body db-in">
-        Designing an individual service well is craft. Designing how services
-        strengthen each other — so that helping a farmer and growing the
-        business become the same motion — is product thinking.
-      </p>
-      <ul class="db-reflect__qs db-in">
-        <li>A service is useful alone. An ecosystem is valuable together.</li>
-        <li>Business value follows farmer value — never the other way around.</li>
-        <li>One product can serve many markets if the emphasis adapts, not the foundation.</li>
+    <section class="cw2-sec cw2-sec--tight" data-chapter="Decisions">
+      <div class="cw2-grid">
+        <div class="cw2-c1_7">
+          <p class="cw2-num db-in">03 — Decision 01</p>
+          <h2 class="cw2-h db-in">Home</h2>
+          <p class="cw2-sub db-in">When everything competes for attention, something has to give.</p>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">
+            The Home had grown into a starting point for several parts of the
+            product — crop information, loyalty, services, product discovery
+            and content.
+          </p>
+          <p class="cw2-body db-in">
+            The challenge was not simply rearranging the interface. It was
+            deciding <strong>what deserved prominence and what could move
+            deeper into the experience.</strong>
+          </p>
+        </div>
+      </div>
+
+      <p class="cw2-label db-in" style="margin-top:clamp(2rem,4vw,3rem)">What was shaping the decision</p>
+      <ul class="cw2-inputs db-in">
+        <li>Multiple services were competing for Home attention.</li>
+        <li>Grower crop context could make the experience more relevant.</li>
+        <li>Loyalty was an important recurring interaction.</li>
+        <li>Product and business priorities needed visibility.</li>
+        <li>The experience needed to remain understandable as the product continued to grow.</li>
       </ul>
-      <p class="db-road__arc db-in">
-        Farmer problem → Product decision → Experience → Ecosystem → Business value.
+
+      <div class="cw2-qwrap">
+        <p class="cw2-q db-in">
+          If everything is important, what does the grower actually see first?
+        </p>
+      </div>
+    </section>
+
+    <div class="cw2-bleed cw2-stage">
+      <div class="cw2-cmp">
+        <div class="cw2-cmp__side">
+          <p class="cw2-label db-in">Before</p>
+          <span class="cw2-shot db-in"><span class="cw2-shot__frame" data-file="OLD HOME — old homepage.png"><img src="assets/cropwise/old-homepage.png" alt="The Home screen before the redesign" loading="lazy" onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()"></span></span>
+        </div>
+        <div class="cw2-cmp__side">
+          <p class="cw2-label db-in">After</p>
+          <span class="cw2-shot db-in"><span class="cw2-shot__frame" data-file="NEW HOME — new homepage.png"><img src="assets/cropwise/new-homepage.png" alt="The Home screen after the redesign" loading="lazy" onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The reasoning after the evidence. The decision itself is pulled out
+         at sub scale so the takeaway is the call I made, not the paragraph. -->
+    <section class="cw2-sec cw2-sec--tight">
+      <p class="cw2-num db-in">What the change was really about</p>
+      <div class="cw2-grid" style="margin-top:clamp(1.4rem,3vw,2.2rem)">
+        <div class="cw2-c1_6">
+          <p class="cw2-body db-in">
+            The redesign was about establishing a clearer hierarchy for the
+            product rather than giving every capability the same weight.
+          </p>
+          <p class="cw2-body db-in">
+            Crop context, products, loyalty and services each had a role, but
+            they did not all need the same level of prominence.
+          </p>
+        </div>
+        <div class="cw2-c8_5">
+          <p class="cw2-sub db-in" style="margin-top:0">
+            The decision was about what belonged in the primary experience and
+            what could be discovered deeper in the product.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         04 — DECISION 02 — LOYALTY
+         A different capability to Home: reasoning through a system with many
+         states. Chain → question → screen evidence → the full state list →
+         the shared artifact → what I contributed to resolving it.
+         ============================================================ -->
+    <section class="cw2-sec cw2-sec--tight cw2-dark">
+      <div class="cw2-grid">
+        <div class="cw2-c1_7">
+          <p class="cw2-num db-in">04 — Decision 02</p>
+          <h2 class="cw2-h db-in">Loyalty</h2>
+          <p class="cw2-sub db-in">A simple scan became a complex product journey.</p>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">
+            The visible action was simple: scan a product and receive a reward.
+          </p>
+          <p class="cw2-body db-in">
+            But the actual experience had to account for what happened around
+            that action:
+          </p>
+        </div>
+      </div>
+
+      <ol class="cw2-chain db-in">
+        <li>Scan</li>
+        <li>Eligibility</li>
+        <li>Cashback</li>
+        <li>Payment</li>
+        <li>Success / Failure</li>
+        <li>History</li>
+      </ol>
+
+      <div class="cw2-qwrap">
+        <p class="cw2-q db-in" style="color:#fff">
+          How do we make a transaction with many possible states still feel
+          simple to the person using it?
+        </p>
+      </div>
+    </section>
+
+    <div class="cw2-bleed cw2-stage cw2-stage--dark">
+      <div class="cw2-cmp">
+        <div class="cw2-cmp__side">
+          <p class="cw2-label db-in" style="color:rgba(255,255,255,.5)">Before</p>
+          <span class="cw2-shot db-in"><span class="cw2-shot__frame" data-file="OLD LOYALTY — old loyalty.png"><img src="assets/cropwise/old-loyalty.png" alt="The Loyalty screen before the redesign" loading="lazy" onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()"></span></span>
+        </div>
+        <div class="cw2-cmp__side">
+          <p class="cw2-label db-in" style="color:rgba(255,255,255,.5)">After</p>
+          <span class="cw2-shot db-in"><span class="cw2-shot__frame" data-file="NEW LOYALTY — new loyalty.png"><img src="assets/cropwise/new-loyalty.png" alt="The Loyalty screen after the redesign" loading="lazy" onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <section class="cw2-sec cw2-sec--tight cw2-dark">
+      <p class="cw2-label db-in">What was shaping the experience</p>
+      <ul class="cw2-inputs cw2-inputs--3 db-in">
+        <li>Product scanning</li>
+        <li>Eligibility and limits</li>
+        <li>Already-scanned products</li>
+        <li>Cashback</li>
+        <li>UPI</li>
+        <li>Bank-account redemption</li>
+        <li>Processing</li>
+        <li>Failed transactions</li>
+        <li>Transaction history</li>
+        <li>Support</li>
+      </ul>
+    </section>
+
+    <section class="cw2-sec cw2-dark">
+      <div class="cw2-grid">
+        <div class="cw2-c1_6">
+          <h2 class="cw2-h db-in" style="margin-top:0;font-size:clamp(1.7rem,1.2rem + 2vw,2.8rem)">Making the transaction understandable</h2>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">
+            The transaction had more states than the Loyalty landing screen
+            suggested.
+          </p>
+          <p class="cw2-body db-in">
+            I mapped and explored the journey with Product and the relevant
+            teams to make those states visible and discuss what the experience
+            needed to support.
+          </p>
+          <p class="cw2-body db-in">
+            The flow was a shared product artifact, not mine alone.
+          </p>
+        </div>
+      </div>
+
+      <div class="db-in" style="margin-top:clamp(2rem,4vw,3rem)">
+        <span class="cw2-shot cw2-shot--flow">
+          <a href="assets/cropwise/loyalty-flow.png" target="_blank" rel="noopener"
+             aria-label="Open the Loyalty cashback flow at full size">
+            <span class="cw2-shot__frame" data-file="LOYALTY CASHBACK FLOW">
+              <img src="assets/cropwise/loyalty-flow.png"
+                   alt="The Loyalty cashback flow: scanning through eligibility, cashback, UPI and bank redemption, failure states, history and support"
+                   loading="lazy"
+                   onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()">
+            </span>
+          </a>
+          <span class="cw2-shot__cap cw2-label">Product decision artifact — Loyalty Cashback Flow · open full size</span>
+        </span>
+      </div>
+
+      <dl class="cw2-read db-in" style="margin-top:clamp(2.5rem,5vw,4rem)">
+        <div>
+          <dt>What I identified</dt>
+          <dd>Loyalty wasn't only a points screen. Scanning, earning, redemption and transaction states all had to connect.</dd>
+        </div>
+        <div>
+          <dt>The question I brought</dt>
+          <dd>How do we make a transaction with many possible states still feel simple to the person using it?</dd>
+        </div>
+        <div>
+          <dt>What needed resolving</dt>
+          <dd>The states where the transaction could not complete normally — including failed cashback, UPI auto-fetch failure, processing, already-scanned products and alternative redemption paths.</dd>
+        </div>
+        <div>
+          <dt>How it informed the experience</dt>
+          <dd>The work moved beyond the Loyalty landing screen. Each state had to make the next action clear, including the states that did not end in success.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ============================================================
+         06 — DESIGNING ACROSS AMEA
+         ============================================================ -->
+    <section class="cw2-sec cw2-dark">
+      <div class="cw2-grid">
+        <div class="cw2-c1_6">
+          <p class="cw2-num db-in">05 — Designing across AMEA</p>
+          <h2 class="cw2-h db-in">One product. Different realities.</h2>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">
+            Cropwise operates across markets with different crops, practices,
+            business priorities and levels of digital familiarity. The challenge
+            wasn't a different experience for every market. It was finding the
+            boundary between <strong>what should remain consistent</strong> and
+            <strong>what needed to adapt.</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="cw2-axis db-in">
+        <div>
+          <p class="cw2-label">Keep consistent</p>
+          <ul>
+            <li>Structure</li>
+            <li>Interaction patterns</li>
+            <li>Core behaviours</li>
+            <li>Navigation principles</li>
+          </ul>
+        </div>
+        <span class="cw2-axis__rule" aria-hidden="true"></span>
+        <div class="cw2-axis--right">
+          <p class="cw2-label">Allow to adapt</p>
+          <ul>
+            <li>Content</li>
+            <li>Service emphasis</li>
+            <li>Market priorities</li>
+            <li>Local requirements</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="cw2-body db-in" style="margin-top:clamp(2rem,4vw,3rem)">
+        I worked through those decisions with Product and Regional teams. I
+        didn't own market strategy. My contribution was helping translate those
+        differences into an experience that could still feel like one product.
       </p>
     </section>
 
     <!-- ============================================================
-         FINAL POSITIONING
+         07 — FIELD REALITY
          ============================================================ -->
-    <section class="db-final db-dark">
-      <p class="db-final__text db-in">
-        Cropwise Grower helps farmers make better decisions — and that help
-        <em>is</em> the demand-generation model.
+    <section class="cw2-sec">
+      <div class="cw2-grid">
+        <div class="cw2-c1_7">
+          <p class="cw2-num db-in">06 — Field reality</p>
+          <h2 class="cw2-h db-in">Designed for the conditions, not the desk.</h2>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">
+            Practical constraints — connectivity, older devices, outdoor use and
+            different levels of digital familiarity — shaped how we thought about
+            speed, steps, hierarchy and interaction.
+          </p>
+        </div>
+      </div>
+      <div class="cw2-strip" tabindex="0" role="region" aria-label="Field photographs — scroll or drag to move">
+        <div class="cw2-strip__track">
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-01.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-02.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-03.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-04.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-05.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-06.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-07.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-08.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-09.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+          <figure class="cw2-strip__item"><img src="assets/cropwise/field-10.jpg" alt="Field photograph from a Cropwise grower visit" loading="lazy" draggable="false"></figure>
+        </div>
+      </div>
+      <p class="cw2-label db-in" style="margin-top:1rem">Scroll or drag to move through the visits</p>
+      <ul class="cw2-notes db-in" style="margin-top:clamp(2rem,4vw,3rem)">
+        <li><i>01</i><b>Connectivity</b><p>A reliable connection couldn't always be assumed.</p></li>
+        <li><i>02</i><b>Device</b><p>The experience couldn't assume the newest hardware.</p></li>
+        <li><i>03</i><b>Context</b><p>The product could be used outdoors and during an active task.</p></li>
+      </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         08 — AFTER LAUNCH
+         ============================================================ -->
+    <section class="cw2-sec cw2-dark" data-chapter="After launch">
+      <div class="cw2-grid">
+        <div class="cw2-c1_6">
+          <p class="cw2-num db-in">07 — After launch</p>
+          <h2 class="cw2-h db-in">Shipping was the middle.</h2>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">
+            Once something was live, the product became another source of
+            information. Usage data. Feedback from regional teams. Business
+            observations. Field observations. Usually not a perfect answer — more
+            often, a signal that raised another question.
+          </p>
+        </div>
+      </div>
+
+      <div class="cw2-loop db-in">
+        <div class="cw2-loop__row">
+          <div class="cw2-loop__node"><i>01</i><b>Live product</b></div>
+          <div class="cw2-loop__node"><i>02</i><b>Signal</b><span>Usage / feedback / observation</span></div>
+          <div class="cw2-loop__node"><i>03</i><b>Question</b><span>What might this mean?</span></div>
+          <div class="cw2-loop__node"><i>04</i><b>Recommendation</b><span>What should we change — if anything?</span></div>
+          <div class="cw2-loop__node"><i>05</i><b>Iterate</b><span>Improve, simplify or leave it alone.</span></div>
+        </div>
+        <span class="cw2-loop__return" aria-hidden="true"></span>
+      </div>
+
+      <div class="cw2-grid" style="margin-top:clamp(2rem,4vw,3rem)">
+        <div class="cw2-c1_6">
+          <p class="cw2-body db-in">
+            I wasn't the owner of analytics or the business decision. My role was
+            connecting those signals back to the experience. Sometimes the answer
+            was yes. Sometimes the better decision was not to add another feature.
+          </p>
+        </div>
+        <div class="cw2-c8_5">
+          <p class="cw2-sub db-in">
+            What does this tell us about what someone is trying to do, and is a
+            design change actually warranted?
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         09 — WHEN PRODUCT USAGE BECOMES A SIGNAL
+         ============================================================ -->
+    <section class="cw2-sec">
+      <div class="cw2-grid">
+        <div class="cw2-c1_7">
+          <p class="cw2-num db-in">08 — When product usage becomes a signal</p>
+          <h2 class="cw2-h db-in">Cropwise could reveal patterns beyond individual interactions.</h2>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">
+            A Crop Doctor interaction can indicate a crop problem. Considered in
+            aggregate, these can become an agricultural signal — what may be
+            appearing, roughly where and when.
+          </p>
+        </div>
+      </div>
+
+      <ol class="cw2-seq db-in">
+        <li><i>01</i><b>Crop Doctor interaction</b></li>
+        <li><i>02</i><b>Aggregated signal</b></li>
+        <li><i>03</i><b>Pattern</b></li>
+        <li><i>04</i><b>Product / Agronomy / Business discussion</b></li>
+        <li><i>05</i><b>Possible product response</b></li>
+      </ol>
+
+      <div class="cw2-qwrap">
+        <p class="cw2-label db-in">That creates another product question</p>
+        <p class="cw2-q db-in" style="margin-top:0.8rem">
+          If we're seeing a pattern, does the product owe the grower a response?
+        </p>
+      </div>
+
+      <div class="cw2-grid">
+        <div class="cw2-c1_6">
+          <p class="cw2-body db-in">
+            That can lead Product, Agronomy and Business teams to consider timely
+            information, a field activity or relevant support. The UX
+            contribution is not owning the data or deciding the business response.
+          </p>
+        </div>
+        <div class="cw2-c8_5">
+          <p class="cw2-label db-in">It is asking</p>
+          <ol class="cw2-qs db-in" style="margin-top:0.9rem">
+            <li>What does the signal mean for the experience?</li>
+            <li>Would responding actually help the grower?</li>
+            <li>What is the smallest useful product response?</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         10 — WHAT CHANGED
+         ============================================================ -->
+    <section class="cw2-sec cw2-dark">
+      <p class="cw2-num db-in">09 — What the work enabled</p>
+      <div class="cw2-out db-in">
+        <div>
+          <h2 class="cw2-out__h" style="color:#fff">For growers</h2>
+          <dl>
+            <dt style="color:#fff">More relevant information</dt>
+            <dd style="color:rgba(255,255,255,.66)">Guidance and services can be connected to crop context and the situation at hand.</dd>
+            <dt style="color:#fff">Easier access to support</dt>
+            <dd style="color:rgba(255,255,255,.66)">Important services are available within one digital experience.</dd>
+            <dt style="color:#fff">Support across the crop journey</dt>
+            <dd style="color:rgba(255,255,255,.66)">From crop planning and diagnosis to protection, loyalty and finding a retailer.</dd>
+          </dl>
+        </div>
+        <div>
+          <h2 class="cw2-out__h" style="color:#fff">For Syngenta</h2>
+          <dl>
+            <dt style="color:#fff">Digital engagement</dt>
+            <dd style="color:rgba(255,255,255,.66)">More reasons for growers to return to the product.</dd>
+            <dt style="color:#fff">Product &amp; service discovery</dt>
+            <dd style="color:rgba(255,255,255,.66)">Relevant products and services can be introduced in the context of grower needs.</dd>
+            <dt style="color:#fff">Scalable product experience</dt>
+            <dd style="color:rgba(255,255,255,.66)">A foundation that can adapt across different markets.</dd>
+          </dl>
+        </div>
+      </div>
+      <p class="cw2-note db-in" style="border-color:rgba(255,255,255,.14);color:rgba(255,255,255,.5)">
+        <b style="display:block;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.5rem">Evidence note</b>
+        These outcomes are presented from the product and project context
+        available to me. I am not attaching causal performance numbers where a
+        reliable before/after measurement wasn't available.
       </p>
-      <p class="db-final__sub db-in">
-        The farmer gets an answer. The business earns a relationship. The same
-        design serves both.
+    </section>
+
+    <!-- ============================================================
+         11 — REFLECTION
+         ============================================================ -->
+    <section class="cw2-sec">
+      <div class="cw2-grid">
+        <div class="cw2-c1_7">
+          <p class="cw2-num db-in">10 — Reflection</p>
+          <h2 class="cw2-h db-in">Four years on one product changed how I work.</h2>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">I used to think more about the screen in front of me.</p>
+          <p class="cw2-body db-in">Working on Cropwise made the larger questions harder to ignore:</p>
+        </div>
+      </div>
+
+      <div class="cw2-grid" style="margin-top:clamp(1.6rem,3vw,2.4rem)">
+        <div class="cw2-c1_7">
+          <ul class="cw2-reflect__qs db-in">
+            <li>Why are we building this?</li>
+            <li>What does the grower actually need?</li>
+            <li>What constraints will shape the experience?</li>
+            <li>What happens when this needs to work in another market?</li>
+            <li>What can we learn once it is live?</li>
+          </ul>
+        </div>
+        <div class="cw2-c8_5" style="align-self:end">
+          <p class="cw2-body db-in">
+            Today, I see the interface as one part of the product decision.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cw2-sec cw2-sec--tight cw2-dark">
+      <p class="cw2-close db-in" style="color:#fff">The screen was never the hard part.</p>
+      <p class="cw2-body db-in" style="margin-top:1.1rem;color:rgba(255,255,255,.72);max-width:46ch">
+        Figuring out what it was for, what constraints mattered, and what to do
+        after it shipped was the bigger job.
       </p>
     </section>
 
