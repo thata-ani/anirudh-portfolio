@@ -95,10 +95,22 @@ export function initDock() {
     dock.appendChild(cta);
   } else if (declared) {
     const [long, short] = declared.dataset.dockAction.split("|");
-    const cta = labelled(document.createElement("button"), long, short || long);
-    cta.type = "button";
-    cta.addEventListener("click", () => declared.click());
-    dock.appendChild(cta);
+    const href = declared.getAttribute("href");
+    if (href) {
+      // A declared link is mirrored as a real link, not a button that clicks
+      // it: that keeps middle-click, open-in-new-tab and the status-bar preview
+      // working, and a target="_blank" opened by script can hit a popup blocker.
+      const cta = labelled(document.createElement("a"), long, short || long);
+      cta.href = href;
+      if (declared.target) cta.target = declared.target;
+      if (declared.rel) cta.rel = declared.rel;
+      dock.appendChild(cta);
+    } else {
+      const cta = labelled(document.createElement("button"), long, short || long);
+      cta.type = "button";
+      cta.addEventListener("click", () => declared.click());
+      dock.appendChild(cta);
+    }
   } else {
     const cta = labelled(document.createElement("a"), "Let's connect", "Connect");
     cta.href = "index.html#contact";
