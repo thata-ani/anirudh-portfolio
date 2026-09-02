@@ -122,6 +122,11 @@
 }
 .cw2-dark .cw2-chain li:not(:last-child)::after { color: rgba(255, 255, 255, 0.45); }
 
+/* <picture> wraps the evidence images so a browser that cannot decode WebP
+   still gets the original. It must not introduce a box of its own — the frame
+   sizes the <img> directly. */
+.cw2-shot picture, .cw2-strip__item picture { display: contents; }
+
 /* ---------- screenshots — the dominant objects ---------------------------- */
 /* A tall phone screen presented big enough to actually inspect, on a stage
    that separates it from the page rather than a card that frames it. */
