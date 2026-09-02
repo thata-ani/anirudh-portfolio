@@ -17,3 +17,21 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* Instrument Sans / Serif — the Cropwise case study only. Latin subset,
+   self-hosted like the rest: nothing here reaches a CDN at runtime. The serif
+   is used sparingly, for the moments the story turns on. */
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("../assets/fonts/InstrumentSans-Variable.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("../assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

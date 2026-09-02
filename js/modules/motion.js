@@ -254,19 +254,110 @@ export function initMotion() {
   return true;
 }
 
+/* ---- A hero that arrives in order ----------------------------------------
+   One entrance, played once, on load. The order is authored in the markup as
+   `data-hero-seq` rather than inferred from position, so the sequence is
+   readable where the content is. Each step moves a short distance and the
+   title also settles from 0.96 — enough to feel deliberate, not enough to
+   read as an effect. Returns the elements it owns so they are not also
+   picked up by the scroll reveal. */
+function heroSequence(gsap, reduce) {
+  const steps = [...document.querySelectorAll("[data-hero-seq]")].sort(
+    (a, b) => a.dataset.heroSeq - b.dataset.heroSeq
+  );
+  if (!steps.length) return [];
+  if (reduce) {
+    gsap.set(steps, { autoAlpha: 1, y: 0, scale: 1 });
+    return steps;
+  }
+
+  const tl = gsap.timeline({ delay: 0.15 });
+  steps.forEach((el, i) => {
+    const isTitle = el.matches("h1");
+    gsap.set(el, { autoAlpha: 0, y: isTitle ? 22 : 12, scale: isTitle ? 0.965 : 1 });
+    tl.to(
+      el,
+      {
+        autoAlpha: 1, y: 0, scale: 1,
+        duration: isTitle ? 1.15 : 0.85,
+        ease: isTitle ? EASE_DISPLAY : EASE,
+        // The title clears its own transform so nothing is left on it for the
+        // scroll departure below to fight with.
+        clearProps: isTitle ? "scale" : "",
+      },
+      i === 0 ? 0 : `-=${isTitle ? 0.55 : 0.62}`
+    );
+  });
+  return steps;
+}
+
+/* The hero doesn't cut to the next section — it recedes as it leaves, so the
+   page reads as one continuous piece rather than a stack of screens. Scrubbed
+   against the hero's own exit, and deliberately small. */
+function heroDeparture(gsap, reduce) {
+  const hero = document.querySelector(".db-hero");
+  if (!hero || reduce) return;
+  gsap.to(hero, {
+    autoAlpha: 0.28,
+    y: -40,
+    ease: "none",
+    scrollTrigger: { trigger: hero, start: "bottom 88%", end: "bottom top", scrub: 0.5 },
+  });
+}
+
 /* ---- Case studies (designbesti / cropwise) ------------------------------- */
 export function initCaseMotion() {
   const gsap = setup();
   if (!gsap) return false;
+  const reduce = prefersReducedMotion();
+
+  const owned = new Set(heroSequence(gsap, reduce));
+  heroDeparture(gsap, reduce);
 
   const displayEls = [
     ...document.querySelectorAll("h1, .db-h2"),
-  ].filter((el) => el.textContent.trim().length > 0);
+  ].filter((el) => el.textContent.trim().length > 0 && !owned.has(el));
   const splitOK = headlineReveal(gsap, displayEls);
   const excluded = new Set(splitOK ? displayEls : []);
 
-  const items = gsap.utils.toArray(".db-in").filter((el) => !excluded.has(el));
+  const items = gsap.utils
+    .toArray(".db-in")
+    .filter((el) => !excluded.has(el) && !owned.has(el));
   riseBatch(gsap, items, { y: 20, stagger: 0.07 });
+
+  // Evidence arrives rather than rises: a screen or a photograph that slides
+  // reads as a card, and these are meant to read as the thing itself.
+  //
+  // Hiding the evidence to animate it is how it stayed invisible for a whole
+  // afternoon earlier in this project, so it is hidden only once GSAP is
+  // confirmed running, and a watchdog puts anything the scroll never reached
+  // back on screen. An unanimated screenshot is a small loss; a missing one is
+  // the case study failing.
+  // The strip is revealed as one band, not photo by photo: it duplicates its
+  // own children for the seamless loop, and cloneNode copies inline style — so
+  // per-item tweening leaves every clone stuck at the hidden start state.
+  const evidence = gsap.utils.toArray(".cw2-shot, .cw2-strip");
+  if (evidence.length && !reduce) {
+    gsap.set(evidence, { autoAlpha: 0, scale: 0.985 });
+    window.ScrollTrigger.batch(evidence, {
+      start: "top 92%",
+      once: true,
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          autoAlpha: 1, scale: 1,
+          duration: 1.1, ease: EASE, stagger: 0.09,
+          clearProps: "transform",
+        }),
+    });
+    setTimeout(() => {
+      evidence.forEach((el) => {
+        const seen = el.getBoundingClientRect().top < window.innerHeight;
+        if (seen && getComputedStyle(el).visibility === "hidden") {
+          gsap.set(el, { autoAlpha: 1, scale: 1, clearProps: "transform" });
+        }
+      });
+    }, 4000);
+  }
 
   refreshOnInteraction();
   refreshOnImages();

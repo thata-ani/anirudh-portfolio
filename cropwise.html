@@ -12,8 +12,8 @@
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/case.css?v=16" />
-  <link rel="stylesheet" href="css/cropwise.css?v=1" />
+  <link rel="stylesheet" href="css/case.css?v=17" />
+  <link rel="stylesheet" href="css/cropwise.css?v=10" />
   <link rel="stylesheet" href="css/pin.css?v=3" />
   <link rel="stylesheet" href="css/smooth.css?v=1" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -46,20 +46,37 @@
     <!-- ============================================================
          HERO
          ============================================================ -->
+    <!-- The hero owns the page's one cinematic moment. `data-hero-seq` marks
+         the order the entrance plays in; the motion module reads it, and
+         without JS every step is simply visible. -->
     <section class="db-hero cw-hero">
-      <p class="db-eyebrow db-in">Senior UX Designer · UX Owner<br />Syngenta · 2022&ndash;Present · ~4 years</p>
-      <h1 class="cw-hero__title db-in">Cropwise Grower</h1>
-      <dl class="cw2-hero__meta db-in">
-        <div>
-          <dt>Scope</dt>
-          <dd>UX across Cropwise Grower — mobile experience, product areas, cross-market experience and continuous product improvement across AMEA.</dd>
+      <div class="cw2-hero__center">
+        <p class="db-eyebrow" data-hero-seq="1">Senior UX Designer · UX Owner &nbsp;·&nbsp; Syngenta · 2022&ndash;Present · ~4 years</p>
+        <h1 class="cw-hero__title" data-hero-seq="2">Cropwise Grower</h1>
+        <p class="cw2-hero__lede" data-hero-seq="3">
+          UX across Cropwise Grower, working with Product, Engineering,
+          Agronomy, Business and Regional teams across AMEA.
+        </p>
+        <div class="cw2-hero__cta" data-hero-seq="4">
+          <button type="button" class="cw2-btn cw2-btn--solid"
+                  onclick="document.querySelector('.proto-fab')?.click()">Try the prototype</button>
+          <a class="cw2-btn cw2-glass" href="#cw-story-start">Read the story</a>
         </div>
-        <div>
-          <dt>Worked with</dt>
-          <dd>Product · Engineering · Agronomy · Business · Regional teams</dd>
+      </div>
+
+      <!-- Caption / action / caption, the reference's bottom band. It carries
+           the scope and the collaborators rather than a marketing line. -->
+      <div class="cw2-hero__foot" data-hero-seq="5">
+        <div class="cw2-hero__cap">
+          <b>Scope</b>
+          <p>UX across Cropwise Grower — mobile experience, product areas, cross-market experience and continuous product improvement across AMEA.</p>
         </div>
-      </dl>
-      <p class="db-hero__scroll db-in" aria-hidden="true">Scroll — this is how I thought about it</p>
+        <p class="db-hero__scroll" aria-hidden="true">Scroll</p>
+        <div class="cw2-hero__cap cw2-hero__cap--right">
+          <b>Worked with</b>
+          <p>Product · Engineering · Agronomy · Business · Regional teams</p>
+        </div>
+      </div>
     </section>
 
     <!-- ============================================================
@@ -664,7 +681,7 @@
   <script defer src="js/vendor/ScrollTrigger.min.js"></script>
   <script defer src="js/vendor/lenis.min.js"></script>
   <script defer src="js/vendor/SplitText.min.js"></script>
-  <script type="module" src="js/case.js?v=3"></script>
+  <script type="module" src="js/case.js?v=4"></script>
 
   <script>
     /* The reveal system holds .db-in at opacity 0 until it runs. If it never
