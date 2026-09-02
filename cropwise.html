@@ -228,11 +228,11 @@
       <div class="cw2-cmp">
         <div class="cw2-cmp__side">
           <p class="cw2-label db-in">Before</p>
-          <span class="cw2-shot db-in"><span class="cw2-shot__frame" data-file="OLD HOME — old homepage.png"><img src="assets/cropwise/old-homepage.webp" alt="The Home screen before the redesign" onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()"></span></span>
+          <span class="cw2-shot"><span class="cw2-shot__frame" data-file="OLD HOME — old homepage.png"><img src="assets/cropwise/old-homepage.webp" alt="The Home screen before the redesign" onerror="if(this.dataset.retried){this.closest('.cw2-shot').classList.add('is-missing')}else{this.dataset.retried=1;var s=this.src;this.src='';this.src=s}"></span></span>
         </div>
         <div class="cw2-cmp__side">
           <p class="cw2-label db-in">After</p>
-          <span class="cw2-shot db-in"><span class="cw2-shot__frame" data-file="NEW HOME — new homepage.png"><img src="assets/cropwise/new-homepage.webp" alt="The Home screen after the redesign" onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()"></span></span>
+          <span class="cw2-shot"><span class="cw2-shot__frame" data-file="NEW HOME — new homepage.png"><img src="assets/cropwise/new-homepage.webp" alt="The Home screen after the redesign" onerror="if(this.dataset.retried){this.closest('.cw2-shot').classList.add('is-missing')}else{this.dataset.retried=1;var s=this.src;this.src='';this.src=s}"></span></span>
         </div>
       </div>
     </div>
@@ -306,11 +306,11 @@
       <div class="cw2-cmp">
         <div class="cw2-cmp__side">
           <p class="cw2-label db-in" style="color:rgba(255,255,255,.5)">Before</p>
-          <span class="cw2-shot db-in"><span class="cw2-shot__frame" data-file="OLD LOYALTY — old loyalty.png"><img src="assets/cropwise/old-loyalty.webp" alt="The Loyalty screen before the redesign" loading="lazy" onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()"></span></span>
+          <span class="cw2-shot"><span class="cw2-shot__frame" data-file="OLD LOYALTY — old loyalty.png"><img src="assets/cropwise/old-loyalty.webp" alt="The Loyalty screen before the redesign" loading="lazy" onerror="if(this.dataset.retried){this.closest('.cw2-shot').classList.add('is-missing')}else{this.dataset.retried=1;var s=this.src;this.src='';this.src=s}"></span></span>
         </div>
         <div class="cw2-cmp__side">
           <p class="cw2-label db-in" style="color:rgba(255,255,255,.5)">After</p>
-          <span class="cw2-shot db-in"><span class="cw2-shot__frame" data-file="NEW LOYALTY — new loyalty.png"><img src="assets/cropwise/new-loyalty.webp" alt="The Loyalty screen after the redesign" loading="lazy" onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()"></span></span>
+          <span class="cw2-shot"><span class="cw2-shot__frame" data-file="NEW LOYALTY — new loyalty.png"><img src="assets/cropwise/new-loyalty.webp" alt="The Loyalty screen after the redesign" loading="lazy" onerror="if(this.dataset.retried){this.closest('.cw2-shot').classList.add('is-missing')}else{this.dataset.retried=1;var s=this.src;this.src='';this.src=s}"></span></span>
         </div>
       </div>
     </div>
@@ -360,7 +360,7 @@
               <img src="assets/cropwise/loyalty-flow.webp"
                    alt="The Loyalty cashback flow: scanning through eligibility, cashback, UPI and bank redemption, failure states, history and support"
                    loading="lazy"
-                   onerror="this.closest('.cw2-shot').classList.add('is-missing');this.remove()">
+                   onerror="if(this.dataset.retried){this.closest('.cw2-shot').classList.add('is-missing')}else{this.dataset.retried=1;var s=this.src;this.src='';this.src=s}">
             </span>
           </a>
           <span class="cw2-shot__cap cw2-label">Product decision artifact — Loyalty Cashback Flow · open full size</span>
@@ -665,5 +665,19 @@
   <script defer src="js/vendor/lenis.min.js"></script>
   <script defer src="js/vendor/SplitText.min.js"></script>
   <script type="module" src="js/case.js?v=2"></script>
+
+  <script>
+    /* The reveal system holds .db-in at opacity 0 until it runs. If it never
+       runs — module blocked, GSAP unavailable, an error before init — the page
+       would stay blank. GSAP marks every batched element .is-in the moment it
+       initialises, so the presence of one is the signal that it ran. */
+    setTimeout(function () {
+      if (document.querySelector(".db-in.is-in")) return;
+      document.querySelectorAll(".db-in").forEach(function (el) {
+        el.classList.add("is-in");
+      });
+    }, 3000);
+  </script>
+
 </body>
 </html>

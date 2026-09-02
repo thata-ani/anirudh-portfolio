@@ -128,6 +128,26 @@ function refreshOnInteraction() {
   });
 }
 
+/* Triggers are measured against the layout as it stands when they are created.
+   On a page carrying real photographs that layout is not final yet: every image
+   that settles afterwards moves everything below it, and a trigger whose start
+   was recorded against the old positions can be left somewhere the scroll never
+   reaches — so the element it guards never gets revealed. Re-measure as the
+   images land, coalesced so a page of them costs one refresh. */
+function refreshOnImages() {
+  const pending = [...document.images].filter((img) => !img.complete);
+  if (!pending.length) return;
+  let t;
+  const settle = () => {
+    clearTimeout(t);
+    t = setTimeout(() => window.ScrollTrigger.refresh(), 200);
+  };
+  pending.forEach((img) => {
+    img.addEventListener("load", settle, { once: true });
+    img.addEventListener("error", settle, { once: true });
+  });
+}
+
 /* ---- Intro — the lamp arrives, then the room settles ---------------------- */
 /* Always safe to call: without GSAP (or with reduced motion) it simply marks
    the intro ready and everything stays visible. GSAP only ever adds the
@@ -230,6 +250,7 @@ export function initMotion() {
   }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-reveal"] });
 
   refreshOnInteraction();
+  refreshOnImages();
   return true;
 }
 
@@ -248,5 +269,6 @@ export function initCaseMotion() {
   riseBatch(gsap, items, { y: 20, stagger: 0.07 });
 
   refreshOnInteraction();
+  refreshOnImages();
   return true;
 }
