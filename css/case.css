@@ -538,6 +538,19 @@ em { font-style: italic; }
 .cw-flow__step:last-child { background: var(--c-light); color: var(--c-ink-800); border-color: var(--c-light); }
 .cw-flow__arrow { width: clamp(0.7rem, 1.6vw, 1.6rem); border-top: 1px solid var(--c-line-strong); flex-shrink: 0; }
 
+/* The six services told as prose rather than six identical scaffolds — the
+   repetition was what made them read as generated. Each one runs only as long
+   as its decision needs, so the shapes differ on purpose. */
+.cw-story { margin-top: clamp(1.6rem, 3vw, 2.4rem); max-width: 62ch; }
+.cw-story p {
+  margin-top: clamp(1.1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  line-height: 1.62; color: var(--c-warm-200);
+}
+.cw-story p:first-child { margin-top: 0; }
+/* The service name is the context for the decision, not a heading above it. */
+.cw-story b { font-weight: 600; color: var(--c-warm-100); }
+
 /* farmer value ↔ business connection */
 .cw-value {
   margin-top: clamp(1rem, 2vw, 1.4rem); display: grid; grid-template-columns: 1fr 1fr;
@@ -557,7 +570,7 @@ em { font-style: italic; }
 .cw-market__list { margin: 0; padding: 0 0 0 1.1rem; display: grid; gap: 0.35rem; }
 .cw-market__list li { font-size: 0.88rem; line-height: 1.4; color: var(--c-warm-300); }
 .cw-market__list li::marker { font-family: var(--font-mono); font-size: 0.72rem; color: var(--c-warm-400); }
-.cw-market__list li:first-child { color: var(--c-warm-100); font-weight: 600; }
+.cw-market__list li:first-child { color: #fff; font-weight: 600; }
 
 /* ---------- FARMER ↔ BUSINESS BRIDGE (dark) ---------- */
 .cw-bridge__flow { margin-top: clamp(2rem, 4vw, 3rem); }
@@ -566,11 +579,11 @@ em { font-style: italic; }
 .cw-compare { margin-top: clamp(2rem, 4vw, 3rem); display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(1.5rem, 4vw, 3rem); }
 .cw-compare__label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c-warm-400); margin-bottom: 1rem; }
 .cw-compare__flow { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.3rem; }
-.cw-compare__flow li { position: relative; font-size: clamp(1.05rem, 0.9rem + 0.8vw, 1.6rem); font-weight: 600; color: var(--c-warm-100); }
-.cw-compare__flow li:not(:last-child)::after { content: "→"; position: absolute; right: -1.05rem; color: var(--c-warm-400); font-weight: 400; }
+.cw-compare__flow li { position: relative; font-size: clamp(1.05rem, 0.9rem + 0.8vw, 1.6rem); font-weight: 600; color: #fff; }
+.cw-compare__flow li:not(:last-child)::after { content: "→"; position: absolute; right: -1.05rem; color: rgba(255, 255, 255, 0.45); font-weight: 400; }
 .cw-compare__cap { margin-top: 1rem; font-size: 0.95rem; color: var(--c-warm-400); }
 .cw-compare__col--old { opacity: 0.5; }
-.cw-compare__col--new .cw-compare__cap { color: var(--c-warm-200); }
+.cw-compare__col--new .cw-compare__cap { color: rgba(255, 255, 255, 0.75); }
 
 /* service / need / opportunity table */
 .cw-tablewrap { margin-top: clamp(2rem, 4vw, 3rem); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--c-line-strong); border-radius: var(--radius-lg); }
@@ -801,6 +814,177 @@ em { font-style: italic; }
 @media (prefers-reduced-motion: reduce) {
   .db-totop { transition: opacity 0.001ms linear, visibility 0.001ms linear; transform: none; }
   .db-totop.is-on, .db-totop:active { transform: none; }
+}
+
+/* ---------- DOCK (experimental) --------------------------------------------
+   One persistent control for the whole case study: the way back, where you
+   are in the story, and the page's single primary action. Replaces the loose
+   floating prototype pill rather than adding a fourth floating thing.
+
+   Palette note: the header's "Let's connect" already carries the site's one
+   gradient, and it is on screen at the same time as this — a second gradient
+   button competes with it instead of reading as a hierarchy. So the dock's
+   accent is contrast only: a white pill inside a near-black dock, the single
+   filled element in the whole control.
+   ------------------------------------------------------------------------ */
+.cw-dock {
+  position: fixed; z-index: 72;
+  left: 50%; translate: -50% 0;
+  bottom: calc(clamp(0.9rem, 2.5vw, 1.6rem) + var(--dock-lift, 0px));
+  display: flex; align-items: stretch; gap: 0.4rem;
+  padding: 0.4rem;
+  /* Layered rather than one flat fill: a top-lit gradient over the blur reads
+     as a physical surface instead of a grey rectangle. */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 42%),
+    rgba(14, 14, 16, 0.82);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 19px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 28px 70px -26px rgba(0, 0, 0, 0.78),
+    0 3px 12px -6px rgba(0, 0, 0, 0.5);
+  max-width: calc(100vw - 1.5rem);
+  /* Resting state is off-screen, below the bottom edge — it drops out of the
+     way while you read and rides back up when you scroll. Leaving comes slower
+     than arriving: a control that answers a scroll should feel immediate,
+     while one bowing out shouldn't snatch the eye on its way down. */
+  opacity: 0; visibility: hidden;
+  transform: translateY(calc(100% + clamp(0.9rem, 2.5vw, 1.6rem)));
+  transition: opacity 420ms var(--ease-out),
+    transform 480ms var(--ease-out),
+    visibility 0s linear 480ms;
+}
+.cw-dock.is-on {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity 240ms var(--ease-out),
+    transform 340ms var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+/* ---- the mark ---- */
+.cw-dock__mark {
+  position: relative; flex-shrink: 0; display: grid; place-items: center;
+  width: 46px; border-radius: 13px;
+  background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255, 255, 255, 0.09);
+  font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.02em; color: rgba(255, 255, 255, 0.82);
+  overflow: hidden;
+  transition: color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+}
+.cw-dock__mark:hover {
+  color: #fff; border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.08);
+}
+.cw-dock__mark span { position: relative; z-index: 1; }
+.cw-dock__mark:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+/* ---- chapter nav ---- */
+.cw-dock__list {
+  position: relative;
+  list-style: none; margin: 0; padding: 0.25rem;
+  display: flex; align-items: center; gap: 0.25rem;
+  background: rgba(0, 0, 0, 0.32); border-radius: 14px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45);
+  min-width: 0; overflow-x: auto; scrollbar-width: none;
+}
+.cw-dock__list::-webkit-scrollbar { display: none; }
+
+/* One indicator that travels between chapters, instead of a box switching off
+   in one place and on in another — the movement is what says "you are here". */
+.cw-dock__glide {
+  position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none;
+  width: var(--gw, 0px); height: var(--gh, 0px);
+  transform: translate(var(--gx, 0px), var(--gy, 0px));
+  border-radius: 10px; opacity: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.19), rgba(255, 255, 255, 0.09));
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 4px 12px -6px rgba(0, 0, 0, 0.7);
+}
+.cw-dock__list.has-glide .cw-dock__glide { opacity: 1; }
+/* Only animate once the dock is actually on screen, so the first measurement
+   doesn't slide in from the left edge. */
+.cw-dock.is-on .cw-dock__glide {
+  transition: transform 0.5s var(--ease-out), width 0.5s var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+
+.cw-dock__item {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.55rem 0.85rem; border-radius: 10px; white-space: nowrap;
+  background: transparent; border: 0; cursor: pointer;
+  font-size: 0.85rem; font-weight: 500; letter-spacing: -0.005em;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.cw-dock__item i {
+  font-family: var(--font-mono); font-style: normal; font-size: 0.62rem;
+  letter-spacing: 0.08em; color: rgba(255, 255, 255, 0.28);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.cw-dock__item:hover { color: rgba(255, 255, 255, 0.88); }
+.cw-dock__item:hover i { color: rgba(255, 255, 255, 0.5); }
+.cw-dock__item:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.cw-dock__item.is-active { color: #fff; }
+.cw-dock__item.is-active i { color: rgba(255, 255, 255, 0.75); }
+
+/* ---- primary action ----
+   The only filled element in the dock. No gradient: the header's "Let's
+   connect" is on screen at the same time and owns that treatment. */
+.cw-dock__cta {
+  flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 1.15rem; border-radius: 13px;
+  color: #0b0b0c; border: 1px solid #fff; cursor: pointer;
+  background: linear-gradient(180deg, #ffffff 0%, #ececea 100%);
+  font-size: 0.88rem; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 6px 18px -8px rgba(0, 0, 0, 0.6);
+  transition: transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out);
+}
+.cw-dock__cta:hover { filter: brightness(1.06); }
+.cw-dock__cta:active { transform: scale(0.97); }
+.cw-dock__cta:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.cw-dock__cta-short { display: none; }
+
+/* The dock takes over the prototype trigger and the back-to-top, so neither
+   floats loose alongside it. */
+body:has(.cw-dock) .proto-fab { display: none; }
+body:has(.cw-dock) .db-totop { display: none; }
+body:has(.cw-dock) .pin-flag { bottom: clamp(0.75rem, 2vw, 1.5rem); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cw-dock {
+    transform: none;
+    transition: opacity 0.001ms linear, visibility 0s linear 0.001ms;
+  }
+  .cw-dock.is-on {
+    transform: none;
+    transition: opacity 0.001ms linear, visibility 0s linear 0s;
+  }
+  .cw-dock.is-on .cw-dock__glide { transition: opacity 0.001ms linear; }
+}
+
+/* Below the widest phones the chapter names give way to their numbers — the
+   dock keeps its shape instead of scrolling a row of long labels. */
+@media (max-width: 620px) {
+  .cw-dock__name { display: none; }
+  .cw-dock__item { padding: 0.55rem 0.7rem; }
+  .cw-dock__item i { font-size: 0.7rem; }
+}
+@media (max-width: 560px) {
+  .cw-dock { gap: 0.3rem; padding: 0.32rem; border-radius: 16px; }
+  .cw-dock__mark { width: 38px; font-size: 0.72rem; border-radius: 11px; }
+  .cw-dock__cta { padding: 0 0.85rem; font-size: 0.8rem; border-radius: 11px; }
+  .cw-dock__cta-long { display: none; }
+  .cw-dock__cta-short { display: inline; }
+  .cw-dock__list { padding: 0.2rem; }
+  .cw-dock__item { padding: 0.5rem 0.55rem; }
 }
 
 /* ===========================================================================

@@ -15,6 +15,8 @@ import { initPin } from "./modules/pin.js";
 import { initSmoothScroll, getLenis } from "./modules/smooth-scroll.js";
 import { initMagnetic } from "./modules/magnetic.js";
 import { initExplain } from "./modules/explain.js";
+import { initDock } from "./modules/dock.js";
+import { initStrip } from "./modules/strip.js";
 
 /* ---- 1 · scroll reveal --------------------------------------------------- */
 function initReveal() {
@@ -399,6 +401,8 @@ const boot = () => {
   initBackNav(); initToTop(); initPin(window.gsap, window.ScrollTrigger); initPrototype();
   initMagnetic();
   initExplain();
+  initDock();
+  initStrip();
 };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
 else boot();
