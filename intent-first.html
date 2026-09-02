@@ -419,5 +419,19 @@
   <script defer src="js/vendor/lenis.min.js"></script>
   <script defer src="js/vendor/SplitText.min.js"></script>
   <script type="module" src="js/case.js?v=2"></script>
+
+  <script>
+    /* The reveal system holds .db-in at opacity 0 until it runs. If it never
+       runs — module blocked, GSAP unavailable, an error before init — the page
+       would stay blank. GSAP marks every batched element .is-in the moment it
+       initialises, so the presence of one is the signal that it ran. */
+    setTimeout(function () {
+      if (document.querySelector(".db-in.is-in")) return;
+      document.querySelectorAll(".db-in").forEach(function (el) {
+        el.classList.add("is-in");
+      });
+    }, 3000);
+  </script>
+
 </body>
 </html>
